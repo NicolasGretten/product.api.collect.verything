@@ -1,0 +1,16 @@
+{
+    "timestamp": 1615911966,
+    "signature": "3114fed1bd4b4811c02d025ad7dc01cc",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "product_71886fceae499c2d6",
+            "deleted_at": "2021-03-16T16:26:06.000000Z",
+            "created_at": "2021-03-16T16:25:07.000000Z",
+            "updated_at": "2021-03-16T16:26:06.000000Z",
+            "title": null,
+            "text": null
+        }
+    }
+}

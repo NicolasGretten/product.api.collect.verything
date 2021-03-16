@@ -1,0 +1,15 @@
+{
+    "timestamp": 1615924550,
+    "signature": "df52473c3ceb52e623743217e7540ff4",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "compproduct_f69ab775ee415",
+            "updated_at": "2021-03-16T19:55:50.000000Z",
+            "created_at": "2021-03-16T19:55:50.000000Z",
+            "title": "Traduction française",
+            "text": "séminaire"
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "timestamp": 1615926839,
+    "signature": "7fc0469a2c14674b9ea25415c3a33a18",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "cpp_9385a6b290339ba3803fa",
+            "composite_product_id": "compproduct_f69ab775ee415",
+            "product_id": "product_9f71793f1bff89227",
+            "updated_at": "2021-03-16T20:33:59.000000Z",
+            "created_at": "2021-03-16T20:33:59.000000Z"
+        }
+    }
+}

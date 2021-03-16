@@ -1,0 +1,60 @@
+{
+    "timestamp": 1615891989,
+    "signature": "0a8307a4fd42cf6b30560070fc461bfb",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "cat_d10be1a57a0fddafc85b5",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "nourriture",
+                "translations_list": [
+                    {
+                        "id": "cattrad_80bfe98ea61de25b4",
+                        "category_id": "cat_d10be1a57a0fddafc85b5",
+                        "locale": "fr-FR",
+                        "title": "Traduction en français",
+                        "text": "nourriture",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    },
+                    {
+                        "id": "cattrad_1f5108d18e0be26c1",
+                        "category_id": "cat_d10be1a57a0fddafc85b5",
+                        "locale": "en-US",
+                        "title": "English Translations",
+                        "text": "food",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ],
+                "products": [
+                    {
+                        "id": "product_9f71793f1bff89227",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    },
+                    {
+                        "id": "product_d66672dd6b9052218",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Salade"
+                    }
+                ],
+                "composite_products": [],
+                "discounts": []
+            }
+        ]
+    }
+}

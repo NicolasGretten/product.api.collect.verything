@@ -1,0 +1,18 @@
+{
+    "timestamp": 1615924826,
+    "signature": "102d4f0e0c6455f824168362dd9024aa",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "producttrad_3601f779806e1",
+            "composite_product_id": "compproduct_64ba1e4ff721a",
+            "locale": "en-US",
+            "title": "English translation",
+            "text": "Seminary",
+            "deleted_at": null,
+            "created_at": "2021-03-16T20:00:26.000000Z",
+            "updated_at": "2021-03-16T20:00:26.000000Z"
+        }
+    }
+}

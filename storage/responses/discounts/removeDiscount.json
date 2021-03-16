@@ -1,0 +1,34 @@
+{
+    "timestamp": 1615935509,
+    "signature": "0c91afb89df390074fda30410a8b6658",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "productdiscount_ddd3b7ec0",
+                "product_id": "product_9f71793f1bff89227",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "deleted_at": "2021-03-16T22:58:29.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z",
+                "updated_at": "2021-03-16T22:58:29.000000Z"
+            },
+            {
+                "id": "cpdiscount_69cc14ed1230c5",
+                "composite_product_id": "compproduct_64ba1e4ff721a",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "deleted_at": "2021-03-16T22:58:29.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z",
+                "updated_at": "2021-03-16T22:58:29.000000Z"
+            },
+            {
+                "id": "catdiscount_c93befd6b0497",
+                "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "deleted_at": "2021-03-16T22:58:29.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z",
+                "updated_at": "2021-03-16T22:58:29.000000Z"
+            }
+        ]
+    }
+}

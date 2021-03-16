@@ -1,0 +1,19 @@
+{
+    "timestamp": 1615924650,
+    "signature": "8a862dbe9a5961e2ddc7e26759259514",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "cpprice_2168ca21f9c50723b",
+            "composite_product_id": "compproduct_f69ab775ee415",
+            "price_including_taxes": "1200",
+            "price_excluding_taxes": "1000",
+            "vat_value": "200",
+            "vat_rate": "20",
+            "deleted_at": null,
+            "created_at": "2021-03-16T19:55:50.000000Z",
+            "updated_at": "2021-03-16T19:57:30.000000Z"
+        }
+    }
+}

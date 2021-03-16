@@ -1,0 +1,15 @@
+{
+    "timestamp": 1615892262,
+    "signature": "396b2ef2a1b7f2b1e65093c95a727eda",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "cat_d534f04d2c1902588573a",
+            "updated_at": "2021-03-16T10:57:42.000000Z",
+            "created_at": "2021-03-16T10:57:42.000000Z",
+            "title": "Traduction française",
+            "text": "Soins"
+        }
+    }
+}

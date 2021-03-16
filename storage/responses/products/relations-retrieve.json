@@ -1,0 +1,86 @@
+{
+    "timestamp": 1615908853,
+    "signature": "e409f3b23aa91b9fcbd6c6a47f05f2aa",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "product_9f71793f1bff89227",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "Croissant",
+                "composite_products": [
+                    {
+                        "id": "compproduct_64ba1e4ff721a",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "petit déjeuner"
+                    }
+                ],
+                "availabilities": [
+                    {
+                        "id": "pa_180d3dbb58a29ee43ce94d",
+                        "product_id": "product_9f71793f1bff89227",
+                        "day": "monday",
+                        "hour_start": "07:00:00",
+                        "hour_end": "11:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ],
+                "prices": [
+                    {
+                        "id": "productprc_acda55e7a9ded8",
+                        "product_id": "product_9f71793f1bff89227",
+                        "price_including_taxes": 110,
+                        "price_excluding_taxes": 100,
+                        "vat_value": 10,
+                        "vat_rate": 10,
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ],
+                "discounts": [],
+                "categories": [
+                    {
+                        "id": "cat_d10be1a57a0fddafc85b5",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "nourriture"
+                    }
+                ],
+                "translations_list": [
+                    {
+                        "id": "producttrad139c02ff5af76c",
+                        "product_id": "product_9f71793f1bff89227",
+                        "locale": "fr-FR",
+                        "title": "Traduction en français",
+                        "text": "Croissant",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    },
+                    {
+                        "id": "producttrad89fdec624b250d",
+                        "product_id": "product_9f71793f1bff89227",
+                        "locale": "en-US",
+                        "title": "English Translations",
+                        "text": "Croissant",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ]
+            }
+        ]
+    }
+}

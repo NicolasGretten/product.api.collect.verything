@@ -1,0 +1,18 @@
+{
+    "timestamp": 1615912106,
+    "signature": "077eb15ee042f3227be91fb2a3f39ae0",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "cattrad_261e027b010fbad50",
+            "product_id": "product_a4f8990000bd4b978",
+            "locale": "en-US",
+            "title": "English translation",
+            "text": "Pool access",
+            "deleted_at": "2021-03-16T16:28:26.000000Z",
+            "created_at": "2021-03-16T16:27:04.000000Z",
+            "updated_at": "2021-03-16T16:28:26.000000Z"
+        }
+    }
+}

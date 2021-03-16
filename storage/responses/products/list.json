@@ -1,0 +1,58 @@
+{
+    "timestamp": 1615908317,
+    "signature": "ac714b7c9aaee00aebf6790e4fe5138b",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 10,
+            "total": 5,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "product_9f71793f1bff89227",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "Croissant"
+            },
+            {
+                "id": "product_d66672dd6b9052218",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "Salade"
+            },
+            {
+                "id": "product_3888c3b144ccdc59c",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "Mimosa"
+            },
+            {
+                "id": "product_8a72e4d0f1fd12d03",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "café"
+            },
+            {
+                "id": "product_4c053842dc07c0330",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "apéritif"
+            }
+        ]
+    }
+}

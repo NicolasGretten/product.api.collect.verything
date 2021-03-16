@@ -1,0 +1,186 @@
+{
+    "timestamp": 1615923478,
+    "signature": "39450b772ae6587f5cc425997001a89f",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 10,
+            "total": 2,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "compproduct_64ba1e4ff721a",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "petit déjeuner",
+                "products": [
+                    {
+                        "id": "product_9f71793f1bff89227",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    },
+                    {
+                        "id": "product_8a72e4d0f1fd12d03",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "café"
+                    }
+                ],
+                "availabilities": [
+                    {
+                        "id": "cpa_c7447b7ec9c1077aba170",
+                        "composite_product_id": "compproduct_64ba1e4ff721a",
+                        "day": "monday",
+                        "hour_start": "07:00:00",
+                        "hour_end": "11:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ],
+                "prices": [
+                    {
+                        "id": "cpprice_d00ac874b5a9626bd",
+                        "composite_product_id": "compproduct_64ba1e4ff721a",
+                        "price_including_taxes": 660,
+                        "price_excluding_taxes": 600,
+                        "vat_value": 60,
+                        "vat_rate": 10,
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ],
+                "discounts": [],
+                "categories": [
+                    {
+                        "id": "cat_3a61a9ed91efe584ca27c",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "repas"
+                    }
+                ],
+                "translations_list": [
+                    {
+                        "id": "cpt_e1d8f7e2a2e13a3369b78",
+                        "composite_product_id": "compproduct_64ba1e4ff721a",
+                        "locale": "fr-FR",
+                        "title": "Traduction en français",
+                        "text": "petit déjeuner",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:55.000000Z",
+                        "updated_at": "2021-03-15T15:21:55.000000Z"
+                    },
+                    {
+                        "id": "cpt_933d08fb18a6a691a79fe",
+                        "composite_product_id": "compproduct_64ba1e4ff721a",
+                        "locale": "en-US",
+                        "title": "English Translations",
+                        "text": "breakfast",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:55.000000Z",
+                        "updated_at": "2021-03-15T15:21:55.000000Z"
+                    }
+                ]
+            },
+            {
+                "id": "compproduct_c0b5eb2d85401",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "déjeuner",
+                "products": [
+                    {
+                        "id": "product_d66672dd6b9052218",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Salade"
+                    },
+                    {
+                        "id": "product_4c053842dc07c0330",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "apéritif"
+                    }
+                ],
+                "availabilities": [
+                    {
+                        "id": "cpa_2aa3a84b4ed526f1a9729",
+                        "composite_product_id": "compproduct_c0b5eb2d85401",
+                        "day": "monday",
+                        "hour_start": "11:30:00",
+                        "hour_end": "13:30:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ],
+                "prices": [
+                    {
+                        "id": "cpprice_7d81298c05e61b019",
+                        "composite_product_id": "compproduct_c0b5eb2d85401",
+                        "price_including_taxes": 1100,
+                        "price_excluding_taxes": 1000,
+                        "vat_value": 100,
+                        "vat_rate": 10,
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                    }
+                ],
+                "discounts": [],
+                "categories": [
+                    {
+                        "id": "cat_3a61a9ed91efe584ca27c",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:54.000000Z",
+                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "title": "Traduction en français",
+                        "text": "repas"
+                    }
+                ],
+                "translations_list": [
+                    {
+                        "id": "cpt_78684cdeefa2fef9ab677",
+                        "composite_product_id": "compproduct_c0b5eb2d85401",
+                        "locale": "fr-FR",
+                        "title": "Traduction en français",
+                        "text": "déjeuner",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:55.000000Z",
+                        "updated_at": "2021-03-15T15:21:55.000000Z"
+                    },
+                    {
+                        "id": "cpt_9bc94f2bff8a8ae7d3110",
+                        "composite_product_id": "compproduct_c0b5eb2d85401",
+                        "locale": "en-US",
+                        "title": "English Translations",
+                        "text": "lunch",
+                        "deleted_at": null,
+                        "created_at": "2021-03-15T15:21:55.000000Z",
+                        "updated_at": "2021-03-15T15:21:55.000000Z"
+                    }
+                ]
+            }
+        ]
+    }
+}

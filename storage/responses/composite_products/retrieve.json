@@ -1,0 +1,18 @@
+{
+    "timestamp": 1615923641,
+    "signature": "0e9e7a88527a4ddf65f25ea3616fe2ee",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "compproduct_64ba1e4ff721a",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "petit déjeuner"
+            }
+        ]
+    }
+}

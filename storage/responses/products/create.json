@@ -1,0 +1,15 @@
+{
+    "timestamp": 1615911017,
+    "signature": "9896d92ef3a013e90bb01cec2ed4085a",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "product_52e47d49bc151e311",
+            "updated_at": "2021-03-16T16:10:17.000000Z",
+            "created_at": "2021-03-16T16:10:17.000000Z",
+            "title": "Traduction française",
+            "text": "spa"
+        }
+    }
+}

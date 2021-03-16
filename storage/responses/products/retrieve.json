@@ -1,0 +1,18 @@
+{
+    "timestamp": 1615908831,
+    "signature": "7cc9d6d99f6dec53b882acf672d61bb4",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "product_9f71793f1bff89227",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "Croissant"
+            }
+        ]
+    }
+}

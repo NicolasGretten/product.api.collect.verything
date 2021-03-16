@@ -1,0 +1,26 @@
+{
+    "timestamp": 1615937402,
+    "signature": "8ef3541248f0f1ac43a48d1a4a9a88b2",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "promocode_17d78ae0a3bfb0a",
+                "code": "PROMO10",
+                "start_at": "2021-03-15 00:00:00",
+                "end_at": null,
+                "amount": 150,
+                "number_used": 0,
+                "maximum_usage": 1,
+                "combinable_with_offers": false,
+                "promotional_code_type": "pourcent",
+                "deleted_at": null,
+                "created_at": "2021-03-16T21:54:03.000000Z",
+                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "title": "Traduction en français",
+                "text": "Code promo 10%"
+            }
+        ]
+    }
+}

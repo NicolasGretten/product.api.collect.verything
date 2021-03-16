@@ -1,0 +1,1508 @@
+# Discounts
+
+
+## Retrieve a discount
+
+
+Retrieve all discount details.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'json' => [
+            'filters' => [
+                'relations' => '["compositeProducts","products","categories","translationsList","promotionalCodes"]',
+            ],
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "filters": {
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+    }
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227'
+payload = {
+    "filters": {
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+    }
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, json=payload)
+response.json()
+```
+
+```bash
+curl -X GET \
+    -G "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"filters":{"relations":"[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"}}'
+
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615932294,
+    "signature": "8b6955676d8c7f63b3cd719ce6edb74e",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "discount_fffbae84a65baa0a",
+                "discount_type": "eur",
+                "promotional_code_id": null,
+                "amount": 50,
+                "start_at": "2021-05-05 00:00:00",
+                "end_at": "2021-05-25 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T21:54:03.000000Z",
+                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "title": "traduction française",
+                "text": "promo d'haloween"
+            }
+        ]
+    }
+}
+```
+> Example response (200, Relations filter):
+
+```json
+{
+    "timestamp": 1615936478,
+    "signature": "fa19301410442d0cd92da28f7cc726ae",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "discount_93c6eb6a9e05c06e",
+                "discount_type": "EUR",
+                "promotional_code_id": null,
+                "amount": 50,
+                "start_at": "2021-03-16 00:00:00",
+                "end_at": "2021-05-16 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T22:10:27.000000Z",
+                "updated_at": "2021-03-16T22:19:14.000000Z",
+                "title": "Traduction française",
+                "text": "Promo d'hiver",
+                "translations_list": [
+                    {
+                        "id": "discounttrad_dd51f2fb1c42",
+                        "discount_id": "discount_93c6eb6a9e05c06e",
+                        "locale": "fr-FR",
+                        "title": "Traduction française",
+                        "text": "Promo d'hiver",
+                        "deleted_at": null,
+                        "created_at": "2021-03-16T22:10:27.000000Z",
+                        "updated_at": "2021-03-16T22:10:27.000000Z"
+                    }
+                ],
+                "products": [],
+                "composite_products": [],
+                "categories": [],
+                "promotional_codes": null
+            }
+        ]
+    }
+}
+```
+
+### Request
+<small class="badge badge-green">GET</small>
+ **`discounts/{discount_id}`**
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<code><b>discount_id</b></code>&nbsp;      <br>
+    Discount ID
+
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<code><b>filters[relations]</b></code>&nbsp; <small>Add</small>         <i>optional</i>    <br>
+    a relation in the response
+
+
+
+## List all discounts
+
+
+List all the discounts.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://dev-product.api.hopn.space/discounts',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'query' => [
+            'items_id'=> '["discount_9f71793f1bff89227","discount_d66672dd6b9052218"]',
+            'limit'=> '10',
+            'page'=> '1',
+        ],
+        'json' => [
+            'filters' => [
+                'created' => [
+                    'gt' => '1602688060',
+                    'gte' => '1602688060',
+                    'lt' => '1602688060',
+                    'lte' => '1602688060',
+                    'order' => 'ASC',
+                ],
+                'updated' => [
+                    'gt' => '1602688060',
+                    'gte' => '1602688060',
+                    'lt' => '1602688060',
+                    'lte' => '1602688060',
+                    'order' => 'ASC',
+                ],
+                'deleted' => [
+                    'gt' => '1602688060',
+                    'gte' => '1602688060',
+                    'lt' => '1602688060',
+                    'lte' => '1602688060',
+                    'order' => 'ASC',
+                ],
+                'relations' => '["compositeProducts","products","categories","translationsList","promotionalCodes"]',
+            ],
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts"
+);
+
+let params = {
+    "items_id": "["discount_9f71793f1bff89227","discount_d66672dd6b9052218"]",
+    "limit": "10",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "filters": {
+        "created": {
+            "gt": "1602688060",
+            "gte": "1602688060",
+            "lt": "1602688060",
+            "lte": "1602688060",
+            "order": "ASC"
+        },
+        "updated": {
+            "gt": "1602688060",
+            "gte": "1602688060",
+            "lt": "1602688060",
+            "lte": "1602688060",
+            "order": "ASC"
+        },
+        "deleted": {
+            "gt": "1602688060",
+            "gte": "1602688060",
+            "lt": "1602688060",
+            "lte": "1602688060",
+            "order": "ASC"
+        },
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+    }
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts'
+payload = {
+    "filters": {
+        "created": {
+            "gt": "1602688060",
+            "gte": "1602688060",
+            "lt": "1602688060",
+            "lte": "1602688060",
+            "order": "ASC"
+        },
+        "updated": {
+            "gt": "1602688060",
+            "gte": "1602688060",
+            "lt": "1602688060",
+            "lte": "1602688060",
+            "order": "ASC"
+        },
+        "deleted": {
+            "gt": "1602688060",
+            "gte": "1602688060",
+            "lt": "1602688060",
+            "lte": "1602688060",
+            "order": "ASC"
+        },
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+    }
+}
+params = {
+  'items_id': '["discount_9f71793f1bff89227","discount_d66672dd6b9052218"]',
+  'limit': '10',
+  'page': '1',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, json=payload, params=params)
+response.json()
+```
+
+```bash
+curl -X GET \
+    -G "http://dev-product.api.hopn.space/discounts?items_id=%5B%22discount_9f71793f1bff89227%22%2C%22discount_d66672dd6b9052218%22%5D&limit=10&page=1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"}}'
+
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615931648,
+    "signature": "5b8174be8e0a5661e2520bfb548eb0df",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 5,
+            "total": 2,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "discount_fffbae84a65baa0a",
+                "discount_type": "eur",
+                "promotional_code_id": null,
+                "amount": 50,
+                "start_at": "2021-05-05 00:00:00",
+                "end_at": "2021-05-25 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T21:54:03.000000Z",
+                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "title": "traduction française",
+                "text": "promo d'haloween"
+            },
+            {
+                "id": "discount_34acc06c4ccd5022",
+                "discount_type": "pourcent",
+                "promotional_code_id": "promocode_17d78ae0a3bfb0a",
+                "amount": 10,
+                "start_at": "2021-05-05 00:00:00",
+                "end_at": "2021-05-25 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T21:54:03.000000Z",
+                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "title": "traduction française",
+                "text": "promo d'été"
+            }
+        ]
+    }
+}
+```
+> Example response (200, Relations Filter):
+
+```json
+{
+    "timestamp": 1615936429,
+    "signature": "1c2bd05ad1b7f7c2113ae530bebfa64e",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 5,
+            "total": 4,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "discount_fffbae84a65baa0a",
+                "discount_type": "eur",
+                "promotional_code_id": null,
+                "amount": 50,
+                "start_at": "2021-05-05 00:00:00",
+                "end_at": "2021-05-25 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T21:54:03.000000Z",
+                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "title": "traduction française",
+                "text": "promo d'haloween",
+                "translations_list": [
+                    {
+                        "id": "discounttrad_9c7576f052cb",
+                        "discount_id": "discount_fffbae84a65baa0a",
+                        "locale": "fr-FR",
+                        "title": "traduction française",
+                        "text": "promo d'haloween",
+                        "deleted_at": null,
+                        "created_at": "2021-03-16T21:54:03.000000Z",
+                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                    },
+                    {
+                        "id": "discounttrad_f5d8884f794c",
+                        "discount_id": "discount_fffbae84a65baa0a",
+                        "locale": "en-US",
+                        "title": "English translation",
+                        "text": "haloween discount",
+                        "deleted_at": null,
+                        "created_at": "2021-03-16T21:54:03.000000Z",
+                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                    }
+                ],
+                "products": [],
+                "composite_products": [],
+                "categories": [],
+                "promotional_codes": null
+            },
+            {
+                "id": "discount_34acc06c4ccd5022",
+                "discount_type": "pourcent",
+                "promotional_code_id": "promocode_17d78ae0a3bfb0a",
+                "amount": 10,
+                "start_at": "2021-05-05 00:00:00",
+                "end_at": "2021-05-25 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T21:54:03.000000Z",
+                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "title": "traduction française",
+                "text": "promo d'été",
+                "translations_list": [
+                    {
+                        "id": "discounttrad_5fe17324be3b",
+                        "discount_id": "discount_34acc06c4ccd5022",
+                        "locale": "fr-FR",
+                        "title": "traduction française",
+                        "text": "promo d'été",
+                        "deleted_at": null,
+                        "created_at": "2021-03-16T21:54:03.000000Z",
+                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                    },
+                    {
+                        "id": "discounttrad_baff92c5ad0e",
+                        "discount_id": "discount_34acc06c4ccd5022",
+                        "locale": "en-US",
+                        "title": "English translation",
+                        "text": "Summer discount",
+                        "deleted_at": null,
+                        "created_at": "2021-03-16T21:54:03.000000Z",
+                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                    }
+                ],
+                "products": [],
+                "composite_products": [],
+                "categories": [],
+                "promotional_codes": {
+                    "id": "promocode_17d78ae0a3bfb0a",
+                    "code": "PROMO10",
+                    "start_at": "2021-03-15 00:00:00",
+                    "end_at": null,
+                    "amount": 150,
+                    "number_used": 0,
+                    "maximum_usage": 1,
+                    "combinable_with_offers": false,
+                    "promotional_code_type": "pourcent",
+                    "deleted_at": null,
+                    "created_at": "2021-03-16T21:54:03.000000Z",
+                    "updated_at": "2021-03-16T21:54:03.000000Z",
+                    "title": "Traduction en français",
+                    "text": "Code promo 10%"
+                }
+            },
+            {
+                "id": "discount_93c6eb6a9e05c06e",
+                "discount_type": "EUR",
+                "promotional_code_id": null,
+                "amount": 50,
+                "start_at": "2021-03-16 00:00:00",
+                "end_at": "2021-05-16 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T22:10:27.000000Z",
+                "updated_at": "2021-03-16T22:19:14.000000Z",
+                "title": "Traduction française",
+                "text": "Promo d'hiver",
+                "translations_list": [
+                    {
+                        "id": "discounttrad_dd51f2fb1c42",
+                        "discount_id": "discount_93c6eb6a9e05c06e",
+                        "locale": "fr-FR",
+                        "title": "Traduction française",
+                        "text": "Promo d'hiver",
+                        "deleted_at": null,
+                        "created_at": "2021-03-16T22:10:27.000000Z",
+                        "updated_at": "2021-03-16T22:10:27.000000Z"
+                    }
+                ],
+                "products": [],
+                "composite_products": [],
+                "categories": [],
+                "promotional_codes": null
+            },
+            {
+                "id": "discount_ef5285ab40773ab4",
+                "discount_type": "pourcent",
+                "promotional_code_id": "promocode_779cf772199954f",
+                "amount": 50,
+                "start_at": "2021-03-16 00:00:00",
+                "end_at": "2021-05-16 00:00:00",
+                "deleted_at": null,
+                "created_at": "2021-03-16T22:10:11.000000Z",
+                "updated_at": "2021-03-16T22:10:11.000000Z",
+                "title": "Traduction française",
+                "text": "Soins",
+                "translations_list": [
+                    {
+                        "id": "discounttrad_d84f418e4129",
+                        "discount_id": "discount_ef5285ab40773ab4",
+                        "locale": "fr-FR",
+                        "title": "Traduction française",
+                        "text": "Soins",
+                        "deleted_at": null,
+                        "created_at": "2021-03-16T22:10:11.000000Z",
+                        "updated_at": "2021-03-16T22:10:11.000000Z"
+                    }
+                ],
+                "products": [],
+                "composite_products": [],
+                "categories": [],
+                "promotional_codes": {
+                    "id": "promocode_779cf772199954f",
+                    "code": "PROMO50",
+                    "start_at": "2021-03-20 00:00:00",
+                    "end_at": "2021-03-30 00:00:00",
+                    "amount": 50,
+                    "number_used": 0,
+                    "maximum_usage": 1,
+                    "combinable_with_offers": true,
+                    "promotional_code_type": "pourcent",
+                    "deleted_at": null,
+                    "created_at": "2021-03-16T21:54:03.000000Z",
+                    "updated_at": "2021-03-16T21:54:03.000000Z",
+                    "title": "Traduction en français",
+                    "text": "Code promo 50%"
+                }
+            }
+        ]
+    }
+}
+```
+
+### Request
+<small class="badge badge-green">GET</small>
+ **`discounts`**
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>items_id</b></code>&nbsp;          <i>optional</i>    <br>
+    The items ID list to retrieve.
+
+<code><b>limit</b></code>&nbsp;          <i>optional</i>    <br>
+    Number of results per pagination page
+
+<code><b>page</b></code>&nbsp;          <i>optional</i>    <br>
+    Current page number for pagination
+
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<code><b>filters[created][gt]</b></code>&nbsp; <small>Creation</small>         <i>optional</i>    <br>
+    datetime is Greater Than this value.
+
+<code><b>filters[created][gte]</b></code>&nbsp; <small>Creation</small>         <i>optional</i>    <br>
+    datetime is Greater Than or Equal to this value
+
+<code><b>filters[created][lt]</b></code>&nbsp; <small>Creation</small>         <i>optional</i>    <br>
+    datetime is Less Than this value
+
+<code><b>filters[created][lte]</b></code>&nbsp; <small>Creation</small>         <i>optional</i>    <br>
+    datetime is Less Than or Equal to this value
+
+<code><b>filters[created][order]</b></code>&nbsp; <small>Sort</small>         <i>optional</i>    <br>
+    the results in the order given
+
+<code><b>filters[updated][gt]</b></code>&nbsp; <small>Update</small>         <i>optional</i>    <br>
+    datetime is Greater Than this value.
+
+<code><b>filters[updated][gte]</b></code>&nbsp; <small>Update</small>         <i>optional</i>    <br>
+    datetime is Greater Than or Equal to this value
+
+<code><b>filters[updated][lt]</b></code>&nbsp; <small>Update</small>         <i>optional</i>    <br>
+    datetime is Less Than this value
+
+<code><b>filters[updated][lte]</b></code>&nbsp; <small>Update</small>         <i>optional</i>    <br>
+    datetime is Less Than or Equal to this value
+
+<code><b>filters[updated][order]</b></code>&nbsp; <small>Sort</small>         <i>optional</i>    <br>
+    the results in the order given
+
+<code><b>filters[deleted][gt]</b></code>&nbsp; <small>Deletion</small>         <i>optional</i>    <br>
+    datetime is Greater Than this value.
+
+<code><b>filters[deleted][gte]</b></code>&nbsp; <small>Deletion</small>         <i>optional</i>    <br>
+    datetime is Greater Than or Equal to this value
+
+<code><b>filters[deleted][lt]</b></code>&nbsp; <small>Deletion</small>         <i>optional</i>    <br>
+    datetime is Less Than this value
+
+<code><b>filters[deleted][lte]</b></code>&nbsp; <small>Deletion</small>         <i>optional</i>    <br>
+    datetime is Less Than or Equal to this value
+
+<code><b>filters[deleted][order]</b></code>&nbsp; <small>Sort</small>         <i>optional</i>    <br>
+    the results in the order given
+
+<code><b>filters[relations]</b></code>&nbsp; <small>Add</small>         <i>optional</i>    <br>
+    a relation in the response
+
+
+
+## Create a discount
+
+
+Allows you to create a new discount.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://dev-product.api.hopn.space/discounts',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'query' => [
+            'title'=> 'Traduction française',
+            'locale'=> 'fr-FR',
+            'text'=> 'Promo d'halloween',
+            'discount_type'=> 'pourcent',
+            'amount'=> '100',
+            'start_at'=> '1970-01-01 00:00:00',
+            'end_at'=> '1970-01-01 00:00:00',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts"
+);
+
+let params = {
+    "title": "Traduction française",
+    "locale": "fr-FR",
+    "text": "Promo d'halloween",
+    "discount_type": "pourcent",
+    "amount": "100",
+    "start_at": "1970-01-01 00:00:00",
+    "end_at": "1970-01-01 00:00:00",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts'
+params = {
+  'title': 'Traduction française',
+  'locale': 'fr-FR',
+  'text': 'Promo d'halloween',
+  'discount_type': 'pourcent',
+  'amount': '100',
+  'start_at': '1970-01-01 00:00:00',
+  'end_at': '1970-01-01 00:00:00',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, params=params)
+response.json()
+```
+
+```bash
+curl -X POST \
+    "http://dev-product.api.hopn.space/discounts?title=Traduction+fran%C3%A7aise&locale=fr-FR&text=Promo+d%27halloween&discount_type=pourcent&amount=100&start_at=1970-01-01+00%3A00%3A00&end_at=1970-01-01+00%3A00%3A00" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615932627,
+    "signature": "b84b9a0d296a686e3fc582316b34aaca",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "discount_93c6eb6a9e05c06e",
+            "discount_type": "pourcent",
+            "amount": "50",
+            "start_at": "2021-03-16 00:00:00",
+            "end_at": "2021-05-16 00:00:00",
+            "updated_at": "2021-03-16T22:10:27.000000Z",
+            "created_at": "2021-03-16T22:10:27.000000Z",
+            "title": "Traduction française",
+            "text": "Promo d'hiver"
+        }
+    }
+}
+```
+
+### Request
+<small class="badge badge-black">POST</small>
+ **`discounts`**
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>title</b></code>&nbsp;      <br>
+    Title of the description
+
+<code><b>locale</b></code>&nbsp;      <br>
+    Locale
+
+<code><b>text</b></code>&nbsp;      <br>
+    Description
+
+<code><b>discount_type</b></code>&nbsp;      <br>
+    Discount Type
+
+<code><b>amount</b></code>&nbsp;      <br>
+    amount
+
+<code><b>start_at</b></code>&nbsp;      <br>
+    Start
+
+<code><b>end_at</b></code>&nbsp;      <br>
+    End
+
+
+
+## Update a discount
+
+
+You can update discount data.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->patch(
+    'http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'query' => [
+            'discount_type'=> 'pourcent',
+            'amount'=> '100',
+            'start_at'=> '1970-01-01 00:00:00',
+            'end_at'=> '1970-01-01 00:00:00',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db"
+);
+
+let params = {
+    "discount_type": "pourcent",
+    "amount": "100",
+    "start_at": "1970-01-01 00:00:00",
+    "end_at": "1970-01-01 00:00:00",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db'
+params = {
+  'discount_type': 'pourcent',
+  'amount': '100',
+  'start_at': '1970-01-01 00:00:00',
+  'end_at': '1970-01-01 00:00:00',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PATCH', url, headers=headers, params=params)
+response.json()
+```
+
+```bash
+curl -X PATCH \
+    "http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db?discount_type=pourcent&amount=100&start_at=1970-01-01+00%3A00%3A00&end_at=1970-01-01+00%3A00%3A00" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615933154,
+    "signature": "3029ce784bf7965220476307742af696",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "discount_93c6eb6a9e05c06e",
+            "discount_type": "EUR",
+            "promotional_code_id": null,
+            "amount": "50",
+            "start_at": "2021-03-16 00:00:00",
+            "end_at": "2021-05-16 00:00:00",
+            "deleted_at": null,
+            "created_at": "2021-03-16T22:10:27.000000Z",
+            "updated_at": "2021-03-16T22:19:14.000000Z",
+            "title": "Traduction française",
+            "text": "Promo d'hiver"
+        }
+    }
+}
+```
+
+### Request
+<small class="badge badge-purple">PATCH</small>
+ **`discounts/{discount_id}`**
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<code><b>discount_id</b></code>&nbsp;      <br>
+    Id of the discount to update
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>discount_type</b></code>&nbsp;      <br>
+    Discount Type
+
+<code><b>amount</b></code>&nbsp;      <br>
+    amount
+
+<code><b>start_at</b></code>&nbsp;      <br>
+    Start
+
+<code><b>end_at</b></code>&nbsp;      <br>
+    End
+
+
+
+## Delete a discount
+
+
+Delete a discount and anonymize the data.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()
+```
+
+```bash
+curl -X DELETE \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+
+
+### Request
+<small class="badge badge-red">DELETE</small>
+ **`discounts/{discount_id}`**
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<code><b>discount_id</b></code>&nbsp;      <br>
+    Discount ID
+
+
+
+## Translate a discount&#039;s description
+
+
+Allow you to translate a discount's description
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'query' => [
+            'locale'=> 'en-US',
+            'title'=> 'English translations',
+            'text'=> 'winter sales',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate"
+);
+
+let params = {
+    "locale": "en-US",
+    "title": "English translations",
+    "text": "winter sales",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate'
+params = {
+  'locale': 'en-US',
+  'title': 'English translations',
+  'text': 'winter sales',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, params=params)
+response.json()
+```
+
+```bash
+curl -X POST \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate?locale=en-US&title=English+translations&text=winter+sales" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615933267,
+    "signature": "286a088044c8fb466707b2487795bbfa",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "discounttrad_19e863dfddd6",
+            "discount_id": "discount_93c6eb6a9e05c06e",
+            "locale": "en-US",
+            "title": "English translation",
+            "text": "Winter sales",
+            "deleted_at": null,
+            "created_at": "2021-03-16T22:21:07.000000Z",
+            "updated_at": "2021-03-16T22:21:07.000000Z"
+        }
+    }
+}
+```
+
+### Request
+<small class="badge badge-black">POST</small>
+ **`discounts/{discount_id}/translate`**
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<code><b>discount_id</b></code>&nbsp;      <br>
+    Discount ID
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>locale</b></code>&nbsp;      <br>
+    Locale
+
+<code><b>title</b></code>&nbsp;      <br>
+    The title of the translation
+
+<code><b>text</b></code>&nbsp;      <br>
+    The description of the discount translated
+
+
+
+## Remove a discount&#039;s description translation
+
+
+Allow you to remove a discount's description translation.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'query' => [
+            'locale'=> 'en-US',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate"
+);
+
+let params = {
+    "locale": "en-US",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate'
+params = {
+  'locale': 'en-US',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers, params=params)
+response.json()
+```
+
+```bash
+curl -X DELETE \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/translate?locale=en-US" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615933306,
+    "signature": "2edf4bc012a3516835b3057e8a094cd6",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "discounttrad_19e863dfddd6",
+            "discount_id": "discount_93c6eb6a9e05c06e",
+            "locale": "en-US",
+            "title": "English translation",
+            "text": "Winter sales",
+            "deleted_at": "2021-03-16T22:21:46.000000Z",
+            "created_at": "2021-03-16T22:21:07.000000Z",
+            "updated_at": "2021-03-16T22:21:46.000000Z"
+        }
+    }
+}
+```
+
+### Request
+<small class="badge badge-red">DELETE</small>
+ **`discounts/{discount_id}/translate`**
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<code><b>discount_id</b></code>&nbsp;      <br>
+    Discount ID
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>locale</b></code>&nbsp;      <br>
+    Locale
+
+
+
+## assign a discount to a product, composite product or category
+
+
+You can assign a discount.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/assign',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'query' => [
+            'product_id'=> 'product_9f71793f1bff89227',
+            'composite_product_id'=> 'compproduct_64ba1e4ff721a',
+            'category_id'=> 'cat_bcc3b36c2dd0ae4a1c57c',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/assign"
+);
+
+let params = {
+    "product_id": "product_9f71793f1bff89227",
+    "composite_product_id": "compproduct_64ba1e4ff721a",
+    "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/assign'
+params = {
+  'product_id': 'product_9f71793f1bff89227',
+  'composite_product_id': 'compproduct_64ba1e4ff721a',
+  'category_id': 'cat_bcc3b36c2dd0ae4a1c57c',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, params=params)
+response.json()
+```
+
+```bash
+curl -X POST \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/assign?product_id=product_9f71793f1bff89227&composite_product_id=compproduct_64ba1e4ff721a&category_id=cat_bcc3b36c2dd0ae4a1c57c" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615935107,
+    "signature": "29de4dd69c9846c25983a7654986f712",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "productdiscount_ddd3b7ec0",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "product_id": "product_9f71793f1bff89227",
+                "updated_at": "2021-03-16T22:51:47.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z"
+            },
+            {
+                "id": "cpdiscount_69cc14ed1230c5",
+                "composite_product_id": "compproduct_64ba1e4ff721a",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "updated_at": "2021-03-16T22:51:47.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z"
+            },
+            {
+                "id": "catdiscount_c93befd6b0497",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
+                "updated_at": "2021-03-16T22:51:47.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z"
+            }
+        ]
+    }
+}
+```
+
+### Request
+<small class="badge badge-black">POST</small>
+ **`discounts/{discount_id}/assign`**
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<code><b>discount_id</b></code>&nbsp;      <br>
+    Id of the discount to assign
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>product_id</b></code>&nbsp;      <br>
+    Product ID
+
+<code><b>composite_product_id</b></code>&nbsp;      <br>
+    Composite Product ID
+
+<code><b>category_id</b></code>&nbsp;      <br>
+    Category ID
+
+
+
+## remove a discount to a product, composite product or category
+
+
+You can remove a discount.
+
+> Example request:
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/remove',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ],
+        'query' => [
+            'product_id'=> 'product_9f71793f1bff89227',
+            'composite_product_id'=> 'compproduct_64ba1e4ff721a',
+            'category_id'=> 'cat_bcc3b36c2dd0ae4a1c57c',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```javascript
+const url = new URL(
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/remove"
+);
+
+let params = {
+    "product_id": "product_9f71793f1bff89227",
+    "composite_product_id": "compproduct_64ba1e4ff721a",
+    "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```python
+import requests
+import json
+
+url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/remove'
+params = {
+  'product_id': 'product_9f71793f1bff89227',
+  'composite_product_id': 'compproduct_64ba1e4ff721a',
+  'category_id': 'cat_bcc3b36c2dd0ae4a1c57c',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers, params=params)
+response.json()
+```
+
+```bash
+curl -X DELETE \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/remove?product_id=product_9f71793f1bff89227&composite_product_id=compproduct_64ba1e4ff721a&category_id=cat_bcc3b36c2dd0ae4a1c57c" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+
+> Example response (200):
+
+```json
+{
+    "timestamp": 1615935509,
+    "signature": "0c91afb89df390074fda30410a8b6658",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "productdiscount_ddd3b7ec0",
+                "product_id": "product_9f71793f1bff89227",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "deleted_at": "2021-03-16T22:58:29.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z",
+                "updated_at": "2021-03-16T22:58:29.000000Z"
+            },
+            {
+                "id": "cpdiscount_69cc14ed1230c5",
+                "composite_product_id": "compproduct_64ba1e4ff721a",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "deleted_at": "2021-03-16T22:58:29.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z",
+                "updated_at": "2021-03-16T22:58:29.000000Z"
+            },
+            {
+                "id": "catdiscount_c93befd6b0497",
+                "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
+                "discount_id": "discount_93c6eb6a9e05c06e",
+                "deleted_at": "2021-03-16T22:58:29.000000Z",
+                "created_at": "2021-03-16T22:51:47.000000Z",
+                "updated_at": "2021-03-16T22:58:29.000000Z"
+            }
+        ]
+    }
+}
+```
+
+### Request
+<small class="badge badge-red">DELETE</small>
+ **`discounts/{discount_id}/remove`**
+
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<code><b>discount_id</b></code>&nbsp;      <br>
+    Id of the discount to assign
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>product_id</b></code>&nbsp;      <br>
+    Product ID
+
+<code><b>composite_product_id</b></code>&nbsp;      <br>
+    Composite Product ID
+
+<code><b>category_id</b></code>&nbsp;      <br>
+    Category ID
+
+
+
+
