@@ -27,15 +27,15 @@ class PromotionalCodeController extends ControllerBase
     }
 
     /**
-     * Retrieve a promotional_code
+     * Retrieve a promotional code
      *
-     * Retrieve all promotional_code details.
+     * Retrieve all promotional code details.
      *
      * @group   Promotional Codes
      *
-     * @urlParam    promotional_code_id          required        Promotional Code ID                        Example: promocode_17d78ae0a3bfb0a
+     * @urlParam    promotional_code_id     required        Promotional Code ID                 Example: promocode_17d78ae0a3bfb0a
      *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["translationsList","discounts"]
+     * @bodyParam   filters[relations]                      Add a relation in the response      Example: ["translationsList","discounts"]
      *
      * @responseFile /responses/promotional_codes/retrieve.json
      * @responseFile scenario="Relations filter" /responses/promotional_codes/relations-retrieve.json
@@ -146,23 +146,19 @@ class PromotionalCodeController extends ControllerBase
     }
 
     /**
-     * Create a promotional_code
+     * Create a promotional code
      *
-     * Allows you to create a new promotional_code.
+     * Allows you to create a new promotional code.
      *
      * @group   Promotional Codes
      *
-     * @queryParam  title                           required        Title of the description                            Example: Traduction française
-     * @queryParam  locale                          required        Locale                                              Example: fr-FR
-     * @queryParam  code                            required        Code                                                Example: PROMO20
-     * @queryParam  start_at                        required        date start                                          Example: 1970-01-01 00:00:00
-     * @queryParam  end_at                          required        date end                                            Example: 1970-01-01 00:00:00
-     * @queryParam  amount                          required        amount of use                                       Example: 150
-     * @queryParam  number_used                     required        number already used                                 Example: 50
-     * @queryParam  maximum_usage                   required        max usage                                           Example: 1
-     * @queryParam  combinable_with_offers          required        combinable with others offers                       Example: true
-     * @queryParam  promotional_code_type           required        type: pourcent or EUR/US                            Example: pourcent
-     * @queryParam  text                            required        Description                                         Example: code promo spéciale
+     * @queryParam  title                       required        Title of the description            Example: Traduction française
+     * @queryParam  locale                      required        Locale                              Example: fr-FR
+     * @queryParam  code                        required        Code                                Example: PROMO20
+     * @queryParam  number_used                 required        number already used                 Example: 50
+     * @queryParam  maximum_usage               required        max usage                           Example: 1
+     * @queryParam  combinable_with_offers      required        combinable with others offers       Example: true
+     * @queryParam  text                        required        Description                         Example: code promo spéciale
      *
      * @responseFile /responses/promotional_codes/create.json
      *
@@ -177,13 +173,9 @@ class PromotionalCodeController extends ControllerBase
                 'title'                         => 'string',
                 'locale'                        => 'in:'. env('LOCALES_ALLOWED'),
                 'code'                          => 'string',
-                'start_at'                      => 'date_format:Y-m-d H:i:s',
-                'end_at'                        => 'date_format:Y-m-d H:i:s',
-                'amount'                        => 'integer',
                 'number_used'                   => 'integer',
                 'maximum_usage'                 => 'integer',
                 'combinable_with_offers'        => 'boolean',
-                'promotional_code_type'         => 'string',
                 'text'                          => 'string',
             ]);
 
@@ -198,13 +190,9 @@ class PromotionalCodeController extends ControllerBase
             $promotional_code = new PromotionalCode;
             $promotional_code->id = $this->generateId('promocode', $promotional_code);
             $promotional_code->code = $request->code;
-            $promotional_code->start_at = $request->start_at;
-            $promotional_code->end_at = $request->end_at;
-            $promotional_code->amount = $request->amount;
             $promotional_code->number_used = $request->number_used;
             $promotional_code->maximum_usage = $request->maximum_usage;
             $promotional_code->combinable_with_offers = $request->combinable_with_offers;
-            $promotional_code->promotional_code_type = $request->promotional_code_type;
 
             if(!empty($request->input('locale'))) {
                 $promotional_code->translateOrNew($request->input('locale'))->fill(['id' => $request->promotional_code_translation_id])->title   = $request->input('title');
@@ -232,22 +220,18 @@ class PromotionalCodeController extends ControllerBase
     }
 
     /**
-     * Update a promotional_code
+     * Update a promotional code
      *
-     * You can update promotional_code data.
+     * You can update promotional code data.
      *
      * @group   Promotional Codes
      *
-     * @urlParam      promotional_code_id                       required        Id of the promotional_code to update    Example: promocode_e0e4cf83ded071a
+     * @urlParam    promotional_code_id     required        Id of the promotional_code to update    Example: promocode_e0e4cf83ded071a
      *
-     * @queryParam  code                            required        Code                                                Example: PROMO20
-     * @queryParam  start_at                        required        date start                                          Example: 1970-01-01 00:00:00
-     * @queryParam  end_at                          required        date end                                            Example: 1970-01-01 00:00:00
-     * @queryParam  amount                          required        amount of use                                       Example: 150
-     * @queryParam  number_used                     required        number already used                                 Example: 50
-     * @queryParam  maximum_usage                   required        max usage                                           Example: 1
-     * @queryParam  combinable_with_offers          required        combinable with others offers                       Example: true
-     * @queryParam  promotional_code_type           required        type: pourcent or EUR/US                            Example: pourcent
+     * @queryParam  code                    required        Code                                    Example: PROMO20
+     * @queryParam  number_used             required        number already used                     Example: 50
+     * @queryParam  maximum_usage           required        max usage                               Example: 1
+     * @queryParam  combinable_with_offers  required        combinable with others offers           Example: true
      *
      * @responseFile /responses/promotional_codes/update.json
      *
@@ -260,13 +244,9 @@ class PromotionalCodeController extends ControllerBase
         try {
             $this->validate($request, [
                 'code'                          => 'string',
-                'start_at'                      => 'date_format:Y-m-d H:i:s',
-                'end_at'                        => 'date_format:Y-m-d H:i:s',
-                'amount'                        => 'integer',
                 'number_used'                   => 'integer',
                 'maximum_usage'                 => 'integer',
                 'combinable_with_offers'        => 'boolean',
-                'promotional_code_type'         => 'string',
             ]);
 
             DB::beginTransaction();
@@ -279,14 +259,10 @@ class PromotionalCodeController extends ControllerBase
                 throw new ModelNotFoundException('Promotional Code not found.', 404);
             }
 
-            $promotional_code->promotional_code_type        = $request->input('promotional_code_type', $promotional_code->getOriginal('promotional_code_type'));
-            $promotional_code->amount               = $request->input('amount', $promotional_code->getOriginal('amount'));
-            $promotional_code->start_at             = $request->input('start_at', $promotional_code->getOriginal('start_at'));
-            $promotional_code->end_at               = $request->input('end_at', $promotional_code->getOriginal('end_at'));
-            $promotional_code->code               = $request->input('code', $promotional_code->getOriginal('code'));
-            $promotional_code->number_used               = $request->input('number_used', $promotional_code->getOriginal('number_used'));
-            $promotional_code->maximum_usage               = $request->input('maximum_usage', $promotional_code->getOriginal('maximum_usage'));
-            $promotional_code->combinable_with_offers               = $request->input('combinable_with_offers', $promotional_code->getOriginal('combinable_with_offers'));
+            $promotional_code->code                         = $request->input('code', $promotional_code->getOriginal('code'));
+            $promotional_code->number_used                  = $request->input('number_used', $promotional_code->getOriginal('number_used'));
+            $promotional_code->maximum_usage                = $request->input('maximum_usage', $promotional_code->getOriginal('maximum_usage'));
+            $promotional_code->combinable_with_offers       = $request->input('combinable_with_offers', $promotional_code->getOriginal('combinable_with_offers'));
 
             $promotional_code->save();
 
@@ -309,13 +285,13 @@ class PromotionalCodeController extends ControllerBase
     }
 
     /**
-     * Delete a promotional_code
+     * Delete a promotional code
      *
-     * Delete a promotional_code and anonymize the data.
+     * Delete a promotional code and anonymize the data.
      *
      * @group   Promotional Codes
      *
-     * @urlParam    promotional_code_id             required        Promotional Code ID            Example: promocode_17d78ae0a3bfb0a
+     * @urlParam    promotional_code_id         required        Promotional Code ID            Example: promocode_17d78ae0a3bfb0a
      *
      * @responseFile /responses/promotional_codes/delete.json
      *
@@ -357,17 +333,17 @@ class PromotionalCodeController extends ControllerBase
     }
 
     /**
-     * Translate a promotional_code's description
+     * Translate a promotional code's description
      *
-     * Allow you to translate a promotional_code's description
+     * Allow you to translate a promotional code's description
      *
      * @group   Promotional Codes
      *
-     * @urlParam    promotional_code_id         required        Promotional Code ID                                     Example: promocode_17d78ae0a3bfb0a
+     * @urlParam    promotional_code_id     required        Promotional Code ID                                     Example: promocode_17d78ae0a3bfb0a
      *
-     * @queryParam  locale              required        Locale                                                          Example: en-US
-     * @queryParam  title               required        The title of the translation                                        Example: English translations
-     * @queryParam  text                required        The description of the promotional_code translated              Example: Special black friday code
+     * @queryParam  locale                  required        Locale                                                  Example: en-US
+     * @queryParam  title                   required        The title of the translation                            Example: English translations
+     * @queryParam  text                    required        The description of the promotional_code translated      Example: Special black friday code
      *
      * @responseFile /responses/promotional_codes/addTranslation.json
      *
@@ -424,15 +400,15 @@ class PromotionalCodeController extends ControllerBase
     }
 
     /**
-     * Remove a promotional_code's description translation
+     * Remove a promotional code's description translation
      *
-     * Allow you to remove a promotional_code's description translation.
+     * Allow you to remove a promotional code's description translation.
      *
      * @group   Promotional Codes
      *
-     * @urlParam    promotional_code_id                      required        Promotional Code ID                        Example: promocode_17d78ae0a3bfb0a
+     * @urlParam    promotional_code_id         required        Promotional Code ID         Example: promocode_17d78ae0a3bfb0a
      *
-     * @queryParam  locale                           required        Locale                                             Example: en-US
+     * @queryParam  locale                      required        Locale                      Example: en-US
      *
      * @responseFile /responses/promotional_codes/removeTranslation.json
      *

@@ -41,7 +41,7 @@ $router->group(['prefix' => 'composite_products'], function () use ($router)
         'uses'          =>'CompositeProductController@removeTranslation'
     ]);
 
-    $router->patch('/{composite_product_id}/price', [
+    $router->patch('/{composite_product_id}/price/{composite_product_price_id}', [
         'uses'          =>'CompositeProductController@updatePrice'
     ]);
 

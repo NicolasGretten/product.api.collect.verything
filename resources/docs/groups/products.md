@@ -1004,17 +1004,43 @@ curl -X POST \
 
 ```json
 {
-    "timestamp": 1615911017,
-    "signature": "9896d92ef3a013e90bb01cec2ed4085a",
+    "timestamp": 1615970444,
+    "signature": "41996b2fbd37f2ebb5e7fa742895ad4e",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "product_52e47d49bc151e311",
-            "updated_at": "2021-03-16T16:10:17.000000Z",
-            "created_at": "2021-03-16T16:10:17.000000Z",
+            "id": "product_010ff0c6a7a748678",
+            "updated_at": "2021-03-17T08:40:44.000000Z",
+            "created_at": "2021-03-17T08:40:44.000000Z",
+            "availability": {
+                "id": "pa_b2511925a4018489d3663a",
+                "product_id": "product_010ff0c6a7a748678",
+                "day": "[\"monday\",\"tuesday\",\"wednesday\",\"friday\"]",
+                "hour_start": "08:00:00",
+                "hour_end": "18:00:00",
+                "updated_at": "2021-03-17T08:40:44.000000Z",
+                "created_at": "2021-03-17T08:40:44.000000Z"
+            },
+            "price": {
+                "id": "productprc_7eaf1101dae4d3",
+                "product_id": "product_010ff0c6a7a748678",
+                "price_including_taxes": "110",
+                "price_excluding_taxes": "100",
+                "vat_value": "10",
+                "vat_rate": "10",
+                "updated_at": "2021-03-17T08:40:44.000000Z",
+                "created_at": "2021-03-17T08:40:44.000000Z"
+            },
+            "category": {
+                "id": "prodcat_da0d6c16c0487c28a",
+                "product_id": "product_010ff0c6a7a748678",
+                "category_id": "cat_1ddf322d0c198c29b50ce",
+                "updated_at": "2021-03-17T08:40:44.000000Z",
+                "created_at": "2021-03-17T08:40:44.000000Z"
+            },
             "title": "Traduction française",
-            "text": "spa"
+            "text": "salle de coworking"
         }
     }
 }
@@ -1034,16 +1060,16 @@ curl -X POST \
 <code><b>text</b></code>&nbsp;      <br>
     Description
 
-<code><b>price_including_taxes</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>price_including_taxes</b></code>&nbsp;      <br>
     New price including taxes
 
-<code><b>price_excluding_taxes</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>price_excluding_taxes</b></code>&nbsp;      <br>
     New price excluding taxes
 
-<code><b>vat_value</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>vat_value</b></code>&nbsp;      <br>
     New vat value
 
-<code><b>vat_rate</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>vat_rate</b></code>&nbsp;      <br>
     New vat rate
 
 <code><b>day</b></code>&nbsp;      <br>
@@ -1404,7 +1430,7 @@ You can update product price data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->patch(
-    'http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price',
+    'http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price/productprc_4e9a60b280a60e',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -1424,7 +1450,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price"
+    "http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price/productprc_4e9a60b280a60e"
 );
 
 let params = {
@@ -1454,7 +1480,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price'
+url = 'http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price/productprc_4e9a60b280a60e'
 params = {
   'price_including_taxes': '120',
   'price_excluding_taxes': '100',
@@ -1472,7 +1498,7 @@ response.json()
 
 ```bash
 curl -X PATCH \
-    "http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price?price_including_taxes=120&price_excluding_taxes=100&vat_value=20&vat_rate=20" \
+    "http://dev-product.api.hopn.space/products/product_9f71793f1bff89227/price/productprc_4e9a60b280a60e?price_including_taxes=120&price_excluding_taxes=100&vat_value=20&vat_rate=20" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1482,21 +1508,20 @@ curl -X PATCH \
 
 ```json
 {
-    "timestamp": 1615924650,
-    "signature": "8a862dbe9a5961e2ddc7e26759259514",
+    "timestamp": 1615970601,
+    "signature": "88f15c805bd2880b8c6044648d505369",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cpprice_2168ca21f9c50723b",
-            "composite_product_id": "compproduct_f69ab775ee415",
-            "price_including_taxes": "1200",
-            "price_excluding_taxes": "1000",
-            "vat_value": "200",
+            "id": "productprc_00b31aa55d3fa8",
+            "product_id": "product_010ff0c6a7a748678",
+            "price_including_taxes": "12000",
+            "price_excluding_taxes": "10000",
+            "vat_value": "2000",
             "vat_rate": "20",
-            "deleted_at": null,
-            "created_at": "2021-03-16T19:55:50.000000Z",
-            "updated_at": "2021-03-16T19:57:30.000000Z"
+            "updated_at": "2021-03-17T08:43:21.000000Z",
+            "created_at": "2021-03-17T08:43:21.000000Z"
         }
     }
 }
@@ -1504,23 +1529,26 @@ curl -X PATCH \
 
 ### Request
 <small class="badge badge-purple">PATCH</small>
- **`products/{product_id}/price`**
+ **`products/{product_id}/price/{product_price_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>product_id</b></code>&nbsp;      <br>
     Id of the product to update
 
+<code><b>product_price_id</b></code>&nbsp;      <br>
+    Id of the product price to update
+
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>price_including_taxes</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>price_including_taxes</b></code>&nbsp;      <br>
     New price including taxes
 
-<code><b>price_excluding_taxes</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>price_excluding_taxes</b></code>&nbsp;      <br>
     New price excluding taxes
 
-<code><b>vat_value</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>vat_value</b></code>&nbsp;      <br>
     New vat value
 
-<code><b>vat_rate</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>vat_rate</b></code>&nbsp;      <br>
     New vat rate
 
 

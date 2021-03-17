@@ -152,9 +152,9 @@ class CategoryController extends ControllerBase
      *
      * @group   Categories
      *
-     * @queryParam  title                           required        Title of the description                            Example: Traduction française
-     * @queryParam  locale                          required        Locale                                              Example: fr-FR
-     * @queryParam  text                            required        Description                                         Example: Soins
+     * @queryParam  title       required        Title of the description    Example: Traduction française
+     * @queryParam  locale      required        Locale                      Example: fr-FR
+     * @queryParam  text        required        Description                 Example: Soins
      *
      * @responseFile /responses/categories/create.json
      *
@@ -214,7 +214,7 @@ class CategoryController extends ControllerBase
      *
      * @group   Categories
      *
-     * @urlParam    category_id             required        Category ID            Example: cat_d10be1a57a0fddafc85b5
+     * @urlParam    category_id     required        Category ID     Example: cat_d10be1a57a0fddafc85b5
      *
      * @responseFile /responses/categories/delete.json
      *
@@ -262,11 +262,11 @@ class CategoryController extends ControllerBase
      *
      * @group   Categories
      *
-     * @urlParam    category_id         required        Category ID                                     Example: cat_d10be1a57a0fddafc85b5
+     * @urlParam    category_id     required        Category ID                                     Example: cat_d10be1a57a0fddafc85b5
      *
-     * @queryParam  locale              required        Locale                                          Example: en-US
-     * @queryParam  title               required        The title of the translation                    Example: English translations
-     * @queryParam  text                required        The description of the category translated      Example: subscription
+     * @queryParam  locale          required        Locale                                          Example: en-US
+     * @queryParam  title           required        The title of the translation                    Example: English translations
+     * @queryParam  text            required        The description of the category translated      Example: subscription
      *
      * @responseFile /responses/categories/addTranslation.json
      *
@@ -329,9 +329,9 @@ class CategoryController extends ControllerBase
      *
      * @group   Categories
      *
-     * @urlParam    category_id                      required        Category ID                                        Example: cat_d10be1a57a0fddafc85b5
+     * @urlParam    category_id     required        Category ID         Example: cat_d10be1a57a0fddafc85b5
      *
-     * @queryParam  locale                           required        Locale                                             Example: en-US
+     * @queryParam  locale          required        Locale              Example: en-US
      *
      * @responseFile /responses/categories/removeTranslation.json
      *

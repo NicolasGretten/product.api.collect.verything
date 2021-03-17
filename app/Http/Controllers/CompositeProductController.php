@@ -37,9 +37,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id          required        Composite Product ID      Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id          required          Composite Product ID                    Example: compproduct_64ba1e4ff721a
      *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["products","availabilities","prices","discounts","categories","translationsList"]
+     * @bodyParam   filters[relations]                              Add a relation in the response          Example: ["products","availabilities","prices","discounts","categories","translationsList"]
      *
      * @responseFile /responses/composite_products/retrieve.json
      * @responseFile scenario="Relations filter" /responses/composite_products/relations-retrieve.json
@@ -156,24 +156,24 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @queryParam  title                           required        Title of the description                            Example: Traduction française
-     * @queryParam  locale                          required        Locale                                              Example: fr-FR
-     * @queryParam  text                            required        Description                                         Example: spa
-     * @queryParam      price_including_taxes                           New price including taxes                          Example: 120
-     * @queryParam      price_excluding_taxes                           New price excluding taxes                           Example: 100
-     * @queryParam      vat_value                                       New vat value                                       Example: 20
-     * @queryParam      vat_rate                                        New vat rate                                        Example: 20
-     * @queryParam      day                 required        day available                   Example: ["monday","tuesday","wednesday"]
-     * @queryParam      hour_start          required        Hour start                      Example: 08:00:00
-     * @queryParam      hour_end            required        Hour end                        Example: 10:00:00
-     * @queryParam      category_id                        required        Category ID              Example: cat_d10be1a57a0fddafc85b5
+     * @queryParam  title                       required        Title of the description        Example: Traduction française
+     * @queryParam  locale                      required        Locale                          Example: fr-FR
+     * @queryParam  text                        required        Description                     Example: spa
+     * @queryParam  price_including_taxes       required        New price including taxes       Example: 120
+     * @queryParam  price_excluding_taxes       required        New price excluding taxes       Example: 100
+     * @queryParam  vat_value                   required        New vat value                   Example: 20
+     * @queryParam  vat_rate                    required        New vat rate                    Example: 20
+     * @queryParam  day                         required        day available                   Example: ["monday","tuesday","wednesday"]
+     * @queryParam  hour_start                  required        Hour start                      Example: 08:00:00
+     * @queryParam  hour_end                    required        Hour end                        Example: 10:00:00
+     * @queryParam  category_id                 required        Category ID                     Example: cat_d10be1a57a0fddafc85b5
      *
      * @responseFile /responses/composite_products/create.json
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
@@ -219,6 +219,7 @@ class CompositeProductController extends ControllerBase
             $availability->hour_start   = $request->hour_start;
             $availability->hour_end     = $request->hour_end;
             $availability->save();
+            $compositeProduct->availability = $availability;
 
             $price = new CompositeProductPrice();
             $price->id                      = $this->generateId('cpprice', $price);
@@ -228,12 +229,14 @@ class CompositeProductController extends ControllerBase
             $price->vat_value               = $request->vat_value;
             $price->vat_rate                = $request->vat_rate;
             $price->save();
+            $compositeProduct->price = $price;
 
             $category = new CompositeProductCategory();
             $category->id               = $this->generateId('cpcat', $category);
             $category->composite_product_id       = $id;
             $category->category_id      = $request->category_id;
             $category->save();
+            $compositeProduct->category = $category;
 
             DB::commit();
 
@@ -308,11 +311,11 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id         required        Composite Product ID                                     Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id        required        Composite Product ID                        Example: compproduct_64ba1e4ff721a
      *
-     * @queryParam  locale              required        Locale                                          Example: en-US
-     * @queryParam  title               required        The title of the translation                    Example: English translations
-     * @queryParam  text                required        The description of the product translated      Example: Spa
+     * @queryParam  locale                      required        Locale                                      Example: en-US
+     * @queryParam  title                       required        The title of the translation                Example: English translations
+     * @queryParam  text                        required        The description of the product translated   Example: Spa
      *
      * @responseFile /responses/composite_products/addTranslation.json
      *
@@ -375,9 +378,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id                      required        Composite Product ID                                        Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id            required        Composite Product ID            Example: compproduct_64ba1e4ff721a
      *
-     * @queryParam  locale                           required        Locale                                             Example: en-US
+     * @queryParam  locale                          required        Locale                          Example: en-US
      *
      * @responseFile /responses/composite_products/removeTranslation.json
      *
@@ -439,12 +442,12 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam      composite_product_id                       required        Id of the product to update                        Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id        required        Id of the product to update     Example: compproduct_64ba1e4ff721a
      *
-     * @queryParam      price_including_taxes                           New price including taxes                          Example: 120
-     * @queryParam      price_excluding_taxes                           New price excluding taxes                           Example: 100
-     * @queryParam      vat_value                                       New vat value                                       Example: 20
-     * @queryParam      vat_rate                                        New vat rate                                        Example: 20
+     * @queryParam  price_including_taxes       required        New price including taxes       Example: 120
+     * @queryParam  price_excluding_taxes       required        New price excluding taxes       Example: 100
+     * @queryParam  vat_value                   required        New vat value                   Example: 20
+     * @queryParam  vat_rate                    required        New vat rate                    Example: 20
      *
      * @responseFile /responses/composite_products/updatePrice.json
      *
@@ -464,20 +467,30 @@ class CompositeProductController extends ControllerBase
 
             DB::beginTransaction();
 
-            $resultSet = CompositeProductPrice::where('composite_products_prices.composite_product_id', $request->composite_product_id);
+            $resultSet = CompositeProductPrice::where('composite_products_prices.id', $request->composite_product_price_id);
 
-            $price = $resultSet->first();
+            $compositePrice = $resultSet->first();
 
-            $price->price_including_taxes       = $request->input('price_including_taxes', $price->getOriginal('price_including_taxes'));
-            $price->price_excluding_taxes       = $request->input('price_excluding_taxes', $price->getOriginal('price_excluding_taxes'));
-            $price->vat_value                   = $request->input('vat_value', $price->getOriginal('vat_value'));
-            $price->vat_rate                    = $request->input('vat_rate', $price->getOriginal('vat_rate'));
+            if(empty($compositePrice)) {
+                throw new Exception('The composite product price doesn\'t exist.', 404);
+            }
 
-            $price->save();
+            $compositePrice->delete();
+
+
+            $newPrice = new CompositeProductPrice();
+            $newPrice->id                           = $this->generateId('cpprice', $newPrice);
+            $newPrice->composite_product_id         = $request->composite_product_id;
+            $newPrice->price_including_taxes        = $request->price_including_taxes;
+            $newPrice->price_excluding_taxes        = $request->price_excluding_taxes;
+            $newPrice->vat_value                    = $request->vat_value;
+            $newPrice->vat_rate                     = $request->vat_rate;
+
+            $newPrice->save();
 
             DB::commit();
 
-            return response()->json($price);
+            return response()->json($newPrice);
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);
@@ -500,11 +513,11 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam      composite_product_id           required        Id of the product to update    Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id    required        Id of the product to update     Example: compproduct_64ba1e4ff721a
      *
-     * @queryParam      day                 required        day available                   Example: ["monday","tuesday","wednesday"]
-     * @queryParam      hour_start          required        Hour start                      Example: 08:00:00
-     * @queryParam      hour_end            required        Hour end                        Example: 10:00:00
+     * @queryParam  day                     required        day available                   Example: ["monday","tuesday","wednesday"]
+     * @queryParam  hour_start              required        Hour start                      Example: 08:00:00
+     * @queryParam  hour_end                required        Hour end                        Example: 10:00:00
      *
      * @responseFile /responses/composite_products/updateAvailability.json
      *
@@ -558,9 +571,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam      composite_product_id                       required        Id of the product to update        Example: compproduct_64ba1e4ff721a
+     * @urlParam      composite_product_id      required        Id of the product to update     Example: compproduct_64ba1e4ff721a
      *
-     * @queryParam      category_id                        required        Category ID              Example: product_9f71793f1bff89227
+     * @queryParam      category_id             required        Category ID                     Example: product_9f71793f1bff89227
      *
      * @responseFile /responses/composite_products/updateCategory.json
      *
@@ -610,9 +623,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam      composite_product_id                       required        Id of the product to update        Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id        required        Id of the product to update         Example: compproduct_64ba1e4ff721a
      *
-     * @queryParam      product_id                        required        Product ID              Example: product_9f71793f1bff89227
+     * @queryParam  product_id                  required        Product ID                          Example: product_9f71793f1bff89227
      *
      * @responseFile /responses/composite_products/addProduct.json
      *
@@ -620,11 +633,11 @@ class CompositeProductController extends ControllerBase
      *
      * @return JsonResponse
      */
-    public function addProduct(Request $request)
+    public function addProduct(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
-                'product_id'                   => 'string|exists:products,id',
+                'product_id'    => 'string|exists:products,id',
             ]);
 
             DB::beginTransaction();
@@ -662,9 +675,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam      composite_product_id                       required        Id of the product to update        Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id            required        Id of the product to update         Example: compproduct_64ba1e4ff721a
      *
-     * @queryParam      product_id                        required        Product ID              Example: product_9f71793f1bff89227
+     * @queryParam  product_id                      required        Product ID                          Example: product_9f71793f1bff89227
      *
      * @responseFile /responses/composite_products/removeProduct.json
      *
@@ -672,11 +685,11 @@ class CompositeProductController extends ControllerBase
      *
      * @return JsonResponse
      */
-    public function removeProduct(Request $request)
+    public function removeProduct(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
-                'product_id'                   => 'string|exists:products,id',
+                'product_id'    => 'string|exists:products,id',
             ]);
 
             DB::beginTransaction();

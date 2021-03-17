@@ -1,10 +1,10 @@
 # Promotional Codes
 
 
-## Retrieve a promotional_code
+## Retrieve a promotional code
 
 
-Retrieve all promotional_code details.
+Retrieve all promotional code details.
 
 > Example request:
 
@@ -606,10 +606,10 @@ curl -X GET \
 
 
 
-## Create a promotional_code
+## Create a promotional code
 
 
-Allows you to create a new promotional_code.
+Allows you to create a new promotional code.
 
 > Example request:
 
@@ -627,13 +627,9 @@ $response = $client->post(
             'title'=> 'Traduction française',
             'locale'=> 'fr-FR',
             'code'=> 'PROMO20',
-            'start_at'=> '1970-01-01 00:00:00',
-            'end_at'=> '1970-01-01 00:00:00',
-            'amount'=> '150',
             'number_used'=> '50',
             'maximum_usage'=> '1',
             'combinable_with_offers'=> 'true',
-            'promotional_code_type'=> 'pourcent',
             'text'=> 'code promo spéciale',
         ],
     ]
@@ -651,13 +647,9 @@ let params = {
     "title": "Traduction française",
     "locale": "fr-FR",
     "code": "PROMO20",
-    "start_at": "1970-01-01 00:00:00",
-    "end_at": "1970-01-01 00:00:00",
-    "amount": "150",
     "number_used": "50",
     "maximum_usage": "1",
     "combinable_with_offers": "true",
-    "promotional_code_type": "pourcent",
     "text": "code promo spéciale",
 };
 Object.keys(params)
@@ -686,13 +678,9 @@ params = {
   'title': 'Traduction française',
   'locale': 'fr-FR',
   'code': 'PROMO20',
-  'start_at': '1970-01-01 00:00:00',
-  'end_at': '1970-01-01 00:00:00',
-  'amount': '150',
   'number_used': '50',
   'maximum_usage': '1',
   'combinable_with_offers': 'true',
-  'promotional_code_type': 'pourcent',
   'text': 'code promo spéciale',
 }
 headers = {
@@ -706,7 +694,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://dev-product.api.hopn.space/promotional_codes?title=Traduction+fran%C3%A7aise&locale=fr-FR&code=PROMO20&start_at=1970-01-01+00%3A00%3A00&end_at=1970-01-01+00%3A00%3A00&amount=150&number_used=50&maximum_usage=1&combinable_with_offers=true&promotional_code_type=pourcent&text=code+promo+sp%C3%A9ciale" \
+    "http://dev-product.api.hopn.space/promotional_codes?title=Traduction+fran%C3%A7aise&locale=fr-FR&code=PROMO20&number_used=50&maximum_usage=1&combinable_with_offers=true&text=code+promo+sp%C3%A9ciale" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -754,15 +742,6 @@ curl -X POST \
 <code><b>code</b></code>&nbsp;      <br>
     Code
 
-<code><b>start_at</b></code>&nbsp;      <br>
-    date start
-
-<code><b>end_at</b></code>&nbsp;      <br>
-    date end
-
-<code><b>amount</b></code>&nbsp;      <br>
-    amount of use
-
 <code><b>number_used</b></code>&nbsp;      <br>
     number already used
 
@@ -772,18 +751,15 @@ curl -X POST \
 <code><b>combinable_with_offers</b></code>&nbsp;      <br>
     combinable with others offers
 
-<code><b>promotional_code_type</b></code>&nbsp;      <br>
-    type: pourcent or EUR/US
-
 <code><b>text</b></code>&nbsp;      <br>
     Description
 
 
 
-## Update a promotional_code
+## Update a promotional code
 
 
-You can update promotional_code data.
+You can update promotional code data.
 
 > Example request:
 
@@ -799,13 +775,9 @@ $response = $client->patch(
         ],
         'query' => [
             'code'=> 'PROMO20',
-            'start_at'=> '1970-01-01 00:00:00',
-            'end_at'=> '1970-01-01 00:00:00',
-            'amount'=> '150',
             'number_used'=> '50',
             'maximum_usage'=> '1',
             'combinable_with_offers'=> 'true',
-            'promotional_code_type'=> 'pourcent',
         ],
     ]
 );
@@ -820,13 +792,9 @@ const url = new URL(
 
 let params = {
     "code": "PROMO20",
-    "start_at": "1970-01-01 00:00:00",
-    "end_at": "1970-01-01 00:00:00",
-    "amount": "150",
     "number_used": "50",
     "maximum_usage": "1",
     "combinable_with_offers": "true",
-    "promotional_code_type": "pourcent",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -852,13 +820,9 @@ import json
 url = 'http://dev-product.api.hopn.space/promotional_codes/promocode_e0e4cf83ded071a'
 params = {
   'code': 'PROMO20',
-  'start_at': '1970-01-01 00:00:00',
-  'end_at': '1970-01-01 00:00:00',
-  'amount': '150',
   'number_used': '50',
   'maximum_usage': '1',
   'combinable_with_offers': 'true',
-  'promotional_code_type': 'pourcent',
 }
 headers = {
   'Content-Type': 'application/json',
@@ -871,7 +835,7 @@ response.json()
 
 ```bash
 curl -X PATCH \
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_e0e4cf83ded071a?code=PROMO20&start_at=1970-01-01+00%3A00%3A00&end_at=1970-01-01+00%3A00%3A00&amount=150&number_used=50&maximum_usage=1&combinable_with_offers=true&promotional_code_type=pourcent" \
+    "http://dev-product.api.hopn.space/promotional_codes/promocode_e0e4cf83ded071a?code=PROMO20&number_used=50&maximum_usage=1&combinable_with_offers=true" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -918,15 +882,6 @@ curl -X PATCH \
 <code><b>code</b></code>&nbsp;      <br>
     Code
 
-<code><b>start_at</b></code>&nbsp;      <br>
-    date start
-
-<code><b>end_at</b></code>&nbsp;      <br>
-    date end
-
-<code><b>amount</b></code>&nbsp;      <br>
-    amount of use
-
 <code><b>number_used</b></code>&nbsp;      <br>
     number already used
 
@@ -936,15 +891,12 @@ curl -X PATCH \
 <code><b>combinable_with_offers</b></code>&nbsp;      <br>
     combinable with others offers
 
-<code><b>promotional_code_type</b></code>&nbsp;      <br>
-    type: pourcent or EUR/US
 
 
+## Delete a promotional code
 
-## Delete a promotional_code
 
-
-Delete a promotional_code and anonymize the data.
+Delete a promotional code and anonymize the data.
 
 > Example request:
 
@@ -1044,10 +996,10 @@ curl -X DELETE \
 
 
 
-## Translate a promotional_code&#039;s description
+## Translate a promotional code&#039;s description
 
 
-Allow you to translate a promotional_code's description
+Allow you to translate a promotional code's description
 
 > Example request:
 
@@ -1169,10 +1121,10 @@ curl -X POST \
 
 
 
-## Remove a promotional_code&#039;s description translation
+## Remove a promotional code&#039;s description translation
 
 
-Allow you to remove a promotional_code's description translation.
+Allow you to remove a promotional code's description translation.
 
 > Example request:
 

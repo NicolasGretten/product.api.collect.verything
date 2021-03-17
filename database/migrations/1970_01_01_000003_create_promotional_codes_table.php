@@ -16,13 +16,9 @@ class CreatePromotionalCodesTable extends Migration
         Schema::create('promotional_codes', function (Blueprint $table) {
             $table->string('id')->primary();;
             $table->string('code');
-            $table->dateTime('start_at');
-            $table->dateTime('end_at')->nullable();
-            $table->integer('amount');
             $table->integer('number_used');
             $table->integer('maximum_usage');
             $table->boolean('combinable_with_offers');
-            $table->string('promotional_code_type');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

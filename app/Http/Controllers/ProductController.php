@@ -36,7 +36,7 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id          required        Product ID                        Example: product_9f71793f1bff89227
+     * @urlParam    product_id          required        Product ID                          Example: product_9f71793f1bff89227
      *
      * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","availabilities","prices","discounts","categories","translationsList"]
      *
@@ -155,17 +155,17 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @queryParam  title                           required        Title of the description                            Example: Traduction française
-     * @queryParam  locale                          required        Locale                                              Example: fr-FR
-     * @queryParam  text                            required        Description                                         Example: spa
-     * @queryParam      price_including_taxes                           New price including taxes                          Example: 120
-     * @queryParam      price_excluding_taxes                           New price excluding taxes                           Example: 100
-     * @queryParam      vat_value                                       New vat value                                       Example: 20
-     * @queryParam      vat_rate                                        New vat rate                                        Example: 20
-     * @queryParam      day                 required        day available                   Example: ["monday","tuesday","wednesday"]
-     * @queryParam      hour_start          required        Hour start                      Example: 08:00:00
-     * @queryParam      hour_end            required        Hour end                        Example: 10:00:00
-     * @queryParam      category_id                        required        Category ID              Example: cat_d10be1a57a0fddafc85b5
+     * @queryParam  title                           required        Title of the description        Example: Traduction française
+     * @queryParam  locale                          required        Locale                          Example: fr-FR
+     * @queryParam  text                            required        Description                     Example: spa
+     * @queryParam  price_including_taxes           required        New price including taxes       Example: 120
+     * @queryParam  price_excluding_taxes           required        New price excluding taxes       Example: 100
+     * @queryParam  vat_value                       required        New vat value                   Example: 20
+     * @queryParam  vat_rate                        required        New vat rate                    Example: 20
+     * @queryParam  day                             required        day available                   Example: ["monday","tuesday","wednesday"]
+     * @queryParam  hour_start                      required        Hour start                      Example: 08:00:00
+     * @queryParam  hour_end                        required        Hour end                        Example: 10:00:00
+     * @queryParam  category_id                     required        Category ID                     Example: cat_d10be1a57a0fddafc85b5
      *
      * @responseFile /responses/products/create.json
      *
@@ -218,6 +218,7 @@ class ProductController extends ControllerBase
             $availability->hour_start   = $request->hour_start;
             $availability->hour_end     = $request->hour_end;
             $availability->save();
+            $product->availability = $availability;
 
             $price = new ProductPrice();
             $price->id                      = $this->generateId('productprc', $price);
@@ -227,12 +228,14 @@ class ProductController extends ControllerBase
             $price->vat_value               = $request->vat_value;
             $price->vat_rate                = $request->vat_rate;
             $price->save();
+            $product->price = $price;
 
             $category = new ProductCategory();
             $category->id               = $this->generateId('prodcat', $category);
             $category->product_id       = $id;
             $category->category_id      = $request->category_id;
             $category->save();
+            $product->category = $category;
 
             DB::commit();
 
@@ -307,11 +310,11 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id         required        Product ID                                     Example: product_9f71793f1bff89227
+     * @urlParam    product_id  required        Product ID                                      Example: product_9f71793f1bff89227
      *
-     * @queryParam  locale              required        Locale                                          Example: en-US
-     * @queryParam  title               required        The title of the translation                    Example: English translations
-     * @queryParam  text                required        The description of the product translated      Example: Spa
+     * @queryParam  locale      required        Locale                                          Example: en-US
+     * @queryParam  title       required        The title of the translation                    Example: English translations
+     * @queryParam  text        required        The description of the product translated       Example: Spa
      *
      * @responseFile /responses/products/addTranslation.json
      *
@@ -374,9 +377,9 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id                      required        Product ID                                        Example: product_9f71793f1bff89227
+     * @urlParam    product_id      required        Product ID      Example: product_9f71793f1bff89227
      *
-     * @queryParam  locale                           required        Locale                                             Example: en-US
+     * @queryParam  locale          required        Locale          Example: en-US
      *
      * @responseFile /responses/products/removeTranslation.json
      *
@@ -438,12 +441,13 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam      product_id                       required        Id of the product to update                        Example: product_9f71793f1bff89227
+     * @urlParam    product_id              required    Id of the product to update         Example: product_9f71793f1bff89227
+     * @urlParam    product_price_id        required    Id of the product price to update   Example: productprc_4e9a60b280a60e
      *
-     * @queryParam      price_including_taxes                           New price including taxes                          Example: 120
-     * @queryParam      price_excluding_taxes                           New price excluding taxes                           Example: 100
-     * @queryParam      vat_value                                       New vat value                                       Example: 20
-     * @queryParam      vat_rate                                        New vat rate                                        Example: 20
+     * @queryParam  price_including_taxes   required    New price including taxes           Example: 120
+     * @queryParam  price_excluding_taxes   required    New price excluding taxes           Example: 100
+     * @queryParam  vat_value               required    New vat value                       Example: 20
+     * @queryParam  vat_rate                required    New vat rate                        Example: 20
      *
      * @responseFile /responses/products/updatePrice.json
      *
@@ -463,20 +467,30 @@ class ProductController extends ControllerBase
 
             DB::beginTransaction();
 
-            $resultSet = ProductPrice::where('products_prices.product_id', $request->product_id);
+            $resultSet = ProductPrice::where('products_prices.id', $request->product_price_id);
 
             $price = $resultSet->first();
 
-            $price->price_including_taxes       = $request->input('price_including_taxes', $price->getOriginal('price_including_taxes'));
-            $price->price_excluding_taxes       = $request->input('price_excluding_taxes', $price->getOriginal('price_excluding_taxes'));
-            $price->vat_value                   = $request->input('vat_value', $price->getOriginal('vat_value'));
-            $price->vat_rate                    = $request->input('vat_rate', $price->getOriginal('vat_rate'));
+            if(empty($price)) {
+                throw new Exception('The product price doesn\'t exist.', 404);
+            }
 
-            $price->save();
+            $price->delete();
+
+
+            $newPrice = new ProductPrice();
+            $newPrice->id                           = $this->generateId('productprc', $newPrice);
+            $newPrice->product_id                   = $request->product_id;
+            $newPrice->price_including_taxes        = $request->price_including_taxes;
+            $newPrice->price_excluding_taxes        = $request->price_excluding_taxes;
+            $newPrice->vat_value                    = $request->vat_value;
+            $newPrice->vat_rate                     = $request->vat_rate;
+
+            $newPrice->save();
 
             DB::commit();
 
-            return response()->json($price);
+            return response()->json($newPrice);
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);
@@ -499,11 +513,11 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam      product_id           required        Id of the product to update    Example: product_9f71793f1bff89227
+     * @urlParam    product_id          required        Id of the product to update     Example: product_9f71793f1bff89227
      *
-     * @queryParam      day                 required        day available                   Example: ["monday","tuesday","wednesday"]
-     * @queryParam      hour_start          required        Hour start                      Example: 08:00:00
-     * @queryParam      hour_end            required        Hour end                        Example: 10:00:00
+     * @queryParam  day                 required        day available                   Example: ["monday","tuesday","wednesday"]
+     * @queryParam  hour_start          required        Hour start                      Example: 08:00:00
+     * @queryParam  hour_end            required        Hour end                        Example: 10:00:00
      *
      * @responseFile /responses/products/updateAvailability.json
      *
@@ -557,9 +571,9 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam      product_id                       required        Id of the product to update        Example: product_9f71793f1bff89227
+     * @urlParam    product_id      required        Id of the product to update     Example: product_9f71793f1bff89227
      *
-     * @queryParam      category_id                        required        Category ID              Example: cat_d10be1a57a0fddafc85b5
+     * @queryParam  category_id     required        Category ID                     Example: cat_d10be1a57a0fddafc85b5
      *
      * @responseFile /responses/products/updateCategory.json
      *
