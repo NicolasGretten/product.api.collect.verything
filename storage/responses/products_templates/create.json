@@ -1,0 +1,16 @@
+{
+    "timestamp": 1616155133,
+    "signature": "75b336d33b794b93d14b6b1e762170ea",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "prodtemplate_3a3d84898a",
+            "category_id": "cat_1ddf322d0c198c29b50ce",
+            "updated_at": "2021-03-19T11:58:53.000000Z",
+            "created_at": "2021-03-19T11:58:53.000000Z",
+            "title": "Traduction française",
+            "text": "Boisson 02"
+        }
+    }
+}

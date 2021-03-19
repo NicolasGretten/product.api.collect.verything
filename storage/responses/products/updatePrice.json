@@ -1,18 +1,18 @@
 {
-    "timestamp": 1615970601,
-    "signature": "88f15c805bd2880b8c6044648d505369",
+    "timestamp": 1616157703,
+    "signature": "9442b07053d533fd9ea2bf4336c2c2c0",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "productprc_00b31aa55d3fa8",
-            "product_id": "product_010ff0c6a7a748678",
+            "id": "prodprice_0d9798e7dcecf9f",
+            "product_id": "prod_3a3d84897c39a40bc49e",
             "price_including_taxes": "12000",
             "price_excluding_taxes": "10000",
             "vat_value": "2000",
             "vat_rate": "20",
-            "updated_at": "2021-03-17T08:43:21.000000Z",
-            "created_at": "2021-03-17T08:43:21.000000Z"
+            "updated_at": "2021-03-19T12:41:43.000000Z",
+            "created_at": "2021-03-19T12:41:43.000000Z"
         }
     }
 }

@@ -16,7 +16,7 @@ class CreateProductsAvailabilitiesTable extends Migration
         Schema::create('products_availabilities', function (Blueprint $table) {
             $table->string('id')->primary();;
             $table->string('product_id');
-            $table->string('day');
+            $table->json('days');
             $table->time('hour_start');
             $table->time('hour_end');
             $table->timestamp('deleted_at')->nullable();

@@ -42,4 +42,16 @@ class PromotionalCodeTranslation extends Model
     {
         return $this->belongsTo('App\PromotionalCode');
     }
+
+    public function translationsList(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany('App\PromotionalCodeTranslation');
+    }
+
+    public function delete(): ?bool
+    {
+        $this->translationsList()->delete();
+
+        return parent::delete();
+    }
 }

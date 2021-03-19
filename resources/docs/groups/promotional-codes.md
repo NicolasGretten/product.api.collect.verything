@@ -12,7 +12,7 @@ Retrieve all promotional code details.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->get(
-    'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a',
+    'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -20,7 +20,7 @@ $response = $client->get(
         ],
         'json' => [
             'filters' => [
-                'relations' => '["translationsList","discounts"]',
+                'relations' => '["discounts"]',
             ],
         ],
     ]
@@ -31,7 +31,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a"
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a"
 );
 
 let headers = {
@@ -41,7 +41,7 @@ let headers = {
 
 let body = {
     "filters": {
-        "relations": "[\"translationsList\",\"discounts\"]"
+        "relations": "[\"discounts\"]"
     }
 }
 
@@ -58,10 +58,10 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a'
+url = 'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a'
 payload = {
     "filters": {
-        "relations": "[\"translationsList\",\"discounts\"]"
+        "relations": "[\"discounts\"]"
     }
 }
 headers = {
@@ -75,10 +75,10 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a" \
+    -G "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"relations":"[\"translationsList\",\"discounts\"]"}}'
+    -d '{"filters":{"relations":"[\"discounts\"]"}}'
 
 ```
 
@@ -183,7 +183,7 @@ curl -X GET \
 
 ### Request
 <small class="badge badge-green">GET</small>
- **`promotional_codes/{promotional_code_id}`**
+ **`promotional-codes/{promotional_code_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>promotional_code_id</b></code>&nbsp;      <br>
@@ -206,7 +206,7 @@ List all the promotional codes.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->get(
-    'http://dev-product.api.hopn.space/promotional_codes',
+    'http://dev-product.api.hopn.space/promotional-codes',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -240,7 +240,7 @@ $response = $client->get(
                     'lte' => '1602688060',
                     'order' => 'ASC',
                 ],
-                'relations' => '["translationsList","discounts"]',
+                'relations' => '["discounts"]',
             ],
         ],
     ]
@@ -251,7 +251,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/promotional_codes"
+    "http://dev-product.api.hopn.space/promotional-codes"
 );
 
 let params = {
@@ -290,7 +290,7 @@ let body = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"translationsList\",\"discounts\"]"
+        "relations": "[\"discounts\"]"
     }
 }
 
@@ -307,7 +307,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/promotional_codes'
+url = 'http://dev-product.api.hopn.space/promotional-codes'
 payload = {
     "filters": {
         "created": {
@@ -331,7 +331,7 @@ payload = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"translationsList\",\"discounts\"]"
+        "relations": "[\"discounts\"]"
     }
 }
 params = {
@@ -350,10 +350,10 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://dev-product.api.hopn.space/promotional_codes?items_id=%5B%22promocode_17d78ae0a3bfb0a%22%2C%22promocode_779cf772199954f%22%5D&limit=10&page=1" \
+    -G "http://dev-product.api.hopn.space/promotional-codes?items_id=%5B%22promocode_17d78ae0a3bfb0a%22%2C%22promocode_779cf772199954f%22%5D&limit=10&page=1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"translationsList\",\"discounts\"]"}}'
+    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"discounts\"]"}}'
 
 ```
 
@@ -543,7 +543,7 @@ curl -X GET \
 
 ### Request
 <small class="badge badge-green">GET</small>
- **`promotional_codes`**
+ **`promotional-codes`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
 <code><b>items_id</b></code>&nbsp;          <i>optional</i>    <br>
@@ -617,7 +617,7 @@ Allows you to create a new promotional code.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->post(
-    'http://dev-product.api.hopn.space/promotional_codes',
+    'http://dev-product.api.hopn.space/promotional-codes',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -640,7 +640,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/promotional_codes"
+    "http://dev-product.api.hopn.space/promotional-codes"
 );
 
 let params = {
@@ -673,7 +673,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/promotional_codes'
+url = 'http://dev-product.api.hopn.space/promotional-codes'
 params = {
   'title': 'Traduction française',
   'locale': 'fr-FR',
@@ -694,7 +694,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://dev-product.api.hopn.space/promotional_codes?title=Traduction+fran%C3%A7aise&locale=fr-FR&code=PROMO20&number_used=50&maximum_usage=1&combinable_with_offers=true&text=code+promo+sp%C3%A9ciale" \
+    "http://dev-product.api.hopn.space/promotional-codes?title=Traduction+fran%C3%A7aise&locale=fr-FR&code=PROMO20&number_used=50&maximum_usage=1&combinable_with_offers=true&text=code+promo+sp%C3%A9ciale" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -730,7 +730,7 @@ curl -X POST \
 
 ### Request
 <small class="badge badge-black">POST</small>
- **`promotional_codes`**
+ **`promotional-codes`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
 <code><b>title</b></code>&nbsp;      <br>
@@ -767,7 +767,7 @@ You can update promotional code data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->patch(
-    'http://dev-product.api.hopn.space/promotional_codes/promocode_e0e4cf83ded071a',
+    'http://dev-product.api.hopn.space/promotional-codes/promocode_e0e4cf83ded071a',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -787,7 +787,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_e0e4cf83ded071a"
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_e0e4cf83ded071a"
 );
 
 let params = {
@@ -817,7 +817,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/promotional_codes/promocode_e0e4cf83ded071a'
+url = 'http://dev-product.api.hopn.space/promotional-codes/promocode_e0e4cf83ded071a'
 params = {
   'code': 'PROMO20',
   'number_used': '50',
@@ -835,7 +835,7 @@ response.json()
 
 ```bash
 curl -X PATCH \
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_e0e4cf83ded071a?code=PROMO20&number_used=50&maximum_usage=1&combinable_with_offers=true" \
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_e0e4cf83ded071a?code=PROMO20&number_used=50&maximum_usage=1&combinable_with_offers=true" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -872,7 +872,7 @@ curl -X PATCH \
 
 ### Request
 <small class="badge badge-purple">PATCH</small>
- **`promotional_codes/{promotional_code_id}`**
+ **`promotional-codes/{promotional_code_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>promotional_code_id</b></code>&nbsp;      <br>
@@ -904,7 +904,7 @@ Delete a promotional code and anonymize the data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a',
+    'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -918,7 +918,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a"
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a"
 );
 
 let headers = {
@@ -939,7 +939,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a'
+url = 'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -951,7 +951,7 @@ response.json()
 
 ```bash
 curl -X DELETE \
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a" \
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -988,7 +988,7 @@ curl -X DELETE \
 
 ### Request
 <small class="badge badge-red">DELETE</small>
- **`promotional_codes/{promotional_code_id}`**
+ **`promotional-codes/{promotional_code_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>promotional_code_id</b></code>&nbsp;      <br>
@@ -1007,7 +1007,7 @@ Allow you to translate a promotional code's description
 
 $client = new \GuzzleHttp\Client();
 $response = $client->post(
-    'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate',
+    'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -1026,7 +1026,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate"
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate"
 );
 
 let params = {
@@ -1055,7 +1055,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate'
+url = 'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate'
 params = {
   'locale': 'en-US',
   'title': 'English translations',
@@ -1072,7 +1072,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate?locale=en-US&title=English+translations&text=Special+black+friday+code" \
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate?locale=en-US&title=English+translations&text=Special+black+friday+code" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1088,7 +1088,7 @@ curl -X POST \
         "success": true,
         "async": false,
         "body": {
-            "id": "cattrad_a2656128dd2f18150",
+            "id": "promocodetradd98842e2b7f3",
             "promotional_code_id": "promocode_e0e4cf83ded071a",
             "locale": "en-US",
             "title": "English translation",
@@ -1103,7 +1103,7 @@ curl -X POST \
 
 ### Request
 <small class="badge badge-black">POST</small>
- **`promotional_codes/{promotional_code_id}/translate`**
+ **`promotional-codes/{promotional_code_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>promotional_code_id</b></code>&nbsp;      <br>
@@ -1132,7 +1132,7 @@ Allow you to remove a promotional code's description translation.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate',
+    'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -1149,7 +1149,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate"
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate"
 );
 
 let params = {
@@ -1176,7 +1176,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate'
+url = 'http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate'
 params = {
   'locale': 'en-US',
 }
@@ -1191,7 +1191,7 @@ response.json()
 
 ```bash
 curl -X DELETE \
-    "http://dev-product.api.hopn.space/promotional_codes/promocode_17d78ae0a3bfb0a/translate?locale=en-US" \
+    "http://dev-product.api.hopn.space/promotional-codes/promocode_17d78ae0a3bfb0a/translate?locale=en-US" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1207,7 +1207,7 @@ curl -X DELETE \
         "success": true,
         "async": false,
         "body": {
-            "id": "cattrad_a2656128dd2f18150",
+            "id": "promocodetradd98842e2b7f3",
             "promotional_code_id": "promocode_e0e4cf83ded071a",
             "locale": "en-US",
             "title": "English translation",
@@ -1222,7 +1222,7 @@ curl -X DELETE \
 
 ### Request
 <small class="badge badge-red">DELETE</small>
- **`promotional_codes/{promotional_code_id}/translate`**
+ **`promotional-codes/{promotional_code_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>promotional_code_id</b></code>&nbsp;      <br>

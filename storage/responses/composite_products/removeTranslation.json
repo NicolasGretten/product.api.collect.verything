@@ -1,18 +1,18 @@
 {
-    "timestamp": 1615924870,
-    "signature": "c56e76aba21f48ef5a56818d7e15429e",
+    "timestamp": 1616094432,
+    "signature": "53d660ef070f99eae8c6fb0dfacb6832",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "producttrad_3601f779806e1",
-            "composite_product_id": "compproduct_64ba1e4ff721a",
+            "id": "prodctrad_ba9c77ec568381d",
+            "composite_product_id": "prodc_05ba52372e3c09a8219",
             "locale": "en-US",
             "title": "English translation",
-            "text": "Seminary",
-            "deleted_at": "2021-03-16T20:01:10.000000Z",
-            "created_at": "2021-03-16T20:00:26.000000Z",
-            "updated_at": "2021-03-16T20:01:10.000000Z"
+            "text": "breakfast",
+            "deleted_at": "2021-03-18T19:07:12.000000Z",
+            "created_at": "2021-03-18T19:00:57.000000Z",
+            "updated_at": "2021-03-18T19:07:12.000000Z"
         }
     }
 }

@@ -28,5 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call('PromotionalCodesTranslationsSeeder');
         $this->call('DiscountsSeeder');
         $this->call('DiscountsTranslationsSeeder');
+        $this->call('ProductsTemplatesSeeder');
+        $this->call('ProductsTemplatesTranslationsSeeder');
     }
 }

@@ -15,31 +15,31 @@ class ProductsSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('products')->insert([
-            'id'                    => 'product_9f71793f1bff89227',
+            'id'                    => 'prod_3a3d84897c39a40bc49e',
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('products')->insert([
-            'id'                    => 'product_d66672dd6b9052218',
+            'id'                    => 'prod_c93e0a2194593f85a7a6',
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('products')->insert([
-            'id'                    => 'product_3888c3b144ccdc59c',
+            'id'                    => 'prod_672832afc671d36c6213',
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('products')->insert([
-            'id'                    => 'product_8a72e4d0f1fd12d03',
+            'id'                    => 'prod_1344f9b420f516b26861',
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('products')->insert([
-            'id'                    => 'product_4c053842dc07c0330',
+            'id'                    => 'prod_bc477fe21a7c92c52256',
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);

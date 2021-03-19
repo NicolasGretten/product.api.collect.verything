@@ -17,8 +17,8 @@ class ProductsTranslationsSeeder extends Seeder
         $faker = \Faker\Factory::create('fr_FR');
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'                => 'product_9f71793f1bff89227',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_3a3d84897c39a40bc49e',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'Croissant',
@@ -28,8 +28,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'                => 'product_9f71793f1bff89227',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_3a3d84897c39a40bc49e',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'Croissant',
@@ -39,8 +39,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_d66672dd6b9052218',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_c93e0a2194593f85a7a6',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'Salade',
@@ -50,8 +50,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_d66672dd6b9052218',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_c93e0a2194593f85a7a6',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'Salad',
@@ -61,8 +61,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_3888c3b144ccdc59c',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_672832afc671d36c6213',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'Mimosa',
@@ -72,8 +72,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_3888c3b144ccdc59c',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_672832afc671d36c6213',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'Mimosa',
@@ -83,8 +83,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_8a72e4d0f1fd12d03',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_1344f9b420f516b26861',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'café',
@@ -94,8 +94,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_8a72e4d0f1fd12d03',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_1344f9b420f516b26861',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'coffee',
@@ -105,8 +105,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_4c053842dc07c0330',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52256',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'apéritif',
@@ -116,8 +116,8 @@ class ProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_translations')->insert([
-            'id'                        => substr('producttrad' . md5(Str::uuid()), 0, 25),
-            'product_id'      => 'product_4c053842dc07c0330',
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52256',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'aperitif',

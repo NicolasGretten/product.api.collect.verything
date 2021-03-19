@@ -15,9 +15,9 @@ class ProductsAvailabilitiesSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('products_availabilities')->insert([
-            'id'                    => substr('pa_' . md5(Str::uuid()), 0, 25),
-            'product_id'  => 'product_9f71793f1bff89227',//petit dej
-            'day'                   => 'monday',
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_3a3d84897c39a40bc49e',//petit dej
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
             'hour_start'            => '07:00:00',
             'hour_end'              => '11:00:00',
             'created_at'            => Carbon::now(),
@@ -25,9 +25,9 @@ class ProductsAvailabilitiesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_availabilities')->insert([
-            'id'                    => substr('pa_' . md5(Str::uuid()), 0, 25),
-            'product_id'  => 'product_d66672dd6b9052218',//déjeuner
-            'day'                   => 'monday',
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_c93e0a2194593f85a7a6',//déjeuner
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
             'hour_start'            => '11:30:00',
             'hour_end'              => '13:30:00',
             'created_at'            => Carbon::now(),
@@ -35,9 +35,9 @@ class ProductsAvailabilitiesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_availabilities')->insert([
-            'id'                    => substr('pa_' . md5(Str::uuid()), 0, 25),
-            'product_id'  => 'product_3888c3b144ccdc59c',//déjeuner
-            'day'                   => 'monday',
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_672832afc671d36c6213',//déjeuner
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
             'hour_start'            => '10:30:00',
             'hour_end'              => '14:30:00',
             'created_at'            => Carbon::now(),
@@ -45,9 +45,9 @@ class ProductsAvailabilitiesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_availabilities')->insert([
-            'id'                    => substr('pa_' . md5(Str::uuid()), 0, 25),
-            'product_id'  => 'product_8a72e4d0f1fd12d03',//déjeuner
-            'day'                   => 'monday',
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_1344f9b420f516b26861',//déjeuner
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
             'hour_start'            => '08:00:00',
             'hour_end'              => '18:00:00',
             'created_at'            => Carbon::now(),
@@ -55,9 +55,9 @@ class ProductsAvailabilitiesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_availabilities')->insert([
-            'id'                    => substr('pa_' . md5(Str::uuid()), 0, 25),
-            'product_id'  => 'product_4c053842dc07c0330',//déjeuner
-            'day'                   => 'monday',
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52256',//déjeuner
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
             'hour_start'            => '18:00:00',
             'hour_end'              => '23:30:00',
             'created_at'            => Carbon::now(),

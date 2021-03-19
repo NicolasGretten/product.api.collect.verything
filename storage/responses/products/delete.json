@@ -1,14 +1,14 @@
 {
-    "timestamp": 1615911966,
-    "signature": "3114fed1bd4b4811c02d025ad7dc01cc",
+    "timestamp": 1616157885,
+    "signature": "964e4fd5128fb96cb8388c0f2a20c31b",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "product_71886fceae499c2d6",
-            "deleted_at": "2021-03-16T16:26:06.000000Z",
-            "created_at": "2021-03-16T16:25:07.000000Z",
-            "updated_at": "2021-03-16T16:26:06.000000Z",
+            "id": "prod_c63eea43f4b6c3124b52",
+            "deleted_at": "2021-03-19T12:44:45.000000Z",
+            "created_at": "2021-03-19T12:44:23.000000Z",
+            "updated_at": "2021-03-19T12:44:45.000000Z",
             "title": null,
             "text": null
         }

@@ -35,7 +35,7 @@ class CategoryController extends ControllerBase
      *
      * @urlParam    category_id          required        Category ID                        Example: cat_d10be1a57a0fddafc85b5
      *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["translationsList","products","compositeProducts","discounts"]
+     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["products","compositeProducts","discounts"]
      *
      * @responseFile /responses/categories/retrieve.json
      * @responseFile scenario="Relations filter" /responses/categories/relations-retrieve.json
@@ -48,7 +48,7 @@ class CategoryController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'        => 'json|relations:translationsList,products,compositeProducts,discounts',
+                'filters.relations'        => 'json|relations:products,compositeProducts,discounts',
             ]);
 
             $this->setLocale();
@@ -58,7 +58,7 @@ class CategoryController extends ControllerBase
 
             $this->filter($resultSet, ['relations']);
 
-            $category = $resultSet->get();
+            $category = $resultSet->first();
 
             return response()->json($category);
         }
@@ -105,7 +105,7 @@ class CategoryController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["translationsList","products","compositeProducts","discounts"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["products","compositeProducts","discounts"]
      *
      * @responseFile /responses/categories/list.json
      * @responseFile scenario="Relations Filter" /responses/categories/relations-list.json
@@ -119,7 +119,7 @@ class CategoryController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:translationsList,products,compositeProducts,discounts',
+                'filters.relations'     => 'json|relations:products,compositeProducts,discounts',
                 'items_id'              => 'json'
             ]);
 

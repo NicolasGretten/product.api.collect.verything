@@ -1,38 +1,42 @@
 {
-    "timestamp": 1615970444,
-    "signature": "41996b2fbd37f2ebb5e7fa742895ad4e",
+    "timestamp": 1616157863,
+    "signature": "9e1f5ab0f108cfab96767b4ea1947c7a",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "product_010ff0c6a7a748678",
-            "updated_at": "2021-03-17T08:40:44.000000Z",
-            "created_at": "2021-03-17T08:40:44.000000Z",
+            "id": "prod_c63eea43f4b6c3124b52",
+            "updated_at": "2021-03-19T12:44:23.000000Z",
+            "created_at": "2021-03-19T12:44:23.000000Z",
             "availability": {
-                "id": "pa_b2511925a4018489d3663a",
-                "product_id": "product_010ff0c6a7a748678",
-                "day": "[\"monday\",\"tuesday\",\"wednesday\",\"friday\"]",
+                "id": "prodavail_4907564ae59d6a5",
+                "product_id": "prod_c63eea43f4b6c3124b52",
+                "days": [
+                    "monday",
+                    "tuesday",
+                    "friday"
+                ],
                 "hour_start": "08:00:00",
                 "hour_end": "18:00:00",
-                "updated_at": "2021-03-17T08:40:44.000000Z",
-                "created_at": "2021-03-17T08:40:44.000000Z"
+                "updated_at": "2021-03-19T12:44:23.000000Z",
+                "created_at": "2021-03-19T12:44:23.000000Z"
             },
             "price": {
-                "id": "productprc_7eaf1101dae4d3",
-                "product_id": "product_010ff0c6a7a748678",
+                "id": "prodprice_d53194c281152ad",
+                "product_id": "prod_c63eea43f4b6c3124b52",
                 "price_including_taxes": "110",
                 "price_excluding_taxes": "100",
                 "vat_value": "10",
                 "vat_rate": "10",
-                "updated_at": "2021-03-17T08:40:44.000000Z",
-                "created_at": "2021-03-17T08:40:44.000000Z"
+                "updated_at": "2021-03-19T12:44:23.000000Z",
+                "created_at": "2021-03-19T12:44:23.000000Z"
             },
             "category": {
-                "id": "prodcat_da0d6c16c0487c28a",
-                "product_id": "product_010ff0c6a7a748678",
+                "id": "prodcat_28496a39ae96eeb2c",
+                "product_id": "prod_c63eea43f4b6c3124b52",
                 "category_id": "cat_1ddf322d0c198c29b50ce",
-                "updated_at": "2021-03-17T08:40:44.000000Z",
-                "created_at": "2021-03-17T08:40:44.000000Z"
+                "updated_at": "2021-03-19T12:44:23.000000Z",
+                "created_at": "2021-03-19T12:44:23.000000Z"
             },
             "title": "Traduction française",
             "text": "salle de coworking"

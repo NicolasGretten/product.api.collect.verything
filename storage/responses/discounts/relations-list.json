@@ -1,6 +1,6 @@
 {
-    "timestamp": 1615936429,
-    "signature": "1c2bd05ad1b7f7c2113ae530bebfa64e",
+    "timestamp": 1616156272,
+    "signature": "caf102482a6dac9b74b5adc2395a8894",
     "content": {
         "success": true,
         "async": false,
@@ -8,7 +8,7 @@
             "current_page": 1,
             "last_page": 1,
             "per_page": 5,
-            "total": 4,
+            "total": 2,
             "next_page_url": null,
             "prev_page_url": null
         },
@@ -21,35 +21,62 @@
                 "start_at": "2021-05-05 00:00:00",
                 "end_at": "2021-05-25 00:00:00",
                 "deleted_at": null,
-                "created_at": "2021-03-16T21:54:03.000000Z",
-                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "traduction française",
                 "text": "promo d'haloween",
                 "translations_list": [
                     {
-                        "id": "discounttrad_9c7576f052cb",
+                        "id": "discounttrad_f257c1e6560a",
                         "discount_id": "discount_fffbae84a65baa0a",
                         "locale": "fr-FR",
                         "title": "traduction française",
                         "text": "promo d'haloween",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     },
                     {
-                        "id": "discounttrad_f5d8884f794c",
+                        "id": "discounttrad_6b9d1ce76bab",
                         "discount_id": "discount_fffbae84a65baa0a",
                         "locale": "en-US",
                         "title": "English translation",
                         "text": "haloween discount",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     }
                 ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
+                "products": [
+                    {
+                        "id": "prod_3a3d84897c39a40bc49e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    }
+                ],
+                "composite_products": [
+                    {
+                        "id": "prodc_05ba52372e3c09a8219",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "petit déjeuner"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": "cat_bcc3b36c2dd0ae4a1c57c",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Abonnement"
+                    }
+                ],
                 "promotional_codes": null
             },
             {
@@ -60,30 +87,30 @@
                 "start_at": "2021-05-05 00:00:00",
                 "end_at": "2021-05-25 00:00:00",
                 "deleted_at": null,
-                "created_at": "2021-03-16T21:54:03.000000Z",
-                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "traduction française",
                 "text": "promo d'été",
                 "translations_list": [
                     {
-                        "id": "discounttrad_5fe17324be3b",
+                        "id": "discounttrad_b8bcb8a3a10d",
                         "discount_id": "discount_34acc06c4ccd5022",
                         "locale": "fr-FR",
                         "title": "traduction française",
                         "text": "promo d'été",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     },
                     {
-                        "id": "discounttrad_baff92c5ad0e",
+                        "id": "discounttrad_9ab7cb6f1c67",
                         "discount_id": "discount_34acc06c4ccd5022",
                         "locale": "en-US",
                         "title": "English translation",
                         "text": "Summer discount",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     }
                 ],
                 "products": [],
@@ -92,91 +119,14 @@
                 "promotional_codes": {
                     "id": "promocode_17d78ae0a3bfb0a",
                     "code": "PROMO10",
-                    "start_at": "2021-03-15 00:00:00",
-                    "end_at": null,
-                    "amount": 150,
                     "number_used": 0,
                     "maximum_usage": 1,
                     "combinable_with_offers": false,
-                    "promotional_code_type": "pourcent",
                     "deleted_at": null,
-                    "created_at": "2021-03-16T21:54:03.000000Z",
-                    "updated_at": "2021-03-16T21:54:03.000000Z",
+                    "created_at": "2021-03-19T12:17:31.000000Z",
+                    "updated_at": "2021-03-19T12:17:31.000000Z",
                     "title": "Traduction en français",
                     "text": "Code promo 10%"
-                }
-            },
-            {
-                "id": "discount_93c6eb6a9e05c06e",
-                "discount_type": "EUR",
-                "promotional_code_id": null,
-                "amount": 50,
-                "start_at": "2021-03-16 00:00:00",
-                "end_at": "2021-05-16 00:00:00",
-                "deleted_at": null,
-                "created_at": "2021-03-16T22:10:27.000000Z",
-                "updated_at": "2021-03-16T22:19:14.000000Z",
-                "title": "Traduction française",
-                "text": "Promo d'hiver",
-                "translations_list": [
-                    {
-                        "id": "discounttrad_dd51f2fb1c42",
-                        "discount_id": "discount_93c6eb6a9e05c06e",
-                        "locale": "fr-FR",
-                        "title": "Traduction française",
-                        "text": "Promo d'hiver",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T22:10:27.000000Z",
-                        "updated_at": "2021-03-16T22:10:27.000000Z"
-                    }
-                ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
-                "promotional_codes": null
-            },
-            {
-                "id": "discount_ef5285ab40773ab4",
-                "discount_type": "pourcent",
-                "promotional_code_id": "promocode_779cf772199954f",
-                "amount": 50,
-                "start_at": "2021-03-16 00:00:00",
-                "end_at": "2021-05-16 00:00:00",
-                "deleted_at": null,
-                "created_at": "2021-03-16T22:10:11.000000Z",
-                "updated_at": "2021-03-16T22:10:11.000000Z",
-                "title": "Traduction française",
-                "text": "Soins",
-                "translations_list": [
-                    {
-                        "id": "discounttrad_d84f418e4129",
-                        "discount_id": "discount_ef5285ab40773ab4",
-                        "locale": "fr-FR",
-                        "title": "Traduction française",
-                        "text": "Soins",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T22:10:11.000000Z",
-                        "updated_at": "2021-03-16T22:10:11.000000Z"
-                    }
-                ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
-                "promotional_codes": {
-                    "id": "promocode_779cf772199954f",
-                    "code": "PROMO50",
-                    "start_at": "2021-03-20 00:00:00",
-                    "end_at": "2021-03-30 00:00:00",
-                    "amount": 50,
-                    "number_used": 0,
-                    "maximum_usage": 1,
-                    "combinable_with_offers": true,
-                    "promotional_code_type": "pourcent",
-                    "deleted_at": null,
-                    "created_at": "2021-03-16T21:54:03.000000Z",
-                    "updated_at": "2021-03-16T21:54:03.000000Z",
-                    "title": "Traduction en français",
-                    "text": "Code promo 50%"
                 }
             }
         ]

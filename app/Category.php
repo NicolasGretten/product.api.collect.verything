@@ -46,6 +46,26 @@ class Category extends Model
         return $this->hasMany('App\CategoryTranslation');
     }
 
+    public function categoryDiscounts(): HasMany
+    {
+        return $this->hasMany('App\CategoryDiscount');
+    }
+
+    public function productCategory(): HasMany
+    {
+        return $this->hasMany('App\ProductCategory');
+    }
+
+    public function compositeProductCategory(): HasMany
+    {
+        return $this->hasMany('App\compositeProductCategory');
+    }
+
+    public function ProductTemplate(): HasMany
+    {
+        return $this->hasMany('App\ProductTemplate');
+    }
+
     public function products(): BelongsToMany
     {
         return $this->belongsToMany('App\Product', 'products_categories')->wherePivotNull('deleted_at');
@@ -61,5 +81,16 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Discount', 'categories_discounts')->wherePivotNull('deleted_at');
 
+    }
+
+    public function delete(): ?bool
+    {
+        $this->translationsList()->delete();
+        $this->categoryDiscounts()->delete();
+        $this->productCategory()->delete();
+        $this->compositeProductCategory()->delete();
+        $this->ProductTemplate()->delete();
+
+        return parent::delete();
     }
 }

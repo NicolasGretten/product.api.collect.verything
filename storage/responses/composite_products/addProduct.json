@@ -5,9 +5,9 @@
         "success": true,
         "async": false,
         "body": {
-            "id": "cpp_9385a6b290339ba3803fa",
-            "composite_product_id": "compproduct_f69ab775ee415",
-            "product_id": "product_9f71793f1bff89227",
+            "id": "prodcprod_74ec7b2d989035b",
+            "composite_product_id": "prodc_f7cf076a4da1055a5a1",
+            "product_id": "prod_3a3d84897c39a40bc49e",
             "updated_at": "2021-03-16T20:33:59.000000Z",
             "created_at": "2021-03-16T20:33:59.000000Z"
         }

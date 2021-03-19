@@ -70,4 +70,11 @@ class Discount extends Model
     {
         return $this->belongsToMany('App\Category', 'categories_discounts')->wherePivotNull('deleted_at');
     }
+
+    public function delete(): ?bool
+    {
+        $this->translationsList()->delete();
+
+        return parent::delete();
+    }
 }

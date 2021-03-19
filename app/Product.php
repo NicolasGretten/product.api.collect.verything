@@ -4,6 +4,8 @@ namespace App;
 
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -40,39 +42,49 @@ class Product extends Model
      */
     protected $hidden = ['pivot','translations'];
 
-    public function compositeProducts(): \Illuminate\Database\Eloquent\Relations\belongsToMany
+    public function compositeProducts(): belongsToMany
     {
         return $this->belongsToMany('App\CompositeProduct', 'composite_products_products')->wherePivotNull('deleted_at');
     }
 
-    public function availabilities(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function availabilities(): HasMany
     {
         return $this->hasMany('App\ProductAvailability');
     }
 
-    public function productCategories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function productCategories(): HasMany
     {
         return $this->hasMany('App\ProductCategory');
     }
 
-    public function prices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function productDiscount(): HasMany
+    {
+        return $this->hasMany('App\ProductDiscount');
+    }
+
+    public function prices(): HasMany
     {
         return $this->hasMany('App\ProductPrice');
     }
 
-    public function discounts(): \Illuminate\Database\Eloquent\Relations\belongsToMany
+    public function discounts(): belongsToMany
     {
         return $this->belongsToMany('App\Discount', 'products_discounts')->wherePivotNull('deleted_at');
     }
 
-    public function categories(): \Illuminate\Database\Eloquent\Relations\belongsToMany
+    public function categories(): belongsToMany
     {
         return $this->belongsToMany('App\Category', 'products_categories')->wherePivotNull('deleted_at');
     }
 
-    public function translationsList(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function translationsList(): HasMany
     {
         return $this->hasMany('App\ProductTranslation');
+    }
+
+    public function compositeProductProduct(): HasMany
+    {
+        return $this->hasMany('App\compositeProductProduct');
     }
 
     public function delete(): ?bool
@@ -81,6 +93,8 @@ class Product extends Model
         $this->availabilities()->delete();
         $this->prices()->delete();
         $this->productCategories()->delete();
+        $this->productDiscount()->delete();
+        $this->compositeProductProduct()->delete();
 
         return parent::delete();
     }

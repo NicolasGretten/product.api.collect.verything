@@ -4,6 +4,7 @@ namespace App;
 
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -45,6 +46,27 @@ class CompositeProduct extends Model
         return $this->belongsToMany('App\Product', 'composite_products_products')->wherePivotNull('deleted_at');
     }
 
+    public function compositeProductCategory(): HasMany
+    {
+        return $this->hasMany('App\compositeProductCategory');
+    }
+    public function compositeProductAvailability(): HasMany
+    {
+        return $this->hasMany('App\compositeProductAvailability');
+    }
+    public function compositeProductDiscount(): HasMany
+    {
+        return $this->hasMany('App\compositeProductDiscount');
+    }
+    public function compositeProductPrice(): HasMany
+    {
+        return $this->hasMany('App\compositeProductPrice');
+    }
+    public function compositeProductProduct(): HasMany
+    {
+        return $this->hasMany('App\compositeProductProduct');
+    }
+
     public function translationsList(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\CompositeProductTranslation');
@@ -69,5 +91,17 @@ class CompositeProduct extends Model
     public function categories(): \Illuminate\Database\Eloquent\Relations\belongsToMany
     {
         return $this->belongsToMany('App\Category', 'composite_products_categories')->wherePivotNull('deleted_at');
+    }
+
+    public function delete(): ?bool
+    {
+        $this->translationsList()->delete();
+        $this->compositeProductCategory()->delete();
+        $this->compositeProductAvailability()->delete();
+        $this->compositeProductPrice()->delete();
+        $this->compositeProductDiscount()->delete();
+        $this->compositeProductProduct()->delete();
+
+        return parent::delete();
     }
 }

@@ -17,8 +17,8 @@ class CompositeProductsTranslationsSeeder extends Seeder
         $faker = \Faker\Factory::create('fr_FR');
 
         DB::connection('data')->table('composite_products_translations')->insert([
-            'id'                        => substr('cpt_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'      => 'compproduct_64ba1e4ff721a',
+            'id'                        => substr('prodctrad_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'      => 'prodc_05ba52372e3c09a8219',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'petit déjeuner',
@@ -28,8 +28,8 @@ class CompositeProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('composite_products_translations')->insert([
-            'id'                        => substr('cpt_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'                  => 'compproduct_64ba1e4ff721a',
+            'id'                        => substr('prodctrad_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'      => 'prodc_05ba52372e3c09a8219',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'breakfast',
@@ -39,8 +39,8 @@ class CompositeProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('composite_products_translations')->insert([
-            'id'                        => substr('cpt_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'                  => 'compproduct_c0b5eb2d85401',
+            'id'                        => substr('prodctrad_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'      => 'prodc_bb6bca80cb0ac3484fb',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'déjeuner',
@@ -50,8 +50,8 @@ class CompositeProductsTranslationsSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('composite_products_translations')->insert([
-            'id'                        => substr('cpt_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'                  => 'compproduct_c0b5eb2d85401',
+            'id'                        => substr('prodctrad_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'      => 'prodc_bb6bca80cb0ac3484fb',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'lunch',

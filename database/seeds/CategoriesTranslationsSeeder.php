@@ -18,7 +18,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_bcc3b36c2dd0ae4a1c57c',
+            'category_id'               => 'cat_bcc3b36c2dd0ae4a1c57c',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'Abonnement',
@@ -29,7 +29,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_bcc3b36c2dd0ae4a1c57c',
+            'category_id'               => 'cat_bcc3b36c2dd0ae4a1c57c',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'Subscription',
@@ -40,7 +40,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_1ddf322d0c198c29b50ce',
+            'category_id'               => 'cat_1ddf322d0c198c29b50ce',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'Boisson',
@@ -51,7 +51,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_1ddf322d0c198c29b50ce',
+            'category_id'               => 'cat_1ddf322d0c198c29b50ce',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'Drinks',
@@ -62,7 +62,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_d10be1a57a0fddafc85b5',
+            'category_id'               => 'cat_d10be1a57a0fddafc85b5',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'nourriture',
@@ -73,7 +73,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_d10be1a57a0fddafc85b5',
+            'category_id'               => 'cat_d10be1a57a0fddafc85b5',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'food',
@@ -84,7 +84,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_3a61a9ed91efe584ca27c',
+            'category_id'               => 'cat_3a61a9ed91efe584ca27c',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
             'text'                      => 'repas',
@@ -95,7 +95,7 @@ class CategoriesTranslationsSeeder extends Seeder
 
         DB::connection('data')->table('categories_translations')->insert([
             'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
-            'category_id'      => 'cat_3a61a9ed91efe584ca27c',
+            'category_id'               => 'cat_3a61a9ed91efe584ca27c',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'Lunch',

@@ -15,16 +15,16 @@ class CompositeProductsCategoriesSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('composite_products_categories')->insert([
-            'id'                    => substr('compproductpcat' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'            => 'compproduct_64ba1e4ff721a',//petit dej
+            'id'                    => substr('prodccat_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_05ba52372e3c09a8219',//petit dej
             'category_id'           => 'cat_3a61a9ed91efe584ca27c',//repas
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('composite_products_categories')->insert([
-            'id'                    => substr('compproductpcat' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'            => 'compproduct_c0b5eb2d85401',//déjeuner
+            'id'                    => substr('prodccat_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484fb',//déjeuner
             'category_id'           => 'cat_3a61a9ed91efe584ca27c',//repas
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),

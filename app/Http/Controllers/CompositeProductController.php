@@ -37,9 +37,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id          required          Composite Product ID                    Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id          required          Composite Product ID                    Example: prodc_05ba52372e3c09a8219
      *
-     * @bodyParam   filters[relations]                              Add a relation in the response          Example: ["products","availabilities","prices","discounts","categories","translationsList"]
+     * @bodyParam   filters[relations]                              Add a relation in the response          Example: ["products","availabilities","prices","discounts","categories"]
      *
      * @responseFile /responses/composite_products/retrieve.json
      * @responseFile scenario="Relations filter" /responses/composite_products/relations-retrieve.json
@@ -52,7 +52,7 @@ class CompositeProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:products,availabilities,prices,discounts,categories,translationsList',
+                'filters.relations'     => 'json|relations:products,availabilities,prices,discounts,categories',
             ]);
 
             $this->setLocale();
@@ -62,7 +62,7 @@ class CompositeProductController extends ControllerBase
 
             $this->filter($resultSet, ['relations']);
 
-            $product = $resultSet->get();
+            $product = $resultSet->first();
 
             return response()->json($product);
         }
@@ -87,7 +87,7 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["compproduct_64ba1e4ff721a","compproduct_c0b5eb2d85401"]
+     * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["prodc_05ba52372e3c09a8219","prodc_bb6bca80cb0ac3484fb"]
      * @queryParam  limit                                  Number of results per pagination page                        Example: 10
      * @queryParam  page                                   Current page number for pagination                           Example: 1
      *
@@ -109,7 +109,7 @@ class CompositeProductController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["products","availabilities","prices","discounts","categories","translationsList"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["products","availabilities","prices","discounts","categories"]
      *
      * @responseFile /responses/composite_products/list.json
      * @responseFile scenario="Relations Filter" /responses/composite_products/relations-list.json
@@ -123,7 +123,7 @@ class CompositeProductController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:products,availabilities,prices,discounts,categories,translationsList',
+                'filters.relations'     => 'json|relations:products,availabilities,prices,discounts,categories',
                 'items_id'              => 'json'
             ]);
 
@@ -183,7 +183,7 @@ class CompositeProductController extends ControllerBase
 
                 'category_id'                   => 'string|exists:categories,id',
 
-                'day'                           => 'json',
+                'days'                           => 'json',
                 'hour_start'                    => 'date_format:H:i:s',
                 'hour_end'                      => 'date_format:H:i:s',
 
@@ -199,10 +199,10 @@ class CompositeProductController extends ControllerBase
 
             DB::beginTransaction();
 
-            $request->product_translation_id = substr('cptrad_' . md5(Str::uuid()),0 ,25);
+            $request->product_translation_id = substr('prodctrad_' . md5(Str::uuid()),0 ,25);
 
             $compositeProduct = new CompositeProduct;
-            $id = $this->generateId('compproduct', $compositeProduct);
+            $id = $this->generateId('prodc', $compositeProduct);
             $compositeProduct->id = $id;
 
             if(!empty($request->input('locale'))) {
@@ -213,16 +213,16 @@ class CompositeProductController extends ControllerBase
             $compositeProduct->save();
 
             $availability = new CompositeProductAvailability();
-            $availability->id           = $this->generateId('cpa', $availability);
+            $availability->id           = $this->generateId('prodcavail', $availability);
             $availability->composite_product_id   = $id;
-            $availability->day          = $request->day;
+            $availability->days          = json_decode($request->days);
             $availability->hour_start   = $request->hour_start;
             $availability->hour_end     = $request->hour_end;
             $availability->save();
             $compositeProduct->availability = $availability;
 
             $price = new CompositeProductPrice();
-            $price->id                      = $this->generateId('cpprice', $price);
+            $price->id                      = $this->generateId('prodcprice', $price);
             $price->composite_product_id              = $id;
             $price->price_including_taxes   = $request->price_including_taxes;
             $price->price_excluding_taxes   = $request->price_excluding_taxes;
@@ -232,7 +232,7 @@ class CompositeProductController extends ControllerBase
             $compositeProduct->price = $price;
 
             $category = new CompositeProductCategory();
-            $category->id               = $this->generateId('cpcat', $category);
+            $category->id               = $this->generateId('prodccat', $category);
             $category->composite_product_id       = $id;
             $category->category_id      = $request->category_id;
             $category->save();
@@ -263,7 +263,7 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id             required        Composite Product ID            Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id             required        Composite Product ID            Example: prodc_05ba52372e3c09a8219
      *
      * @responseFile /responses/composite_products/delete.json
      *
@@ -311,7 +311,7 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id        required        Composite Product ID                        Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id        required        Composite Product ID                        Example: prodc_05ba52372e3c09a8219
      *
      * @queryParam  locale                      required        Locale                                      Example: en-US
      * @queryParam  title                       required        The title of the translation                Example: English translations
@@ -346,7 +346,7 @@ class CompositeProductController extends ControllerBase
                 $product->deleteTranslations($request->input('locale'));
             }
 
-            $request->productTranslation_id = substr('producttrad_' . md5(Str::uuid()),0 ,25);
+            $request->productTranslation_id = substr('prodctrad_' . md5(Str::uuid()),0 ,25);
 
             $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->title = $request->input('title');
             $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->text = $request->input('text');
@@ -378,7 +378,7 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id            required        Composite Product ID            Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id            required        Composite Product ID            Example: prodc_05ba52372e3c09a8219
      *
      * @queryParam  locale                          required        Locale                          Example: en-US
      *
@@ -442,7 +442,7 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id        required        Id of the product to update     Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id        required        Id of the product to update     Example: prodc_05ba52372e3c09a8219
      *
      * @queryParam  price_including_taxes       required        New price including taxes       Example: 120
      * @queryParam  price_excluding_taxes       required        New price excluding taxes       Example: 100
@@ -467,6 +467,12 @@ class CompositeProductController extends ControllerBase
 
             DB::beginTransaction();
 
+            $product = CompositeProduct::where('composite_products.id', $request->composite_product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Composite Product not found.', 404);
+            }
+
             $resultSet = CompositeProductPrice::where('composite_products_prices.id', $request->composite_product_price_id);
 
             $compositePrice = $resultSet->first();
@@ -479,7 +485,7 @@ class CompositeProductController extends ControllerBase
 
 
             $newPrice = new CompositeProductPrice();
-            $newPrice->id                           = $this->generateId('cpprice', $newPrice);
+            $newPrice->id                           = $this->generateId('prodcprice', $newPrice);
             $newPrice->composite_product_id         = $request->composite_product_id;
             $newPrice->price_including_taxes        = $request->price_including_taxes;
             $newPrice->price_excluding_taxes        = $request->price_excluding_taxes;
@@ -513,7 +519,7 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id    required        Id of the product to update     Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id    required        Id of the product to update     Example: prodc_05ba52372e3c09a8219
      *
      * @queryParam  day                     required        day available                   Example: ["monday","tuesday","wednesday"]
      * @queryParam  hour_start              required        Hour start                      Example: 08:00:00
@@ -529,18 +535,24 @@ class CompositeProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'day'                           => 'json',
+                'days'                           => 'json',
                 'hour_start'                    => 'date_format:H:i:s',
                 'hour_end'                      => 'date_format:H:i:s',
             ]);
 
             DB::beginTransaction();
 
+            $product = CompositeProduct::where('composite_products.id', $request->composite_product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Composite Product not found.', 404);
+            }
+
             $resultSet = CompositeProductAvailability::where('composite_products_availabilities.composite_product_id', $request->composite_product_id);
 
             $availability = $resultSet->first();
 
-            $availability->day              = $request->input('day', $availability->getOriginal('day'));
+            $availability->days              = json_decode($request->input('days', $availability->getOriginal('days')));
             $availability->hour_start       = $request->input('hour_start', $availability->getOriginal('hour_start'));
             $availability->hour_end         = $request->input('hour_end', $availability->getOriginal('hour_end'));
 
@@ -571,9 +583,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam      composite_product_id      required        Id of the product to update     Example: compproduct_64ba1e4ff721a
+     * @urlParam      composite_product_id      required        Id of the product to update     Example: prodc_05ba52372e3c09a8219
      *
-     * @queryParam      category_id             required        Category ID                     Example: product_9f71793f1bff89227
+     * @queryParam      category_id             required        Category ID                     Example: cat_d10be1a57a0fddafc85b5
      *
      * @responseFile /responses/composite_products/updateCategory.json
      *
@@ -590,9 +602,19 @@ class CompositeProductController extends ControllerBase
 
             DB::beginTransaction();
 
+            $product = CompositeProduct::where('composite_products.id', $request->composite_product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Composite Product not found.', 404);
+            }
+
             $resultSet = CompositeProductCategory::where('composite_products_categories.composite_product_id', $request->composite_product_id);
 
             $category = $resultSet->first();
+
+            if(empty($category)) {
+                throw new Exception('The composite product price doesn\'t exist.', 404);
+            }
 
             $category->category_id  = $request->input('category_id', $category->getOriginal('category_id'));
 
@@ -623,9 +645,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id        required        Id of the product to update         Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id        required        Id of the product to update         Example: prodc_05ba52372e3c09a8219
      *
-     * @queryParam  product_id                  required        Product ID                          Example: product_9f71793f1bff89227
+     * @queryParam  product_id                  required        Product ID                          Example: prod_3a3d84897c39a40bc49e
      *
      * @responseFile /responses/composite_products/addProduct.json
      *
@@ -642,9 +664,15 @@ class CompositeProductController extends ControllerBase
 
             DB::beginTransaction();
 
+            $product = CompositeProduct::where('composite_products.id', $request->composite_product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Composite Product not found.', 404);
+            }
+
             $product = new CompositeProductProduct();
 
-            $product->id = $this->generateId('cpp', $product);
+            $product->id = $this->generateId('prodcprod', $product);
             $product->composite_product_id = $request->composite_product_id;
             $product->product_id = $request->product_id;
 
@@ -675,9 +703,9 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id            required        Id of the product to update         Example: compproduct_64ba1e4ff721a
+     * @urlParam    composite_product_id            required        Id of the product to update         Example: prodc_05ba52372e3c09a8219
      *
-     * @queryParam  product_id                      required        Product ID                          Example: product_9f71793f1bff89227
+     * @queryParam  product_id                      required        Product ID                          Example: prod_3a3d84897c39a40bc49e
      *
      * @responseFile /responses/composite_products/removeProduct.json
      *
@@ -693,6 +721,12 @@ class CompositeProductController extends ControllerBase
             ]);
 
             DB::beginTransaction();
+
+            $product = CompositeProduct::where('composite_products.id', $request->composite_product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Composite Product not found.', 404);
+            }
 
             $resultSet = CompositeProductProduct::where('composite_products_products.composite_product_id', $request->composite_product_id)
                     ->where('composite_products_products.product_id', $request->product_id);

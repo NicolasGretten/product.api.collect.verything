@@ -1,37 +1,74 @@
 {
-    "timestamp": 1615936478,
-    "signature": "fa19301410442d0cd92da28f7cc726ae",
+    "timestamp": 1616156299,
+    "signature": "d454352279e0d811be287611fbaa7219",
     "content": {
         "success": true,
         "async": false,
         "body": [
             {
-                "id": "discount_93c6eb6a9e05c06e",
-                "discount_type": "EUR",
+                "id": "discount_fffbae84a65baa0a",
+                "discount_type": "eur",
                 "promotional_code_id": null,
                 "amount": 50,
-                "start_at": "2021-03-16 00:00:00",
-                "end_at": "2021-05-16 00:00:00",
+                "start_at": "2021-05-05 00:00:00",
+                "end_at": "2021-05-25 00:00:00",
                 "deleted_at": null,
-                "created_at": "2021-03-16T22:10:27.000000Z",
-                "updated_at": "2021-03-16T22:19:14.000000Z",
-                "title": "Traduction française",
-                "text": "Promo d'hiver",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "title": "traduction française",
+                "text": "promo d'haloween",
                 "translations_list": [
                     {
-                        "id": "discounttrad_dd51f2fb1c42",
-                        "discount_id": "discount_93c6eb6a9e05c06e",
+                        "id": "discounttrad_f257c1e6560a",
+                        "discount_id": "discount_fffbae84a65baa0a",
                         "locale": "fr-FR",
-                        "title": "Traduction française",
-                        "text": "Promo d'hiver",
+                        "title": "traduction française",
+                        "text": "promo d'haloween",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T22:10:27.000000Z",
-                        "updated_at": "2021-03-16T22:10:27.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
+                    },
+                    {
+                        "id": "discounttrad_6b9d1ce76bab",
+                        "discount_id": "discount_fffbae84a65baa0a",
+                        "locale": "en-US",
+                        "title": "English translation",
+                        "text": "haloween discount",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     }
                 ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
+                "products": [
+                    {
+                        "id": "prod_3a3d84897c39a40bc49e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    }
+                ],
+                "composite_products": [
+                    {
+                        "id": "prodc_05ba52372e3c09a8219",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "petit déjeuner"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": "cat_bcc3b36c2dd0ae4a1c57c",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Abonnement"
+                    }
+                ],
                 "promotional_codes": null
             }
         ]

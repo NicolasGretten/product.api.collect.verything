@@ -15,9 +15,9 @@ class CompositeProductsAvailabilitiesSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('composite_products_availabilities')->insert([
-            'id'                    => substr('cpa_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'              => 'compproduct_64ba1e4ff721a',//petit dej
-            'day'                   => 'monday',
+            'id'                    => substr('prodcavail_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_05ba52372e3c09a8219',//petit dej
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
             'hour_start'            => '07:00:00',
             'hour_end'              => '11:00:00',
             'created_at'            => Carbon::now(),
@@ -25,9 +25,9 @@ class CompositeProductsAvailabilitiesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('composite_products_availabilities')->insert([
-            'id'                    => substr('cpa_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'            => 'compproduct_c0b5eb2d85401',//déjeuner
-            'day'                   => 'monday',
+            'id'                    => substr('prodcavail_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484fb',//déjeuner
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
             'hour_start'            => '11:30:00',
             'hour_end'              => '13:30:00',
             'created_at'            => Carbon::now(),

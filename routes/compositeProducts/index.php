@@ -12,7 +12,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$router->group(['prefix' => 'composite_products'], function () use ($router)
+$router->group(['prefix' => 'composite-products'], function () use ($router)
 {
     /**
      * CompositeProductController

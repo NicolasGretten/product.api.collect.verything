@@ -15,33 +15,33 @@ class CompositeProductsProductsSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('composite_products_products')->insert([
-            'id'                    => substr('cpp_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'            => 'compproduct_64ba1e4ff721a',//petit dej
-            'product_id'           => 'product_9f71793f1bff89227',//croissant
+            'id'                    => substr('prodcprod_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_05ba52372e3c09a8219',//petit dej
+            'product_id'            => 'prod_3a3d84897c39a40bc49e',//croissant
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('composite_products_products')->insert([
-            'id'                    => substr('cpp_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'            => 'compproduct_64ba1e4ff721a',//petit dej
-            'product_id'           => 'product_8a72e4d0f1fd12d03',//café
+            'id'                    => substr('prodcprod_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_05ba52372e3c09a8219',//petit dej
+            'product_id'            => 'prod_c93e0a2194593f85a7a6',//café
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('composite_products_products')->insert([
-            'id'                    => substr('cpp_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'            => 'compproduct_c0b5eb2d85401',//déjeuner
-            'product_id'           => 'product_4c053842dc07c0330',//aperitif
+            'id'                    => substr('prodcprod_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484fb',//déjeuner
+            'product_id'            => 'prod_672832afc671d36c6213',//aperitif
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('composite_products_products')->insert([
-            'id'                    => substr('cpp_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'            => 'compproduct_c0b5eb2d85401',//déjeuner
-            'product_id'           => 'product_d66672dd6b9052218',//salade
+            'id'                    => substr('prodcprod_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484fb',//déjeuner
+            'product_id'            => 'prod_1344f9b420f516b26861',//salade
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);

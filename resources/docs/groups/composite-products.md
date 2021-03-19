@@ -12,7 +12,7 @@ Retrieve all product details.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->get(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -20,7 +20,7 @@ $response = $client->get(
         ],
         'json' => [
             'filters' => [
-                'relations' => '["products","availabilities","prices","discounts","categories","translationsList"]',
+                'relations' => '["products","availabilities","prices","discounts","categories"]',
             ],
         ],
     ]
@@ -31,7 +31,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219"
 );
 
 let headers = {
@@ -41,7 +41,7 @@ let headers = {
 
 let body = {
     "filters": {
-        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\",\"translationsList\"]"
+        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\"]"
     }
 }
 
@@ -58,10 +58,10 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219'
 payload = {
     "filters": {
-        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\",\"translationsList\"]"
+        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\"]"
     }
 }
 headers = {
@@ -75,10 +75,10 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a" \
+    -G "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"relations":"[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\",\"translationsList\"]"}}'
+    -d '{"filters":{"relations":"[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\"]"}}'
 
 ```
 
@@ -87,17 +87,17 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615923641,
-    "signature": "0e9e7a88527a4ddf65f25ea3616fe2ee",
+    "timestamp": 1616094448,
+    "signature": "89bb5a65399429164feb4dd73a1ed3ee",
     "content": {
         "success": true,
         "async": false,
         "body": [
             {
-                "id": "compproduct_64ba1e4ff721a",
+                "id": "prodc_05ba52372e3c09a8219",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-18T13:27:54.000000Z",
+                "updated_at": "2021-03-18T13:27:54.000000Z",
                 "title": "Traduction en français",
                 "text": "petit déjeuner"
             }
@@ -109,104 +109,86 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615923670,
-    "signature": "4e4b09ac8b899c6c324ab01f936a8572",
+    "timestamp": 1616159900,
+    "signature": "a6ffb1fba0b8366c0b510ffd2cd84953",
     "content": {
         "success": true,
         "async": false,
-        "body": [
-            {
-                "id": "compproduct_64ba1e4ff721a",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "petit déjeuner",
-                "products": [
-                    {
-                        "id": "product_9f71793f1bff89227",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "Croissant"
-                    },
-                    {
-                        "id": "product_8a72e4d0f1fd12d03",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "café"
-                    }
-                ],
-                "availabilities": [
-                    {
-                        "id": "cpa_c7447b7ec9c1077aba170",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "day": "monday",
-                        "hour_start": "07:00:00",
-                        "hour_end": "11:00:00",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "prices": [
-                    {
-                        "id": "cpprice_d00ac874b5a9626bd",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "price_including_taxes": 660,
-                        "price_excluding_taxes": 600,
-                        "vat_value": 60,
-                        "vat_rate": 10,
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "discounts": [],
-                "categories": [
-                    {
-                        "id": "cat_3a61a9ed91efe584ca27c",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "repas"
-                    }
-                ],
-                "translations_list": [
-                    {
-                        "id": "cpt_e1d8f7e2a2e13a3369b78",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "petit déjeuner",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:55.000000Z",
-                        "updated_at": "2021-03-15T15:21:55.000000Z"
-                    },
-                    {
-                        "id": "cpt_933d08fb18a6a691a79fe",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "breakfast",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:55.000000Z",
-                        "updated_at": "2021-03-15T15:21:55.000000Z"
-                    }
-                ]
-            }
-        ]
+        "body": {
+            "id": "prodc_05ba52372e3c09a8219",
+            "deleted_at": null,
+            "created_at": "2021-03-19T13:07:40.000000Z",
+            "updated_at": "2021-03-19T13:07:40.000000Z",
+            "title": "Traduction en français",
+            "text": "petit déjeuner",
+            "products": [
+                {
+                    "id": "prod_3a3d84897c39a40bc49e",
+                    "deleted_at": null,
+                    "created_at": "2021-03-19T13:07:40.000000Z",
+                    "updated_at": "2021-03-19T13:07:40.000000Z",
+                    "title": "Traduction en français",
+                    "text": "Croissant"
+                },
+                {
+                    "id": "prod_c93e0a2194593f85a7a6",
+                    "deleted_at": null,
+                    "created_at": "2021-03-19T13:07:40.000000Z",
+                    "updated_at": "2021-03-19T13:07:40.000000Z",
+                    "title": "Traduction en français",
+                    "text": "Salade"
+                }
+            ],
+            "availabilities": [
+                {
+                    "id": "prodcavail_be543e130303d0",
+                    "composite_product_id": "prodc_05ba52372e3c09a8219",
+                    "days": [
+                        "monday",
+                        "tuesday",
+                        "wednesday",
+                        "thursday",
+                        "friday"
+                    ],
+                    "hour_start": "07:00:00",
+                    "hour_end": "11:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-19T13:07:40.000000Z",
+                    "updated_at": "2021-03-19T13:07:40.000000Z"
+                }
+            ],
+            "prices": [
+                {
+                    "id": "prodcprice_bf3c673a69a41e",
+                    "composite_product_id": "prodc_05ba52372e3c09a8219",
+                    "price_including_taxes": 660,
+                    "price_excluding_taxes": 600,
+                    "vat_value": 60,
+                    "vat_rate": 10,
+                    "deleted_at": null,
+                    "created_at": "2021-03-19T13:07:40.000000Z",
+                    "updated_at": "2021-03-19T13:07:40.000000Z"
+                }
+            ],
+            "discounts": [],
+            "categories": [
+                {
+                    "id": "cat_3a61a9ed91efe584ca27c",
+                    "deleted_at": null,
+                    "created_at": "2021-03-19T13:07:40.000000Z",
+                    "updated_at": "2021-03-19T13:07:40.000000Z",
+                    "title": "Traduction en français",
+                    "text": "repas"
+                }
+            ]
+        }
     }
 }
 ```
 
 ### Request
 <small class="badge badge-green">GET</small>
- **`composite_products/{composite_product_id}`**
+ **`composite-products/{composite_product_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -229,14 +211,14 @@ List all the composite products.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->get(
-    'http://dev-product.api.hopn.space/composite_products',
+    'http://dev-product.api.hopn.space/composite-products',
     [
         'headers' => [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
         ],
         'query' => [
-            'items_id'=> '["compproduct_64ba1e4ff721a","compproduct_c0b5eb2d85401"]',
+            'items_id'=> '["prodc_05ba52372e3c09a8219","prodc_bb6bca80cb0ac3484fb"]',
             'limit'=> '10',
             'page'=> '1',
         ],
@@ -263,7 +245,7 @@ $response = $client->get(
                     'lte' => '1602688060',
                     'order' => 'ASC',
                 ],
-                'relations' => '["products","availabilities","prices","discounts","categories","translationsList"]',
+                'relations' => '["products","availabilities","prices","discounts","categories"]',
             ],
         ],
     ]
@@ -274,11 +256,11 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products"
+    "http://dev-product.api.hopn.space/composite-products"
 );
 
 let params = {
-    "items_id": "["compproduct_64ba1e4ff721a","compproduct_c0b5eb2d85401"]",
+    "items_id": "["prodc_05ba52372e3c09a8219","prodc_bb6bca80cb0ac3484fb"]",
     "limit": "10",
     "page": "1",
 };
@@ -313,7 +295,7 @@ let body = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\",\"translationsList\"]"
+        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\"]"
     }
 }
 
@@ -330,7 +312,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products'
+url = 'http://dev-product.api.hopn.space/composite-products'
 payload = {
     "filters": {
         "created": {
@@ -354,11 +336,11 @@ payload = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\",\"translationsList\"]"
+        "relations": "[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\"]"
     }
 }
 params = {
-  'items_id': '["compproduct_64ba1e4ff721a","compproduct_c0b5eb2d85401"]',
+  'items_id': '["prodc_05ba52372e3c09a8219","prodc_bb6bca80cb0ac3484fb"]',
   'limit': '10',
   'page': '1',
 }
@@ -373,10 +355,10 @@ response.json()
 
 ```bash
 curl -X GET \
-    -G "http://dev-product.api.hopn.space/composite_products?items_id=%5B%22compproduct_64ba1e4ff721a%22%2C%22compproduct_c0b5eb2d85401%22%5D&limit=10&page=1" \
+    -G "http://dev-product.api.hopn.space/composite-products?items_id=%5B%22prodc_05ba52372e3c09a8219%22%2C%22prodc_bb6bca80cb0ac3484fb%22%5D&limit=10&page=1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\",\"translationsList\"]"}}'
+    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"products\",\"availabilities\",\"prices\",\"discounts\",\"categories\"]"}}'
 
 ```
 
@@ -400,7 +382,7 @@ curl -X GET \
         },
         "body": [
             {
-                "id": "compproduct_64ba1e4ff721a",
+                "id": "prodc_05ba52372e3c09a8219",
                 "deleted_at": null,
                 "created_at": "2021-03-15T15:21:54.000000Z",
                 "updated_at": "2021-03-15T15:21:54.000000Z",
@@ -408,7 +390,7 @@ curl -X GET \
                 "text": "petit déjeuner"
             },
             {
-                "id": "compproduct_c0b5eb2d85401",
+                "id": "prodc_bb6bca80cb0ac3484fb",
                 "deleted_at": null,
                 "created_at": "2021-03-15T15:21:54.000000Z",
                 "updated_at": "2021-03-15T15:21:54.000000Z",
@@ -423,8 +405,8 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615923478,
-    "signature": "39450b772ae6587f5cc425997001a89f",
+    "timestamp": 1616159875,
+    "signature": "23e358a9fc9a7d86b32e3b8cf60c6983",
     "content": {
         "success": true,
         "async": false,
@@ -438,137 +420,127 @@ curl -X GET \
         },
         "body": [
             {
-                "id": "compproduct_64ba1e4ff721a",
+                "id": "prodc_05ba52372e3c09a8219",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T13:07:40.000000Z",
+                "updated_at": "2021-03-19T13:07:40.000000Z",
                 "title": "Traduction en français",
                 "text": "petit déjeuner",
                 "products": [
                     {
-                        "id": "product_9f71793f1bff89227",
+                        "id": "prod_3a3d84897c39a40bc49e",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "Croissant"
                     },
                     {
-                        "id": "product_8a72e4d0f1fd12d03",
+                        "id": "prod_c93e0a2194593f85a7a6",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Salade"
+                    }
+                ],
+                "availabilities": [
+                    {
+                        "id": "prodcavail_be543e130303d0",
+                        "composite_product_id": "prodc_05ba52372e3c09a8219",
+                        "days": [
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday"
+                        ],
+                        "hour_start": "07:00:00",
+                        "hour_end": "11:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
+                    }
+                ],
+                "prices": [
+                    {
+                        "id": "prodcprice_bf3c673a69a41e",
+                        "composite_product_id": "prodc_05ba52372e3c09a8219",
+                        "price_including_taxes": 660,
+                        "price_excluding_taxes": 600,
+                        "vat_value": 60,
+                        "vat_rate": 10,
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
+                    }
+                ],
+                "discounts": [],
+                "categories": [
+                    {
+                        "id": "cat_3a61a9ed91efe584ca27c",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
+                        "title": "Traduction en français",
+                        "text": "repas"
+                    }
+                ]
+            },
+            {
+                "id": "prodc_bb6bca80cb0ac3484fb",
+                "deleted_at": null,
+                "created_at": "2021-03-19T13:07:40.000000Z",
+                "updated_at": "2021-03-19T13:07:40.000000Z",
+                "title": "Traduction en français",
+                "text": "déjeuner",
+                "products": [
+                    {
+                        "id": "prod_672832afc671d36c6213",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Mimosa"
+                    },
+                    {
+                        "id": "prod_1344f9b420f516b26861",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "café"
                     }
                 ],
                 "availabilities": [
                     {
-                        "id": "cpa_c7447b7ec9c1077aba170",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "day": "monday",
-                        "hour_start": "07:00:00",
-                        "hour_end": "11:00:00",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "prices": [
-                    {
-                        "id": "cpprice_d00ac874b5a9626bd",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "price_including_taxes": 660,
-                        "price_excluding_taxes": 600,
-                        "vat_value": 60,
-                        "vat_rate": 10,
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "discounts": [],
-                "categories": [
-                    {
-                        "id": "cat_3a61a9ed91efe584ca27c",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "repas"
-                    }
-                ],
-                "translations_list": [
-                    {
-                        "id": "cpt_e1d8f7e2a2e13a3369b78",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "petit déjeuner",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:55.000000Z",
-                        "updated_at": "2021-03-15T15:21:55.000000Z"
-                    },
-                    {
-                        "id": "cpt_933d08fb18a6a691a79fe",
-                        "composite_product_id": "compproduct_64ba1e4ff721a",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "breakfast",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:55.000000Z",
-                        "updated_at": "2021-03-15T15:21:55.000000Z"
-                    }
-                ]
-            },
-            {
-                "id": "compproduct_c0b5eb2d85401",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "déjeuner",
-                "products": [
-                    {
-                        "id": "product_d66672dd6b9052218",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "Salade"
-                    },
-                    {
-                        "id": "product_4c053842dc07c0330",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "apéritif"
-                    }
-                ],
-                "availabilities": [
-                    {
-                        "id": "cpa_2aa3a84b4ed526f1a9729",
-                        "composite_product_id": "compproduct_c0b5eb2d85401",
-                        "day": "monday",
+                        "id": "prodcavail_3c9c65b9218a28",
+                        "composite_product_id": "prodc_bb6bca80cb0ac3484fb",
+                        "days": [
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday"
+                        ],
                         "hour_start": "11:30:00",
                         "hour_end": "13:30:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "prices": [
                     {
-                        "id": "cpprice_7d81298c05e61b019",
-                        "composite_product_id": "compproduct_c0b5eb2d85401",
+                        "id": "prodcprice_ebae4c356d1e94",
+                        "composite_product_id": "prodc_bb6bca80cb0ac3484fb",
                         "price_including_taxes": 1100,
                         "price_excluding_taxes": 1000,
                         "vat_value": 100,
                         "vat_rate": 10,
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "discounts": [],
@@ -576,32 +548,10 @@ curl -X GET \
                     {
                         "id": "cat_3a61a9ed91efe584ca27c",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "repas"
-                    }
-                ],
-                "translations_list": [
-                    {
-                        "id": "cpt_78684cdeefa2fef9ab677",
-                        "composite_product_id": "compproduct_c0b5eb2d85401",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "déjeuner",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:55.000000Z",
-                        "updated_at": "2021-03-15T15:21:55.000000Z"
-                    },
-                    {
-                        "id": "cpt_9bc94f2bff8a8ae7d3110",
-                        "composite_product_id": "compproduct_c0b5eb2d85401",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "lunch",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:55.000000Z",
-                        "updated_at": "2021-03-15T15:21:55.000000Z"
                     }
                 ]
             }
@@ -612,7 +562,7 @@ curl -X GET \
 
 ### Request
 <small class="badge badge-green">GET</small>
- **`composite_products`**
+ **`composite-products`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
 <code><b>items_id</b></code>&nbsp;          <i>optional</i>    <br>
@@ -686,7 +636,7 @@ Allows you to create a new product.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->post(
-    'http://dev-product.api.hopn.space/composite_products',
+    'http://dev-product.api.hopn.space/composite-products',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -713,7 +663,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products"
+    "http://dev-product.api.hopn.space/composite-products"
 );
 
 let params = {
@@ -750,7 +700,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products'
+url = 'http://dev-product.api.hopn.space/composite-products'
 params = {
   'title': 'Traduction française',
   'locale': 'fr-FR',
@@ -775,7 +725,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://dev-product.api.hopn.space/composite_products?title=Traduction+fran%C3%A7aise&locale=fr-FR&text=spa&price_including_taxes=120&price_excluding_taxes=100&vat_value=20&vat_rate=20&day=%5B%22monday%22%2C%22tuesday%22%2C%22wednesday%22%5D&hour_start=08%3A00%3A00&hour_end=10%3A00%3A00&category_id=cat_d10be1a57a0fddafc85b5" \
+    "http://dev-product.api.hopn.space/composite-products?title=Traduction+fran%C3%A7aise&locale=fr-FR&text=spa&price_including_taxes=120&price_excluding_taxes=100&vat_value=20&vat_rate=20&day=%5B%22monday%22%2C%22tuesday%22%2C%22wednesday%22%5D&hour_start=08%3A00%3A00&hour_end=10%3A00%3A00&category_id=cat_d10be1a57a0fddafc85b5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -785,40 +735,44 @@ curl -X POST \
 
 ```json
 {
-    "timestamp": 1615971333,
-    "signature": "6b4d909ef64a67722540bd7293095584",
+    "timestamp": 1616094321,
+    "signature": "221202a27628f3ec57c52d492cf9487a",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "compproduct_681edbb076233",
-            "updated_at": "2021-03-17T08:55:33.000000Z",
-            "created_at": "2021-03-17T08:55:33.000000Z",
+            "id": "prodc_1ea4c4b453b2490a6c9",
+            "updated_at": "2021-03-18T19:05:21.000000Z",
+            "created_at": "2021-03-18T19:05:21.000000Z",
             "availability": {
-                "id": "cpa_4e1296a73fea549696bc5",
-                "composite_product_id": "compproduct_681edbb076233",
-                "day": "[\"monday\",\"tuesday\",\"wednesday\",\"friday\"]",
+                "id": "prodcavail_6f901489e78f9f",
+                "composite_product_id": "prodc_1ea4c4b453b2490a6c9",
+                "days": [
+                    "monday",
+                    "tuesday",
+                    "friday"
+                ],
                 "hour_start": "08:00:00",
                 "hour_end": "18:00:00",
-                "updated_at": "2021-03-17T08:55:33.000000Z",
-                "created_at": "2021-03-17T08:55:33.000000Z"
+                "updated_at": "2021-03-18T19:05:21.000000Z",
+                "created_at": "2021-03-18T19:05:21.000000Z"
             },
             "price": {
-                "id": "cpprice_fafe88f81dc7a77f9",
-                "composite_product_id": "compproduct_681edbb076233",
+                "id": "prodcprice_f1141a356500d7",
+                "composite_product_id": "prodc_1ea4c4b453b2490a6c9",
                 "price_including_taxes": "110",
                 "price_excluding_taxes": "100",
                 "vat_value": "10",
                 "vat_rate": "10",
-                "updated_at": "2021-03-17T08:55:33.000000Z",
-                "created_at": "2021-03-17T08:55:33.000000Z"
+                "updated_at": "2021-03-18T19:05:21.000000Z",
+                "created_at": "2021-03-18T19:05:21.000000Z"
             },
             "category": {
-                "id": "cpcat_72b30b3025b4dc77aa6",
-                "composite_product_id": "compproduct_681edbb076233",
+                "id": "prodccat_d58b673c60162d0b",
+                "composite_product_id": "prodc_1ea4c4b453b2490a6c9",
                 "category_id": "cat_1ddf322d0c198c29b50ce",
-                "updated_at": "2021-03-17T08:55:33.000000Z",
-                "created_at": "2021-03-17T08:55:33.000000Z"
+                "updated_at": "2021-03-18T19:05:21.000000Z",
+                "created_at": "2021-03-18T19:05:21.000000Z"
             },
             "title": "Traduction française",
             "text": "séminaire"
@@ -829,7 +783,7 @@ curl -X POST \
 
 ### Request
 <small class="badge badge-black">POST</small>
- **`composite_products`**
+ **`composite-products`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
 <code><b>title</b></code>&nbsp;      <br>
@@ -878,7 +832,7 @@ Delete a product and anonymize the data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -892,7 +846,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219"
 );
 
 let headers = {
@@ -913,7 +867,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -925,7 +879,7 @@ response.json()
 
 ```bash
 curl -X DELETE \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -941,7 +895,7 @@ curl -X DELETE \
         "success": true,
         "async": false,
         "body": {
-            "id": "compproduct_64ba1e4ff721a",
+            "id": "prodc_1ea4c4b453b2490a6c9",
             "deleted_at": "2021-03-16T20:01:49.000000Z",
             "created_at": "2021-03-15T15:21:54.000000Z",
             "updated_at": "2021-03-16T20:01:49.000000Z",
@@ -954,7 +908,7 @@ curl -X DELETE \
 
 ### Request
 <small class="badge badge-red">DELETE</small>
- **`composite_products/{composite_product_id}`**
+ **`composite-products/{composite_product_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -973,7 +927,7 @@ Allow you to translate a product's description
 
 $client = new \GuzzleHttp\Client();
 $response = $client->post(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -992,7 +946,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate"
 );
 
 let params = {
@@ -1021,7 +975,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate'
 params = {
   'locale': 'en-US',
   'title': 'English translations',
@@ -1038,7 +992,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate?locale=en-US&title=English+translations&text=Spa" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate?locale=en-US&title=English+translations&text=Spa" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1054,8 +1008,8 @@ curl -X POST \
         "success": true,
         "async": false,
         "body": {
-            "id": "producttrad_3601f779806e1",
-            "composite_product_id": "compproduct_64ba1e4ff721a",
+            "id": "prodctrad_ba9c77ec568381d",
+            "composite_product_id": "prodc_f7cf076a4da1055a5a1",
             "locale": "en-US",
             "title": "English translation",
             "text": "Seminary",
@@ -1069,7 +1023,7 @@ curl -X POST \
 
 ### Request
 <small class="badge badge-black">POST</small>
- **`composite_products/{composite_product_id}/translate`**
+ **`composite-products/{composite_product_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -1098,7 +1052,7 @@ Allow you to remove a product's description translation.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -1115,7 +1069,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate"
 );
 
 let params = {
@@ -1142,7 +1096,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate'
 params = {
   'locale': 'en-US',
 }
@@ -1157,7 +1111,7 @@ response.json()
 
 ```bash
 curl -X DELETE \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/translate?locale=en-US" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/translate?locale=en-US" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1167,20 +1121,20 @@ curl -X DELETE \
 
 ```json
 {
-    "timestamp": 1615924870,
-    "signature": "c56e76aba21f48ef5a56818d7e15429e",
+    "timestamp": 1616094432,
+    "signature": "53d660ef070f99eae8c6fb0dfacb6832",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "producttrad_3601f779806e1",
-            "composite_product_id": "compproduct_64ba1e4ff721a",
+            "id": "prodctrad_ba9c77ec568381d",
+            "composite_product_id": "prodc_05ba52372e3c09a8219",
             "locale": "en-US",
             "title": "English translation",
-            "text": "Seminary",
-            "deleted_at": "2021-03-16T20:01:10.000000Z",
-            "created_at": "2021-03-16T20:00:26.000000Z",
-            "updated_at": "2021-03-16T20:01:10.000000Z"
+            "text": "breakfast",
+            "deleted_at": "2021-03-18T19:07:12.000000Z",
+            "created_at": "2021-03-18T19:00:57.000000Z",
+            "updated_at": "2021-03-18T19:07:12.000000Z"
         }
     }
 }
@@ -1188,7 +1142,7 @@ curl -X DELETE \
 
 ### Request
 <small class="badge badge-red">DELETE</small>
- **`composite_products/{composite_product_id}/translate`**
+ **`composite-products/{composite_product_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -1211,7 +1165,7 @@ You can update product price data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->patch(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/price/1',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/price/1',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -1231,7 +1185,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/price/1"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/price/1"
 );
 
 let params = {
@@ -1261,7 +1215,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/price/1'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/price/1'
 params = {
   'price_including_taxes': '120',
   'price_excluding_taxes': '100',
@@ -1279,7 +1233,7 @@ response.json()
 
 ```bash
 curl -X PATCH \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/price/1?price_including_taxes=120&price_excluding_taxes=100&vat_value=20&vat_rate=20" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/price/1?price_including_taxes=120&price_excluding_taxes=100&vat_value=20&vat_rate=20" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1289,20 +1243,20 @@ curl -X PATCH \
 
 ```json
 {
-    "timestamp": 1615971859,
-    "signature": "c7b98425371ff03bea2e445b4454f2f6",
+    "timestamp": 1616155473,
+    "signature": "485c583db97d155ae6cd961987b96339",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cpprice_d43dafc4ba8eaefd6",
-            "composite_product_id": "compproduct_681edbb076233",
+            "id": "prodcprice_79d60102fd6d74",
+            "composite_product_id": "prodc_05ba52372e3c09a8219",
             "price_including_taxes": "2400",
             "price_excluding_taxes": "2000",
             "vat_value": "400",
             "vat_rate": "20",
-            "updated_at": "2021-03-17T09:04:18.000000Z",
-            "created_at": "2021-03-17T09:04:18.000000Z"
+            "updated_at": "2021-03-19T12:04:33.000000Z",
+            "created_at": "2021-03-19T12:04:33.000000Z"
         }
     }
 }
@@ -1310,7 +1264,7 @@ curl -X PATCH \
 
 ### Request
 <small class="badge badge-purple">PATCH</small>
- **`composite_products/{composite_product_id}/price/{composite_product_price_id}`**
+ **`composite-products/{composite_product_id}/price/{composite_product_price_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -1342,7 +1296,7 @@ You can update product availabilities data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->patch(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/availability',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/availability',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -1361,7 +1315,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/availability"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/availability"
 );
 
 let params = {
@@ -1390,7 +1344,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/availability'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/availability'
 params = {
   'day': '["monday","tuesday","wednesday"]',
   'hour_start': '08:00:00',
@@ -1407,7 +1361,7 @@ response.json()
 
 ```bash
 curl -X PATCH \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/availability?day=%5B%22monday%22%2C%22tuesday%22%2C%22wednesday%22%5D&hour_start=08%3A00%3A00&hour_end=10%3A00%3A00" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/availability?day=%5B%22monday%22%2C%22tuesday%22%2C%22wednesday%22%5D&hour_start=08%3A00%3A00&hour_end=10%3A00%3A00" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1417,20 +1371,26 @@ curl -X PATCH \
 
 ```json
 {
-    "timestamp": 1615924708,
-    "signature": "3ce0e3ceeb9dcbfc07f07e95b1618590",
+    "timestamp": 1616160080,
+    "signature": "79216bc25997b150699479ead7ad3ad9",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cpa_9dd4932a9e5f703520a17",
-            "composite_product_id": "compproduct_f69ab775ee415",
-            "day": "[\"monday\",\"tuesday\",\"wednesday\"]",
+            "id": "prodcavail_be543e130303d0",
+            "composite_product_id": "prodc_05ba52372e3c09a8219",
+            "days": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday"
+            ],
             "hour_start": "08:00:00",
             "hour_end": "18:00:00",
             "deleted_at": null,
-            "created_at": "2021-03-16T19:55:50.000000Z",
-            "updated_at": "2021-03-16T19:58:28.000000Z"
+            "created_at": "2021-03-19T13:07:40.000000Z",
+            "updated_at": "2021-03-19T13:21:20.000000Z"
         }
     }
 }
@@ -1438,7 +1398,7 @@ curl -X PATCH \
 
 ### Request
 <small class="badge badge-purple">PATCH</small>
- **`composite_products/{composite_product_id}/availability`**
+ **`composite-products/{composite_product_id}/availability`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -1467,14 +1427,14 @@ You can update product category data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->patch(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/category',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/category',
     [
         'headers' => [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
         ],
         'query' => [
-            'category_id'=> 'product_9f71793f1bff89227',
+            'category_id'=> 'cat_d10be1a57a0fddafc85b5',
         ],
     ]
 );
@@ -1484,11 +1444,11 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/category"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/category"
 );
 
 let params = {
-    "category_id": "product_9f71793f1bff89227",
+    "category_id": "cat_d10be1a57a0fddafc85b5",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1511,9 +1471,9 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/category'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/category'
 params = {
-  'category_id': 'product_9f71793f1bff89227',
+  'category_id': 'cat_d10be1a57a0fddafc85b5',
 }
 headers = {
   'Content-Type': 'application/json',
@@ -1526,7 +1486,7 @@ response.json()
 
 ```bash
 curl -X PATCH \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/category?category_id=product_9f71793f1bff89227" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/category?category_id=cat_d10be1a57a0fddafc85b5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1536,18 +1496,18 @@ curl -X PATCH \
 
 ```json
 {
-    "timestamp": 1615924763,
-    "signature": "c2f6f7f4e0cca1e74168929324d7fcc7",
+    "timestamp": 1616155446,
+    "signature": "d4092d668f6271713404e9367c900773",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cpcat_e651cad0babb7718975",
-            "composite_product_id": "compproduct_f69ab775ee415",
+            "id": "prodccat_7c029f6bb9a2ebd2",
+            "composite_product_id": "prodc_05ba52372e3c09a8219",
             "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
             "deleted_at": null,
-            "created_at": "2021-03-16T19:55:50.000000Z",
-            "updated_at": "2021-03-16T19:59:23.000000Z"
+            "created_at": "2021-03-19T10:33:44.000000Z",
+            "updated_at": "2021-03-19T12:04:06.000000Z"
         }
     }
 }
@@ -1555,7 +1515,7 @@ curl -X PATCH \
 
 ### Request
 <small class="badge badge-purple">PATCH</small>
- **`composite_products/{composite_product_id}/category`**
+ **`composite-products/{composite_product_id}/category`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -1578,14 +1538,14 @@ You can add a product to a composite product.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->post(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product',
     [
         'headers' => [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
         ],
         'query' => [
-            'product_id'=> 'product_9f71793f1bff89227',
+            'product_id'=> 'prod_3a3d84897c39a40bc49e',
         ],
     ]
 );
@@ -1595,11 +1555,11 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product"
 );
 
 let params = {
-    "product_id": "product_9f71793f1bff89227",
+    "product_id": "prod_3a3d84897c39a40bc49e",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1622,9 +1582,9 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product'
 params = {
-  'product_id': 'product_9f71793f1bff89227',
+  'product_id': 'prod_3a3d84897c39a40bc49e',
 }
 headers = {
   'Content-Type': 'application/json',
@@ -1637,7 +1597,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product?product_id=product_9f71793f1bff89227" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product?product_id=prod_3a3d84897c39a40bc49e" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1653,9 +1613,9 @@ curl -X POST \
         "success": true,
         "async": false,
         "body": {
-            "id": "cpp_9385a6b290339ba3803fa",
-            "composite_product_id": "compproduct_f69ab775ee415",
-            "product_id": "product_9f71793f1bff89227",
+            "id": "prodcprod_74ec7b2d989035b",
+            "composite_product_id": "prodc_f7cf076a4da1055a5a1",
+            "product_id": "prod_3a3d84897c39a40bc49e",
             "updated_at": "2021-03-16T20:33:59.000000Z",
             "created_at": "2021-03-16T20:33:59.000000Z"
         }
@@ -1665,7 +1625,7 @@ curl -X POST \
 
 ### Request
 <small class="badge badge-black">POST</small>
- **`composite_products/{composite_product_id}/product`**
+ **`composite-products/{composite_product_id}/product`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>
@@ -1688,14 +1648,14 @@ You can remove a product from composite product.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->delete(
-    'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product',
+    'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product',
     [
         'headers' => [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
         ],
         'query' => [
-            'product_id'=> 'product_9f71793f1bff89227',
+            'product_id'=> 'prod_3a3d84897c39a40bc49e',
         ],
     ]
 );
@@ -1705,11 +1665,11 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product"
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product"
 );
 
 let params = {
-    "product_id": "product_9f71793f1bff89227",
+    "product_id": "prod_3a3d84897c39a40bc49e",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1732,9 +1692,9 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product'
+url = 'http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product'
 params = {
-  'product_id': 'product_9f71793f1bff89227',
+  'product_id': 'prod_3a3d84897c39a40bc49e',
 }
 headers = {
   'Content-Type': 'application/json',
@@ -1747,7 +1707,7 @@ response.json()
 
 ```bash
 curl -X DELETE \
-    "http://dev-product.api.hopn.space/composite_products/compproduct_64ba1e4ff721a/product?product_id=product_9f71793f1bff89227" \
+    "http://dev-product.api.hopn.space/composite-products/prodc_05ba52372e3c09a8219/product?product_id=prod_3a3d84897c39a40bc49e" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1763,8 +1723,8 @@ curl -X DELETE \
         "success": true,
         "async": false,
         "body": {
-            "id": "cpp_9385a6b290339ba3803fa",
-            "composite_product_id": "compproduct_f69ab775ee415",
+            "id": "prodcprod_74ec7b2d989035b",
+            "composite_product_id": "prodc_f7cf076a4da1055a5a1",
             "product_id": "product_9f71793f1bff89227",
             "deleted_at": "2021-03-16T20:34:48.000000Z",
             "created_at": "2021-03-16T20:33:59.000000Z",
@@ -1776,7 +1736,7 @@ curl -X DELETE \
 
 ### Request
 <small class="badge badge-red">DELETE</small>
- **`composite_products/{composite_product_id}/product`**
+ **`composite-products/{composite_product_id}/product`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <code><b>composite_product_id</b></code>&nbsp;      <br>

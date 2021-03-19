@@ -35,7 +35,7 @@ class PromotionalCodeController extends ControllerBase
      *
      * @urlParam    promotional_code_id     required        Promotional Code ID                 Example: promocode_17d78ae0a3bfb0a
      *
-     * @bodyParam   filters[relations]                      Add a relation in the response      Example: ["translationsList","discounts"]
+     * @bodyParam   filters[relations]                      Add a relation in the response      Example: ["discounts"]
      *
      * @responseFile /responses/promotional_codes/retrieve.json
      * @responseFile scenario="Relations filter" /responses/promotional_codes/relations-retrieve.json
@@ -48,7 +48,7 @@ class PromotionalCodeController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'        => 'json|relations:translationsList,discounts',
+                'filters.relations'        => 'json|relations:discounts',
             ]);
 
             $this->setLocale();
@@ -58,7 +58,7 @@ class PromotionalCodeController extends ControllerBase
 
             $this->filter($resultSet, ['relations']);
 
-            $promotional_code = $resultSet->get();
+            $promotional_code = $resultSet->first();
 
             return response()->json($promotional_code);
         }
@@ -105,7 +105,7 @@ class PromotionalCodeController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["translationsList","discounts"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["discounts"]
      *
      * @responseFile /responses/promotional_codes/list.json
      * @responseFile scenario="Relations Filter" /responses/promotional_codes/relations-list.json
@@ -119,7 +119,7 @@ class PromotionalCodeController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:translationsList,discounts',
+                'filters.relations'     => 'json|relations:discounts',
                 'items_id'              => 'json'
             ]);
 
@@ -374,7 +374,7 @@ class PromotionalCodeController extends ControllerBase
                 $promotional_code->deleteTranslations($request->input('locale'));
             }
 
-            $request->promotional_codeTranslation_id = substr('cattrad_' . md5(Str::uuid()),0 ,25);
+            $request->promotional_codeTranslation_id = substr('promocodetrad_' . md5(Str::uuid()),0 ,25);
 
             $promotional_code->translateOrNew($request->input('locale'))->fill(['id' => $request->promotional_codeTranslation_id])->title = $request->input('title');
             $promotional_code->translateOrNew($request->input('locale'))->fill(['id' => $request->promotional_codeTranslation_id])->text = $request->input('text');

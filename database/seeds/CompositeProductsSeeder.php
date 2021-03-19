@@ -15,13 +15,13 @@ class CompositeProductsSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('composite_products')->insert([
-            'id'                    => 'compproduct_64ba1e4ff721a',
+            'id'                    => 'prodc_05ba52372e3c09a8219',
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
 
         DB::connection('data')->table('composite_products')->insert([
-            'id'                    => 'compproduct_c0b5eb2d85401',
+            'id'                    => 'prodc_bb6bca80cb0ac3484fb',
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);

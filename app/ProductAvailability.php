@@ -40,9 +40,10 @@ class ProductAvailability extends Model
      * @var array
      */
     protected $hidden = [];
-    /**
-     * @var ProductPrice|mixed
-     */
+
+    protected $casts = [
+        'days' => 'array',
+    ];
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

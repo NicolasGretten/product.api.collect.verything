@@ -1,33 +1,33 @@
 {
-    "timestamp": 1615972305,
-    "signature": "e24204d3a95858fc7ad70c4a61f8966f",
+    "timestamp": 1616155756,
+    "signature": "1055f4e9269d469e30ea887df31a4777",
     "content": {
         "success": true,
         "async": false,
         "body": {
             "product": {
-                "id": "productdiscount_926cd375d",
-                "product_id": "product_9f71793f1bff89227",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "deleted_at": "2021-03-17T09:11:45.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z",
-                "updated_at": "2021-03-17T09:11:45.000000Z"
+                "id": "productdiscount_7c362234c",
+                "product_id": "prod_3a3d84897c39a40bc49e",
+                "discount_id": "discount_fffbae84a65baa0a",
+                "deleted_at": "2021-03-19T12:09:16.000000Z",
+                "created_at": "2021-03-19T12:07:33.000000Z",
+                "updated_at": "2021-03-19T12:09:16.000000Z"
             },
             "composite_product": {
-                "id": "cpdiscount_a95211d42303fa",
-                "composite_product_id": "compproduct_64ba1e4ff721a",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "deleted_at": "2021-03-17T09:11:45.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z",
-                "updated_at": "2021-03-17T09:11:45.000000Z"
+                "id": "cpdiscount_a109fe33b55ca3",
+                "composite_product_id": "prodc_05ba52372e3c09a8219",
+                "discount_id": "discount_fffbae84a65baa0a",
+                "deleted_at": "2021-03-19T12:09:16.000000Z",
+                "created_at": "2021-03-19T12:07:33.000000Z",
+                "updated_at": "2021-03-19T12:09:16.000000Z"
             },
             "category": {
-                "id": "catdiscount_9e9bc89f6fdf7",
+                "id": "catdiscount_b550eef6ce6ed",
                 "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "deleted_at": "2021-03-17T09:11:45.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z",
-                "updated_at": "2021-03-17T09:11:45.000000Z"
+                "discount_id": "discount_fffbae84a65baa0a",
+                "deleted_at": "2021-03-19T12:09:16.000000Z",
+                "created_at": "2021-03-19T12:07:33.000000Z",
+                "updated_at": "2021-03-19T12:09:16.000000Z"
             }
         }
     }

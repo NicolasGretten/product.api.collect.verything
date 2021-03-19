@@ -40,7 +40,7 @@ class DiscountController extends ControllerBase
      *
      * @urlParam    discount_id          required        Discount ID                        Example: discount_9f71793f1bff89227
      *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","products","categories","translationsList","promotionalCodes"]
+     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","products","categories","promotionalCodes"]
      *
      * @responseFile /responses/discounts/retrieve.json
      * @responseFile scenario="Relations filter" /responses/discounts/relations-retrieve.json
@@ -53,7 +53,7 @@ class DiscountController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:products,compositeProducts,categories,translationsList,promotionalCodes',
+                'filters.relations'     => 'json|relations:products,compositeProducts,categories,promotionalCodes',
             ]);
 
             $this->setLocale();
@@ -63,7 +63,7 @@ class DiscountController extends ControllerBase
 
             $this->filter($resultSet, ['relations']);
 
-            $discount = $resultSet->get();
+            $discount = $resultSet->first();
 
             return response()->json($discount);
         }
@@ -110,7 +110,7 @@ class DiscountController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","products","categories","translationsList","promotionalCodes"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","products","categories","promotionalCodes"]
      *
      * @responseFile /responses/discounts/list.json
      * @responseFile scenario="Relations Filter" /responses/discounts/relations-list.json
@@ -124,7 +124,7 @@ class DiscountController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:products,compositeProducts,categories,translationsList,promotionalCodes',
+                'filters.relations'     => 'json|relations:products,compositeProducts,categories,promotionalCodes',
                 'items_id'              => 'json'
             ]);
 
@@ -181,7 +181,7 @@ class DiscountController extends ControllerBase
                 'amount'                        => 'integer|required',
                 'start_at'                      => 'date_format:Y-m-d H:i:s|required',
                 'end_at'                        => 'date_format:Y-m-d H:i:s|required',
-                'promotional_code_id'           => 'string|required|exists:promotional_codes,id',
+                'promotional_code_id'           => 'string|exists:promotional_codes,id',
 
             ]);
 
@@ -241,7 +241,7 @@ class DiscountController extends ControllerBase
      *
      * @group   Discounts
      *
-     * @urlParam    discount_id         required        Id of the discount to update        Example: build_cc60ae1633a2524e8db
+     * @urlParam    discount_id         required        Id of the discount to update        Example: discount_9f71793f1bff89227
      *
      * @queryParam  discount_type       required        Discount Type                       Example: pourcent
      * @queryParam  amount              required        amount                              Example: 100
@@ -505,8 +505,8 @@ class DiscountController extends ControllerBase
      *
      * @urlParam    discount_id                 required        Id of the discount to assign        Example: discount_9f71793f1bff89227
      *
-     * @queryParam  product_id                  required        Product ID                          Example: product_9f71793f1bff89227
-     * @queryParam  composite_product_id        required        Composite Product ID                Example: compproduct_64ba1e4ff721a
+     * @queryParam  product_id                  required        Product ID                          Example: prod_3a3d84897c39a40bc49e
+     * @queryParam  composite_product_id        required        Composite Product ID                Example: prodc_05ba52372e3c09a8219
      * @queryParam  category_id                 required        Category ID                         Example: cat_bcc3b36c2dd0ae4a1c57c
      *
      * @responseFile /responses/discounts/assignDiscount.json
@@ -528,10 +528,24 @@ class DiscountController extends ControllerBase
 
             DB::beginTransaction();
 
+            $discount = Discount::where('discounts.id', $request->discount_id)->first();
+
+            if(empty($discount)) {
+                throw new ModelNotFoundException('Discount not found.', 404);
+            }
+
             if(!empty($request->product_id)) {
+                $verification = ProductDiscount::where('products_discounts.discount_id', $request->discount_id)
+                    ->where('products_discounts.product_id', $request->product_id)
+                    ->first();
+
+                if(!empty($verification)) {
+                    throw new Exception('This Discount is already assign to this product.', 400);
+                }
+
                 $product = new ProductDiscount();
 
-                $product->id = $this->generateId('productdiscount', $product);
+                $product->id = $this->generateId('proddiscount', $product);
                 $product->discount_id = $request->discount_id;
                 $product->product_id = $request->product_id;
 
@@ -540,9 +554,16 @@ class DiscountController extends ControllerBase
             }
 
             if(!empty($request->composite_product_id)) {
+                $verification = CompositeProductDiscount::where('composite_products_discounts.discount_id', $request->discount_id)
+                    ->where('composite_products_discounts.composite_product_id', $request->composite_product_id)
+                    ->first();
+
+                if(!empty($verification)) {
+                    throw new Exception('This Discount is already assign to this composite product.', 400);
+                }
                 $compositeProduct = new CompositeProductDiscount();
 
-                $compositeProduct->id = $this->generateId('cpdiscount', $compositeProduct);
+                $compositeProduct->id = $this->generateId('prodcdiscount', $compositeProduct);
                 $compositeProduct->composite_product_id = $request->composite_product_id;
                 $compositeProduct->discount_id = $request->discount_id;
 
@@ -552,6 +573,13 @@ class DiscountController extends ControllerBase
             }
 
             if(!empty($request->category_id)) {
+                $verification = CategoryDiscount::where('categories_discounts.discount_id', $request->discount_id)
+                    ->where('categories_discounts.category_id', $request->category_id)
+                    ->first();
+
+                if(!empty($verification)) {
+                    throw new Exception('This Discount is already assign to this category.', 400);
+                }
                 $category = new CategoryDiscount();
 
                 $category->id = $this->generateId('catdiscount', $category);
@@ -587,11 +615,11 @@ class DiscountController extends ControllerBase
      *
      * @group   Discounts
      *
-     * @urlParam    discount_id             required        Id of the discount to assign        Example: discount_9f71793f1bff89227
+     * @urlParam    discount_id                 required        Id of the discount to assign    Example: discount_9f71793f1bff89227
      *
-     * @queryParam  product_id              required        Product ID                          Example: product_9f71793f1bff89227
-     * @queryParam  composite_product_id    required        Composite Product ID                Example: compproduct_64ba1e4ff721a
-     * @queryParam  category_id             required        Category ID                         Example: cat_bcc3b36c2dd0ae4a1c57c
+     * @queryParam  product_id                  required        Product ID                      Example: prod_3a3d84897c39a40bc49e
+     * @queryParam  composite_product_id        required        Composite Product ID            Example: prodc_05ba52372e3c09a8219
+     * @queryParam  category_id                 required        Category ID                     Example: cat_bcc3b36c2dd0ae4a1c57c
      *
      * @responseFile /responses/discounts/removeDiscount.json
      *
@@ -610,6 +638,12 @@ class DiscountController extends ControllerBase
 
             $response = new stdClass();
             DB::beginTransaction();
+
+            $discount = Discount::where('discounts.id', $request->discount_id)->first();
+
+            if(empty($discount)) {
+                throw new ModelNotFoundException('Discount not found.', 404);
+            }
 
             if(!empty($request->product_id)) {
                 $resultProduct = ProductDiscount::where('products_discounts.product_id', $request->product_id)

@@ -15,8 +15,8 @@ class ProductsPricesSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('products_prices')->insert([
-            'id'                    => substr('productprc_' . md5(Str::uuid()), 0, 25),
-            'product_id'            => 'product_9f71793f1bff89227',
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_3a3d84897c39a40bc49e',
             'price_including_taxes' => '110',
             'price_excluding_taxes' => '100',
             'vat_value'             => '010',
@@ -26,8 +26,8 @@ class ProductsPricesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_prices')->insert([
-            'id'                    => substr('productprc_' . md5(Str::uuid()), 0, 25),
-            'product_id'            => 'product_d66672dd6b9052218',
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_c93e0a2194593f85a7a6',
             'price_including_taxes' => '550',
             'price_excluding_taxes' => '500',
             'vat_value'             => '050',
@@ -37,8 +37,8 @@ class ProductsPricesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_prices')->insert([
-            'id'                    => substr('productprc_' . md5(Str::uuid()), 0, 25),
-            'product_id'            => 'product_3888c3b144ccdc59c',
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_672832afc671d36c6213',
             'price_including_taxes' => '660',
             'price_excluding_taxes' => '600',
             'vat_value'             => '060',
@@ -48,8 +48,8 @@ class ProductsPricesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_prices')->insert([
-            'id'                    => substr('productprc_' . md5(Str::uuid()), 0, 25),
-            'product_id'            => 'product_8a72e4d0f1fd12d03',
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_1344f9b420f516b26861',
             'price_including_taxes' => '110',
             'price_excluding_taxes' => '100',
             'vat_value'             => '010',
@@ -59,8 +59,8 @@ class ProductsPricesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('products_prices')->insert([
-            'id'                    => substr('productprc_' . md5(Str::uuid()), 0, 25),
-            'product_id'            => 'product_4c053842dc07c0330',
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52256',
             'price_including_taxes' => '880',
             'price_excluding_taxes' => '800',
             'vat_value'             => '080',

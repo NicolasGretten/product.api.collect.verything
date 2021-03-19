@@ -41,6 +41,10 @@ class CompositeProductAvailability extends Model
      */
     protected $hidden = [];
 
+    protected $casts = [
+        'days' => 'array',
+    ];
+
     public function compositeProduct(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\CompositeProduct');

@@ -15,8 +15,8 @@ class CompositeProductsPricesSeeder extends Seeder
     public function run()
     {
         DB::connection('data')->table('composite_products_prices')->insert([
-            'id'                    => substr('cpprice_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'  => 'compproduct_64ba1e4ff721a',//petit dej
+            'id'                    => substr('prodcprice_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_05ba52372e3c09a8219',//petit dej
             'price_including_taxes' => '660',
             'price_excluding_taxes' => '600',
             'vat_value'             => '060',
@@ -26,8 +26,8 @@ class CompositeProductsPricesSeeder extends Seeder
         ]);
 
         DB::connection('data')->table('composite_products_prices')->insert([
-            'id'                    => substr('cpprice_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'  => 'compproduct_c0b5eb2d85401',//déjeuner
+            'id'                    => substr('prodcprice_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484fb',//déjeuner
             'price_including_taxes' => '1100',
             'price_excluding_taxes' => '1000',
             'vat_value'             => '100',

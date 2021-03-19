@@ -36,9 +36,9 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id          required        Product ID                          Example: product_9f71793f1bff89227
+     * @urlParam    product_id          required        Product ID                          Example: prod_3a3d84897c39a40bc49e
      *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","availabilities","prices","discounts","categories","translationsList"]
+     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","availabilities","prices","discounts","categories"]
      *
      * @responseFile /responses/products/retrieve.json
      * @responseFile scenario="Relations filter" /responses/products/relations-retrieve.json
@@ -51,7 +51,7 @@ class ProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories,translationsList',
+                'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories',
             ]);
 
             $this->setLocale();
@@ -61,7 +61,7 @@ class ProductController extends ControllerBase
 
             $this->filter($resultSet, ['relations']);
 
-            $product = $resultSet->get();
+            $product = $resultSet->first();
 
             return response()->json($product);
         }
@@ -86,7 +86,7 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["product_9f71793f1bff89227","product_d66672dd6b9052218"]
+     * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["prod_3a3d84897c39a40bc49e","prod_c93e0a2194593f85a7a6"]
      * @queryParam  limit                                  Number of results per pagination page                        Example: 10
      * @queryParam  page                                   Current page number for pagination                           Example: 1
      *
@@ -108,7 +108,7 @@ class ProductController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","availabilities","prices","discounts","categories","translationsList"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","availabilities","prices","discounts","categories"]
      *
      * @responseFile /responses/products/list.json
      * @responseFile scenario="Relations Filter" /responses/products/relations-list.json
@@ -122,7 +122,7 @@ class ProductController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories,translationsList',
+                'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories',
                 'items_id'              => 'json'
             ]);
 
@@ -182,7 +182,7 @@ class ProductController extends ControllerBase
 
                 'category_id'                   => 'string|exists:categories,id',
 
-                'day'                           => 'json',
+                'days'                           => 'json',
                 'hour_start'                    => 'date_format:H:i:s',
                 'hour_end'                      => 'date_format:H:i:s',
 
@@ -198,10 +198,10 @@ class ProductController extends ControllerBase
 
             DB::beginTransaction();
 
-            $request->product_translation_id = substr('producttrad_' . md5(Str::uuid()),0 ,25);
+            $request->product_translation_id = substr('prodtrad_' . md5(Str::uuid()),0 ,25);
 
             $product = new Product;
-            $id = $this->generateId('product', $product);
+            $id = $this->generateId('prod', $product);
             $product->id = $id;
 
             if(!empty($request->input('locale'))) {
@@ -212,16 +212,16 @@ class ProductController extends ControllerBase
             $product->save();
 
             $availability = new ProductAvailability();
-            $availability->id           = $this->generateId('pa', $availability);
+            $availability->id           = $this->generateId('prodavail', $availability);
             $availability->product_id   = $id;
-            $availability->day          = $request->day;
+            $availability->days          = json_decode($request->days);
             $availability->hour_start   = $request->hour_start;
             $availability->hour_end     = $request->hour_end;
             $availability->save();
             $product->availability = $availability;
 
             $price = new ProductPrice();
-            $price->id                      = $this->generateId('productprc', $price);
+            $price->id                      = $this->generateId('prodprice', $price);
             $price->product_id              = $id;
             $price->price_including_taxes   = $request->price_including_taxes;
             $price->price_excluding_taxes   = $request->price_excluding_taxes;
@@ -262,7 +262,7 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id             required        Product ID            Example: product_9f71793f1bff89227
+     * @urlParam    product_id             required        Product ID            Example: prod_3a3d84897c39a40bc49e
      *
      * @responseFile /responses/products/delete.json
      *
@@ -310,7 +310,7 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id  required        Product ID                                      Example: product_9f71793f1bff89227
+     * @urlParam    product_id  required        Product ID                                      Example: prod_3a3d84897c39a40bc49e
      *
      * @queryParam  locale      required        Locale                                          Example: en-US
      * @queryParam  title       required        The title of the translation                    Example: English translations
@@ -345,7 +345,7 @@ class ProductController extends ControllerBase
                 $product->deleteTranslations($request->input('locale'));
             }
 
-            $request->productTranslation_id = substr('producttrad_' . md5(Str::uuid()),0 ,25);
+            $request->productTranslation_id = substr('prodtrad_' . md5(Str::uuid()),0 ,25);
 
             $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->title = $request->input('title');
             $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->text = $request->input('text');
@@ -377,7 +377,7 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id      required        Product ID      Example: product_9f71793f1bff89227
+     * @urlParam    product_id      required        Product ID      Example: prod_3a3d84897c39a40bc49e
      *
      * @queryParam  locale          required        Locale          Example: en-US
      *
@@ -441,8 +441,8 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id              required    Id of the product to update         Example: product_9f71793f1bff89227
-     * @urlParam    product_price_id        required    Id of the product price to update   Example: productprc_4e9a60b280a60e
+     * @urlParam    product_id              required    Id of the product to update         Example: prod_3a3d84897c39a40bc49e
+     * @urlParam    product_price_id        required    Id of the product price to update   Example: prodprice_4e9a60b280a60e5
      *
      * @queryParam  price_including_taxes   required    New price including taxes           Example: 120
      * @queryParam  price_excluding_taxes   required    New price excluding taxes           Example: 100
@@ -467,6 +467,12 @@ class ProductController extends ControllerBase
 
             DB::beginTransaction();
 
+            $product = Product::where('products.id', $request->product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Product not found.', 404);
+            }
+
             $resultSet = ProductPrice::where('products_prices.id', $request->product_price_id);
 
             $price = $resultSet->first();
@@ -479,7 +485,7 @@ class ProductController extends ControllerBase
 
 
             $newPrice = new ProductPrice();
-            $newPrice->id                           = $this->generateId('productprc', $newPrice);
+            $newPrice->id                           = $this->generateId('prodprice', $newPrice);
             $newPrice->product_id                   = $request->product_id;
             $newPrice->price_including_taxes        = $request->price_including_taxes;
             $newPrice->price_excluding_taxes        = $request->price_excluding_taxes;
@@ -513,7 +519,7 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id          required        Id of the product to update     Example: product_9f71793f1bff89227
+     * @urlParam    product_id          required        Id of the product to update     Example: prod_3a3d84897c39a40bc49e
      *
      * @queryParam  day                 required        day available                   Example: ["monday","tuesday","wednesday"]
      * @queryParam  hour_start          required        Hour start                      Example: 08:00:00
@@ -529,18 +535,24 @@ class ProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'day'                           => 'json',
+                'days'                          => 'json',
                 'hour_start'                    => 'date_format:H:i:s',
                 'hour_end'                      => 'date_format:H:i:s',
             ]);
 
             DB::beginTransaction();
 
+            $product = Product::where('products.id', $request->product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Product not found.', 404);
+            }
+
             $resultSet = ProductAvailability::where('products_availabilities.product_id', $request->product_id);
 
             $availability = $resultSet->first();
 
-            $availability->day              = $request->input('day', $availability->getOriginal('day'));
+            $availability->days             = json_decode($request->input('days', $availability->getOriginal('days')));
             $availability->hour_start       = $request->input('hour_start', $availability->getOriginal('hour_start'));
             $availability->hour_end         = $request->input('hour_end', $availability->getOriginal('hour_end'));
 
@@ -571,7 +583,7 @@ class ProductController extends ControllerBase
      *
      * @group   Products
      *
-     * @urlParam    product_id      required        Id of the product to update     Example: product_9f71793f1bff89227
+     * @urlParam    product_id      required        Id of the product to update     Example: prod_3a3d84897c39a40bc49e
      *
      * @queryParam  category_id     required        Category ID                     Example: cat_d10be1a57a0fddafc85b5
      *
@@ -589,6 +601,12 @@ class ProductController extends ControllerBase
             ]);
 
             DB::beginTransaction();
+
+            $product = Product::where('products.id', $request->product_id)->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Product not found.', 404);
+            }
 
             $resultSet = ProductCategory::where('products_categories.product_id', $request->product_id);
 

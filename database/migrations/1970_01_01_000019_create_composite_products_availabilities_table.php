@@ -16,7 +16,7 @@ class CreateCompositeProductsAvailabilitiesTable extends Migration
         Schema::create('composite_products_availabilities', function (Blueprint $table) {
             $table->string('id')->primary();;
             $table->string('composite_product_id');
-            $table->string('day');
+            $table->json('days');
             $table->time('hour_start');
             $table->time('hour_end');
             $table->timestamp('deleted_at')->nullable();

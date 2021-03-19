@@ -1,18 +1,22 @@
 {
-    "timestamp": 1615924708,
-    "signature": "3ce0e3ceeb9dcbfc07f07e95b1618590",
+    "timestamp": 1616157720,
+    "signature": "4ec7fc712ca8d7a940f78d2f4bb6bbcb",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cpa_9dd4932a9e5f703520a17",
-            "composite_product_id": "compproduct_f69ab775ee415",
-            "day": "[\"monday\",\"tuesday\",\"wednesday\"]",
+            "id": "prodavail_d73bfb3c6a1cc6a",
+            "product_id": "prod_3a3d84897c39a40bc49e",
+            "days": [
+                "monday",
+                "tuesday",
+                "friday"
+            ],
             "hour_start": "08:00:00",
             "hour_end": "18:00:00",
             "deleted_at": null,
-            "created_at": "2021-03-16T19:55:50.000000Z",
-            "updated_at": "2021-03-16T19:58:28.000000Z"
+            "created_at": "2021-03-19T12:17:31.000000Z",
+            "updated_at": "2021-03-19T12:42:00.000000Z"
         }
     }
 }

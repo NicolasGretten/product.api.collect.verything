@@ -1,6 +1,6 @@
 {
-    "timestamp": 1615908746,
-    "signature": "42d232d0e16180588f2d647f9ffd831a",
+    "timestamp": 1616159800,
+    "signature": "562b278af7be91b78c070910a57c3d8c",
     "content": {
         "success": true,
         "async": false,
@@ -14,45 +14,51 @@
         },
         "body": [
             {
-                "id": "product_9f71793f1bff89227",
+                "id": "prod_3a3d84897c39a40bc49e",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T13:07:40.000000Z",
+                "updated_at": "2021-03-19T13:07:40.000000Z",
                 "title": "Traduction en français",
                 "text": "Croissant",
                 "composite_products": [
                     {
-                        "id": "compproduct_64ba1e4ff721a",
+                        "id": "prodc_05ba52372e3c09a8219",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "petit déjeuner"
                     }
                 ],
                 "availabilities": [
                     {
-                        "id": "pa_180d3dbb58a29ee43ce94d",
-                        "product_id": "product_9f71793f1bff89227",
-                        "day": "monday",
+                        "id": "prodavail_bc8197b5add49f4",
+                        "product_id": "prod_3a3d84897c39a40bc49e",
+                        "days": [
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday"
+                        ],
                         "hour_start": "07:00:00",
                         "hour_end": "11:00:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "prices": [
                     {
-                        "id": "productprc_acda55e7a9ded8",
-                        "product_id": "product_9f71793f1bff89227",
+                        "id": "prodprice_956bf40dbb7eedf",
+                        "product_id": "prod_3a3d84897c39a40bc49e",
                         "price_including_taxes": 110,
                         "price_excluding_taxes": 100,
                         "vat_value": 10,
                         "vat_rate": 10,
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "discounts": [],
@@ -60,75 +66,59 @@
                     {
                         "id": "cat_d10be1a57a0fddafc85b5",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "nourriture"
-                    }
-                ],
-                "translations_list": [
-                    {
-                        "id": "producttrad139c02ff5af76c",
-                        "product_id": "product_9f71793f1bff89227",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "Croissant",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "producttrad89fdec624b250d",
-                        "product_id": "product_9f71793f1bff89227",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Croissant",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
                     }
                 ]
             },
             {
-                "id": "product_d66672dd6b9052218",
+                "id": "prod_c93e0a2194593f85a7a6",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T13:07:40.000000Z",
+                "updated_at": "2021-03-19T13:07:40.000000Z",
                 "title": "Traduction en français",
                 "text": "Salade",
                 "composite_products": [
                     {
-                        "id": "compproduct_c0b5eb2d85401",
+                        "id": "prodc_05ba52372e3c09a8219",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
-                        "text": "déjeuner"
+                        "text": "petit déjeuner"
                     }
                 ],
                 "availabilities": [
                     {
-                        "id": "pa_b4f5b22bb71f6008a1b778",
-                        "product_id": "product_d66672dd6b9052218",
-                        "day": "monday",
+                        "id": "prodavail_424402cb7ce5c3c",
+                        "product_id": "prod_c93e0a2194593f85a7a6",
+                        "days": [
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday"
+                        ],
                         "hour_start": "11:30:00",
                         "hour_end": "13:30:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "prices": [
                     {
-                        "id": "productprc_1f5d304f55e4c7",
-                        "product_id": "product_d66672dd6b9052218",
+                        "id": "prodprice_128a431f566a709",
+                        "product_id": "prod_c93e0a2194593f85a7a6",
                         "price_including_taxes": 550,
                         "price_excluding_taxes": 500,
                         "vat_value": 50,
                         "vat_rate": 10,
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "discounts": [],
@@ -136,218 +126,59 @@
                     {
                         "id": "cat_d10be1a57a0fddafc85b5",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "nourriture"
                     }
-                ],
-                "translations_list": [
-                    {
-                        "id": "producttrad0475fe55673a46",
-                        "product_id": "product_d66672dd6b9052218",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "Salade",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "producttrad8072122e9c936c",
-                        "product_id": "product_d66672dd6b9052218",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Salad",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
                 ]
             },
             {
-                "id": "product_3888c3b144ccdc59c",
+                "id": "prod_672832afc671d36c6213",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T13:07:40.000000Z",
+                "updated_at": "2021-03-19T13:07:40.000000Z",
                 "title": "Traduction en français",
                 "text": "Mimosa",
-                "composite_products": [],
-                "availabilities": [
-                    {
-                        "id": "pa_02d1fe6232ff5b9bf62e42",
-                        "product_id": "product_3888c3b144ccdc59c",
-                        "day": "monday",
-                        "hour_start": "10:30:00",
-                        "hour_end": "14:30:00",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "prices": [
-                    {
-                        "id": "productprc_514b590943e32d",
-                        "product_id": "product_3888c3b144ccdc59c",
-                        "price_including_taxes": 660,
-                        "price_excluding_taxes": 600,
-                        "vat_value": 60,
-                        "vat_rate": 10,
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "discounts": [],
-                "categories": [
-                    {
-                        "id": "cat_1ddf322d0c198c29b50ce",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "Boisson"
-                    }
-                ],
-                "translations_list": [
-                    {
-                        "id": "producttrad42d723fbbdeb74",
-                        "product_id": "product_3888c3b144ccdc59c",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "Mimosa",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "producttrada2a862229d89fd",
-                        "product_id": "product_3888c3b144ccdc59c",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Mimosa",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ]
-            },
-            {
-                "id": "product_8a72e4d0f1fd12d03",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "café",
                 "composite_products": [
                     {
-                        "id": "compproduct_64ba1e4ff721a",
+                        "id": "prodc_bb6bca80cb0ac3484fb",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "petit déjeuner"
-                    }
-                ],
-                "availabilities": [
-                    {
-                        "id": "pa_0535b1fd8aaf67f5c7749b",
-                        "product_id": "product_8a72e4d0f1fd12d03",
-                        "day": "monday",
-                        "hour_start": "08:00:00",
-                        "hour_end": "18:00:00",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "prices": [
-                    {
-                        "id": "productprc_71bac653104046",
-                        "product_id": "product_8a72e4d0f1fd12d03",
-                        "price_including_taxes": 110,
-                        "price_excluding_taxes": 100,
-                        "vat_value": 10,
-                        "vat_rate": 10,
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
-                "discounts": [],
-                "categories": [
-                    {
-                        "id": "cat_1ddf322d0c198c29b50ce",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "Boisson"
-                    }
-                ],
-                "translations_list": [
-                    {
-                        "id": "producttrada11f934b82dd3f",
-                        "product_id": "product_8a72e4d0f1fd12d03",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "café",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "producttrad82d4038d393aac",
-                        "product_id": "product_8a72e4d0f1fd12d03",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "coffee",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ]
-            },
-            {
-                "id": "product_4c053842dc07c0330",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "apéritif",
-                "composite_products": [
-                    {
-                        "id": "compproduct_c0b5eb2d85401",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "déjeuner"
                     }
                 ],
                 "availabilities": [
                     {
-                        "id": "pa_fb3d8e12d5706b18552cb3",
-                        "product_id": "product_4c053842dc07c0330",
-                        "day": "monday",
-                        "hour_start": "18:00:00",
-                        "hour_end": "23:30:00",
+                        "id": "prodavail_d9c7d7f3faaa134",
+                        "product_id": "prod_672832afc671d36c6213",
+                        "days": [
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday"
+                        ],
+                        "hour_start": "10:30:00",
+                        "hour_end": "14:30:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "prices": [
                     {
-                        "id": "productprc_7de206e17915d8",
-                        "product_id": "product_4c053842dc07c0330",
-                        "price_including_taxes": 880,
-                        "price_excluding_taxes": 800,
-                        "vat_value": 80,
+                        "id": "prodprice_8d9951358ad8e0d",
+                        "product_id": "prod_672832afc671d36c6213",
+                        "price_including_taxes": 660,
+                        "price_excluding_taxes": 600,
+                        "vat_value": 60,
                         "vat_rate": 10,
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
                     }
                 ],
                 "discounts": [],
@@ -355,32 +186,121 @@
                     {
                         "id": "cat_1ddf322d0c198c29b50ce",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
                         "text": "Boisson"
                     }
-                ],
-                "translations_list": [
+                ]
+            },
+            {
+                "id": "prod_1344f9b420f516b26861",
+                "deleted_at": null,
+                "created_at": "2021-03-19T13:07:40.000000Z",
+                "updated_at": "2021-03-19T13:07:40.000000Z",
+                "title": "Traduction en français",
+                "text": "café",
+                "composite_products": [
                     {
-                        "id": "producttradbd6c67d9f934be",
-                        "product_id": "product_4c053842dc07c0330",
-                        "locale": "fr-FR",
+                        "id": "prodc_bb6bca80cb0ac3484fb",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
                         "title": "Traduction en français",
-                        "text": "apéritif",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
+                        "text": "déjeuner"
+                    }
+                ],
+                "availabilities": [
                     {
-                        "id": "producttrad8581d12907e5c3",
-                        "product_id": "product_4c053842dc07c0330",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "aperitif",
+                        "id": "prodavail_6c95465f2a3a848",
+                        "product_id": "prod_1344f9b420f516b26861",
+                        "days": [
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday"
+                        ],
+                        "hour_start": "08:00:00",
+                        "hour_end": "18:00:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
+                    }
+                ],
+                "prices": [
+                    {
+                        "id": "prodprice_1409764a160624e",
+                        "product_id": "prod_1344f9b420f516b26861",
+                        "price_including_taxes": 110,
+                        "price_excluding_taxes": 100,
+                        "vat_value": 10,
+                        "vat_rate": 10,
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
+                    }
+                ],
+                "discounts": [],
+                "categories": [
+                    {
+                        "id": "cat_1ddf322d0c198c29b50ce",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Boisson"
+                    }
+                ]
+            },
+            {
+                "id": "prod_bc477fe21a7c92c52256",
+                "deleted_at": null,
+                "created_at": "2021-03-19T13:07:40.000000Z",
+                "updated_at": "2021-03-19T13:07:40.000000Z",
+                "title": "Traduction en français",
+                "text": "apéritif",
+                "composite_products": [],
+                "availabilities": [
+                    {
+                        "id": "prodavail_ada1d8ae5308aca",
+                        "product_id": "prod_bc477fe21a7c92c52256",
+                        "days": [
+                            "monday",
+                            "tuesday",
+                            "wednesday",
+                            "thursday",
+                            "friday"
+                        ],
+                        "hour_start": "18:00:00",
+                        "hour_end": "23:30:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
+                    }
+                ],
+                "prices": [
+                    {
+                        "id": "prodprice_5161aec4d240c66",
+                        "product_id": "prod_bc477fe21a7c92c52256",
+                        "price_including_taxes": 880,
+                        "price_excluding_taxes": 800,
+                        "vat_value": 80,
+                        "vat_rate": 10,
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z"
+                    }
+                ],
+                "discounts": [],
+                "categories": [
+                    {
+                        "id": "cat_1ddf322d0c198c29b50ce",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T13:07:40.000000Z",
+                        "updated_at": "2021-03-19T13:07:40.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Boisson"
                     }
                 ]
             }

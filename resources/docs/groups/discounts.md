@@ -20,7 +20,7 @@ $response = $client->get(
         ],
         'json' => [
             'filters' => [
-                'relations' => '["compositeProducts","products","categories","translationsList","promotionalCodes"]',
+                'relations' => '["compositeProducts","products","categories","promotionalCodes"]',
             ],
         ],
     ]
@@ -41,7 +41,7 @@ let headers = {
 
 let body = {
     "filters": {
-        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"promotionalCodes\"]"
     }
 }
 
@@ -61,7 +61,7 @@ import json
 url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227'
 payload = {
     "filters": {
-        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"promotionalCodes\"]"
     }
 }
 headers = {
@@ -78,7 +78,7 @@ curl -X GET \
     -G "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"relations":"[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"}}'
+    -d '{"filters":{"relations":"[\"compositeProducts\",\"products\",\"categories\",\"promotionalCodes\"]"}}'
 
 ```
 
@@ -114,39 +114,76 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615936478,
-    "signature": "fa19301410442d0cd92da28f7cc726ae",
+    "timestamp": 1616156299,
+    "signature": "d454352279e0d811be287611fbaa7219",
     "content": {
         "success": true,
         "async": false,
         "body": [
             {
-                "id": "discount_93c6eb6a9e05c06e",
-                "discount_type": "EUR",
+                "id": "discount_fffbae84a65baa0a",
+                "discount_type": "eur",
                 "promotional_code_id": null,
                 "amount": 50,
-                "start_at": "2021-03-16 00:00:00",
-                "end_at": "2021-05-16 00:00:00",
+                "start_at": "2021-05-05 00:00:00",
+                "end_at": "2021-05-25 00:00:00",
                 "deleted_at": null,
-                "created_at": "2021-03-16T22:10:27.000000Z",
-                "updated_at": "2021-03-16T22:19:14.000000Z",
-                "title": "Traduction française",
-                "text": "Promo d'hiver",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "title": "traduction française",
+                "text": "promo d'haloween",
                 "translations_list": [
                     {
-                        "id": "discounttrad_dd51f2fb1c42",
-                        "discount_id": "discount_93c6eb6a9e05c06e",
+                        "id": "discounttrad_f257c1e6560a",
+                        "discount_id": "discount_fffbae84a65baa0a",
                         "locale": "fr-FR",
-                        "title": "Traduction française",
-                        "text": "Promo d'hiver",
+                        "title": "traduction française",
+                        "text": "promo d'haloween",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T22:10:27.000000Z",
-                        "updated_at": "2021-03-16T22:10:27.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
+                    },
+                    {
+                        "id": "discounttrad_6b9d1ce76bab",
+                        "discount_id": "discount_fffbae84a65baa0a",
+                        "locale": "en-US",
+                        "title": "English translation",
+                        "text": "haloween discount",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     }
                 ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
+                "products": [
+                    {
+                        "id": "prod_3a3d84897c39a40bc49e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    }
+                ],
+                "composite_products": [
+                    {
+                        "id": "prodc_05ba52372e3c09a8219",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "petit déjeuner"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": "cat_bcc3b36c2dd0ae4a1c57c",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Abonnement"
+                    }
+                ],
                 "promotional_codes": null
             }
         ]
@@ -213,7 +250,7 @@ $response = $client->get(
                     'lte' => '1602688060',
                     'order' => 'ASC',
                 ],
-                'relations' => '["compositeProducts","products","categories","translationsList","promotionalCodes"]',
+                'relations' => '["compositeProducts","products","categories","promotionalCodes"]',
             ],
         ],
     ]
@@ -263,7 +300,7 @@ let body = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"promotionalCodes\"]"
     }
 }
 
@@ -304,7 +341,7 @@ payload = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"
+        "relations": "[\"compositeProducts\",\"products\",\"categories\",\"promotionalCodes\"]"
     }
 }
 params = {
@@ -326,7 +363,7 @@ curl -X GET \
     -G "http://dev-product.api.hopn.space/discounts?items_id=%5B%22discount_9f71793f1bff89227%22%2C%22discount_d66672dd6b9052218%22%5D&limit=10&page=1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"compositeProducts\",\"products\",\"categories\",\"translationsList\",\"promotionalCodes\"]"}}'
+    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"compositeProducts\",\"products\",\"categories\",\"promotionalCodes\"]"}}'
 
 ```
 
@@ -383,8 +420,8 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615936429,
-    "signature": "1c2bd05ad1b7f7c2113ae530bebfa64e",
+    "timestamp": 1616156272,
+    "signature": "caf102482a6dac9b74b5adc2395a8894",
     "content": {
         "success": true,
         "async": false,
@@ -392,7 +429,7 @@ curl -X GET \
             "current_page": 1,
             "last_page": 1,
             "per_page": 5,
-            "total": 4,
+            "total": 2,
             "next_page_url": null,
             "prev_page_url": null
         },
@@ -405,35 +442,62 @@ curl -X GET \
                 "start_at": "2021-05-05 00:00:00",
                 "end_at": "2021-05-25 00:00:00",
                 "deleted_at": null,
-                "created_at": "2021-03-16T21:54:03.000000Z",
-                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "traduction française",
                 "text": "promo d'haloween",
                 "translations_list": [
                     {
-                        "id": "discounttrad_9c7576f052cb",
+                        "id": "discounttrad_f257c1e6560a",
                         "discount_id": "discount_fffbae84a65baa0a",
                         "locale": "fr-FR",
                         "title": "traduction française",
                         "text": "promo d'haloween",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     },
                     {
-                        "id": "discounttrad_f5d8884f794c",
+                        "id": "discounttrad_6b9d1ce76bab",
                         "discount_id": "discount_fffbae84a65baa0a",
                         "locale": "en-US",
                         "title": "English translation",
                         "text": "haloween discount",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     }
                 ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
+                "products": [
+                    {
+                        "id": "prod_3a3d84897c39a40bc49e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    }
+                ],
+                "composite_products": [
+                    {
+                        "id": "prodc_05ba52372e3c09a8219",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "petit déjeuner"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": "cat_bcc3b36c2dd0ae4a1c57c",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Abonnement"
+                    }
+                ],
                 "promotional_codes": null
             },
             {
@@ -444,30 +508,30 @@ curl -X GET \
                 "start_at": "2021-05-05 00:00:00",
                 "end_at": "2021-05-25 00:00:00",
                 "deleted_at": null,
-                "created_at": "2021-03-16T21:54:03.000000Z",
-                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "traduction française",
                 "text": "promo d'été",
                 "translations_list": [
                     {
-                        "id": "discounttrad_5fe17324be3b",
+                        "id": "discounttrad_b8bcb8a3a10d",
                         "discount_id": "discount_34acc06c4ccd5022",
                         "locale": "fr-FR",
                         "title": "traduction française",
                         "text": "promo d'été",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     },
                     {
-                        "id": "discounttrad_baff92c5ad0e",
+                        "id": "discounttrad_9ab7cb6f1c67",
                         "discount_id": "discount_34acc06c4ccd5022",
                         "locale": "en-US",
                         "title": "English translation",
                         "text": "Summer discount",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z"
                     }
                 ],
                 "products": [],
@@ -476,91 +540,14 @@ curl -X GET \
                 "promotional_codes": {
                     "id": "promocode_17d78ae0a3bfb0a",
                     "code": "PROMO10",
-                    "start_at": "2021-03-15 00:00:00",
-                    "end_at": null,
-                    "amount": 150,
                     "number_used": 0,
                     "maximum_usage": 1,
                     "combinable_with_offers": false,
-                    "promotional_code_type": "pourcent",
                     "deleted_at": null,
-                    "created_at": "2021-03-16T21:54:03.000000Z",
-                    "updated_at": "2021-03-16T21:54:03.000000Z",
+                    "created_at": "2021-03-19T12:17:31.000000Z",
+                    "updated_at": "2021-03-19T12:17:31.000000Z",
                     "title": "Traduction en français",
                     "text": "Code promo 10%"
-                }
-            },
-            {
-                "id": "discount_93c6eb6a9e05c06e",
-                "discount_type": "EUR",
-                "promotional_code_id": null,
-                "amount": 50,
-                "start_at": "2021-03-16 00:00:00",
-                "end_at": "2021-05-16 00:00:00",
-                "deleted_at": null,
-                "created_at": "2021-03-16T22:10:27.000000Z",
-                "updated_at": "2021-03-16T22:19:14.000000Z",
-                "title": "Traduction française",
-                "text": "Promo d'hiver",
-                "translations_list": [
-                    {
-                        "id": "discounttrad_dd51f2fb1c42",
-                        "discount_id": "discount_93c6eb6a9e05c06e",
-                        "locale": "fr-FR",
-                        "title": "Traduction française",
-                        "text": "Promo d'hiver",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T22:10:27.000000Z",
-                        "updated_at": "2021-03-16T22:10:27.000000Z"
-                    }
-                ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
-                "promotional_codes": null
-            },
-            {
-                "id": "discount_ef5285ab40773ab4",
-                "discount_type": "pourcent",
-                "promotional_code_id": "promocode_779cf772199954f",
-                "amount": 50,
-                "start_at": "2021-03-16 00:00:00",
-                "end_at": "2021-05-16 00:00:00",
-                "deleted_at": null,
-                "created_at": "2021-03-16T22:10:11.000000Z",
-                "updated_at": "2021-03-16T22:10:11.000000Z",
-                "title": "Traduction française",
-                "text": "Soins",
-                "translations_list": [
-                    {
-                        "id": "discounttrad_d84f418e4129",
-                        "discount_id": "discount_ef5285ab40773ab4",
-                        "locale": "fr-FR",
-                        "title": "Traduction française",
-                        "text": "Soins",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T22:10:11.000000Z",
-                        "updated_at": "2021-03-16T22:10:11.000000Z"
-                    }
-                ],
-                "products": [],
-                "composite_products": [],
-                "categories": [],
-                "promotional_codes": {
-                    "id": "promocode_779cf772199954f",
-                    "code": "PROMO50",
-                    "start_at": "2021-03-20 00:00:00",
-                    "end_at": "2021-03-30 00:00:00",
-                    "amount": 50,
-                    "number_used": 0,
-                    "maximum_usage": 1,
-                    "combinable_with_offers": true,
-                    "promotional_code_type": "pourcent",
-                    "deleted_at": null,
-                    "created_at": "2021-03-16T21:54:03.000000Z",
-                    "updated_at": "2021-03-16T21:54:03.000000Z",
-                    "title": "Traduction en français",
-                    "text": "Code promo 50%"
                 }
             }
         ]
@@ -790,7 +777,7 @@ You can update discount data.
 
 $client = new \GuzzleHttp\Client();
 $response = $client->patch(
-    'http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db',
+    'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227',
     [
         'headers' => [
             'Content-Type' => 'application/json',
@@ -810,7 +797,7 @@ print_r(json_decode((string) $body));
 
 ```javascript
 const url = new URL(
-    "http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db"
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227"
 );
 
 let params = {
@@ -840,7 +827,7 @@ fetch(url, {
 import requests
 import json
 
-url = 'http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db'
+url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227'
 params = {
   'discount_type': 'pourcent',
   'amount': '100',
@@ -858,7 +845,7 @@ response.json()
 
 ```bash
 curl -X PATCH \
-    "http://dev-product.api.hopn.space/discounts/build_cc60ae1633a2524e8db?discount_type=pourcent&amount=100&start_at=1970-01-01+00%3A00%3A00&end_at=1970-01-01+00%3A00%3A00" \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227?discount_type=pourcent&amount=100&start_at=1970-01-01+00%3A00%3A00&end_at=1970-01-01+00%3A00%3A00" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -977,6 +964,31 @@ curl -X DELETE \
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "timestamp": 1616156189,
+    "signature": "7eb769cc815a7b1bd7c934906d58a225",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "discount_fffbae84a65baa0a",
+            "discount_type": "eur",
+            "promotional_code_id": null,
+            "amount": 50,
+            "start_at": "2021-05-05 00:00:00",
+            "end_at": "2021-05-25 00:00:00",
+            "deleted_at": "2021-03-19T12:16:29.000000Z",
+            "created_at": "2021-03-19T10:33:44.000000Z",
+            "updated_at": "2021-03-19T12:16:29.000000Z",
+            "title": null,
+            "text": null
+        }
+    }
+}
+```
 
 ### Request
 <small class="badge badge-red">DELETE</small>
@@ -1244,8 +1256,8 @@ $response = $client->post(
             'Accept' => 'application/json',
         ],
         'query' => [
-            'product_id'=> 'product_9f71793f1bff89227',
-            'composite_product_id'=> 'compproduct_64ba1e4ff721a',
+            'product_id'=> 'prod_3a3d84897c39a40bc49e',
+            'composite_product_id'=> 'prodc_05ba52372e3c09a8219',
             'category_id'=> 'cat_bcc3b36c2dd0ae4a1c57c',
         ],
     ]
@@ -1260,8 +1272,8 @@ const url = new URL(
 );
 
 let params = {
-    "product_id": "product_9f71793f1bff89227",
-    "composite_product_id": "compproduct_64ba1e4ff721a",
+    "product_id": "prod_3a3d84897c39a40bc49e",
+    "composite_product_id": "prodc_05ba52372e3c09a8219",
     "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
 };
 Object.keys(params)
@@ -1287,8 +1299,8 @@ import json
 
 url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/assign'
 params = {
-  'product_id': 'product_9f71793f1bff89227',
-  'composite_product_id': 'compproduct_64ba1e4ff721a',
+  'product_id': 'prod_3a3d84897c39a40bc49e',
+  'composite_product_id': 'prodc_05ba52372e3c09a8219',
   'category_id': 'cat_bcc3b36c2dd0ae4a1c57c',
 }
 headers = {
@@ -1302,7 +1314,7 @@ response.json()
 
 ```bash
 curl -X POST \
-    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/assign?product_id=product_9f71793f1bff89227&composite_product_id=compproduct_64ba1e4ff721a&category_id=cat_bcc3b36c2dd0ae4a1c57c" \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/assign?product_id=prod_3a3d84897c39a40bc49e&composite_product_id=prodc_05ba52372e3c09a8219&category_id=cat_bcc3b36c2dd0ae4a1c57c" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1312,32 +1324,32 @@ curl -X POST \
 
 ```json
 {
-    "timestamp": 1615972275,
-    "signature": "222305958ec7910c3995b7bb537dd62f",
+    "timestamp": 1616155703,
+    "signature": "d3ec0dc0e198a39f06a513ff667b0fa8",
     "content": {
         "success": true,
         "async": false,
         "body": {
             "product": {
-                "id": "productdiscount_926cd375d",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "product_id": "product_9f71793f1bff89227",
-                "updated_at": "2021-03-17T09:11:15.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z"
+                "id": "proddiscount_5471a5a2027d",
+                "discount_id": "discount_fffbae84a65baa0a",
+                "product_id": "prod_3a3d84897c39a40bc49e",
+                "updated_at": "2021-03-19T12:08:23.000000Z",
+                "created_at": "2021-03-19T12:08:23.000000Z"
             },
             "composite_product": {
-                "id": "cpdiscount_a95211d42303fa",
-                "composite_product_id": "compproduct_64ba1e4ff721a",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "updated_at": "2021-03-17T09:11:15.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z"
+                "id": "prodcdiscount_45d4e653b70",
+                "composite_product_id": "prodc_05ba52372e3c09a8219",
+                "discount_id": "discount_fffbae84a65baa0a",
+                "updated_at": "2021-03-19T12:08:23.000000Z",
+                "created_at": "2021-03-19T12:08:23.000000Z"
             },
             "category": {
-                "id": "catdiscount_9e9bc89f6fdf7",
-                "discount_id": "discount_93c6eb6a9e05c06e",
+                "id": "catdiscount_3de9328674a97",
+                "discount_id": "discount_fffbae84a65baa0a",
                 "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
-                "updated_at": "2021-03-17T09:11:15.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z"
+                "updated_at": "2021-03-19T12:08:23.000000Z",
+                "created_at": "2021-03-19T12:08:23.000000Z"
             }
         }
     }
@@ -1382,8 +1394,8 @@ $response = $client->delete(
             'Accept' => 'application/json',
         ],
         'query' => [
-            'product_id'=> 'product_9f71793f1bff89227',
-            'composite_product_id'=> 'compproduct_64ba1e4ff721a',
+            'product_id'=> 'prod_3a3d84897c39a40bc49e',
+            'composite_product_id'=> 'prodc_05ba52372e3c09a8219',
             'category_id'=> 'cat_bcc3b36c2dd0ae4a1c57c',
         ],
     ]
@@ -1398,8 +1410,8 @@ const url = new URL(
 );
 
 let params = {
-    "product_id": "product_9f71793f1bff89227",
-    "composite_product_id": "compproduct_64ba1e4ff721a",
+    "product_id": "prod_3a3d84897c39a40bc49e",
+    "composite_product_id": "prodc_05ba52372e3c09a8219",
     "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
 };
 Object.keys(params)
@@ -1425,8 +1437,8 @@ import json
 
 url = 'http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/remove'
 params = {
-  'product_id': 'product_9f71793f1bff89227',
-  'composite_product_id': 'compproduct_64ba1e4ff721a',
+  'product_id': 'prod_3a3d84897c39a40bc49e',
+  'composite_product_id': 'prodc_05ba52372e3c09a8219',
   'category_id': 'cat_bcc3b36c2dd0ae4a1c57c',
 }
 headers = {
@@ -1440,7 +1452,7 @@ response.json()
 
 ```bash
 curl -X DELETE \
-    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/remove?product_id=product_9f71793f1bff89227&composite_product_id=compproduct_64ba1e4ff721a&category_id=cat_bcc3b36c2dd0ae4a1c57c" \
+    "http://dev-product.api.hopn.space/discounts/discount_9f71793f1bff89227/remove?product_id=prod_3a3d84897c39a40bc49e&composite_product_id=prodc_05ba52372e3c09a8219&category_id=cat_bcc3b36c2dd0ae4a1c57c" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -1450,35 +1462,35 @@ curl -X DELETE \
 
 ```json
 {
-    "timestamp": 1615972305,
-    "signature": "e24204d3a95858fc7ad70c4a61f8966f",
+    "timestamp": 1616155756,
+    "signature": "1055f4e9269d469e30ea887df31a4777",
     "content": {
         "success": true,
         "async": false,
         "body": {
             "product": {
-                "id": "productdiscount_926cd375d",
-                "product_id": "product_9f71793f1bff89227",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "deleted_at": "2021-03-17T09:11:45.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z",
-                "updated_at": "2021-03-17T09:11:45.000000Z"
+                "id": "productdiscount_7c362234c",
+                "product_id": "prod_3a3d84897c39a40bc49e",
+                "discount_id": "discount_fffbae84a65baa0a",
+                "deleted_at": "2021-03-19T12:09:16.000000Z",
+                "created_at": "2021-03-19T12:07:33.000000Z",
+                "updated_at": "2021-03-19T12:09:16.000000Z"
             },
             "composite_product": {
-                "id": "cpdiscount_a95211d42303fa",
-                "composite_product_id": "compproduct_64ba1e4ff721a",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "deleted_at": "2021-03-17T09:11:45.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z",
-                "updated_at": "2021-03-17T09:11:45.000000Z"
+                "id": "cpdiscount_a109fe33b55ca3",
+                "composite_product_id": "prodc_05ba52372e3c09a8219",
+                "discount_id": "discount_fffbae84a65baa0a",
+                "deleted_at": "2021-03-19T12:09:16.000000Z",
+                "created_at": "2021-03-19T12:07:33.000000Z",
+                "updated_at": "2021-03-19T12:09:16.000000Z"
             },
             "category": {
-                "id": "catdiscount_9e9bc89f6fdf7",
+                "id": "catdiscount_b550eef6ce6ed",
                 "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
-                "discount_id": "discount_93c6eb6a9e05c06e",
-                "deleted_at": "2021-03-17T09:11:45.000000Z",
-                "created_at": "2021-03-17T09:11:15.000000Z",
-                "updated_at": "2021-03-17T09:11:45.000000Z"
+                "discount_id": "discount_fffbae84a65baa0a",
+                "deleted_at": "2021-03-19T12:09:16.000000Z",
+                "created_at": "2021-03-19T12:07:33.000000Z",
+                "updated_at": "2021-03-19T12:09:16.000000Z"
             }
         }
     }

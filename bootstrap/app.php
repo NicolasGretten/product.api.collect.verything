@@ -141,7 +141,7 @@ $app->router->group([
     require __DIR__ . '/../routes/categories/index.php';
 
     /*
-     * /compositeProducts
+     * /composite-products
      */
     require __DIR__ . '/../routes/compositeProducts/index.php';
 
@@ -151,9 +151,14 @@ $app->router->group([
     require __DIR__ . '/../routes/discounts/index.php';
 
     /*
-    * /discounts
+    * /promotional-codes
     */
     require __DIR__ . '/../routes/promotionalCodes/index.php';
+
+    /*
+    * /products-templates
+    */
+    require __DIR__ . '/../routes/productsTemplates/index.php';
 });
 
 return $app;

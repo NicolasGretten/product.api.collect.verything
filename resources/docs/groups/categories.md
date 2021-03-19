@@ -20,7 +20,7 @@ $response = $client->get(
         ],
         'json' => [
             'filters' => [
-                'relations' => '["translationsList","products","compositeProducts","discounts"]',
+                'relations' => '["products","compositeProducts","discounts"]',
             ],
         ],
     ]
@@ -41,7 +41,7 @@ let headers = {
 
 let body = {
     "filters": {
-        "relations": "[\"translationsList\",\"products\",\"compositeProducts\",\"discounts\"]"
+        "relations": "[\"products\",\"compositeProducts\",\"discounts\"]"
     }
 }
 
@@ -61,7 +61,7 @@ import json
 url = 'http://dev-product.api.hopn.space/categories/cat_d10be1a57a0fddafc85b5'
 payload = {
     "filters": {
-        "relations": "[\"translationsList\",\"products\",\"compositeProducts\",\"discounts\"]"
+        "relations": "[\"products\",\"compositeProducts\",\"discounts\"]"
     }
 }
 headers = {
@@ -78,7 +78,7 @@ curl -X GET \
     -G "http://dev-product.api.hopn.space/categories/cat_d10be1a57a0fddafc85b5" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"relations":"[\"translationsList\",\"products\",\"compositeProducts\",\"discounts\"]"}}'
+    -d '{"filters":{"relations":"[\"products\",\"compositeProducts\",\"discounts\"]"}}'
 
 ```
 
@@ -109,61 +109,45 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615891989,
-    "signature": "0a8307a4fd42cf6b30560070fc461bfb",
+    "timestamp": 1616158160,
+    "signature": "32a7ec5726aa82015c54027ee6946b2b",
     "content": {
         "success": true,
         "async": false,
         "body": [
             {
-                "id": "cat_d10be1a57a0fddafc85b5",
+                "id": "cat_bcc3b36c2dd0ae4a1c57c",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "Traduction en français",
-                "text": "nourriture",
-                "translations_list": [
-                    {
-                        "id": "cattrad_80bfe98ea61de25b4",
-                        "category_id": "cat_d10be1a57a0fddafc85b5",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "nourriture",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "cattrad_1f5108d18e0be26c1",
-                        "category_id": "cat_d10be1a57a0fddafc85b5",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "food",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
+                "text": "Abonnement",
                 "products": [
                     {
-                        "id": "product_9f71793f1bff89227",
+                        "id": "prod_3a3d84897c39a40bc49e",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
                         "text": "Croissant"
-                    },
-                    {
-                        "id": "product_d66672dd6b9052218",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "Salade"
                     }
                 ],
                 "composite_products": [],
-                "discounts": []
+                "discounts": [
+                    {
+                        "id": "discount_fffbae84a65baa0a",
+                        "discount_type": "eur",
+                        "promotional_code_id": null,
+                        "amount": 50,
+                        "start_at": "2021-05-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "traduction française",
+                        "text": "promo d'haloween"
+                    }
+                ]
             }
         ]
     }
@@ -229,7 +213,7 @@ $response = $client->get(
                     'lte' => '1602688060',
                     'order' => 'ASC',
                 ],
-                'relations' => '["translationsList","products","compositeProducts","discounts"]',
+                'relations' => '["products","compositeProducts","discounts"]',
             ],
         ],
     ]
@@ -279,7 +263,7 @@ let body = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"translationsList\",\"products\",\"compositeProducts\",\"discounts\"]"
+        "relations": "[\"products\",\"compositeProducts\",\"discounts\"]"
     }
 }
 
@@ -320,7 +304,7 @@ payload = {
             "lte": "1602688060",
             "order": "ASC"
         },
-        "relations": "[\"translationsList\",\"products\",\"compositeProducts\",\"discounts\"]"
+        "relations": "[\"products\",\"compositeProducts\",\"discounts\"]"
     }
 }
 params = {
@@ -342,7 +326,7 @@ curl -X GET \
     -G "http://dev-product.api.hopn.space/categories?items_id=%5B%22cat_d10be1a57a0fddafc85b5%22%2C%22cattrad_d8c93817712865f96%22%5D&limit=10&page=1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"translationsList\",\"products\",\"compositeProducts\",\"discounts\"]"}}'
+    -d '{"filters":{"created":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"updated":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"deleted":{"gt":"1602688060","gte":"1602688060","lt":"1602688060","lte":"1602688060","order":"ASC"},"relations":"[\"products\",\"compositeProducts\",\"discounts\"]"}}'
 
 ```
 
@@ -405,104 +389,83 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615908249,
-    "signature": "aecdbd9840a02641e457aeb1e2613e29",
+    "timestamp": 1616158109,
+    "signature": "fb8c1302357f5343e259454ac804c156",
     "content": {
         "success": true,
         "async": false,
         "pagination": {
             "current_page": 1,
-            "last_page": 2,
+            "last_page": 1,
             "per_page": 5,
-            "total": 6,
-            "next_page_url": "http:\/\/dev-product.api.hopn.space\/categories?filters%255Brelations%255D=%255B%2522translationsList%2522%252C%2522products%2522%252C%2522compositeProducts%2522%252C%2522discounts%2522%255D&limit=5&page=2",
+            "total": 4,
+            "next_page_url": null,
             "prev_page_url": null
         },
         "body": [
             {
                 "id": "cat_bcc3b36c2dd0ae4a1c57c",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "Traduction en français",
                 "text": "Abonnement",
-                "translations_list": [
+                "products": [
                     {
-                        "id": "cattrad_d8c93817712865f96",
-                        "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
-                        "locale": "fr-FR",
+                        "id": "prod_3a3d84897c39a40bc49e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
-                        "text": "Abonnement",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "cattrad_c604267473bac50ac",
-                        "category_id": "cat_bcc3b36c2dd0ae4a1c57c",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Subscription",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
+                        "text": "Croissant"
                     }
                 ],
-                "products": [],
                 "composite_products": [],
-                "discounts": []
+                "discounts": [
+                    {
+                        "id": "discount_fffbae84a65baa0a",
+                        "discount_type": "eur",
+                        "promotional_code_id": null,
+                        "amount": 50,
+                        "start_at": "2021-05-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "traduction française",
+                        "text": "promo d'haloween"
+                    }
+                ]
             },
             {
                 "id": "cat_1ddf322d0c198c29b50ce",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "Traduction en français",
                 "text": "Boisson",
-                "translations_list": [
-                    {
-                        "id": "cattrad_e9e47a24fa73fd8af",
-                        "category_id": "cat_1ddf322d0c198c29b50ce",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "Boisson",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "cattrad_5eeaef83d26cad45a",
-                        "category_id": "cat_1ddf322d0c198c29b50ce",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Drinks",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
                 "products": [
                     {
-                        "id": "product_3888c3b144ccdc59c",
+                        "id": "prod_672832afc671d36c6213",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
                         "text": "Mimosa"
                     },
                     {
-                        "id": "product_8a72e4d0f1fd12d03",
+                        "id": "prod_1344f9b420f516b26861",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
                         "text": "café"
                     },
                     {
-                        "id": "product_4c053842dc07c0330",
+                        "id": "prod_bc477fe21a7c92c52256",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
                         "text": "apéritif"
                     }
@@ -513,46 +476,16 @@ curl -X GET \
             {
                 "id": "cat_d10be1a57a0fddafc85b5",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "Traduction en français",
                 "text": "nourriture",
-                "translations_list": [
-                    {
-                        "id": "cattrad_80bfe98ea61de25b4",
-                        "category_id": "cat_d10be1a57a0fddafc85b5",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "nourriture",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "cattrad_1f5108d18e0be26c1",
-                        "category_id": "cat_d10be1a57a0fddafc85b5",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "food",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
                 "products": [
                     {
-                        "id": "product_9f71793f1bff89227",
+                        "id": "prod_c93e0a2194593f85a7a6",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
-                        "title": "Traduction en français",
-                        "text": "Croissant"
-                    },
-                    {
-                        "id": "product_d66672dd6b9052218",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
                         "text": "Salade"
                     }
@@ -563,47 +496,25 @@ curl -X GET \
             {
                 "id": "cat_3a61a9ed91efe584ca27c",
                 "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
                 "title": "Traduction en français",
                 "text": "repas",
-                "translations_list": [
-                    {
-                        "id": "cattrad_1f045d3c526f80be9",
-                        "category_id": "cat_3a61a9ed91efe584ca27c",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "repas",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    },
-                    {
-                        "id": "cattrad_5ff116543d078c690",
-                        "category_id": "cat_3a61a9ed91efe584ca27c",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Lunch",
-                        "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z"
-                    }
-                ],
                 "products": [],
                 "composite_products": [
                     {
-                        "id": "compproduct_64ba1e4ff721a",
+                        "id": "prodc_05ba52372e3c09a8219",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
                         "text": "petit déjeuner"
                     },
                     {
-                        "id": "compproduct_c0b5eb2d85401",
+                        "id": "prodc_bb6bca80cb0ac3484fb",
                         "deleted_at": null,
-                        "created_at": "2021-03-15T15:21:54.000000Z",
-                        "updated_at": "2021-03-15T15:21:54.000000Z",
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
                         "title": "Traduction en français",
                         "text": "déjeuner"
                     }
