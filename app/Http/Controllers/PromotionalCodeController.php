@@ -265,6 +265,7 @@ class PromotionalCodeController extends ControllerBase
             $promotional_code->combinable_with_offers       = $request->input('combinable_with_offers', $promotional_code->getOriginal('combinable_with_offers'));
 
             $promotional_code->save();
+            $promotional_code->checkUsage();
 
             DB::commit();
 

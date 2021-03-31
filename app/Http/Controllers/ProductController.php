@@ -7,6 +7,7 @@ use App\Exceptions\PgSqlException;
 use App\ProductAvailability;
 use App\ProductCategory;
 use App\ProductPrice;
+use App\PromotionalCode;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
 use App\Traits\LocaleTrait;
@@ -38,6 +39,8 @@ class ProductController extends ControllerBase
      *
      * @urlParam    product_id          required        Product ID                          Example: prod_3a3d84897c39a40bc49e
      *
+     * @queryParam  code                                Promotional code                    Example: PROMO10
+     *
      * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","availabilities","prices","discounts","categories"]
      *
      * @responseFile /responses/products/retrieve.json
@@ -52,6 +55,7 @@ class ProductController extends ControllerBase
         try {
             $this->validate($request, [
                 'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories',
+                'code' => 'string',
             ]);
 
             $this->setLocale();
@@ -61,9 +65,27 @@ class ProductController extends ControllerBase
 
             $this->filter($resultSet, ['relations']);
 
-            $product = $resultSet->first();
+            if (!empty($request->code))
+            {
+                $resultCode = PromotionalCode::where('code', $request->code)->first();
 
-            return response()->json($product);
+                if (empty($resultCode))
+                {
+                    throw new Exception('The promo code doesn\'t exist', 404);
+                }
+                $product = $resultSet->first();
+                $product->code($resultCode->id)->getCurrentDiscountAttribute();
+                $product->code($resultCode->id)->getCurrentPricingAttribute();
+                $product->code($resultCode->id)->getDiscountAttribute();
+
+                return response()->json($product);
+            }
+            else{
+                $product = $resultSet->first();
+                return response()->json($product);
+            }
+
+
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);
@@ -89,6 +111,7 @@ class ProductController extends ControllerBase
      * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["prod_3a3d84897c39a40bc49e","prod_c93e0a2194593f85a7a6"]
      * @queryParam  limit                                  Number of results per pagination page                        Example: 10
      * @queryParam  page                                   Current page number for pagination                           Example: 1
+     * @queryParam  code                                   Promotional code                                             Example: PROMO10
      *
      * @bodyParam   filters[created][gt]                   Creation datetime is Greater Than this value.                Example: 1602688060
      * @bodyParam   filters[created][gte]                  Creation datetime is Greater Than or Equal to this value     Example: 1602688060
@@ -123,7 +146,8 @@ class ProductController extends ControllerBase
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
                 'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories',
-                'items_id'              => 'json'
+                'items_id'              => 'json',
+                'code'                  => 'string'
             ]);
 
             $this->setLocale();
@@ -133,9 +157,27 @@ class ProductController extends ControllerBase
             $this->filter($resultSet, ['date', 'relations', 'itemsId']);
             $this->paginate($resultSet);
 
-            $products = $resultSet->get();
+            if (!empty($request->code))
+            {
+                $resultCode = PromotionalCode::where('code', $request->code)->first();
 
-            return response()->json($products, 200,['pagination' => $this->pagination]);
+                if (empty($resultCode))
+                {
+                    throw new Exception('The promo code doesn\'t exist', 404);
+                }
+                $products = $resultSet->get();
+
+                foreach ($products as $product){
+                    $product->code($resultCode->id)->getCurrentDiscountAttribute();
+                    $product->code($resultCode->id)->getCurrentPricingAttribute();
+                    $product->code($resultCode->id)->getDiscountAttribute();
+                }
+                return response()->json($products);
+            }
+            else{
+                $product = $resultSet->get();
+                return response()->json($product);
+            }
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);

@@ -16,7 +16,7 @@ class DiscountsSeeder extends Seeder
     {
         DB::connection('data')->table('discounts')->insert([
             'id'            => 'discount_fffbae84a65baa0a',
-            'discount_type' => 'eur',
+            'discount_type' => 'monetary',
             'amount'        => '50',
             'start_at'      => '2021-05-05 00:00:00',
             'end_at'        => '2021-05-25 00:00:00',
@@ -27,7 +27,7 @@ class DiscountsSeeder extends Seeder
 
         DB::connection('data')->table('discounts')->insert([
             'id'            => 'discount_34acc06c4ccd5022',
-            'discount_type' => 'pourcent',
+            'discount_type' => 'percentage',
             'amount'        => '10',
             'start_at'      => '2021-05-05 00:00:00',
             'end_at'        => '2021-05-25 00:00:00',

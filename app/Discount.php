@@ -3,6 +3,7 @@
 namespace App;
 
 use Astrotomic\Translatable\Translatable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -44,7 +45,19 @@ class Discount extends Model
      *
      * @var array
      */
-    protected $hidden = ['pivot','translations'];
+    protected $hidden = ['pivot','translations','promotional_code_id'];
+
+    public $appends = [
+        'promotional_code',
+    ];
+
+    public function getPromotionalCodeAttribute()
+    {
+        if ($this->promotionalCodes()->exists()) {
+            return $this->promotionalCodes()->first();
+        }
+        return null;
+    }
 
     public function translationsList(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

@@ -65,7 +65,7 @@ class ProductsTranslationsSeeder extends Seeder
             'product_id'                => 'prod_672832afc671d36c6213',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
-            'text'                      => 'Mimosa',
+            'text'                      => 'Coworking 1h',
             'created_at'                => Carbon::now(),
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
@@ -76,7 +76,7 @@ class ProductsTranslationsSeeder extends Seeder
             'product_id'                => 'prod_672832afc671d36c6213',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
-            'text'                      => 'Mimosa',
+            'text'                      => 'Coworking 1h',
             'created_at'                => Carbon::now(),
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null

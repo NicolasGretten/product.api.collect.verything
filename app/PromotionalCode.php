@@ -49,4 +49,11 @@ class PromotionalCode extends Model
     {
         return $this->hasMany('App\Discount');
     }
+
+    public function checkUsage()
+    {
+        if ($this->maximum_usage == $this->number_used){
+            $this->delete();
+        }
+    }
 }

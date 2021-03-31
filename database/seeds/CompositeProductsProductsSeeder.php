@@ -30,13 +30,13 @@ class CompositeProductsProductsSeeder extends Seeder
             'updated_at'            => Carbon::now(),
         ]);
 
-        DB::connection('data')->table('composite_products_products')->insert([
-            'id'                    => substr('prodcprod_' . md5(Str::uuid()), 0, 25),
-            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484fb',//déjeuner
-            'product_id'            => 'prod_672832afc671d36c6213',//aperitif
-            'created_at'            => Carbon::now(),
-            'updated_at'            => Carbon::now(),
-        ]);
+//        DB::connection('data')->table('composite_products_products')->insert([
+//            'id'                    => substr('prodcprod_' . md5(Str::uuid()), 0, 25),
+//            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484fb',//déjeuner
+//            'product_id'            => 'prod_672832afc671d36c6213',//aperitif
+//            'created_at'            => Carbon::now(),
+//            'updated_at'            => Carbon::now(),
+//        ]);
 
         DB::connection('data')->table('composite_products_products')->insert([
             'id'                    => substr('prodcprod_' . md5(Str::uuid()), 0, 25),

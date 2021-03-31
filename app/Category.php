@@ -3,6 +3,7 @@
 namespace App;
 
 use Astrotomic\Translatable\Translatable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -40,6 +41,19 @@ class Category extends Model
      * @var array
      */
     protected $hidden = ['pivot','translations'];
+
+    protected $appends = ['discount'];
+
+    public function getDiscountAttribute()
+    {
+        if ($this->discounts()->exists()) {
+            return $this->discounts()
+                ->where('start_at','<=', Carbon::now())
+                ->where('end_at','>', Carbon::now())
+                ->get();
+        }
+        return null;
+    }
 
     public function translationsList(): HasMany
     {

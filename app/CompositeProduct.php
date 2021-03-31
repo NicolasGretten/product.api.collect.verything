@@ -5,6 +5,7 @@ namespace App;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -67,18 +68,17 @@ class CompositeProduct extends Model
         return $this->hasMany('App\compositeProductProduct');
     }
 
-    public function translationsList(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function translationsList(): HasMany
     {
         return $this->hasMany('App\CompositeProductTranslation');
-
     }
 
-    public function prices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function prices(): hasOne
     {
-        return $this->hasMany('App\CompositeProductPrice');
+        return $this->hasOne('App\CompositeProductPrice');
     }
 
-    public function availabilities(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function availabilities(): HasMany
     {
         return $this->hasMany('App\CompositeProductAvailability');
     }
