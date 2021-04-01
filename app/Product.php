@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use stdClass;
 
 
 /**
@@ -45,15 +46,22 @@ class Product extends Model
      */
     protected $hidden = ['pivot', 'translations'];
 
-    protected $appends = ['current_pricing', 'current_discount', 'original_pricing', 'discount','discount_category'];
+    protected $appends = ['current_pricing', 'current_discount', 'original_pricing', 'discount'];
 
     protected ?string $code = null;
 
-    public function getDiscountCategoryAttribute()
+    /*
+     * Variable
+     */
+    public function code(string $code = null): Product
     {
-        return $this->categories()->first()->discount;
+        $this->code = $code;
+        return $this;
     }
 
+    /*
+     * Appends attributes
+     */
     public function getCurrentDiscountAttribute()
     {
         $discount = $this->applyDiscount($this->code);
@@ -75,70 +83,146 @@ class Product extends Model
         return $discount['current_discount'];
     }
 
-
-    // applique le discount et return le prix actuel avec le discount appliqué et le discount
-    public function applyDiscount(String $code = null)
+    public function getOriginalPricingAttribute()
     {
+        if ($this->price()->exists()) {
+            return $this->price()->first()->makeHidden('product_id', 'deleted_at', 'created_at', 'updated_at');
+        }
+        return null;
+    }
+
+    /*
+     * Gestion des discount et des prix
+     * applique la remise et return le prix actuel avec le discount appliqué et le discount
+     */
+    public function applyDiscount(string $code = null)
+    {
+
+        $originalPrice = $this->getOriginalPricingAttribute();
+
+        /*
+         * le discount sur le produit passe en priorité
+         */
         if ($this->getDiscounts() != null) {
-            $originalPrice = $this->getOriginalPricingAttribute();
-            if ($code != null)
-            {
-                $discount = $this->getDiscounts()->where('promotional_code_id', $code)->first();
-                if (empty($discount)) {
-                    $discount = $this->getDiscounts()->where('promotional_code_id', null)->first();
+            $discount = $this->checkDiscount($this->getDiscounts(), $code);
+            if ($discount === false){
+                return $originalPrice;
+            }
+        }
+        /*
+         * si aucun discount sur le produit existe on ckeck si un discount sur la category existe
+         */
+        elseif ($this->getCategoryDiscount() != null) {
+            $discount = $this->checkDiscount($this->getCategoryDiscount(), $code);
+            if ($discount === false){
+                return $originalPrice;
+            }
+        }
+        /*
+         * si aucun discount existe je return le prix original
+         */
+        else {
+            return $originalPrice;
+        }
+
+        /*
+         * application des discount suivant leur type
+         */
+        switch ($discount->discount_type) {
+            case "monetary":
+
+                $discount->price_excluding_taxes = $originalPrice->price_excluding_taxes - $discount->amount;
+                $discount->vat_value = $discount->price_excluding_taxes * ($originalPrice->vat_rate / 100);
+
+                $discount->price_including_taxes = $discount->price_excluding_taxes * (1 + ($originalPrice->vat_rate / 100));
+                break;
+            case "percentage":
+
+                $discount->price_excluding_taxes = $originalPrice->price_excluding_taxes - (($discount->amount / 100) * $originalPrice->price_excluding_taxes);
+                $discount->vat_value = $discount->price_excluding_taxes * ($originalPrice->vat_rate / 100);
+
+                $discount->price_including_taxes = $discount->price_excluding_taxes * (1 + ($originalPrice->vat_rate / 100));
+                break;
+        }
+
+        /*
+         * l'objet qui est return
+         */
+        $currentPricing = new stdClass;
+        $currentPricing->id = null;
+        $currentPricing->price_including_taxes = round($discount->price_including_taxes);
+        $currentPricing->price_excluding_taxes = round($discount->price_excluding_taxes);
+        $currentPricing->vat_value = $discount->vat_value;
+        $currentPricing->vat_rate = $originalPrice->vat_rate;
+
+        return ['current_pricing' => $currentPricing, 'current_discount' => $discount->makeHidden('vat_value', 'price_excluding_taxes', 'price_including_taxes')];
+    }
+
+    /*
+     * check si le produit a un ou plusieurs discount apllicable, applique automatiquement un discount et applique un code promo si le code existe
+     */
+    public function checkDiscount(Collection $discountCollection, string $code = null)
+    {
+        /*
+           * dans le cas ou un seul discount existe
+           */
+        if(count($discountCollection) === 1){
+
+            if ($discountCollection->contains('promotional_code', '!=', null)){
+                if ($code != null) {
+                    $discount = $discountCollection->where('promotional_code_id', $code)->first();
+                    if (empty($discount)) {
+                        $discount = $discountCollection->where('promotional_code_id', null)->first();
+                    }
+                }
+                else {
+                    return false;
                 }
             }
             else{
-                $discount = $this->getDiscounts()->where('promotional_code_id', null)->first();
+                $discount = $discountCollection->first();
             }
-
-                switch ($discount->discount_type) {
-                    case "monetary":
-
-                        $discount->price_excluding_taxes = $originalPrice->price_excluding_taxes - $discount->amount;
-                        $discount->vat_value = $discount->price_excluding_taxes * ($originalPrice->vat_rate/100);
-
-                        $discount->price_including_taxes = $discount->price_excluding_taxes * (1 + ($originalPrice->vat_rate/100));
-                        break;
-                    case "percentage":
-
-                        $discount->price_excluding_taxes = $originalPrice->price_excluding_taxes - (($discount->amount / 100) * $originalPrice->price_excluding_taxes);
-                        $discount->vat_value = $discount->price_excluding_taxes * ($originalPrice->vat_rate/100);
-
-                        $discount->price_including_taxes = $discount->price_excluding_taxes * (1 + ($originalPrice->vat_rate/100));
-                        break;
-                }
-
-            $currentPricing = new \stdClass;
-            $currentPricing->id = null;
-            $currentPricing->price_including_taxes = round($discount->price_including_taxes);
-            $currentPricing->price_excluding_taxes = round($discount->price_excluding_taxes);
-            $currentPricing->vat_value = $discount->vat_value;
-            $currentPricing->vat_rate = $originalPrice->vat_rate;
-
-            return ['current_pricing' => $currentPricing, 'current_discount' => $discount->makeHidden('vat_value', 'price_excluding_taxes','price_including_taxes')];
+        }
+        /*
+         * dans le cas où il un discount et un promo code existant
+         */
+        if ($code != null) {
+            $discount = $discountCollection->where('promotional_code_id', $code)->first();
+            if (empty($discount)) {
+                $discount = $discountCollection->where('promotional_code_id', null)->first();
+            }
+        } else {
+            $discount = $discountCollection->first();
         }
 
-        return $this->getOriginalPricingAttribute();
+        return $discount;
     }
 
-    public function getOriginalPricingAttribute()
+    /*
+     * Getters
+     */
+    public function getCategoryDiscount()
     {
-        return $this->price()->first()->makeHidden('product_id', 'deleted_at', 'created_at', 'updated_at');
-
+        if ($this->categories()->exists()) {
+            return $this->categories()->first()->discount;
+        }
+        return null;
     }
 
     public function getDiscounts()
     {
         if ($this->discounts()->exists()) {
             return $this->discounts()
-                ->where('start_at','<=', Carbon::now())
-                ->where('end_at','>', Carbon::now())
+                ->where('start_at', '<=', Carbon::now())
+                ->where('end_at', '>', Carbon::now())
                 ->get();
         }
         return null;
     }
 
+    /*
+     * Relations
+     */
     public function compositeProducts(): belongsToMany
     {
         return $this->belongsToMany('App\CompositeProduct', 'composite_products_products')->wherePivotNull('deleted_at');
@@ -194,11 +278,5 @@ class Product extends Model
         $this->compositeProductProduct()->delete();
 
         return parent::delete();
-    }
-
-    public function code(string $code = null)
-    {
-        $this->code = $code;
-        return $this;
     }
 }

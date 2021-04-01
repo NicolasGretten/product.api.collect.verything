@@ -8,6 +8,7 @@ use App\CompositeProductCategory;
 use App\CompositeProductPrice;
 use App\CompositeProductProduct;
 use App\Exceptions\PgSqlException;
+use App\PromotionalCode;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
 use App\Traits\LocaleTrait;
@@ -26,10 +27,6 @@ class CompositeProductController extends ControllerBase
 {
     use IdTrait, FiltersTrait, PaginationTrait, LocaleTrait;
 
-    public function __construct() {
-
-    }
-
     /**
      * Retrieve a product
      *
@@ -37,12 +34,15 @@ class CompositeProductController extends ControllerBase
      *
      * @group   Composite Products
      *
-     * @urlParam    composite_product_id          required          Composite Product ID                    Example: prodc_05ba52372e3c09a8219
+     * @urlParam    composite_product_id          required          Composite Product ID                Example: prodc_05ba52372e3c09a8219
      *
-     * @bodyParam   filters[relations]                              Add a relation in the response          Example: ["products","availabilities","prices","discounts","categories"]
+     * @queryParam  code                                            Promotional code                    Example: PROMO10
+     *
+     * @bodyParam   filters[relations]                              Add a relation in the response      Example: ["products","availabilities","categories"]
      *
      * @responseFile /responses/composite_products/retrieve.json
      * @responseFile scenario="Relations filter" /responses/composite_products/relations-retrieve.json
+     * @responseFile scenario="Use code promo" /responses/composite_products/promo-retrieve.json
      *
      * @param Request $request
      *
@@ -52,7 +52,8 @@ class CompositeProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:products,availabilities,prices,discounts,categories',
+                'filters.relations'     => 'json|relations:products,availabilities,categories',
+                'code' => 'string',
             ]);
 
             $this->setLocale();
@@ -62,9 +63,25 @@ class CompositeProductController extends ControllerBase
 
             $this->filter($resultSet, ['relations']);
 
-            $product = $resultSet->first();
+            if (!empty($request->code))
+            {
+                $resultCode = PromotionalCode::where('code', $request->code)->first();
 
-            return response()->json($product);
+                if (empty($resultCode))
+                {
+                    throw new Exception('The promo code doesn\'t exist', 404);
+                }
+                $prodc = $resultSet->first();
+                $prodc->code($resultCode->id)->getCurrentDiscountAttribute();
+                $prodc->code($resultCode->id)->getCurrentPricingAttribute();
+                $prodc->code($resultCode->id)->getDiscountAttribute();
+
+                return response()->json($prodc);
+            }
+            else{
+                $prodc = $resultSet->first();
+                return response()->json($prodc);
+            }
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);
@@ -90,6 +107,7 @@ class CompositeProductController extends ControllerBase
      * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["prodc_05ba52372e3c09a8219","prodc_bb6bca80cb0ac3484fb"]
      * @queryParam  limit                                  Number of results per pagination page                        Example: 10
      * @queryParam  page                                   Current page number for pagination                           Example: 1
+     * @queryParam  code                                   Promotional code                                             Example: PROMO10
      *
      * @bodyParam   filters[created][gt]                   Creation datetime is Greater Than this value.                Example: 1602688060
      * @bodyParam   filters[created][gte]                  Creation datetime is Greater Than or Equal to this value     Example: 1602688060
@@ -109,10 +127,11 @@ class CompositeProductController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["products","availabilities","prices","discounts","categories"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["products","availabilities","categories"]
      *
      * @responseFile /responses/composite_products/list.json
      * @responseFile scenario="Relations Filter" /responses/composite_products/relations-list.json
+     * @responseFile scenario="Use code promo" /responses/composite_products/promo-list.json
      *
      * @param Request $request
      * @return JsonResponse
@@ -123,8 +142,9 @@ class CompositeProductController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:products,availabilities,prices,discounts,categories',
-                'items_id'              => 'json'
+                'filters.relations'     => 'json|relations:products,availabilities,categories',
+                'items_id'              => 'json',
+                'code'                  => 'string'
             ]);
 
             $this->setLocale();
@@ -133,10 +153,27 @@ class CompositeProductController extends ControllerBase
 
             $this->filter($resultSet, ['date', 'relations', 'itemsId']);
             $this->paginate($resultSet);
+            if (!empty($request->code))
+            {
+                $resultCode = PromotionalCode::where('code', $request->code)->first();
 
-            $composite_products = $resultSet->get();
+                if (empty($resultCode))
+                {
+                    throw new Exception('The promo code doesn\'t exist', 404);
+                }
+                $composite_products = $resultSet->get();
 
-            return response()->json($composite_products, 200,['pagination' => $this->pagination]);
+                foreach ($composite_products as $composite_product){
+                    $composite_product->code($resultCode->id)->getCurrentDiscountAttribute();
+                    $composite_product->code($resultCode->id)->getCurrentPricingAttribute();
+                    $composite_product->code($resultCode->id)->getDiscountAttribute();
+                }
+                return response()->json($composite_products, 200,['pagination' => $this->pagination]);
+            }
+            else{
+                $composite_products = $resultSet->get();
+                return response()->json($composite_products, 200,['pagination' => $this->pagination]);
+            }
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);
@@ -282,13 +319,13 @@ class CompositeProductController extends ControllerBase
                 throw new ModelNotFoundException('Composite Product not found.', 404);
             }
 
-            $product = $resultSet->first();
+            $compositeProduct = $resultSet->first();
 
-            $product->delete();
+            $compositeProduct->delete();
 
             DB::commit();
 
-            return response()->json($product);
+            return response()->json($compositeProduct->fresh()->makeHidden(['current_pricing', 'current_discount', 'original_pricing', 'discount']));
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);

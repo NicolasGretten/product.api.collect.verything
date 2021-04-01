@@ -40,7 +40,7 @@ class DiscountController extends ControllerBase
      *
      * @urlParam    discount_id          required        Discount ID                        Example: discount_9f71793f1bff89227
      *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","products","categories","promotionalCodes"]
+     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","products","categories"]
      *
      * @responseFile /responses/discounts/retrieve.json
      * @responseFile scenario="Relations filter" /responses/discounts/relations-retrieve.json
@@ -53,7 +53,7 @@ class DiscountController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:products,compositeProducts,categories,promotionalCodes',
+                'filters.relations'     => 'json|relations:products,compositeProducts,categories',
             ]);
 
             $this->setLocale();
@@ -110,7 +110,7 @@ class DiscountController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","products","categories","promotionalCodes"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","products","categories"]
      *
      * @responseFile /responses/discounts/list.json
      * @responseFile scenario="Relations Filter" /responses/discounts/relations-list.json
@@ -124,7 +124,7 @@ class DiscountController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:products,compositeProducts,categories,promotionalCodes',
+                'filters.relations'     => 'json|relations:products,compositeProducts,categories',
                 'items_id'              => 'json'
             ]);
 
@@ -157,13 +157,14 @@ class DiscountController extends ControllerBase
      *
      * @group   Discounts
      *
-     * @queryParam  title               required        Title of the description    Example: Traduction française
-     * @queryParam  locale              required        Locale                      Example: fr-FR
-     * @queryParam  text                required        Description                 Example: Promo d'halloween
-     * @queryParam  discount_type       required        Discount Type               Example: pourcent
-     * @queryParam  amount              required        amount                      Example: 100
-     * @queryParam  start_at            required        Start                       Example: 1970-01-01 00:00:00
-     * @queryParam  end_at              required        End                         Example: 1970-01-01 00:00:00
+     * @queryParam  title                       required        Title of the description    Example: Traduction française
+     * @queryParam  locale                      required        Locale                      Example: fr-FR
+     * @queryParam  text                        required        Description                 Example: Promo d'halloween
+     * @queryParam  discount_type               required        Discount Type               Example: percentage
+     * @queryParam  amount                      required        amount                      Example: 100
+     * @queryParam  start_at                    required        Start                       Example: 1970-01-01 00:00:00
+     * @queryParam  end_at                      required        End                         Example: 1970-01-01 00:00:00
+     * @queryParam  promotional_code_id         required        Promotional code ID         Example: promocode_17d78ae0a3bfb0a
      *
      * @responseFile /responses/discounts/create.json
      *
@@ -243,7 +244,7 @@ class DiscountController extends ControllerBase
      *
      * @urlParam    discount_id         required        Id of the discount to update        Example: discount_9f71793f1bff89227
      *
-     * @queryParam  discount_type       required        Discount Type                       Example: pourcent
+     * @queryParam  discount_type       required        Discount Type                       Example: percentage
      * @queryParam  amount              required        amount                              Example: 100
      * @queryParam  start_at            required        Start                               Example: 1970-01-01 00:00:00
      * @queryParam  end_at              required        End                                 Example: 1970-01-01 00:00:00
@@ -275,20 +276,24 @@ class DiscountController extends ControllerBase
                 throw new ModelNotFoundException('Discount not found.', 404);
             }
 
-            if($discount->start_at <= Carbon::now()) {
-                throw new Exception('you cannot edit a discount that is in progress or has already ended ', 400);
+            if (!empty($request->start_date)){
+                if($discount->start_at <= Carbon::now()) {
+                    throw new Exception('you cannot edit a discount that is in progress or has already ended ', 400);
+                }
+
+                if($request->start_at < Carbon::tomorrow()) {
+                    throw new Exception('The discount can\'t start before tomorrow.', 400);
+                }
             }
 
-            if($request->start_at < Carbon::tomorrow()) {
-                throw new Exception('The discount can\'t start before tomorrow.', 400);
-            }
+            if (!empty($request->end_at)) {
+                if($request->end_at <= $request->start_at) {
+                    throw new Exception('The discount can\'t end before or on the same time than the start date.', 400);
+                }
 
-            if($request->end_at <= $request->start_at) {
-                throw new Exception('The discount can\'t end before or on the same time than the start date.', 400);
-            }
-
-            if($request->end_at <= $discount->start_at) {
-                throw new Exception('The discount can\'t end before or on the same time than the start date.', 400);
+                if($request->end_at <= $discount->start_at) {
+                    throw new Exception('The discount can\'t end before or on the same time than the start date.', 400);
+                }
             }
 
             $discount->discount_type        = $request->input('discount_type', $discount->getOriginal('discount_type'));
@@ -651,6 +656,11 @@ class DiscountController extends ControllerBase
 
                 $product = $resultProduct->first();
 
+                if (empty($product))
+                {
+                    throw new Exception('The product doesn\'t have this discount assign.', 400);
+                }
+
                 $product->delete();
                 $response->product = $product;
             }
@@ -661,6 +671,10 @@ class DiscountController extends ControllerBase
 
                 $compositeProduct = $resultCompositeProduct->first();
 
+                if (empty($compositeProduct))
+                {
+                    throw new Exception('The composite product doesn\'t have this discount assign.', 400);
+                }
 
                 $compositeProduct->delete();
                 $response->composite_product = $compositeProduct;
@@ -672,6 +686,10 @@ class DiscountController extends ControllerBase
 
                 $category = $resultCategory->first();
 
+                if (empty($category))
+                {
+                    throw new Exception('The category doesn\'t have this discount assign.', 400);
+                }
 
                 $category->delete();
                 $response->category = $category;

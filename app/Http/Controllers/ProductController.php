@@ -41,10 +41,11 @@ class ProductController extends ControllerBase
      *
      * @queryParam  code                                Promotional code                    Example: PROMO10
      *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","availabilities","prices","discounts","categories"]
+     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","availabilities","categories"]
      *
      * @responseFile /responses/products/retrieve.json
      * @responseFile scenario="Relations filter" /responses/products/relations-retrieve.json
+     * @responseFile scenario="Use code promo" /responses/products/promo-retrieve.json
      *
      * @param Request $request
      *
@@ -54,8 +55,8 @@ class ProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories',
-                'code' => 'string',
+                'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
+                'code'                  => 'string',
             ]);
 
             $this->setLocale();
@@ -84,8 +85,6 @@ class ProductController extends ControllerBase
                 $product = $resultSet->first();
                 return response()->json($product);
             }
-
-
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);
@@ -131,10 +130,12 @@ class ProductController extends ControllerBase
      * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
      * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
      *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","availabilities","prices","discounts","categories"]
+     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","availabilities","categories"]
      *
      * @responseFile /responses/products/list.json
      * @responseFile scenario="Relations Filter" /responses/products/relations-list.json
+     * @responseFile scenario="Use code promo" /responses/products/promo-list.json
+     *
      *
      * @param Request $request
      * @return JsonResponse
@@ -145,7 +146,7 @@ class ProductController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:compositeProducts,availabilities,prices,discounts,categories',
+                'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
                 'items_id'              => 'json',
                 'code'                  => 'string'
             ]);
@@ -155,6 +156,7 @@ class ProductController extends ControllerBase
             $resultSet = Product::select('products.*');
 
             $this->filter($resultSet, ['date', 'relations', 'itemsId']);
+
             $this->paginate($resultSet);
 
             if (!empty($request->code))
@@ -172,11 +174,11 @@ class ProductController extends ControllerBase
                     $product->code($resultCode->id)->getCurrentPricingAttribute();
                     $product->code($resultCode->id)->getDiscountAttribute();
                 }
-                return response()->json($products);
+                return response()->json($products, 200,['pagination' => $this->pagination]);
             }
             else{
-                $product = $resultSet->get();
-                return response()->json($product);
+                $products = $resultSet->get();
+                return response()->json($products, 200,['pagination' => $this->pagination]);
             }
         }
         catch(PDOException $e) {
@@ -224,7 +226,7 @@ class ProductController extends ControllerBase
 
                 'category_id'                   => 'string|exists:categories,id',
 
-                'days'                           => 'json',
+                'days'                          => 'json',
                 'hour_start'                    => 'date_format:H:i:s',
                 'hour_end'                      => 'date_format:H:i:s',
 
@@ -329,7 +331,7 @@ class ProductController extends ControllerBase
 
             DB::commit();
 
-            return response()->json($product);
+            return response()->json($product->fresh()->makeHidden(['current_pricing', 'current_discount', 'original_pricing', 'discount']));
         }
         catch(PDOException $e) {
             throw new PgSqlException($e);

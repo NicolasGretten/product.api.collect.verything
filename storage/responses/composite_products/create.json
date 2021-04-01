@@ -1,43 +1,62 @@
 {
-    "timestamp": 1616094321,
-    "signature": "221202a27628f3ec57c52d492cf9487a",
+    "timestamp": 1617269920,
+    "signature": "76bf897630652793d745d77d8c8d2b38",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "prodc_1ea4c4b453b2490a6c9",
-            "updated_at": "2021-03-18T19:05:21.000000Z",
-            "created_at": "2021-03-18T19:05:21.000000Z",
+            "id": "prodc_7af6a52531c1a634f63",
+            "updated_at": "2021-04-01T09:38:39.000000Z",
+            "created_at": "2021-04-01T09:38:39.000000Z",
             "availability": {
-                "id": "prodcavail_6f901489e78f9f",
-                "composite_product_id": "prodc_1ea4c4b453b2490a6c9",
+                "id": "prodcavail_2ef94cbf5b4d05",
+                "composite_product_id": "prodc_7af6a52531c1a634f63",
                 "days": [
                     "monday",
                     "tuesday",
+                    "wednesday",
                     "friday"
                 ],
                 "hour_start": "08:00:00",
                 "hour_end": "18:00:00",
-                "updated_at": "2021-03-18T19:05:21.000000Z",
-                "created_at": "2021-03-18T19:05:21.000000Z"
+                "updated_at": "2021-04-01T09:38:39.000000Z",
+                "created_at": "2021-04-01T09:38:39.000000Z"
             },
             "price": {
-                "id": "prodcprice_f1141a356500d7",
-                "composite_product_id": "prodc_1ea4c4b453b2490a6c9",
+                "id": "prodcprice_dab3b34bbfb1d1",
+                "composite_product_id": "prodc_7af6a52531c1a634f63",
                 "price_including_taxes": "110",
                 "price_excluding_taxes": "100",
                 "vat_value": "10",
                 "vat_rate": "10",
-                "updated_at": "2021-03-18T19:05:21.000000Z",
-                "created_at": "2021-03-18T19:05:21.000000Z"
+                "updated_at": "2021-04-01T09:38:39.000000Z",
+                "created_at": "2021-04-01T09:38:39.000000Z"
             },
             "category": {
-                "id": "prodccat_d58b673c60162d0b",
-                "composite_product_id": "prodc_1ea4c4b453b2490a6c9",
+                "id": "prodccat_2d16c36bb4951519",
+                "composite_product_id": "prodc_7af6a52531c1a634f63",
                 "category_id": "cat_1ddf322d0c198c29b50ce",
-                "updated_at": "2021-03-18T19:05:21.000000Z",
-                "created_at": "2021-03-18T19:05:21.000000Z"
+                "updated_at": "2021-04-01T09:38:39.000000Z",
+                "created_at": "2021-04-01T09:38:39.000000Z"
             },
+            "current_pricing": {
+                "id": "prodcprice_dab3b34bbfb1d1",
+                "composite_product_id": "prodc_7af6a52531c1a634f63",
+                "price_including_taxes": 110,
+                "price_excluding_taxes": 100,
+                "vat_value": 10,
+                "vat_rate": 10
+            },
+            "current_discount": null,
+            "original_pricing": {
+                "id": "prodcprice_dab3b34bbfb1d1",
+                "composite_product_id": "prodc_7af6a52531c1a634f63",
+                "price_including_taxes": 110,
+                "price_excluding_taxes": 100,
+                "vat_value": 10,
+                "vat_rate": 10
+            },
+            "discount": null,
             "title": "Traduction française",
             "text": "séminaire"
         }
