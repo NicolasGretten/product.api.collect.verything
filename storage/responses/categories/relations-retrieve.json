@@ -1,0 +1,44 @@
+{
+    "timestamp": 1616158160,
+    "signature": "32a7ec5726aa82015c54027ee6946b2b",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "cat_bcc3b36c2dd0ae4a1c57c",
+                "deleted_at": null,
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "title": "Traduction en français",
+                "text": "Abonnement",
+                "products": [
+                    {
+                        "id": "prod_3a3d84897c39a40bc49e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    }
+                ],
+                "composite_products": [],
+                "discounts": [
+                    {
+                        "id": "discount_fffbae84a65baa0a",
+                        "discount_type": "eur",
+                        "promotional_code_id": null,
+                        "amount": 50,
+                        "start_at": "2021-05-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "traduction française",
+                        "text": "promo d'haloween"
+                    }
+                ]
+            }
+        ]
+    }
+}

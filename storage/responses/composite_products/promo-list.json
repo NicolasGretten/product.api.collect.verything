@@ -1,0 +1,115 @@
+{
+    "timestamp": 1617269804,
+    "signature": "b85e3328b5002d51b78695dc551caa60",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 10,
+            "total": 2,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "prodc_05ba52372e3c09a8219",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
+                "current_pricing": {
+                    "id": null,
+                    "price_including_taxes": 594,
+                    "price_excluding_taxes": 540,
+                    "vat_value": 54,
+                    "vat_rate": 10
+                },
+                "current_discount": {
+                    "id": "discount_34acc06c4ccd5022",
+                    "discount_type": "percentage",
+                    "amount": 10,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": {
+                        "id": "promocode_17d78ae0a3bfb0a",
+                        "code": "PROMO10",
+                        "number_used": 0,
+                        "maximum_usage": 1,
+                        "combinable_with_offers": false,
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Code promo 10%"
+                    },
+                    "title": "traduction française",
+                    "text": "promo d'été"
+                },
+                "original_pricing": {
+                    "id": "prodcprice_4e0706a388edfd",
+                    "composite_product_id": "prodc_05ba52372e3c09a8219",
+                    "price_including_taxes": 660,
+                    "price_excluding_taxes": 600,
+                    "vat_value": 60,
+                    "vat_rate": 10
+                },
+                "discount": {
+                    "id": "discount_34acc06c4ccd5022",
+                    "discount_type": "percentage",
+                    "amount": 10,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": {
+                        "id": "promocode_17d78ae0a3bfb0a",
+                        "code": "PROMO10",
+                        "number_used": 0,
+                        "maximum_usage": 1,
+                        "combinable_with_offers": false,
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Code promo 10%"
+                    },
+                    "title": "traduction française",
+                    "text": "promo d'été"
+                },
+                "title": "Traduction en français",
+                "text": "petit déjeuner"
+            },
+            {
+                "id": "prodc_bb6bca80cb0ac3484fb",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
+                "current_pricing": {
+                    "id": "prodcprice_4c079f8a1647ea",
+                    "composite_product_id": "prodc_bb6bca80cb0ac3484fb",
+                    "price_including_taxes": 1100,
+                    "price_excluding_taxes": 1000,
+                    "vat_value": 100,
+                    "vat_rate": 10
+                },
+                "current_discount": null,
+                "original_pricing": {
+                    "id": "prodcprice_4c079f8a1647ea",
+                    "composite_product_id": "prodc_bb6bca80cb0ac3484fb",
+                    "price_including_taxes": 1100,
+                    "price_excluding_taxes": 1000,
+                    "vat_value": 100,
+                    "vat_rate": 10
+                },
+                "discount": null,
+                "title": "Traduction en français",
+                "text": "déjeuner"
+            }
+        ]
+    }
+}

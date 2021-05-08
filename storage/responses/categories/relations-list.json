@@ -1,0 +1,136 @@
+{
+    "timestamp": 1616158109,
+    "signature": "fb8c1302357f5343e259454ac804c156",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 5,
+            "total": 4,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "cat_bcc3b36c2dd0ae4a1c57c",
+                "deleted_at": null,
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "title": "Traduction en français",
+                "text": "Abonnement",
+                "products": [
+                    {
+                        "id": "prod_3a3d84897c39a40bc49e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Croissant"
+                    }
+                ],
+                "composite_products": [],
+                "discounts": [
+                    {
+                        "id": "discount_fffbae84a65baa0a",
+                        "discount_type": "eur",
+                        "promotional_code_id": null,
+                        "amount": 50,
+                        "start_at": "2021-05-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "traduction française",
+                        "text": "promo d'haloween"
+                    }
+                ]
+            },
+            {
+                "id": "cat_1ddf322d0c198c29b50ce",
+                "deleted_at": null,
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "title": "Traduction en français",
+                "text": "Boisson",
+                "products": [
+                    {
+                        "id": "prod_672832afc671d36c6213",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Mimosa"
+                    },
+                    {
+                        "id": "prod_1344f9b420f516b26861",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "café"
+                    },
+                    {
+                        "id": "prod_bc477fe21a7c92c52256",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "apéritif"
+                    }
+                ],
+                "composite_products": [],
+                "discounts": []
+            },
+            {
+                "id": "cat_d10be1a57a0fddafc85b5",
+                "deleted_at": null,
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "title": "Traduction en français",
+                "text": "nourriture",
+                "products": [
+                    {
+                        "id": "prod_c93e0a2194593f85a7a6",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Salade"
+                    }
+                ],
+                "composite_products": [],
+                "discounts": []
+            },
+            {
+                "id": "cat_3a61a9ed91efe584ca27c",
+                "deleted_at": null,
+                "created_at": "2021-03-19T12:17:31.000000Z",
+                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "title": "Traduction en français",
+                "text": "repas",
+                "products": [],
+                "composite_products": [
+                    {
+                        "id": "prodc_05ba52372e3c09a8219",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "petit déjeuner"
+                    },
+                    {
+                        "id": "prodc_bb6bca80cb0ac3484fb",
+                        "deleted_at": null,
+                        "created_at": "2021-03-19T12:17:31.000000Z",
+                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "title": "Traduction en français",
+                        "text": "déjeuner"
+                    }
+                ],
+                "discounts": []
+            }
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "timestamp": 1615938725,
+    "signature": "eeea276849336af36d5329351fa441d2",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "promocodetradd98842e2b7f3",
+            "promotional_code_id": "promocode_e0e4cf83ded071a",
+            "locale": "en-US",
+            "title": "English translation",
+            "text": "special black friday discount code",
+            "deleted_at": "2021-03-16T23:52:05.000000Z",
+            "created_at": "2021-03-16T23:51:19.000000Z",
+            "updated_at": "2021-03-16T23:52:05.000000Z"
+        }
+    }
+}

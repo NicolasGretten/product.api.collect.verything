@@ -1,0 +1,16 @@
+{
+    "timestamp": 1615926888,
+    "signature": "718501965b9e91619669690aaee12a13",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "prodcprod_74ec7b2d989035b",
+            "composite_product_id": "prodc_f7cf076a4da1055a5a1",
+            "product_id": "product_9f71793f1bff89227",
+            "deleted_at": "2021-03-16T20:34:48.000000Z",
+            "created_at": "2021-03-16T20:33:59.000000Z",
+            "updated_at": "2021-03-16T20:34:48.000000Z"
+        }
+    }
+}

@@ -1,0 +1,162 @@
+{
+    "timestamp": 1617200761,
+    "signature": "c24ff8ae9318c07b40a12ded8df07b04",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 10,
+            "total": 5,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "prod_3a3d84897c39a40bc49e",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
+                "current_pricing": {
+                    "id": "prodprice_511dda32151dddf",
+                    "price_including_taxes": 110,
+                    "price_excluding_taxes": 100,
+                    "vat_value": 10,
+                    "vat_rate": 10
+                },
+                "current_discount": null,
+                "original_pricing": {
+                    "id": "prodprice_511dda32151dddf",
+                    "price_including_taxes": 110,
+                    "price_excluding_taxes": 100,
+                    "vat_value": 10,
+                    "vat_rate": 10
+                },
+                "discount": null,
+                "title": "Traduction en français",
+                "text": "Croissant"
+            },
+            {
+                "id": "prod_c93e0a2194593f85a7a6",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
+                "current_pricing": {
+                    "id": "prodprice_3169e3f7b71af10",
+                    "price_including_taxes": 550,
+                    "price_excluding_taxes": 500,
+                    "vat_value": 50,
+                    "vat_rate": 10
+                },
+                "current_discount": null,
+                "original_pricing": {
+                    "id": "prodprice_3169e3f7b71af10",
+                    "price_including_taxes": 550,
+                    "price_excluding_taxes": 500,
+                    "vat_value": 50,
+                    "vat_rate": 10
+                },
+                "discount": null,
+                "title": "Traduction en français",
+                "text": "Salade"
+            },
+            {
+                "id": "prod_672832afc671d36c6213",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
+                "current_pricing": {
+                    "id": null,
+                    "price_including_taxes": 605,
+                    "price_excluding_taxes": 550,
+                    "vat_value": 55,
+                    "vat_rate": 10
+                },
+                "current_discount": {
+                    "id": "discount_fffbae84a65baa0a",
+                    "discount_type": "monetary",
+                    "amount": 50,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": null,
+                    "title": "traduction française",
+                    "text": "promo d'haloween"
+                },
+                "original_pricing": {
+                    "id": "prodprice_47a43509e35e375",
+                    "price_including_taxes": 660,
+                    "price_excluding_taxes": 600,
+                    "vat_value": 60,
+                    "vat_rate": 10
+                },
+                "discount": {
+                    "id": "discount_fffbae84a65baa0a",
+                    "discount_type": "monetary",
+                    "amount": 50,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": null,
+                    "title": "traduction française",
+                    "text": "promo d'haloween"
+                },
+                "title": "Traduction en français",
+                "text": "Coworking 1h"
+            },
+            {
+                "id": "prod_1344f9b420f516b26861",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
+                "current_pricing": {
+                    "id": "prodprice_8d903e2d741bf4c",
+                    "price_including_taxes": 110,
+                    "price_excluding_taxes": 100,
+                    "vat_value": 10,
+                    "vat_rate": 10
+                },
+                "current_discount": null,
+                "original_pricing": {
+                    "id": "prodprice_8d903e2d741bf4c",
+                    "price_including_taxes": 110,
+                    "price_excluding_taxes": 100,
+                    "vat_value": 10,
+                    "vat_rate": 10
+                },
+                "discount": null,
+                "title": "Traduction en français",
+                "text": "café"
+            },
+            {
+                "id": "prod_bc477fe21a7c92c52256",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
+                "current_pricing": {
+                    "id": "prodprice_e634719eaa3b3bd",
+                    "price_including_taxes": 880,
+                    "price_excluding_taxes": 800,
+                    "vat_value": 80,
+                    "vat_rate": 10
+                },
+                "current_discount": null,
+                "original_pricing": {
+                    "id": "prodprice_e634719eaa3b3bd",
+                    "price_including_taxes": 880,
+                    "price_excluding_taxes": 800,
+                    "vat_value": 80,
+                    "vat_rate": 10
+                },
+                "discount": null,
+                "title": "Traduction en français",
+                "text": "apéritif"
+            }
+        ]
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "timestamp": 1616151615,
+    "signature": "fa3c5a4836f537c590b30ac7ceea5d18",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 10,
+            "total": 2,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "prodtemplate_3a3d84898a",
+                "category_id": "cat_1ddf322d0c198c29b50ce",
+                "deleted_at": null,
+                "created_at": "2021-03-19T10:33:44.000000Z",
+                "updated_at": "2021-03-19T10:33:44.000000Z",
+                "title": "Traduction en français",
+                "text": "Boisson 01"
+            },
+            {
+                "id": "prodtemplate_3a3d84897b",
+                "category_id": "cat_d10be1a57a0fddafc85b5",
+                "deleted_at": null,
+                "created_at": "2021-03-19T10:33:44.000000Z",
+                "updated_at": "2021-03-19T10:33:44.000000Z",
+                "title": "Traduction en français",
+                "text": "Nourriture 01"
+            }
+        ]
+    }
+}

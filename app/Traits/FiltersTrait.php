@@ -194,18 +194,22 @@ trait FiltersTrait
     }
 
     public function relations(Builder $builder) {
-        if(!empty(app('request')->input('relations'))) {
-            $relations = json_decode(app('request')->input('relations'));
+        $requestedFilters = request()->get('filters');
 
-            foreach($relations as $relation)
-            {
-                $builder = $builder->with($relation);
+        if ($requestedFilters === null) {
+            return $this;
+        }
+
+        foreach ($requestedFilters as $filterName => $filterValue) {
+            if ($filterName === 'relations') {
+                if(!empty($filterValue)){
+                    foreach (json_decode($filterValue) as $relation) {
+                        $builder = $builder->with($relation);
+                    }
+                }
+                return $this;
             }
-
-            return $this;
         }
-        else {
-            return $this;
-        }
+        return $this;
     }
 }

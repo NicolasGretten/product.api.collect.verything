@@ -1,0 +1,18 @@
+{
+    "timestamp": 1615891970,
+    "signature": "9b7e5e0b04af4f88c8fa5fd3a7e68df1",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": [
+            {
+                "id": "cat_d10be1a57a0fddafc85b5",
+                "deleted_at": null,
+                "created_at": "2021-03-15T15:21:54.000000Z",
+                "updated_at": "2021-03-15T15:21:54.000000Z",
+                "title": "Traduction en français",
+                "text": "nourriture"
+            }
+        ]
+    }
+}

@@ -129,6 +129,36 @@ $app->router->group([
      * /docs
      */
     require __DIR__ . '/../routes/docs/index.php';
+
+    /*
+     * /products
+     */
+    require __DIR__ . '/../routes/products/index.php';
+
+    /*
+     * /categories
+     */
+    require __DIR__ . '/../routes/categories/index.php';
+
+    /*
+     * /composite-products
+     */
+    require __DIR__ . '/../routes/compositeProducts/index.php';
+
+    /*
+     * /discounts
+     */
+    require __DIR__ . '/../routes/discounts/index.php';
+
+    /*
+    * /promotional-codes
+    */
+    require __DIR__ . '/../routes/promotionalCodes/index.php';
+
+    /*
+    * /products-templates
+    */
+    require __DIR__ . '/../routes/productsTemplates/index.php';
 });
 
 return $app;

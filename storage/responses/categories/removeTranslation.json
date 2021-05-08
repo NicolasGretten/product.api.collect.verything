@@ -1,0 +1,18 @@
+{
+    "timestamp": 1615899817,
+    "signature": "e4e6ba55ca00f54856bc36717f94bbf2",
+    "content": {
+        "success": true,
+        "async": false,
+        "body": {
+            "id": "cattrad_8753c99c98e1e45e8",
+            "category_id": "cat_30f5cb24a6eb5c50318bf",
+            "locale": "en-US",
+            "title": "English translation",
+            "text": "Care",
+            "deleted_at": "2021-03-16T13:03:37.000000Z",
+            "created_at": "2021-03-16T13:03:30.000000Z",
+            "updated_at": "2021-03-16T13:03:37.000000Z"
+        }
+    }
+}
