@@ -56,4 +56,11 @@ class PromotionalCode extends Model
             $this->delete();
         }
     }
+
+    public function delete(): ?bool
+    {
+        $this->translationsList()->delete();
+
+        return parent::delete();
+    }
 }

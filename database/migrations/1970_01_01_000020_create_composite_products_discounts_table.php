@@ -37,6 +37,6 @@ class CreateCompositeProductsDiscountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups_discounts');
+        Schema::dropIfExists('composite_products_discounts');
     }
 }
