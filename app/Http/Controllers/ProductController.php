@@ -75,6 +75,11 @@ class ProductController extends ControllerBase
                     throw new Exception('The promo code doesn\'t exist', 404);
                 }
                 $product = $resultSet->first();
+
+                if ($product == null)
+                {
+                    throw new Exception('The product doesn\'t exist.');
+                }
                 $product->code($resultCode->id)->getCurrentDiscountAttribute();
                 $product->code($resultCode->id)->getCurrentPricingAttribute();
                 $product->code($resultCode->id)->getDiscountAttribute();
@@ -83,6 +88,10 @@ class ProductController extends ControllerBase
             }
             else{
                 $product = $resultSet->first();
+                if ($product == null)
+                {
+                    throw new Exception('The product doesn\'t exist.');
+                }
                 return response()->json($product);
             }
         }

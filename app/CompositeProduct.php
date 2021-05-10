@@ -211,7 +211,7 @@ class CompositeProduct extends Model
 
     public function getDiscounts()
     {
-        if ($this->discounts()->exists()) {
+        if ($this->discounts()->where('start_at','<=', Carbon::now())->exists()) {
             return $this->discounts()
                 ->where('start_at', '<=', Carbon::now())
                 ->where('end_at', '>', Carbon::now())

@@ -1,16 +1,17 @@
 {
-    "timestamp": 1615898916,
-    "signature": "752ef8f23f86eb628958c7be72985d12",
+    "timestamp": 1617277460,
+    "signature": "95f64d391d0ce842049e5db2fff8ae43",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cat_d534f04d2c1902588573a",
-            "deleted_at": "2021-03-16T12:48:36.000000Z",
-            "created_at": "2021-03-16T10:57:42.000000Z",
-            "updated_at": "2021-03-16T12:48:36.000000Z",
-            "title": "Traduction française",
-            "text": "Soins"
+            "id": "cat_7212aa03fc13a5d1163bd",
+            "deleted_at": "2021-04-01T11:44:19.000000Z",
+            "created_at": "2021-04-01T11:43:04.000000Z",
+            "updated_at": "2021-04-01T11:44:19.000000Z",
+            "discount": null,
+            "title": null,
+            "text": null
         }
     }
 }

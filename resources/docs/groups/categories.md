@@ -87,21 +87,45 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615891970,
-    "signature": "9b7e5e0b04af4f88c8fa5fd3a7e68df1",
+    "timestamp": 1617277340,
+    "signature": "ade3a88db94c8727302436bdbb873db6",
     "content": {
         "success": true,
         "async": false,
-        "body": [
-            {
-                "id": "cat_d10be1a57a0fddafc85b5",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "nourriture"
-            }
-        ]
+        "body": {
+            "id": "cat_1ddf322d0c198c29b50ce",
+            "deleted_at": null,
+            "created_at": "2021-03-29T09:30:59.000000Z",
+            "updated_at": "2021-03-29T09:30:59.000000Z",
+            "discount": [
+                {
+                    "id": "discount_34acc06c4ccd5022",
+                    "discount_type": "percentage",
+                    "amount": 10,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": {
+                        "id": "promocode_17d78ae0a3bfb0a",
+                        "code": "PROMO10",
+                        "number_used": 0,
+                        "maximum_usage": 1,
+                        "combinable_with_offers": false,
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Code promo 10%"
+                    },
+                    "title": "traduction française",
+                    "text": "promo d'été"
+                }
+            ],
+            "title": "Traduction en français",
+            "text": "Boisson"
+        }
     }
 }
 ```
@@ -109,47 +133,218 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1616158160,
-    "signature": "32a7ec5726aa82015c54027ee6946b2b",
+    "timestamp": 1617277354,
+    "signature": "f3d157f3aa0cc655f121280c3d82d49b",
     "content": {
         "success": true,
         "async": false,
-        "body": [
-            {
-                "id": "cat_bcc3b36c2dd0ae4a1c57c",
-                "deleted_at": null,
-                "created_at": "2021-03-19T12:17:31.000000Z",
-                "updated_at": "2021-03-19T12:17:31.000000Z",
-                "title": "Traduction en français",
-                "text": "Abonnement",
-                "products": [
-                    {
-                        "id": "prod_3a3d84897c39a40bc49e",
+        "body": {
+            "id": "cat_1ddf322d0c198c29b50ce",
+            "deleted_at": null,
+            "created_at": "2021-03-29T09:30:59.000000Z",
+            "updated_at": "2021-03-29T09:30:59.000000Z",
+            "discount": [
+                {
+                    "id": "discount_34acc06c4ccd5022",
+                    "discount_type": "percentage",
+                    "amount": 10,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": {
+                        "id": "promocode_17d78ae0a3bfb0a",
+                        "code": "PROMO10",
+                        "number_used": 0,
+                        "maximum_usage": 1,
+                        "combinable_with_offers": false,
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
                         "title": "Traduction en français",
-                        "text": "Croissant"
-                    }
-                ],
-                "composite_products": [],
-                "discounts": [
-                    {
+                        "text": "Code promo 10%"
+                    },
+                    "title": "traduction française",
+                    "text": "promo d'été"
+                }
+            ],
+            "title": "Traduction en français",
+            "text": "Boisson",
+            "products": [
+                {
+                    "id": "prod_672832afc671d36c6213",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "current_pricing": {
+                        "id": null,
+                        "price_including_taxes": 605,
+                        "price_excluding_taxes": 550,
+                        "vat_value": 55,
+                        "vat_rate": 10
+                    },
+                    "current_discount": {
                         "id": "discount_fffbae84a65baa0a",
-                        "discount_type": "eur",
-                        "promotional_code_id": null,
+                        "discount_type": "monetary",
                         "amount": 50,
-                        "start_at": "2021-05-05 00:00:00",
+                        "start_at": "2021-03-05 00:00:00",
                         "end_at": "2021-05-25 00:00:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": null,
                         "title": "traduction française",
                         "text": "promo d'haloween"
-                    }
-                ]
-            }
-        ]
+                    },
+                    "original_pricing": {
+                        "id": "prodprice_47a43509e35e375",
+                        "price_including_taxes": 660,
+                        "price_excluding_taxes": 600,
+                        "vat_value": 60,
+                        "vat_rate": 10
+                    },
+                    "discount": {
+                        "id": "discount_fffbae84a65baa0a",
+                        "discount_type": "monetary",
+                        "amount": 50,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": null,
+                        "title": "traduction française",
+                        "text": "promo d'haloween"
+                    },
+                    "title": "Traduction en français",
+                    "text": "Coworking 1h"
+                },
+                {
+                    "id": "prod_1344f9b420f516b26861",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "current_pricing": {
+                        "id": null,
+                        "price_including_taxes": 55,
+                        "price_excluding_taxes": 50,
+                        "vat_value": 5,
+                        "vat_rate": 10
+                    },
+                    "current_discount": {
+                        "id": "discount_fffbae84a65baa0a",
+                        "discount_type": "monetary",
+                        "amount": 50,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": null,
+                        "title": "traduction française",
+                        "text": "promo d'haloween"
+                    },
+                    "original_pricing": {
+                        "id": "prodprice_8d903e2d741bf4c",
+                        "price_including_taxes": 110,
+                        "price_excluding_taxes": 100,
+                        "vat_value": 10,
+                        "vat_rate": 10
+                    },
+                    "discount": {
+                        "id": "discount_fffbae84a65baa0a",
+                        "discount_type": "monetary",
+                        "amount": 50,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": null,
+                        "title": "traduction française",
+                        "text": "promo d'haloween"
+                    },
+                    "title": "Traduction en français",
+                    "text": "café"
+                },
+                {
+                    "id": "prod_bc477fe21a7c92c52256",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "current_pricing": {
+                        "id": "prodprice_e634719eaa3b3bd",
+                        "price_including_taxes": 880,
+                        "price_excluding_taxes": 800,
+                        "vat_value": 80,
+                        "vat_rate": 10
+                    },
+                    "current_discount": null,
+                    "original_pricing": {
+                        "id": "prodprice_e634719eaa3b3bd",
+                        "price_including_taxes": 880,
+                        "price_excluding_taxes": 800,
+                        "vat_value": 80,
+                        "vat_rate": 10
+                    },
+                    "discount": null,
+                    "title": "Traduction en français",
+                    "text": "apéritif"
+                },
+                {
+                    "id": "prod_19ad05fce8103175db0e",
+                    "deleted_at": null,
+                    "created_at": "2021-03-31T14:28:10.000000Z",
+                    "updated_at": "2021-03-31T14:59:52.000000Z",
+                    "current_pricing": {
+                        "id": "prodprice_99fc0e124cd4fe8",
+                        "price_including_taxes": 110,
+                        "price_excluding_taxes": 100,
+                        "vat_value": 10,
+                        "vat_rate": 10
+                    },
+                    "current_discount": null,
+                    "original_pricing": {
+                        "id": "prodprice_99fc0e124cd4fe8",
+                        "price_including_taxes": 110,
+                        "price_excluding_taxes": 100,
+                        "vat_value": 10,
+                        "vat_rate": 10
+                    },
+                    "discount": null,
+                    "title": "Traduction française",
+                    "text": "heure de coworking"
+                }
+            ],
+            "composite_products": [],
+            "discounts": [
+                {
+                    "id": "discount_34acc06c4ccd5022",
+                    "discount_type": "percentage",
+                    "amount": 10,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": {
+                        "id": "promocode_17d78ae0a3bfb0a",
+                        "code": "PROMO10",
+                        "number_used": 0,
+                        "maximum_usage": 1,
+                        "combinable_with_offers": false,
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "title": "Traduction en français",
+                        "text": "Code promo 10%"
+                    },
+                    "title": "traduction française",
+                    "text": "promo d'été"
+                }
+            ]
+        }
     }
 }
 ```
@@ -335,62 +530,8 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615908193,
-    "signature": "910185725fb099a7b5bfb01b80a54d6a",
-    "content": {
-        "success": true,
-        "async": false,
-        "pagination": {
-            "current_page": 1,
-            "last_page": 2,
-            "per_page": 5,
-            "total": 6,
-            "next_page_url": "http:\/\/dev-product.api.hopn.space\/categories?limit=5&page=2",
-            "prev_page_url": null
-        },
-        "body": [
-            {
-                "id": "cat_bcc3b36c2dd0ae4a1c57c",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "Abonnement"
-            },
-            {
-                "id": "cat_1ddf322d0c198c29b50ce",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "Boisson"
-            },
-            {
-                "id": "cat_d10be1a57a0fddafc85b5",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "nourriture"
-            },
-            {
-                "id": "cat_3a61a9ed91efe584ca27c",
-                "deleted_at": null,
-                "created_at": "2021-03-15T15:21:54.000000Z",
-                "updated_at": "2021-03-15T15:21:54.000000Z",
-                "title": "Traduction en français",
-                "text": "repas"
-            }
-        ]
-    }
-}
-```
-> Example response (200, Relations Filter):
-
-```json
-{
-    "timestamp": 1616158109,
-    "signature": "fb8c1302357f5343e259454ac804c156",
+    "timestamp": 1617277258,
+    "signature": "51220aa87bfeee74cdde16e03b0a4075",
     "content": {
         "success": true,
         "async": false,
@@ -406,86 +547,410 @@ curl -X GET \
             {
                 "id": "cat_bcc3b36c2dd0ae4a1c57c",
                 "deleted_at": null,
-                "created_at": "2021-03-19T12:17:31.000000Z",
-                "updated_at": "2021-03-19T12:17:31.000000Z",
-                "title": "Traduction en français",
-                "text": "Abonnement",
-                "products": [
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": [
                     {
-                        "id": "prod_3a3d84897c39a40bc49e",
+                        "id": "discount_34acc06c4ccd5022",
+                        "discount_type": "percentage",
+                        "amount": 10,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
-                        "title": "Traduction en français",
-                        "text": "Croissant"
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": {
+                            "id": "promocode_17d78ae0a3bfb0a",
+                            "code": "PROMO10",
+                            "number_used": 0,
+                            "maximum_usage": 1,
+                            "combinable_with_offers": false,
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "title": "Traduction en français",
+                            "text": "Code promo 10%"
+                        },
+                        "title": "traduction française",
+                        "text": "promo d'été"
                     }
                 ],
+                "title": "Traduction en français",
+                "text": "Abonnement"
+            },
+            {
+                "id": "cat_1ddf322d0c198c29b50ce",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": [
+                    {
+                        "id": "discount_34acc06c4ccd5022",
+                        "discount_type": "percentage",
+                        "amount": 10,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": {
+                            "id": "promocode_17d78ae0a3bfb0a",
+                            "code": "PROMO10",
+                            "number_used": 0,
+                            "maximum_usage": 1,
+                            "combinable_with_offers": false,
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "title": "Traduction en français",
+                            "text": "Code promo 10%"
+                        },
+                        "title": "traduction française",
+                        "text": "promo d'été"
+                    }
+                ],
+                "title": "Traduction en français",
+                "text": "Boisson"
+            },
+            {
+                "id": "cat_d10be1a57a0fddafc85b5",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": null,
+                "title": "Traduction en français",
+                "text": "nourriture"
+            },
+            {
+                "id": "cat_3a61a9ed91efe584ca27c",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": null,
+                "title": "Traduction en français",
+                "text": "repas"
+            }
+        ]
+    }
+}
+```
+> Example response (200, Relations Filter):
+
+```json
+{
+    "timestamp": 1617277276,
+    "signature": "42023823b1a6804b060db699a8812721",
+    "content": {
+        "success": true,
+        "async": false,
+        "pagination": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 5,
+            "total": 4,
+            "next_page_url": null,
+            "prev_page_url": null
+        },
+        "body": [
+            {
+                "id": "cat_bcc3b36c2dd0ae4a1c57c",
+                "deleted_at": null,
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": [
+                    {
+                        "id": "discount_34acc06c4ccd5022",
+                        "discount_type": "percentage",
+                        "amount": 10,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": {
+                            "id": "promocode_17d78ae0a3bfb0a",
+                            "code": "PROMO10",
+                            "number_used": 0,
+                            "maximum_usage": 1,
+                            "combinable_with_offers": false,
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "title": "Traduction en français",
+                            "text": "Code promo 10%"
+                        },
+                        "title": "traduction française",
+                        "text": "promo d'été"
+                    }
+                ],
+                "title": "Traduction en français",
+                "text": "Abonnement",
+                "products": [],
                 "composite_products": [],
                 "discounts": [
                     {
-                        "id": "discount_fffbae84a65baa0a",
-                        "discount_type": "eur",
-                        "promotional_code_id": null,
-                        "amount": 50,
-                        "start_at": "2021-05-05 00:00:00",
+                        "id": "discount_34acc06c4ccd5022",
+                        "discount_type": "percentage",
+                        "amount": 10,
+                        "start_at": "2021-03-05 00:00:00",
                         "end_at": "2021-05-25 00:00:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": {
+                            "id": "promocode_17d78ae0a3bfb0a",
+                            "code": "PROMO10",
+                            "number_used": 0,
+                            "maximum_usage": 1,
+                            "combinable_with_offers": false,
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "title": "Traduction en français",
+                            "text": "Code promo 10%"
+                        },
                         "title": "traduction française",
-                        "text": "promo d'haloween"
+                        "text": "promo d'été"
                     }
                 ]
             },
             {
                 "id": "cat_1ddf322d0c198c29b50ce",
                 "deleted_at": null,
-                "created_at": "2021-03-19T12:17:31.000000Z",
-                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": [
+                    {
+                        "id": "discount_34acc06c4ccd5022",
+                        "discount_type": "percentage",
+                        "amount": 10,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": {
+                            "id": "promocode_17d78ae0a3bfb0a",
+                            "code": "PROMO10",
+                            "number_used": 0,
+                            "maximum_usage": 1,
+                            "combinable_with_offers": false,
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "title": "Traduction en français",
+                            "text": "Code promo 10%"
+                        },
+                        "title": "traduction française",
+                        "text": "promo d'été"
+                    }
+                ],
                 "title": "Traduction en français",
                 "text": "Boisson",
                 "products": [
                     {
                         "id": "prod_672832afc671d36c6213",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "current_pricing": {
+                            "id": null,
+                            "price_including_taxes": 605,
+                            "price_excluding_taxes": 550,
+                            "vat_value": 55,
+                            "vat_rate": 10
+                        },
+                        "current_discount": {
+                            "id": "discount_fffbae84a65baa0a",
+                            "discount_type": "monetary",
+                            "amount": 50,
+                            "start_at": "2021-03-05 00:00:00",
+                            "end_at": "2021-05-25 00:00:00",
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "promotional_code": null,
+                            "title": "traduction française",
+                            "text": "promo d'haloween"
+                        },
+                        "original_pricing": {
+                            "id": "prodprice_47a43509e35e375",
+                            "price_including_taxes": 660,
+                            "price_excluding_taxes": 600,
+                            "vat_value": 60,
+                            "vat_rate": 10
+                        },
+                        "discount": {
+                            "id": "discount_fffbae84a65baa0a",
+                            "discount_type": "monetary",
+                            "amount": 50,
+                            "start_at": "2021-03-05 00:00:00",
+                            "end_at": "2021-05-25 00:00:00",
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "promotional_code": null,
+                            "title": "traduction française",
+                            "text": "promo d'haloween"
+                        },
                         "title": "Traduction en français",
-                        "text": "Mimosa"
+                        "text": "Coworking 1h"
                     },
                     {
                         "id": "prod_1344f9b420f516b26861",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "current_pricing": {
+                            "id": null,
+                            "price_including_taxes": 55,
+                            "price_excluding_taxes": 50,
+                            "vat_value": 5,
+                            "vat_rate": 10
+                        },
+                        "current_discount": {
+                            "id": "discount_fffbae84a65baa0a",
+                            "discount_type": "monetary",
+                            "amount": 50,
+                            "start_at": "2021-03-05 00:00:00",
+                            "end_at": "2021-05-25 00:00:00",
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "promotional_code": null,
+                            "title": "traduction française",
+                            "text": "promo d'haloween"
+                        },
+                        "original_pricing": {
+                            "id": "prodprice_8d903e2d741bf4c",
+                            "price_including_taxes": 110,
+                            "price_excluding_taxes": 100,
+                            "vat_value": 10,
+                            "vat_rate": 10
+                        },
+                        "discount": {
+                            "id": "discount_fffbae84a65baa0a",
+                            "discount_type": "monetary",
+                            "amount": 50,
+                            "start_at": "2021-03-05 00:00:00",
+                            "end_at": "2021-05-25 00:00:00",
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "promotional_code": null,
+                            "title": "traduction française",
+                            "text": "promo d'haloween"
+                        },
                         "title": "Traduction en français",
                         "text": "café"
                     },
                     {
                         "id": "prod_bc477fe21a7c92c52256",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "current_pricing": {
+                            "id": "prodprice_e634719eaa3b3bd",
+                            "price_including_taxes": 880,
+                            "price_excluding_taxes": 800,
+                            "vat_value": 80,
+                            "vat_rate": 10
+                        },
+                        "current_discount": null,
+                        "original_pricing": {
+                            "id": "prodprice_e634719eaa3b3bd",
+                            "price_including_taxes": 880,
+                            "price_excluding_taxes": 800,
+                            "vat_value": 80,
+                            "vat_rate": 10
+                        },
+                        "discount": null,
                         "title": "Traduction en français",
                         "text": "apéritif"
+                    },
+                    {
+                        "id": "prod_19ad05fce8103175db0e",
+                        "deleted_at": null,
+                        "created_at": "2021-03-31T14:28:10.000000Z",
+                        "updated_at": "2021-03-31T14:59:52.000000Z",
+                        "current_pricing": {
+                            "id": "prodprice_99fc0e124cd4fe8",
+                            "price_including_taxes": 110,
+                            "price_excluding_taxes": 100,
+                            "vat_value": 10,
+                            "vat_rate": 10
+                        },
+                        "current_discount": null,
+                        "original_pricing": {
+                            "id": "prodprice_99fc0e124cd4fe8",
+                            "price_including_taxes": 110,
+                            "price_excluding_taxes": 100,
+                            "vat_value": 10,
+                            "vat_rate": 10
+                        },
+                        "discount": null,
+                        "title": "Traduction française",
+                        "text": "heure de coworking"
                     }
                 ],
                 "composite_products": [],
-                "discounts": []
+                "discounts": [
+                    {
+                        "id": "discount_34acc06c4ccd5022",
+                        "discount_type": "percentage",
+                        "amount": 10,
+                        "start_at": "2021-03-05 00:00:00",
+                        "end_at": "2021-05-25 00:00:00",
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": {
+                            "id": "promocode_17d78ae0a3bfb0a",
+                            "code": "PROMO10",
+                            "number_used": 0,
+                            "maximum_usage": 1,
+                            "combinable_with_offers": false,
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "title": "Traduction en français",
+                            "text": "Code promo 10%"
+                        },
+                        "title": "traduction française",
+                        "text": "promo d'été"
+                    }
+                ]
             },
             {
                 "id": "cat_d10be1a57a0fddafc85b5",
                 "deleted_at": null,
-                "created_at": "2021-03-19T12:17:31.000000Z",
-                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": null,
                 "title": "Traduction en français",
                 "text": "nourriture",
                 "products": [
                     {
                         "id": "prod_c93e0a2194593f85a7a6",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "current_pricing": {
+                            "id": "prodprice_3169e3f7b71af10",
+                            "price_including_taxes": 550,
+                            "price_excluding_taxes": 500,
+                            "vat_value": 50,
+                            "vat_rate": 10
+                        },
+                        "current_discount": null,
+                        "original_pricing": {
+                            "id": "prodprice_3169e3f7b71af10",
+                            "price_including_taxes": 550,
+                            "price_excluding_taxes": 500,
+                            "vat_value": 50,
+                            "vat_rate": 10
+                        },
+                        "discount": null,
                         "title": "Traduction en français",
                         "text": "Salade"
                     }
@@ -496,8 +961,9 @@ curl -X GET \
             {
                 "id": "cat_3a61a9ed91efe584ca27c",
                 "deleted_at": null,
-                "created_at": "2021-03-19T12:17:31.000000Z",
-                "updated_at": "2021-03-19T12:17:31.000000Z",
+                "created_at": "2021-03-29T09:30:59.000000Z",
+                "updated_at": "2021-03-29T09:30:59.000000Z",
+                "discount": null,
                 "title": "Traduction en français",
                 "text": "repas",
                 "products": [],
@@ -505,16 +971,52 @@ curl -X GET \
                     {
                         "id": "prodc_05ba52372e3c09a8219",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "current_pricing": {
+                            "id": "prodcprice_4e0706a388edfd",
+                            "composite_product_id": "prodc_05ba52372e3c09a8219",
+                            "price_including_taxes": 660,
+                            "price_excluding_taxes": 600,
+                            "vat_value": 60,
+                            "vat_rate": 10
+                        },
+                        "current_discount": null,
+                        "original_pricing": {
+                            "id": "prodcprice_4e0706a388edfd",
+                            "composite_product_id": "prodc_05ba52372e3c09a8219",
+                            "price_including_taxes": 660,
+                            "price_excluding_taxes": 600,
+                            "vat_value": 60,
+                            "vat_rate": 10
+                        },
+                        "discount": null,
                         "title": "Traduction en français",
                         "text": "petit déjeuner"
                     },
                     {
                         "id": "prodc_bb6bca80cb0ac3484fb",
                         "deleted_at": null,
-                        "created_at": "2021-03-19T12:17:31.000000Z",
-                        "updated_at": "2021-03-19T12:17:31.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "current_pricing": {
+                            "id": "prodcprice_4c079f8a1647ea",
+                            "composite_product_id": "prodc_bb6bca80cb0ac3484fb",
+                            "price_including_taxes": 1100,
+                            "price_excluding_taxes": 1000,
+                            "vat_value": 100,
+                            "vat_rate": 10
+                        },
+                        "current_discount": null,
+                        "original_pricing": {
+                            "id": "prodcprice_4c079f8a1647ea",
+                            "composite_product_id": "prodc_bb6bca80cb0ac3484fb",
+                            "price_including_taxes": 1100,
+                            "price_excluding_taxes": 1000,
+                            "vat_value": 100,
+                            "vat_rate": 10
+                        },
+                        "discount": null,
                         "title": "Traduction en français",
                         "text": "déjeuner"
                     }
@@ -677,17 +1179,18 @@ curl -X POST \
 
 ```json
 {
-    "timestamp": 1615892262,
-    "signature": "396b2ef2a1b7f2b1e65093c95a727eda",
+    "timestamp": 1617277384,
+    "signature": "38f9e1d7c90ae9495206c920eb2eecad",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cat_d534f04d2c1902588573a",
-            "updated_at": "2021-03-16T10:57:42.000000Z",
-            "created_at": "2021-03-16T10:57:42.000000Z",
+            "id": "cat_7212aa03fc13a5d1163bd",
+            "updated_at": "2021-04-01T11:43:04.000000Z",
+            "created_at": "2021-04-01T11:43:04.000000Z",
+            "discount": null,
             "title": "Traduction française",
-            "text": "Soins"
+            "text": "coworking"
         }
     }
 }
@@ -777,18 +1280,19 @@ curl -X DELETE \
 
 ```json
 {
-    "timestamp": 1615898916,
-    "signature": "752ef8f23f86eb628958c7be72985d12",
+    "timestamp": 1617277460,
+    "signature": "95f64d391d0ce842049e5db2fff8ae43",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cat_d534f04d2c1902588573a",
-            "deleted_at": "2021-03-16T12:48:36.000000Z",
-            "created_at": "2021-03-16T10:57:42.000000Z",
-            "updated_at": "2021-03-16T12:48:36.000000Z",
-            "title": "Traduction française",
-            "text": "Soins"
+            "id": "cat_7212aa03fc13a5d1163bd",
+            "deleted_at": "2021-04-01T11:44:19.000000Z",
+            "created_at": "2021-04-01T11:43:04.000000Z",
+            "updated_at": "2021-04-01T11:44:19.000000Z",
+            "discount": null,
+            "title": null,
+            "text": null
         }
     }
 }
@@ -890,20 +1394,20 @@ curl -X POST \
 
 ```json
 {
-    "timestamp": 1615899810,
-    "signature": "bcb5e0896723649122bc31278620574b",
+    "timestamp": 1617277413,
+    "signature": "fcfea7eeb8418a56e0bc26f553f1d96f",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cattrad_8753c99c98e1e45e8",
-            "category_id": "cat_30f5cb24a6eb5c50318bf",
+            "id": "cattrad_f9020ff471fe2001d",
+            "category_id": "cat_7212aa03fc13a5d1163bd",
             "locale": "en-US",
             "title": "English translation",
-            "text": "Care",
+            "text": "coworking",
             "deleted_at": null,
-            "created_at": "2021-03-16T13:03:30.000000Z",
-            "updated_at": "2021-03-16T13:03:30.000000Z"
+            "created_at": "2021-04-01T11:43:33.000000Z",
+            "updated_at": "2021-04-01T11:43:33.000000Z"
         }
     }
 }
@@ -1009,20 +1513,20 @@ curl -X DELETE \
 
 ```json
 {
-    "timestamp": 1615899817,
-    "signature": "e4e6ba55ca00f54856bc36717f94bbf2",
+    "timestamp": 1617277440,
+    "signature": "4dede59c5b6ac574700986efa7ae4c3a",
     "content": {
         "success": true,
         "async": false,
         "body": {
-            "id": "cattrad_8753c99c98e1e45e8",
-            "category_id": "cat_30f5cb24a6eb5c50318bf",
+            "id": "cattrad_f9020ff471fe2001d",
+            "category_id": "cat_7212aa03fc13a5d1163bd",
             "locale": "en-US",
             "title": "English translation",
-            "text": "Care",
-            "deleted_at": "2021-03-16T13:03:37.000000Z",
-            "created_at": "2021-03-16T13:03:30.000000Z",
-            "updated_at": "2021-03-16T13:03:37.000000Z"
+            "text": "coworking",
+            "deleted_at": "2021-04-01T11:44:00.000000Z",
+            "created_at": "2021-04-01T11:43:33.000000Z",
+            "updated_at": "2021-04-01T11:44:00.000000Z"
         }
     }
 }

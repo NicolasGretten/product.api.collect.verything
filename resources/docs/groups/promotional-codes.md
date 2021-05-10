@@ -117,66 +117,49 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615937418,
-    "signature": "89652cf07c213a7d38aea727c8bfae93",
+    "timestamp": 1617277612,
+    "signature": "7515c4bbfee8db5c4ed7f8496bea8cf0",
     "content": {
         "success": true,
         "async": false,
-        "body": [
-            {
-                "id": "promocode_17d78ae0a3bfb0a",
-                "code": "PROMO10",
-                "start_at": "2021-03-15 00:00:00",
-                "end_at": null,
-                "amount": 150,
-                "number_used": 0,
-                "maximum_usage": 1,
-                "combinable_with_offers": false,
-                "promotional_code_type": "pourcent",
-                "deleted_at": null,
-                "created_at": "2021-03-16T21:54:03.000000Z",
-                "updated_at": "2021-03-16T21:54:03.000000Z",
-                "title": "Traduction en français",
-                "text": "Code promo 10%",
-                "translations_list": [
-                    {
-                        "id": "promocodetrade1f00d7e2e49",
-                        "promotional_code_id": "promocode_17d78ae0a3bfb0a",
-                        "locale": "fr-FR",
+        "body": {
+            "id": "promocode_17d78ae0a3bfb0a",
+            "code": "PROMO10",
+            "number_used": 0,
+            "maximum_usage": 1,
+            "combinable_with_offers": false,
+            "deleted_at": null,
+            "created_at": "2021-03-29T09:31:00.000000Z",
+            "updated_at": "2021-03-29T09:31:00.000000Z",
+            "title": "Traduction en français",
+            "text": "Code promo 10%",
+            "discounts": [
+                {
+                    "id": "discount_34acc06c4ccd5022",
+                    "discount_type": "percentage",
+                    "amount": 10,
+                    "start_at": "2021-03-05 00:00:00",
+                    "end_at": "2021-05-25 00:00:00",
+                    "deleted_at": null,
+                    "created_at": "2021-03-29T09:31:00.000000Z",
+                    "updated_at": "2021-03-29T09:31:00.000000Z",
+                    "promotional_code": {
+                        "id": "promocode_17d78ae0a3bfb0a",
+                        "code": "PROMO10",
+                        "number_used": 0,
+                        "maximum_usage": 1,
+                        "combinable_with_offers": false,
+                        "deleted_at": null,
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
                         "title": "Traduction en français",
-                        "text": "Code promo 10%",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
+                        "text": "Code promo 10%"
                     },
-                    {
-                        "id": "promocodetrad28a04008b127",
-                        "promotional_code_id": "promocode_17d78ae0a3bfb0a",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Promo code 10%",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
-                    }
-                ],
-                "discounts": [
-                    {
-                        "id": "discount_34acc06c4ccd5022",
-                        "discount_type": "pourcent",
-                        "promotional_code_id": "promocode_17d78ae0a3bfb0a",
-                        "amount": 10,
-                        "start_at": "2021-05-05 00:00:00",
-                        "end_at": "2021-05-25 00:00:00",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z",
-                        "title": "traduction française",
-                        "text": "promo d'été"
-                    }
-                ]
-            }
-        ]
+                    "title": "traduction française",
+                    "text": "promo d'été"
+                }
+            ]
+        }
     }
 }
 ```
@@ -416,8 +399,8 @@ curl -X GET \
 
 ```json
 {
-    "timestamp": 1615937295,
-    "signature": "42e0b1e36c512ee0c009320f29cdea40",
+    "timestamp": 1617277583,
+    "signature": "09ed51aa43c87a12fb92650460684539",
     "content": {
         "success": true,
         "async": false,
@@ -433,51 +416,36 @@ curl -X GET \
             {
                 "id": "promocode_17d78ae0a3bfb0a",
                 "code": "PROMO10",
-                "start_at": "2021-03-15 00:00:00",
-                "end_at": null,
-                "amount": 150,
                 "number_used": 0,
                 "maximum_usage": 1,
                 "combinable_with_offers": false,
-                "promotional_code_type": "pourcent",
                 "deleted_at": null,
-                "created_at": "2021-03-16T21:54:03.000000Z",
-                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-29T09:31:00.000000Z",
                 "title": "Traduction en français",
                 "text": "Code promo 10%",
-                "translations_list": [
-                    {
-                        "id": "promocodetrade1f00d7e2e49",
-                        "promotional_code_id": "promocode_17d78ae0a3bfb0a",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "Code promo 10%",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
-                    },
-                    {
-                        "id": "promocodetrad28a04008b127",
-                        "promotional_code_id": "promocode_17d78ae0a3bfb0a",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Promo code 10%",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
-                    }
-                ],
                 "discounts": [
                     {
                         "id": "discount_34acc06c4ccd5022",
-                        "discount_type": "pourcent",
-                        "promotional_code_id": "promocode_17d78ae0a3bfb0a",
+                        "discount_type": "percentage",
                         "amount": 10,
-                        "start_at": "2021-05-05 00:00:00",
+                        "start_at": "2021-03-05 00:00:00",
                         "end_at": "2021-05-25 00:00:00",
                         "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z",
+                        "created_at": "2021-03-29T09:31:00.000000Z",
+                        "updated_at": "2021-03-29T09:31:00.000000Z",
+                        "promotional_code": {
+                            "id": "promocode_17d78ae0a3bfb0a",
+                            "code": "PROMO10",
+                            "number_used": 0,
+                            "maximum_usage": 1,
+                            "combinable_with_offers": false,
+                            "deleted_at": null,
+                            "created_at": "2021-03-29T09:31:00.000000Z",
+                            "updated_at": "2021-03-29T09:31:00.000000Z",
+                            "title": "Traduction en français",
+                            "text": "Code promo 10%"
+                        },
                         "title": "traduction française",
                         "text": "promo d'été"
                     }
@@ -486,55 +454,15 @@ curl -X GET \
             {
                 "id": "promocode_779cf772199954f",
                 "code": "PROMO50",
-                "start_at": "2021-03-20 00:00:00",
-                "end_at": "2021-03-30 00:00:00",
-                "amount": 50,
                 "number_used": 0,
                 "maximum_usage": 1,
                 "combinable_with_offers": true,
-                "promotional_code_type": "pourcent",
                 "deleted_at": null,
-                "created_at": "2021-03-16T21:54:03.000000Z",
-                "updated_at": "2021-03-16T21:54:03.000000Z",
+                "created_at": "2021-03-29T09:31:00.000000Z",
+                "updated_at": "2021-03-30T17:06:13.000000Z",
                 "title": "Traduction en français",
                 "text": "Code promo 50%",
-                "translations_list": [
-                    {
-                        "id": "promocodetradf6130342219f",
-                        "promotional_code_id": "promocode_779cf772199954f",
-                        "locale": "fr-FR",
-                        "title": "Traduction en français",
-                        "text": "Code promo 50%",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
-                    },
-                    {
-                        "id": "promocodetrad663f5599c466",
-                        "promotional_code_id": "promocode_779cf772199954f",
-                        "locale": "en-US",
-                        "title": "English Translations",
-                        "text": "Promo code 50%",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T21:54:03.000000Z",
-                        "updated_at": "2021-03-16T21:54:03.000000Z"
-                    }
-                ],
-                "discounts": [
-                    {
-                        "id": "discount_ef5285ab40773ab4",
-                        "discount_type": "pourcent",
-                        "promotional_code_id": "promocode_779cf772199954f",
-                        "amount": 50,
-                        "start_at": "2021-03-16 00:00:00",
-                        "end_at": "2021-05-16 00:00:00",
-                        "deleted_at": null,
-                        "created_at": "2021-03-16T22:10:11.000000Z",
-                        "updated_at": "2021-03-16T22:10:11.000000Z",
-                        "title": "Traduction française",
-                        "text": "Promo d'hiver"
-                    }
-                ]
+                "discounts": []
             }
         ]
     }
