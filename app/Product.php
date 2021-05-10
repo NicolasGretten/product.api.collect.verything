@@ -101,20 +101,63 @@ class Product extends Model
         $originalPrice = $this->getOriginalPricingAttribute();
 
         /*
-         * le discount sur le produit passe en priorité
+         * si il existe seulement un discount sur le produit
          */
-        if ($this->getDiscounts() != null) {
+        if ($this->getDiscounts() != null && $this->getCategoryDiscount() === null)
+        {
             $discount = $this->checkDiscount($this->getDiscounts(), $code);
-            if ($discount === false){
+            if ($discount === false || $discount === null){
                 return $originalPrice;
             }
         }
         /*
-         * si aucun discount sur le produit existe on ckeck si un discount sur la category existe
+         * si il existe seulement un discount sur la category
          */
-        elseif ($this->getCategoryDiscount() != null) {
+        elseif ($this->getCategoryDiscount() != null && $this->getDiscounts() === null)
+        {
             $discount = $this->checkDiscount($this->getCategoryDiscount(), $code);
-            if ($discount === false){
+            if ($discount === false || $discount === null){
+                return $originalPrice;
+            }
+        }
+
+        /*
+         * si il existe un discount sur le produit et la category
+         */
+        elseif (($this->getCategoryDiscount() != null && $this->getDiscounts() != null))
+        {
+            /*
+             * check des discount, en passant en paramètre les collection correspondante et le code si il existe
+             */
+            $checkDiscount = $this->checkDiscount($this->getDiscounts(), $code);
+            $checkCategoryDiscount = $this->checkDiscount($this->getCategoryDiscount(), $code);
+
+            /*
+             * on check la valeur de retour des fonction en respectant une certaine régle dans les discount
+             * 1) le code promo passe en priorité ensuite le discount sur un produit pour terminer le discount sur la category
+             * 2) le produit peu au maximum avoir un discount appliqué et un code promo, idem pour la categorie
+             * 3) un produit peut avoir en même temps un code promo provenant de sa categorie et un code promo applicable sur lui même, mais un seul peu être appliqué
+             */
+
+            if ($checkDiscount === null){
+                $discount = $checkCategoryDiscount;
+            }
+
+            if ($checkCategoryDiscount === null){
+                $discount = $checkDiscount;
+            }
+
+            /*
+             * le discount sur le produit passe en priorité
+             */
+            if ($checkDiscount != null && $checkCategoryDiscount != null){
+                $discount = $checkDiscount;
+            }
+
+            /*
+             * si le code ne correspond a aucun des code appliqué on return le prix d'origine
+             */
+            if ( $checkDiscount === null && $checkCategoryDiscount === null){
                 return $originalPrice;
             }
         }
@@ -155,6 +198,7 @@ class Product extends Model
         $currentPricing->vat_value = $discount->vat_value;
         $currentPricing->vat_rate = $originalPrice->vat_rate;
 
+
         return ['current_pricing' => $currentPricing, 'current_discount' => $discount->makeHidden('vat_value', 'price_excluding_taxes', 'price_including_taxes')];
     }
 
@@ -176,7 +220,7 @@ class Product extends Model
                     }
                 }
                 else {
-                    return false;
+                    return null;
                 }
             }
             else{
@@ -184,7 +228,7 @@ class Product extends Model
             }
         }
         /*
-         * dans le cas où il un discount et un promo code existant
+         * dans le cas où il un discount est un promo code existant
          */
         if ($code != null) {
             $discount = $discountCollection->where('promotional_code_id', $code)->first();
@@ -211,7 +255,7 @@ class Product extends Model
 
     public function getDiscounts()
     {
-        if ($this->discounts()->exists()) {
+        if ($this->discounts()->where('start_at','<=', Carbon::now())->exists()) {
             return $this->discounts()
                 ->where('start_at', '<=', Carbon::now())
                 ->where('end_at', '>', Carbon::now())

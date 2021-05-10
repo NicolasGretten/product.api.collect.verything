@@ -1,7 +1,0 @@
----
-{!! $frontmatter !!}
----
-
-# Introduction
-
-{!! $introText !!}
