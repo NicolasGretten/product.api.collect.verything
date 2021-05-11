@@ -76,7 +76,7 @@ class ProductController extends ControllerBase
                 }
                 $product = $resultSet->first();
 
-                if ($product == null)
+                if (empty($product))
                 {
                     throw new Exception('The product doesn\'t exist.');
                 }
@@ -605,7 +605,7 @@ class ProductController extends ControllerBase
 
             $availability = $resultSet->first();
 
-            $availability->days             = json_decode($request->input('days', $availability->getOriginal('days')));
+            $availability->days             = json_encode($request->input('days', $availability->getOriginal('days')));
             $availability->hour_start       = $request->input('hour_start', $availability->getOriginal('hour_start'));
             $availability->hour_end         = $request->input('hour_end', $availability->getOriginal('hour_end'));
 
