@@ -72,7 +72,7 @@ class Category extends Model
 
     public function compositeProductCategory(): HasMany
     {
-        return $this->hasMany('App\compositeProductCategory');
+        return $this->hasMany('App\CompositeProductCategory');
     }
 
     public function ProductTemplate(): HasMany

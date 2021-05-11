@@ -61,6 +61,10 @@ class DiscountController extends ControllerBase
             $resultSet = Discount::select('discounts.*')
                 ->where('discounts.id', $request->discount_id);
 
+            if (empty($resultSet->first())){
+                throw new Exception('The discount doesn\'t exists.', 404);
+            }
+
             $this->filter($resultSet, ['relations']);
 
             $discount = $resultSet->first();

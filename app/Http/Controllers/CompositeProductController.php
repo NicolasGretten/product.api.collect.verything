@@ -589,7 +589,7 @@ class CompositeProductController extends ControllerBase
 
             $availability = $resultSet->first();
 
-            $availability->days              = json_decode($request->input('days', $availability->getOriginal('days')));
+            $availability->days              = json_encode($request->input('days', $availability->getOriginal('days')));
             $availability->hour_start       = $request->input('hour_start', $availability->getOriginal('hour_start'));
             $availability->hour_end         = $request->input('hour_end', $availability->getOriginal('hour_end'));
 
