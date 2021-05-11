@@ -558,7 +558,7 @@ class CompositeProductController extends ControllerBase
      *
      * @urlParam    composite_product_id    required        Id of the product to update     Example: prodc_05ba52372e3c09a8219
      *
-     * @queryParam  day                     required        day available                   Example: ["monday","tuesday","wednesday"]
+     * @queryParam  days                    required        day available                   Example: ["monday","tuesday","wednesday"]
      * @queryParam  hour_start              required        Hour start                      Example: 08:00:00
      * @queryParam  hour_end                required        Hour end                        Example: 10:00:00
      *
