@@ -3,11 +3,8 @@
 namespace App\Publishers;
 use \Amranidev\MicroBus\Sns\Facades\Publisher as MicrobusPublisher;
 
-use Exception;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use stdClass;
 
 class Publisher {
     public static function publish($class) {
