@@ -9,7 +9,7 @@ return [
     | Contains an array with the applications available locales.
     |
     */
-    'locales' => getLocalesAllowed(),
+    // 'locales' => getLocalesAllowed(), // todo : Bug Please make sure you have run `php artisan vendor:publish --provider=\"Astrotomic\\Translatable\\TranslatableServiceProvider\"` and that the locales configuration is defined.
 
     /*
     |--------------------------------------------------------------------------
