@@ -41,7 +41,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function date(Builder $builder)
+    public function date(Builder $builder): FiltersTrait
     {
         $requestedFilters = request()->get('filters');
 
@@ -152,7 +152,7 @@ trait FiltersTrait
      * @return FiltersTrait
      * @throws Exception
      */
-    public function status(Builder $builder)
+    public function status(Builder $builder): FiltersTrait
     {
         $requestedFilters = request()->get('filters');
 
@@ -178,7 +178,7 @@ trait FiltersTrait
      *
      * @return FiltersTrait
      */
-    public function itemsId(Builder $builder)
+    public function itemsId(Builder $builder): FiltersTrait
     {
         if (!empty(request()->get('items_id'))) {
             $items = json_decode(request()->get('items_id'));
@@ -193,7 +193,7 @@ trait FiltersTrait
         return $this;
     }
 
-    public function relations(Builder $builder)
+    public function relations(Builder $builder): FiltersTrait
     {
         $requestedFilters = request()->get('filters');
         if ($requestedFilters === null) {
@@ -220,6 +220,29 @@ trait FiltersTrait
                 return $this;
             }
         }
+        return $this;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     * @throws Exception
+     */
+    public function deleted(Builder $builder): FiltersTrait
+    {
+        $requestedFilters = request()->get('filters');
+
+        if ($requestedFilters === null) {
+            return $this;
+        }
+
+        foreach ($requestedFilters as $filterName => $filterValue) {
+            if ($filterName === 'deleted' and $filterValue == "true") {
+                $builder->withTrashed();
+            }
+        }
+
         return $this;
     }
 }
