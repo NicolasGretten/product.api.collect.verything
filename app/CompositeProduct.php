@@ -234,19 +234,19 @@ class CompositeProduct extends Model
     }
     public function compositeProductAvailability(): HasMany
     {
-        return $this->hasMany('App\compositeProductAvailability');
+        return $this->hasMany('App\CompositeProductAvailability');
     }
     public function compositeProductDiscount(): HasMany
     {
-        return $this->hasMany('App\compositeProductDiscount');
+        return $this->hasMany('App\CompositeProductDiscount');
     }
     public function compositeProductPrice(): HasMany
     {
-        return $this->hasMany('App\compositeProductPrice');
+        return $this->hasMany('App\CompositeProductPrice');
     }
     public function compositeProductProduct(): HasMany
     {
-        return $this->hasMany('App\compositeProductProduct');
+        return $this->hasMany('App\CompositeProductProduct');
     }
 
     public function translationsList(): HasMany

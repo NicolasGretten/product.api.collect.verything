@@ -309,7 +309,7 @@ class Product extends Model
 
     public function compositeProductProduct(): HasMany
     {
-        return $this->hasMany('App\compositeProductProduct');
+        return $this->hasMany('App\CompositeProductProduct');
     }
 
     public function delete(): ?bool
