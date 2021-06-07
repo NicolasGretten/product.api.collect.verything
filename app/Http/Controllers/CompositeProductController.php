@@ -52,7 +52,7 @@ class CompositeProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:products,availabilities,categories',
+                //'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
                 'code' => 'string',
             ]);
 
@@ -142,7 +142,7 @@ class CompositeProductController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:products,availabilities,categories',
+                //'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
                 'items_id'              => 'json',
                 'code'                  => 'string'
             ]);

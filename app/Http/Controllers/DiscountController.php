@@ -53,7 +53,7 @@ class DiscountController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:products,compositeProducts,categories',
+                //'filters.relations'     => 'json|relations:products,compositeProducts,categories',
             ]);
 
             $this->setLocale();
@@ -128,7 +128,7 @@ class DiscountController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:products,compositeProducts,categories',
+                //'filters.relations'     => 'json|relations:products,compositeProducts,categories',
                 'items_id'              => 'json'
             ]);
 

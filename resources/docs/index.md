@@ -1,5 +1,5 @@
 ---
-title: product.api.hopn.space
+title: api.hopn.space
 
 language_tabs:
 - php

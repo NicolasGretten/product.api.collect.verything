@@ -55,7 +55,7 @@ class ProductController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
+                //'filters.relations'     => 'json|relations:availabilities,categories',
                 'code'                  => 'string',
             ]);
 
@@ -155,7 +155,7 @@ class ProductController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
+                //'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
                 'items_id'              => 'json',
                 'code'                  => 'string'
             ]);
@@ -183,6 +183,7 @@ class ProductController extends ControllerBase
                     $product->code($resultCode->id)->getCurrentPricingAttribute();
                     $product->code($resultCode->id)->getDiscountAttribute();
                 }
+
                 return response()->json($products, 200,['pagination' => $this->pagination]);
             }
             else{
