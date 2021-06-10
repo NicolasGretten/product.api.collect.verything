@@ -185,6 +185,7 @@ class ProductController extends ControllerBase
                     $product->code($resultCode->id)->getCurrentPricingAttribute();
                     $product->code($resultCode->id)->getDiscountAttribute();
                 }
+
                 return response()->json($products, 200,['pagination' => $this->pagination]);
             }
             else{
