@@ -48,7 +48,8 @@ class CategoryController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'filters.relations'        => 'json|relations:products,compositeProducts,discounts',
+                'filters.relations'               => 'json',
+//                'filters.relations'        => 'json|relations:products,compositeProducts,discounts',
             ]);
 
             $this->setLocale();
@@ -119,7 +120,8 @@ class CategoryController extends ControllerBase
             $this->validate($request, [
                 'limit'                 => 'int|required_with:page',
                 'page'                  => 'int|required_with:limit',
-                'filters.relations'     => 'json|relations:products,compositeProducts,discounts',
+                'filters.relations'               => 'json',
+//                'filters.relations'     => 'json|relations:products,compositeProducts,discounts',
                 'items_id'              => 'json'
             ]);
 
