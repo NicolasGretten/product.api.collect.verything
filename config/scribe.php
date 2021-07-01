@@ -130,7 +130,7 @@ INTRO
          * The base URL to be used in the Postman collection.
          * If this is null, Scribe will use the value of base_url set above.
          */
-        'base_url' => null,
+        'base_url' => env('APP_URL'),
 
         /*
          * The description for the exported Postman collection.
