@@ -103,5 +103,27 @@ class CategoriesTranslationsSeeder extends Seeder
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
         ]);
+
+        DB::connection('data')->table('categories_translations')->insert([
+            'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
+            'category_id'               => 'cat_3a61a9ed91efe584ca29c',
+            'locale'                    => 'fr-FR',
+            'title'                     => 'Traduction en français',
+            'text'                      => 'coworking',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('categories_translations')->insert([
+            'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
+            'category_id'               => 'cat_3a61a9ed91efe584ca29c',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'coworking',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
     }
 }

@@ -53,5 +53,13 @@ class ProductsCategoriesSeeder extends Seeder
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
+
+        DB::connection('data')->table('products_categories')->insert([
+            'id'                    => substr('prodcat' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52255',//h coworking
+            'category_id'           => 'cat_3a61a9ed91efe584ca29c',//coworking
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }

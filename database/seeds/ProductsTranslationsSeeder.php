@@ -125,5 +125,27 @@ class ProductsTranslationsSeeder extends Seeder
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
         ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52256',
+            'locale'                    => 'fr-FR',
+            'title'                     => 'Traduction en français',
+            'text'                      => 'apéritif',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52256',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'aperitif',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
     }
 }
