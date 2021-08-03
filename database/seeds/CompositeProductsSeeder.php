@@ -25,5 +25,11 @@ class CompositeProductsSeeder extends Seeder
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
+
+        DB::connection('data')->table('composite_products')->insert([
+            'id'                    => 'prodc_bb6bca80cb0ac3484xx',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }

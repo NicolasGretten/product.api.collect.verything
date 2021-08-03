@@ -125,5 +125,6 @@ class CategoriesTranslationsSeeder extends Seeder
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
         ]);
+
     }
 }
