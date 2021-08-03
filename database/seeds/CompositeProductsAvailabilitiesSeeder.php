@@ -33,5 +33,15 @@ class CompositeProductsAvailabilitiesSeeder extends Seeder
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
+
+        DB::connection('data')->table('composite_products_availabilities')->insert([
+            'id'                    => substr('prodcavail_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484xx',//formule cowroking
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
+            'hour_start'            => '08:00:00',
+            'hour_end'              => '12:00:00',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }

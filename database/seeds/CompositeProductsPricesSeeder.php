@@ -35,5 +35,16 @@ class CompositeProductsPricesSeeder extends Seeder
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
+
+        DB::connection('data')->table('composite_products_prices')->insert([
+            'id'                    => substr('prodcprice_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484xx',//formule coworking
+            'price_including_taxes' => '220',
+            'price_excluding_taxes' => '200',
+            'vat_value'             => '020',
+            'vat_rate'              => '10',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }

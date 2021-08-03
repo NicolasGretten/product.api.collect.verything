@@ -63,5 +63,15 @@ class ProductsAvailabilitiesSeeder extends Seeder
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
+
+        DB::connection('data')->table('products_availabilities')->insert([
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52255',//h coworking
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
+            'hour_start'            => '8:00:00',
+            'hour_end'              => '18:00:00',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }

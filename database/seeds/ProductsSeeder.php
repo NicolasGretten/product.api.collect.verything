@@ -44,5 +44,10 @@ class ProductsSeeder extends Seeder
             'updated_at'            => Carbon::now(),
         ]);
 
+        DB::connection('data')->table('products')->insert([
+            'id'                    => 'prod_bc477fe21a7c92c52255',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }
