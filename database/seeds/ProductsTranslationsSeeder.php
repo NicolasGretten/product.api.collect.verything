@@ -131,7 +131,7 @@ class ProductsTranslationsSeeder extends Seeder
             'product_id'                => 'prod_bc477fe21a7c92c52255',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
-            'text'                      => 'Heure de corworking',
+            'text'                      => 'Heure de coworking',
             'created_at'                => Carbon::now(),
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
@@ -143,6 +143,29 @@ class ProductsTranslationsSeeder extends Seeder
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
             'text'                      => 'Hour of Coworking',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52266',
+            'locale'                    => 'fr-FR',
+            'title'                     => 'Traduction en français',
+            'text'                      => 'Heure de meeting',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52266',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'Hour of Meeting',
             'created_at'                => Carbon::now(),
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
