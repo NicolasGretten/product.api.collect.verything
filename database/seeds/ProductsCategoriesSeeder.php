@@ -57,7 +57,7 @@ class ProductsCategoriesSeeder extends Seeder
         DB::connection('data')->table('products_categories')->insert([
             'id'                    => substr('prodcat' . md5(Str::uuid()), 0, 25),
             'product_id'            => 'prod_bc477fe21a7c92c52255',//h coworking
-            'category_id'           => 'cat_3a61a9ed91efe584ca29c',//coworking
+            'category_id'           => 'cat_3a61a9ed91efe584ca29c',//slots_prices
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);

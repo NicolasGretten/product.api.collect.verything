@@ -109,7 +109,7 @@ class CategoriesTranslationsSeeder extends Seeder
             'category_id'               => 'cat_3a61a9ed91efe584ca29c',
             'locale'                    => 'fr-FR',
             'title'                     => 'Traduction en français',
-            'text'                      => 'coworking',
+            'text'                      => 'slots_prices',
             'created_at'                => Carbon::now(),
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
@@ -120,7 +120,7 @@ class CategoriesTranslationsSeeder extends Seeder
             'category_id'               => 'cat_3a61a9ed91efe584ca29c',
             'locale'                    => 'en-US',
             'title'                     => 'English Translations',
-            'text'                      => 'coworking',
+            'text'                      => 'slots_prices',
             'created_at'                => Carbon::now(),
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
