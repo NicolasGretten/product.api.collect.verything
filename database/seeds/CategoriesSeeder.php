@@ -43,5 +43,17 @@ class CategoriesSeeder extends Seeder
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now(),
         ]);
+
+        DB::connection('data')->table('categories')->insert([
+            'id'            => 'cat_3a61a9ed91efe584ca29z',
+            'created_at'    => Carbon::now(),
+            'updated_at'    => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('categories')->insert([
+            'id'            => 'cat_3a61a9ed91efe584ca29x',
+            'created_at'    => Carbon::now(),
+            'updated_at'    => Carbon::now(),
+        ]);
     }
 }

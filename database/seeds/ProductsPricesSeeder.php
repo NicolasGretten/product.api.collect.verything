@@ -90,5 +90,52 @@ class ProductsPricesSeeder extends Seeder
              'created_at'            => Carbon::now(),
              'updated_at'            => Carbon::now(),
          ]);
+
+
+        DB::connection('data')->table('products_prices')->insert([
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52zzz',//journée seminaire
+            'price_including_taxes' => '11000',
+            'price_excluding_taxes' => '10000',
+            'vat_value'             => '1000',
+            'vat_rate'              => '10',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products_prices')->insert([
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52aaa',
+            'price_including_taxes' => '5500',
+            'price_excluding_taxes' => '5000',
+            'vat_value'             => '500',
+            'vat_rate'              => '10',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+
+
+        DB::connection('data')->table('products_prices')->insert([
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52ttt',
+            'price_including_taxes' => '1100',
+            'price_excluding_taxes' => '1000',
+            'vat_value'             => '100',
+            'vat_rate'              => '10',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products_prices')->insert([
+            'id'                    => substr('prodprice_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52yyy',
+            'price_including_taxes' => '1100',
+            'price_excluding_taxes' => '1000',
+            'vat_value'             => '100',
+            'vat_rate'              => '10',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }
