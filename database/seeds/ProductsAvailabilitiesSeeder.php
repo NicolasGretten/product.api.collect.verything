@@ -83,5 +83,50 @@ class ProductsAvailabilitiesSeeder extends Seeder
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
+
+
+
+        DB::connection('data')->table('products_availabilities')->insert([
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52zzz',//journée de séminaire
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
+            'hour_start'            => '8:00:00',
+            'hour_end'              => '22:00:00',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products_availabilities')->insert([
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52aaa',//repas midi et soir
+            'days'                   => '["monday","tuesday","wednesday","thursday","friday"]',
+            'hour_start'            => '8:00:00',
+            'hour_end'              => '22:00:00',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+
+        DB::connection('data')->table('products_availabilities')->insert([
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52ttt',//acces poool
+            'days'                   => '["monday","tuesday","wednesday","friday"]',
+            'hour_start'            => '8:00:00',
+            'hour_end'              => '22:00:00',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products_availabilities')->insert([
+            'id'                    => substr('prodavail_' . md5(Str::uuid()), 0, 25),
+            'product_id'            => 'prod_bc477fe21a7c92c52yyy',//acces spa
+            'days'                   => '["monday","tuesday","wednesday","thursday"]',
+            'hour_start'            => '8:00:00',
+            'hour_end'              => '22:00:00',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+
     }
 }
