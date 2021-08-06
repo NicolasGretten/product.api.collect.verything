@@ -79,7 +79,7 @@ class ProductController extends ControllerBase
 
                 if (empty($product))
                 {
-                    throw new Exception('The product doesn\'t exist.');
+                    return response()->json($product);
                 }
                 $product->code($resultCode->id)->getCurrentDiscountAttribute();
                 $product->code($resultCode->id)->getCurrentPricingAttribute();
