@@ -236,7 +236,7 @@ class ProductController extends ControllerBase
                 'locale'                        => 'in:'. env('LOCALES_ALLOWED'),
                 'text'                          => 'string',
 
-                'category_id'                   => 'string|exists:categories,id',
+                'category_id'                   => 'string|nullable|exists:categories,id',
 
                 'days'                          => 'json',
                 'hour_start'                    => 'date_format:H:i:s',

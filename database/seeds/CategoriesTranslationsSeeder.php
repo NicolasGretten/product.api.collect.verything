@@ -170,5 +170,27 @@ class CategoriesTranslationsSeeder extends Seeder
             'deleted_at'                => Null
         ]);
 
+        DB::connection('data')->table('categories_translations')->insert([
+            'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
+            'category_id'               => 'cat_8a61a9ed91efe584ca29z',
+            'locale'                    => 'fr-FR',
+            'title'                     => 'Traduction en français',
+            'text'                      => 'meeting_prices',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('categories_translations')->insert([
+            'id'                        => substr('cattrad_' . md5(Str::uuid()), 0, 25),
+            'category_id'               => 'cat_8a61a9ed91efe584ca29z',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'meeting_prices',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
     }
 }
