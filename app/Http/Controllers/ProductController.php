@@ -286,12 +286,16 @@ class ProductController extends ControllerBase
             $price->save();
             $product->price = $price;
 
-            $category = new ProductCategory();
-            $category->id               = $this->generateId('prodcat', $category);
-            $category->product_id       = $id;
-            $category->category_id      = $request->category_id;
-            $category->save();
-            $product->category = $category;
+            if ($request->category_id){
+
+                $category = new ProductCategory();
+                $category->id               = $this->generateId('prodcat', $category);
+                $category->product_id       = $id;
+                $category->category_id      = $request->category_id;
+                $category->save();
+                $product->category = $category;
+            }
+
 
             DB::commit();
 
