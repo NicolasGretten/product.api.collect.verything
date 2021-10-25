@@ -194,7 +194,7 @@ class PromotionalCodeController extends ControllerBase
             $promotional_code->code = $request->code;
             $promotional_code->number_used = empty($request->number_used) ? 0 : $request->number_used;
             $promotional_code->maximum_usage = $request->maximum_usage;
-            $promotional_code->combinable_with_offers = $request->combinable_with_offers;
+            $promotional_code->combinable_with_offers = !empty($request->combinable_with_offers);
 
             if(!empty($request->input('locale'))) {
                 $promotional_code->translateOrNew($request->input('locale'))->fill(['id' => $request->promotional_code_translation_id])->title   = $request->input('title');
