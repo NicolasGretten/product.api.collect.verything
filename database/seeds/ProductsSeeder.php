@@ -44,5 +44,40 @@ class ProductsSeeder extends Seeder
             'updated_at'            => Carbon::now(),
         ]);
 
+        DB::connection('data')->table('products')->insert([
+            'id'                    => 'prod_bc477fe21a7c92c52255',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products')->insert([
+            'id'                    => 'prod_bc477fe21a7c92c52266',
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products')->insert([
+            'id'                    => 'prod_bc477fe21a7c92c52zzz', // journée de séminaire
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products')->insert([
+            'id'                    => 'prod_bc477fe21a7c92c52aaa', // repas midi et soir
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products')->insert([
+            'id'                    => 'prod_bc477fe21a7c92c52ttt', // accès piscine
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
+
+        DB::connection('data')->table('products')->insert([
+            'id'                    => 'prod_bc477fe21a7c92c52yyy', // accès spa
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }

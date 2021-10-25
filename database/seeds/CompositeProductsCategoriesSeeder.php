@@ -29,5 +29,13 @@ class CompositeProductsCategoriesSeeder extends Seeder
             'created_at'            => Carbon::now(),
             'updated_at'            => Carbon::now(),
         ]);
+
+        DB::connection('data')->table('composite_products_categories')->insert([
+            'id'                    => substr('prodccat_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'  => 'prodc_bb6bca80cb0ac3484xx',//formule coworking
+            'category_id'           => 'cat_3a61a9ed91efe584ca29c',//coworking
+            'created_at'            => Carbon::now(),
+            'updated_at'            => Carbon::now(),
+        ]);
     }
 }

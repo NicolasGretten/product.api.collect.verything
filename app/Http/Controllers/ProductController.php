@@ -79,7 +79,7 @@ class ProductController extends ControllerBase
 
                 if (empty($product))
                 {
-                    throw new Exception('The product doesn\'t exist.');
+                    return response()->json($product);
                 }
                 $product->code($resultCode->id)->getCurrentDiscountAttribute();
                 $product->code($resultCode->id)->getCurrentPricingAttribute();
@@ -236,7 +236,7 @@ class ProductController extends ControllerBase
                 'locale'                        => 'in:'. env('LOCALES_ALLOWED'),
                 'text'                          => 'string',
 
-                'category_id'                   => 'string|exists:categories,id',
+                'category_id'                   => 'string|nullable|exists:categories,id',
 
                 'days'                          => 'json',
                 'hour_start'                    => 'date_format:H:i:s',
@@ -286,12 +286,16 @@ class ProductController extends ControllerBase
             $price->save();
             $product->price = $price;
 
-            $category = new ProductCategory();
-            $category->id               = $this->generateId('prodcat', $category);
-            $category->product_id       = $id;
-            $category->category_id      = $request->category_id;
-            $category->save();
-            $product->category = $category;
+            if ($request->category_id){
+
+                $category = new ProductCategory();
+                $category->id               = $this->generateId('prodcat', $category);
+                $category->product_id       = $id;
+                $category->category_id      = $request->category_id;
+                $category->save();
+                $product->category = $category;
+            }
+
 
             DB::commit();
 

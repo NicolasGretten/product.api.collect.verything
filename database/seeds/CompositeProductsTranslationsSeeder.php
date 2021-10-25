@@ -59,5 +59,27 @@ class CompositeProductsTranslationsSeeder extends Seeder
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
         ]);
+
+        DB::connection('data')->table('composite_products_translations')->insert([
+            'id'                        => substr('prodctrad_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'      => 'prodc_bb6bca80cb0ac3484xx',
+            'locale'                    => 'fr-FR',
+            'title'                     => 'Traduction en français',
+            'text'                      => 'Formule coworking',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('composite_products_translations')->insert([
+            'id'                        => substr('prodctrad_' . md5(Str::uuid()), 0, 25),
+            'composite_product_id'      => 'prodc_bb6bca80cb0ac3484xx',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'coworking formul',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
     }
 }

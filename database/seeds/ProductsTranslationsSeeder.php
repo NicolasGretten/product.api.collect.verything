@@ -125,5 +125,138 @@ class ProductsTranslationsSeeder extends Seeder
             'updated_at'                => Carbon::now(),
             'deleted_at'                => Null
         ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52255',
+            'locale'                    => 'fr-FR',
+            'title'                     => 'Traduction en français',
+            'text'                      => 'Heure de coworking',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52255',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'Hour of Coworking',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52266',
+            'locale'                    => 'fr-FR',
+            'title'                     => 'Traduction en français',
+            'text'                      => 'Heure de meeting',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52266',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'Hour of Meeting',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52zzz',
+            'locale'                    => 'en-US',
+            'title'                     => 'french Translations',
+            'text'                      => 'journée de seminaire',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52zzz',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'seminary day',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52aaa',
+            'locale'                    => 'en-US',
+            'title'                     => 'french Translations',
+            'text'                      => 'repas midi et soir',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52aaa',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'lunch and diner',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52ttt',
+            'locale'                    => 'en-US',
+            'title'                     => 'french Translations',
+            'text'                      => 'accès à la piscine',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52ttt',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'pool access',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52yyy',
+            'locale'                    => 'en-US',
+            'title'                     => 'french Translations',
+            'text'                      => 'accès au spa',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
+
+        DB::connection('data')->table('products_translations')->insert([
+            'id'                        => substr('prodtrad_' . md5(Str::uuid()), 0, 25),
+            'product_id'                => 'prod_bc477fe21a7c92c52yyy',
+            'locale'                    => 'en-US',
+            'title'                     => 'English Translations',
+            'text'                      => 'spa access',
+            'created_at'                => Carbon::now(),
+            'updated_at'                => Carbon::now(),
+            'deleted_at'                => Null
+        ]);
     }
 }
