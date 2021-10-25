@@ -192,7 +192,7 @@ class PromotionalCodeController extends ControllerBase
             $promotional_code = new PromotionalCode;
             $promotional_code->id = $this->generateId('promocode', $promotional_code);
             $promotional_code->code = $request->code;
-            $promotional_code->number_used = $request->number_used;
+            $promotional_code->number_used = empty($request->number_used) ? 0 : $request->number_used;
             $promotional_code->maximum_usage = $request->maximum_usage;
             $promotional_code->combinable_with_offers = $request->combinable_with_offers;
 
