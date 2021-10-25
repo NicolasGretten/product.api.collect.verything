@@ -465,4 +465,69 @@ class PromotionalCodeController extends ControllerBase
             return response()->json($e->getMessage(), 500);
         }
     }
+
+    /**
+     * Check the promotional code.
+     *
+     * Check if the promotional code is valid or not.
+     *
+     * @group   Promotional codes
+     *
+     * @queryParam  code                required                The promotional code to check                              Example: WELCOME30
+     *
+     * @responseFile /responses/promotionalCodes/checkValidation.json
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkValidation(Request $request): JsonResponse
+    {
+        try {
+            $this->validate($request, [
+                'code'              => 'string'
+            ]);
+
+            $resultSet = PromotionalCode::select('promotional_codes.*')
+                ->where('code', $request->code)
+                ->whereNull('deleted_at')
+                ->first();
+
+            if(empty($resultSet)){
+                $response =  [
+                    'code_valid'=>false,
+                    'reason'=> 'Invalid code.'
+                ];
+            }
+            else if ($resultSet->maximum_usage === null)
+            {
+                $response =  [
+                    'code_valid'=>true,
+                ];
+            }
+
+            else if ($resultSet->number_used >= $resultSet->maximum_usage){
+                $response =  [
+                    'code_valid'=>false,
+                    'reason'=> 'Maximum usage reach.'
+                ];
+            }
+            else
+            {
+                $response =  [
+                    'code_valid'=>true,
+                ];
+            }
+
+            return response()->json($response);
+        }
+        catch(PDOException $e) {
+            throw new PgSqlException($e);
+        }
+        catch(ValidationException $e) {
+            return response()->json($e->response->original, 409);
+        }
+        catch(ModelNotFoundException | Exception $e) {
+            return response()->json($e->getMessage(), 409);
+        }
+    }
 }

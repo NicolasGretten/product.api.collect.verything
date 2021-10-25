@@ -17,6 +17,11 @@ $router->group(['prefix' => 'promotional-codes'], function () use ($router)
     /**
      * PromotionalCodeController
      */
+
+    $router->get('/check-validation', [
+        'uses'          =>'PromotionalCodeController@checkValidation'
+    ]);
+
     $router->get('/{promotional_code_id}', [
         'uses'          =>'PromotionalCodeController@retrieve'
     ]);
