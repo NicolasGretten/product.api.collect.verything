@@ -75,6 +75,7 @@ class ProductController extends ControllerBase
                 {
                     throw new Exception('The promo code doesn\'t exist', 404);
                 }
+
                 $product = $resultSet->first();
 
                 if (empty($product))

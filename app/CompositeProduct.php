@@ -165,7 +165,7 @@ class CompositeProduct extends Model
         /*
            * dans le cas ou un seul discount existe
            */
-        if(count($discountCollection) === 1){
+        if(count($discountCollection) >= 1){
 
             if ($discountCollection->contains('promotional_code', '!=', null)){
                 if ($code != null) {

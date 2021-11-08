@@ -265,7 +265,7 @@ class DiscountController extends ControllerBase
     {
         try {
             $this->validate($request, [
-                'discount_type'         => 'string',
+                'discount_type'         => 'string|in:monetary,percentage',
                 'amount'                => 'integer',
                 'start_at'              => 'date_format:Y-m-d H:i:s',
                 'end_at'                => 'date_format:Y-m-d H:i:s',

@@ -275,7 +275,7 @@ curl -X GET \
  **`discounts/{discount_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>discount_id</b></code>&nbsp;      <br>
+<code><b>discount_id</b></code>&nbsp; <small>string</small>     <br>
     Discount ID
 
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
@@ -737,13 +737,13 @@ curl -X GET \
  **`discounts`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>items_id</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>items_id</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     The items ID list to retrieve.
 
-<code><b>limit</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>limit</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Number of results per pagination page
 
-<code><b>page</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>page</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Current page number for pagination
 
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
@@ -935,28 +935,28 @@ curl -X POST \
  **`discounts`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     Title of the description
 
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     Description
 
-<code><b>discount_type</b></code>&nbsp;      <br>
+<code><b>discount_type</b></code>&nbsp; <small>string</small>     <br>
     Discount Type
 
-<code><b>amount</b></code>&nbsp;      <br>
+<code><b>amount</b></code>&nbsp; <small>string</small>     <br>
     amount
 
-<code><b>start_at</b></code>&nbsp;      <br>
+<code><b>start_at</b></code>&nbsp; <small>string</small>     <br>
     Start
 
-<code><b>end_at</b></code>&nbsp;      <br>
+<code><b>end_at</b></code>&nbsp; <small>string</small>     <br>
     End
 
-<code><b>promotional_code_id</b></code>&nbsp;      <br>
+<code><b>promotional_code_id</b></code>&nbsp; <small>string</small>     <br>
     Promotional code ID
 
 
@@ -1088,20 +1088,20 @@ curl -X PATCH \
  **`discounts/{discount_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>discount_id</b></code>&nbsp;      <br>
+<code><b>discount_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the discount to update
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>discount_type</b></code>&nbsp;      <br>
+<code><b>discount_type</b></code>&nbsp; <small>string</small>     <br>
     Discount Type
 
-<code><b>amount</b></code>&nbsp;      <br>
+<code><b>amount</b></code>&nbsp; <small>string</small>     <br>
     amount
 
-<code><b>start_at</b></code>&nbsp;      <br>
+<code><b>start_at</b></code>&nbsp; <small>string</small>     <br>
     Start
 
-<code><b>end_at</b></code>&nbsp;      <br>
+<code><b>end_at</b></code>&nbsp; <small>string</small>     <br>
     End
 
 
@@ -1212,7 +1212,7 @@ curl -X DELETE \
  **`discounts/{discount_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>discount_id</b></code>&nbsp;      <br>
+<code><b>discount_id</b></code>&nbsp; <small>string</small>     <br>
     Discount ID
 
 
@@ -1327,17 +1327,17 @@ curl -X POST \
  **`discounts/{discount_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>discount_id</b></code>&nbsp;      <br>
+<code><b>discount_id</b></code>&nbsp; <small>string</small>     <br>
     Discount ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     The title of the translation
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     The description of the discount translated
 
 
@@ -1446,11 +1446,11 @@ curl -X DELETE \
  **`discounts/{discount_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>discount_id</b></code>&nbsp;      <br>
+<code><b>discount_id</b></code>&nbsp; <small>string</small>     <br>
     Discount ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
 
@@ -1578,17 +1578,17 @@ curl -X POST \
  **`discounts/{discount_id}/assign`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>discount_id</b></code>&nbsp;      <br>
+<code><b>discount_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the discount to assign
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Product ID
 
-<code><b>composite_product_id</b></code>&nbsp;      <br>
+<code><b>composite_product_id</b></code>&nbsp; <small>string</small>     <br>
     Composite Product ID
 
-<code><b>category_id</b></code>&nbsp;      <br>
+<code><b>category_id</b></code>&nbsp; <small>string</small>     <br>
     Category ID
 
 
@@ -1719,17 +1719,17 @@ curl -X DELETE \
  **`discounts/{discount_id}/remove`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>discount_id</b></code>&nbsp;      <br>
+<code><b>discount_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the discount to assign
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Product ID
 
-<code><b>composite_product_id</b></code>&nbsp;      <br>
+<code><b>composite_product_id</b></code>&nbsp; <small>string</small>     <br>
     Composite Product ID
 
-<code><b>category_id</b></code>&nbsp;      <br>
+<code><b>category_id</b></code>&nbsp; <small>string</small>     <br>
     Category ID
 
 
