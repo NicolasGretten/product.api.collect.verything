@@ -169,7 +169,7 @@ curl -X GET \
  **`promotional-codes/{promotional_code_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>promotional_code_id</b></code>&nbsp;      <br>
+<code><b>promotional_code_id</b></code>&nbsp; <small>string</small>     <br>
     Promotional Code ID
 
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
@@ -474,13 +474,13 @@ curl -X GET \
  **`promotional-codes`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>items_id</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>items_id</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     The items ID list to retrieve.
 
-<code><b>limit</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>limit</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Number of results per pagination page
 
-<code><b>page</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>page</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Current page number for pagination
 
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
@@ -661,25 +661,25 @@ curl -X POST \
  **`promotional-codes`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     Title of the description
 
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>code</b></code>&nbsp;      <br>
+<code><b>code</b></code>&nbsp; <small>string</small>     <br>
     Code
 
-<code><b>number_used</b></code>&nbsp;      <br>
+<code><b>number_used</b></code>&nbsp; <small>string</small>     <br>
     number already used
 
-<code><b>maximum_usage</b></code>&nbsp;      <br>
+<code><b>maximum_usage</b></code>&nbsp; <small>string</small>     <br>
     max usage
 
-<code><b>combinable_with_offers</b></code>&nbsp;      <br>
+<code><b>combinable_with_offers</b></code>&nbsp; <small>string</small>     <br>
     combinable with others offers
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     Description
 
 
@@ -803,20 +803,20 @@ curl -X PATCH \
  **`promotional-codes/{promotional_code_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>promotional_code_id</b></code>&nbsp;      <br>
+<code><b>promotional_code_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the promotional_code to update
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>code</b></code>&nbsp;      <br>
+<code><b>code</b></code>&nbsp; <small>string</small>     <br>
     Code
 
-<code><b>number_used</b></code>&nbsp;      <br>
+<code><b>number_used</b></code>&nbsp; <small>string</small>     <br>
     number already used
 
-<code><b>maximum_usage</b></code>&nbsp;      <br>
+<code><b>maximum_usage</b></code>&nbsp; <small>string</small>     <br>
     max usage
 
-<code><b>combinable_with_offers</b></code>&nbsp;      <br>
+<code><b>combinable_with_offers</b></code>&nbsp; <small>string</small>     <br>
     combinable with others offers
 
 
@@ -919,7 +919,7 @@ curl -X DELETE \
  **`promotional-codes/{promotional_code_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>promotional_code_id</b></code>&nbsp;      <br>
+<code><b>promotional_code_id</b></code>&nbsp; <small>string</small>     <br>
     Promotional Code ID
 
 
@@ -1034,17 +1034,17 @@ curl -X POST \
  **`promotional-codes/{promotional_code_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>promotional_code_id</b></code>&nbsp;      <br>
+<code><b>promotional_code_id</b></code>&nbsp; <small>string</small>     <br>
     Promotional Code ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     The title of the translation
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     The description of the promotional_code translated
 
 
@@ -1153,11 +1153,11 @@ curl -X DELETE \
  **`promotional-codes/{promotional_code_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>promotional_code_id</b></code>&nbsp;      <br>
+<code><b>promotional_code_id</b></code>&nbsp; <small>string</small>     <br>
     Promotional Code ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
 

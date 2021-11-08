@@ -356,11 +356,11 @@ curl -X GET \
  **`products/{product_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Product ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>code</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>code</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Promotional code
 
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
@@ -1495,16 +1495,16 @@ curl -X GET \
  **`products`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>items_id</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>items_id</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     The items ID list to retrieve.
 
-<code><b>limit</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>limit</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Number of results per pagination page
 
-<code><b>page</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>page</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Current page number for pagination
 
-<code><b>code</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>code</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Promotional code
 
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
@@ -1736,37 +1736,37 @@ curl -X POST \
  **`products`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     Title of the description
 
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     Description
 
-<code><b>price_including_taxes</b></code>&nbsp;      <br>
+<code><b>price_including_taxes</b></code>&nbsp; <small>string</small>     <br>
     New price including taxes
 
-<code><b>price_excluding_taxes</b></code>&nbsp;      <br>
+<code><b>price_excluding_taxes</b></code>&nbsp; <small>string</small>     <br>
     New price excluding taxes
 
-<code><b>vat_value</b></code>&nbsp;      <br>
+<code><b>vat_value</b></code>&nbsp; <small>string</small>     <br>
     New vat value
 
-<code><b>vat_rate</b></code>&nbsp;      <br>
+<code><b>vat_rate</b></code>&nbsp; <small>string</small>     <br>
     New vat rate
 
-<code><b>day</b></code>&nbsp;      <br>
+<code><b>day</b></code>&nbsp; <small>string</small>     <br>
     day available
 
-<code><b>hour_start</b></code>&nbsp;      <br>
+<code><b>hour_start</b></code>&nbsp; <small>string</small>     <br>
     Hour start
 
-<code><b>hour_end</b></code>&nbsp;      <br>
+<code><b>hour_end</b></code>&nbsp; <small>string</small>     <br>
     Hour end
 
-<code><b>category_id</b></code>&nbsp;      <br>
+<code><b>category_id</b></code>&nbsp; <small>string</small>     <br>
     Category ID
 
 
@@ -1861,7 +1861,7 @@ curl -X DELETE \
  **`products/{product_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Product ID
 
 
@@ -1976,17 +1976,17 @@ curl -X POST \
  **`products/{product_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Product ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     The title of the translation
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     The description of the product translated
 
 
@@ -2095,11 +2095,11 @@ curl -X DELETE \
  **`products/{product_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Product ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
 
@@ -2217,23 +2217,23 @@ curl -X PATCH \
  **`products/{product_id}/price/{product_price_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the product to update
 
-<code><b>product_price_id</b></code>&nbsp;      <br>
+<code><b>product_price_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the product price to update
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>price_including_taxes</b></code>&nbsp;      <br>
+<code><b>price_including_taxes</b></code>&nbsp; <small>string</small>     <br>
     New price including taxes
 
-<code><b>price_excluding_taxes</b></code>&nbsp;      <br>
+<code><b>price_excluding_taxes</b></code>&nbsp; <small>string</small>     <br>
     New price excluding taxes
 
-<code><b>vat_value</b></code>&nbsp;      <br>
+<code><b>vat_value</b></code>&nbsp; <small>string</small>     <br>
     New vat value
 
-<code><b>vat_rate</b></code>&nbsp;      <br>
+<code><b>vat_rate</b></code>&nbsp; <small>string</small>     <br>
     New vat rate
 
 
@@ -2352,17 +2352,17 @@ curl -X PATCH \
  **`products/{product_id}/availability`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the product to update
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>day</b></code>&nbsp;      <br>
+<code><b>day</b></code>&nbsp; <small>string</small>     <br>
     day available
 
-<code><b>hour_start</b></code>&nbsp;      <br>
+<code><b>hour_start</b></code>&nbsp; <small>string</small>     <br>
     Hour start
 
-<code><b>hour_end</b></code>&nbsp;      <br>
+<code><b>hour_end</b></code>&nbsp; <small>string</small>     <br>
     Hour end
 
 
@@ -2469,11 +2469,11 @@ curl -X PATCH \
  **`products/{product_id}/category`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_id</b></code>&nbsp;      <br>
+<code><b>product_id</b></code>&nbsp; <small>string</small>     <br>
     Id of the product to update
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>category_id</b></code>&nbsp;      <br>
+<code><b>category_id</b></code>&nbsp; <small>string</small>     <br>
     Category ID
 
 
