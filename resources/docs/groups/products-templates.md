@@ -94,7 +94,7 @@ curl -X GET \
  **`products-templates/{product_template_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_template_id</b></code>&nbsp;      <br>
+<code><b>product_template_id</b></code>&nbsp; <small>string</small>     <br>
     Product Template ID
 
 
@@ -305,13 +305,13 @@ curl -X GET \
  **`products-templates`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>items_id</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>items_id</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     The items ID list to retrieve.
 
-<code><b>limit</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>limit</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Number of results per pagination page
 
-<code><b>page</b></code>&nbsp;          <i>optional</i>    <br>
+<code><b>page</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
     Current page number for pagination
 
 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
@@ -473,16 +473,16 @@ curl -X POST \
  **`products-templates`**
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     Title of the description
 
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     Description
 
-<code><b>category_id</b></code>&nbsp;      <br>
+<code><b>category_id</b></code>&nbsp; <small>string</small>     <br>
     Category ID
 
 
@@ -578,7 +578,7 @@ curl -X DELETE \
  **`products-templates/{product_template_id}`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_template_id</b></code>&nbsp;      <br>
+<code><b>product_template_id</b></code>&nbsp; <small>string</small>     <br>
     Product Template ID
 
 
@@ -693,17 +693,17 @@ curl -X POST \
  **`products-templates/{product_template_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_template_id</b></code>&nbsp;      <br>
+<code><b>product_template_id</b></code>&nbsp; <small>string</small>     <br>
     ProductTemplate ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
-<code><b>title</b></code>&nbsp;      <br>
+<code><b>title</b></code>&nbsp; <small>string</small>     <br>
     The title of the translation
 
-<code><b>text</b></code>&nbsp;      <br>
+<code><b>text</b></code>&nbsp; <small>string</small>     <br>
     The description of the product template translated
 
 
@@ -812,11 +812,11 @@ curl -X DELETE \
  **`products-templates/{product_template_id}/translate`**
 
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-<code><b>product_template_id</b></code>&nbsp;      <br>
+<code><b>product_template_id</b></code>&nbsp; <small>string</small>     <br>
     Product Template ID
 
 <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-<code><b>locale</b></code>&nbsp;      <br>
+<code><b>locale</b></code>&nbsp; <small>string</small>     <br>
     Locale
 
 
