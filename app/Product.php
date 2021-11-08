@@ -212,7 +212,7 @@ class Product extends Model
            */
         if(count($discountCollection) === 1){
 
-            if ($discountCollection->contains('promotional_code', '!=', null)){
+            if ($discountCollection->contains('promotional_code_id', '!=', null)){
                 if ($code != null) {
                     $discount = $discountCollection->where('promotional_code_id', $code)->first();
                     if (empty($discount)) {
