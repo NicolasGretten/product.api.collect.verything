@@ -235,13 +235,13 @@ class ProductController extends ControllerBase
             $this->validate($request, [
                 'title'                         => 'string',
                 'locale'                        => 'in:'. env('LOCALES_ALLOWED'),
-                'text'                          => 'string',
+                'text'                          => 'string|nullable',
 
                 'category_id'                   => 'string|nullable|exists:categories,id',
 
-                'days'                          => 'json',
-                'hour_start'                    => 'date_format:H:i:s',
-                'hour_end'                      => 'date_format:H:i:s',
+                'days'                          => 'json|nullable',
+                'hour_start'                    => 'date_format:H:i:s|nullable',
+                'hour_end'                      => 'date_format:H:i:s|nullable',
 
                 'price_including_taxes'         => 'integer',
                 'price_excluding_taxes'         => 'integer',
