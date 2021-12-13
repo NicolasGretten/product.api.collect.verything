@@ -168,7 +168,7 @@ class ProductController extends ControllerBase
 
             $this->setLocale();
 
-            $resultSet = Product::select('products.*')->skip(0)->take(10);
+            $resultSet = Product::select('products.*');
 
             $this->filter($resultSet, ['date', 'relations', 'itemsId', 'categoryId']);
 
