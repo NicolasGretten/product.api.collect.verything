@@ -211,6 +211,13 @@ trait FiltersTrait
                 ->where('categories.id', '=', request()->get('category_id'))
                 ->get();
         }
+        elseif (!empty(request()->get('without_category'))){
+            $builder
+                ->leftJoin('products_categories', 'products_categories.product_id', '=', 'products.id')
+                ->where('products_categories.product_id', '=', null)
+                ->get();
+        }
+
         return $this;
     }
 

@@ -122,6 +122,7 @@ class ProductController extends ControllerBase
      * @queryParam  page                                   Current page number for pagination                           Example: 1
      * @queryParam  code                                   Promotional code                                             Example: PROMO10
      * @queryParam  category_id                             Category Id                                             Example: cat_8a61a9ed91efe584ca29z
+     * @queryParam  without_category                             Product without category only                                            Example: 1
      *
      * @bodyParam   filters[created][gt]                   Creation datetime is Greater Than this value.                Example: 1602688060
      * @bodyParam   filters[created][gte]                  Creation datetime is Greater Than or Equal to this value     Example: 1602688060
