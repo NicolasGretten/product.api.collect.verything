@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\JsonEncodingException;
+use phpDocumentor\Reflection\DocBlock\Description;
 
 /**
  * Trait FiltersTrait
@@ -186,10 +187,30 @@ trait FiltersTrait
             if (json_last_error()) {
                 throw new JsonEncodingException();
             }
-
-            $builder->WhereIn('id', $items)->get();
+            $builder->WhereIn($builder->getModel()->getTable() . '.id', $items)->get();
         }
 
+        return $this;
+    }
+
+    /**
+    /**
+     * @param Builder $builder
+     *
+     * @return FiltersTrait
+     */
+    public function categoryId(Builder $builder)
+    {
+        if (!empty(request()->get('category_id'))) {
+            if (json_last_error()) {
+                throw new JsonEncodingException();
+            }
+            $builder
+                ->join('products_categories', 'products_categories.product_id', '=', 'products.id')
+                ->join('categories', 'products_categories.category_id', '=', 'categories.id')
+                ->where('categories.id', '=', request()->get('category_id'))
+                ->get();
+        }
         return $this;
     }
 
