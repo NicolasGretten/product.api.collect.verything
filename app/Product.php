@@ -46,7 +46,7 @@ class Product extends Model
      */
     protected $hidden = ['pivot', 'translations'];
 
-    protected $appends = ['current_pricing', 'current_discount', 'original_pricing', 'discount'];
+    protected $appends = ['current_pricing', 'current_discount', 'original_pricing', 'discount', 'categories_id'];
 
     protected ?string $code = null;
 
@@ -87,6 +87,14 @@ class Product extends Model
     {
         if ($this->price()->exists()) {
             return $this->price()->first()->makeHidden('product_id', 'deleted_at', 'created_at', 'updated_at');
+        }
+        return null;
+    }
+
+    public function getCategoriesIdAttribute()
+    {
+        if ($this->categories()->exists()) {
+            return $this->categories()->pluck('categories.id');
         }
         return null;
     }

@@ -121,6 +121,7 @@ class ProductController extends ControllerBase
      * @queryParam  limit                                  Number of results per pagination page                        Example: 10
      * @queryParam  page                                   Current page number for pagination                           Example: 1
      * @queryParam  code                                   Promotional code                                             Example: PROMO10
+     * @queryParam  category_id                             Category Id                                             Example: cat_8a61a9ed91efe584ca29z
      *
      * @bodyParam   filters[created][gt]                   Creation datetime is Greater Than this value.                Example: 1602688060
      * @bodyParam   filters[created][gte]                  Creation datetime is Greater Than or Equal to this value     Example: 1602688060
@@ -159,14 +160,15 @@ class ProductController extends ControllerBase
                 'filters.relations'               => 'json',
 //                'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
                 'items_id'              => 'json',
-                'code'                  => 'string'
+                'code'                  => 'string',
+                'category_id'           => 'string|nullable|exists:categories,id'
             ]);
 
             $this->setLocale();
 
-            $resultSet = Product::select('products.*');
+            $resultSet = Product::select('products.*')->skip(0)->take(10);
 
-            $this->filter($resultSet, ['date', 'relations', 'itemsId']);
+            $this->filter($resultSet, ['date', 'relations', 'itemsId', 'categoryId']);
 
             $this->paginate($resultSet);
 
