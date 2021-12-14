@@ -392,7 +392,7 @@ class ProductController extends ControllerBase
             $this->validate($request, [
                 'locale'            => 'required|string|in:'.env('LOCALES_ALLOWED'),
                 'title'             => 'required|string',
-                'text'              => 'required|string'
+                'text'              => 'nullable|string'
             ]);
 
             DB::beginTransaction();
