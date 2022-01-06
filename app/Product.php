@@ -94,7 +94,7 @@ class Product extends Model
     public function getCategoriesIdAttribute()
     {
         if ($this->categories()->exists()) {
-            return $this->categories()->pluck('categories.id');
+            return $this->categories()->get();
         }
         return null;
     }
