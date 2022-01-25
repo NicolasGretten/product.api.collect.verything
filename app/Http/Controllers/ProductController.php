@@ -92,7 +92,7 @@ class ProductController extends ControllerBase
                 $product = $resultSet->first();
                 if ($product == null)
                 {
-                    throw new Exception('The product doesn\'t exist.');
+                    $product = [];
                 }
                 return response()->json($product);
             }
