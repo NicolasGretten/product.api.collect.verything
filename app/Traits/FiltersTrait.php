@@ -239,6 +239,9 @@ trait FiltersTrait
                 if (!empty($filterValue)) {
                     foreach (json_decode($filterValue) as $relation) {
                         // si la relations n'est pas trouvée dans le modèle, on continue
+                        if (empty($methodsName)){
+                            continue;
+                        }
                         if (array_search($relation, $methodsName) === false) {
                             continue;
                         }
