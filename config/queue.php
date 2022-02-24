@@ -10,6 +10,13 @@ return [
             'queue'         => 'default',
             'retry_after'   => 5,
         ],
+        'pubsub' => [
+            'driver'        => 'database',
+            'connection'    => 'pubsub',
+            'table'         => 'jobs_pending',
+            'queue'         => 'pubsub',
+            'retry_after'   => 5,
+        ],
         'subscriber' => [
             'driver'      => 'subscriber',
             'key'         => env('SUBSCRIBER_SQS_KEY'),

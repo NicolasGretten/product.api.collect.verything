@@ -199,19 +199,20 @@ trait FiltersTrait
         if ($requestedFilters === null) {
             return $this;
         }
-
-        // clone de la requête pour récupérer les methods
         $clonedBuilder = clone $builder;
-
         // récupération des méthodes suivant le model demandé
         $methodsName = get_class_methods($clonedBuilder->first());
 
         foreach ($requestedFilters as $filterName => $filterValue) {
             if ($filterName === 'relations') {
-                if (!empty($filterValue)) {
+                if(!empty($filterValue)){
                     foreach (json_decode($filterValue) as $relation) {
                         // si la relations n'est pas trouvée dans le modèle, on continue
-                        if (array_search($relation, $methodsName) === false) {
+                        //Todo: à mettre dans template
+                        if (empty($methodsName)){
+                            continue;
+                        }
+                        if (array_search($relation,$methodsName) === false) {
                             continue;
                         }
                         $builder = $builder->with($relation);
