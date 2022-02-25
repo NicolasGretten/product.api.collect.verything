@@ -52,4 +52,14 @@ class Subscriber
             report($e);
         }
     }
+
+    /**
+     * @throws Exception
+     */
+    public function checkJsonResponse($response)
+    {
+        if (substr($response->getStatusCode(), 0, 1) != 2){
+            throw new Exception($response);
+        }
+    }
 }
