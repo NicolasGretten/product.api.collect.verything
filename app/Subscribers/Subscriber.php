@@ -31,7 +31,23 @@ class Subscriber
             DB::connection('pubsub')->table($this->topic)
                 ->where('sns_id', '=', $this->sns_id)
                 ->update(['read_at' => Carbon::now()]);
+            DB::connection('pubsub')->table(env('SUBSCRIBER_SQS_QUEUE'))
+                ->where('sns_id', '=', $this->sns_id)
+                ->update(['read_at' => Carbon::now()]);
+        } catch(PDOException | Exception  $e) {
+            report($e);
+        }
+    }
 
+    public function failed($error)
+    {
+        try {
+            DB::connection('pubsub')->table($this->topic)
+                ->where('sns_id', '=', $this->sns_id)
+                ->update(['failed_at' => Carbon::now(), 'error_message' => $error->getMessage()]);
+            DB::connection('pubsub')->table(env('SUBSCRIBER_SQS_QUEUE'))
+                ->where('sns_id', '=', $this->sns_id)
+                ->update(['failed_at' => Carbon::now(), 'error_message' => $error->getMessage()]);
         } catch(PDOException | Exception  $e) {
             report($e);
         }
