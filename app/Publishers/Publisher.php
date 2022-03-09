@@ -19,6 +19,6 @@ class Publisher {
         $message = json_decode(json_encode($class->message));
 
         DB::connection('pubsub')
-            ->insert('insert into '.$message->to.' (sns_id, message, topic, created_at) values (?, ?, ?, ?)', [substr('sns_' . md5(Str::uuid()),0 ,25) ,base64_encode(json_encode($message->body)), $message->body->topic, Carbon::now()]);
+            ->insert('insert into '.$message->to.' (sns_id, message, topic, created_at) values (?, ?, ?, ?)', [substr('sns_' . md5(Str::uuid()),0 ,25) ,base64_encode(json_encode($message->body)), $message->to, Carbon::now()]);
     }
 }
