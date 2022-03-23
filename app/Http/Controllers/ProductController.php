@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+set_time_limit(0);
 
 use App\Product;
 use App\Exceptions\PgSqlException;
