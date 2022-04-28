@@ -46,7 +46,7 @@ class Product extends Model
      */
     protected $hidden = ['pivot', 'translations'];
 
-    protected $appends = ['current_pricing', 'current_discount', 'original_pricing', 'discount', 'categories_id'];
+    protected $appends = ['current_pricing', 'current_discount', 'original_pricing', 'discount', 'categories_id', 'minimum_booking_capacity'];
 
     protected ?string $code = null;
 
@@ -57,6 +57,11 @@ class Product extends Model
     {
         $this->code = $code;
         return $this;
+    }
+
+    public function getMinimumBookingCapacityAttribute()
+    {
+        return $this->productMinimumBookingCapacity()->value('minimum_booking_capacity');
     }
 
     /*
@@ -300,6 +305,11 @@ class Product extends Model
         return $this->hasOne('App\ProductPrice');
     }
 
+    public function productMinimumBookingCapacity(): hasOne
+    {
+        return $this->hasOne('App\ProductMinimumBookingCapacity');
+    }
+
     public function discounts(): belongsToMany
     {
         return $this->belongsToMany('App\Discount', 'products_discounts')->wherePivotNull('deleted_at');
@@ -328,6 +338,7 @@ class Product extends Model
         $this->productCategories()->delete();
         $this->productDiscount()->delete();
         $this->compositeProductProduct()->delete();
+        $this->productMinimumCapacity()->delete();
 
         return parent::delete();
     }

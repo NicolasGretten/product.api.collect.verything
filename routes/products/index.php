@@ -41,6 +41,18 @@ $router->group(['prefix' => 'products'], function () use ($router)
         'uses'          =>'ProductController@removeTranslation'
     ]);
 
+    $router->post('/{product_id}/minimum-booking-capacity', [
+        'uses'          =>'ProductController@addMinimumBookingCapacity'
+    ]);
+
+    $router->patch('/{product_id}/minimum-booking-capacity/{product_minimum_booking_capacity_id}', [
+        'uses'          =>'ProductController@updateMinimumBookingCapacity'
+    ]);
+
+    $router->delete('/{product_id}/minimum-booking-capacity/{product_minimum_booking_capacity_id}', [
+        'uses'          =>'ProductController@removeMinimumBookingCapacity'
+    ]);
+
     $router->patch('/{product_id}/price/{product_price_id}', [
         'uses'          =>'ProductController@updatePrice'
     ]);
