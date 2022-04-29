@@ -338,7 +338,7 @@ class Product extends Model
         $this->productCategories()->delete();
         $this->productDiscount()->delete();
         $this->compositeProductProduct()->delete();
-        $this->productMinimumCapacity()->delete();
+        $this->productMinimumBookingCapacity()->delete();
 
         return parent::delete();
     }
