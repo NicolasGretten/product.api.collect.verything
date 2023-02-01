@@ -23,7 +23,8 @@ class ProductController extends Controller
 {
     use IdTrait, FiltersTrait, PaginationTrait, LocaleTrait;
 
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
@@ -51,59 +52,22 @@ class ProductController extends Controller
     public function retrieve(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
-                'filters.relations'               => 'json',
-//                'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
-                'code'                  => 'string',
-            ]);
 
             $this->setLocale();
 
             $resultSet = Product::select('products.*')
-                ->where('products.id', $request->product_id);
+                ->where('products.id', $request->id);
 
-            $this->filter($resultSet, ['relations']);
-
-            if (!empty($request->code))
-            {
-                $resultCode = PromotionalCode::where('code', $request->code)->first();
-
-                if (empty($resultCode))
-                {
-                    throw new Exception('The promo code doesn\'t exist', 404);
-                }
-
-                $product = $resultSet->first();
-
-                if (empty($product))
-                {
-                    return response()->json($product);
-                }
-                $product->code($resultCode->id)->getCurrentDiscountAttribute();
-                $product->code($resultCode->id)->getCurrentPricingAttribute();
-                $product->code($resultCode->id)->getDiscountAttribute();
-
-                return response()->json($product);
+            $product = $resultSet->first();
+            if ($product == null) {
+                $product = [];
             }
-            else{
-                $product = $resultSet->first();
-                if ($product == null)
-                {
-                    $product = [];
-                }
-                return response()->json($product);
-            }
-        }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
-        catch(ValidationException $e) {
+            return response()->json($product);
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json($e->getMessage(), 409);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -154,53 +118,25 @@ class ProductController extends Controller
     {
         try {
             $this->validate($request, [
-                'limit'                 => 'int|required_with:page',
-                'page'                  => 'int|required_with:limit',
-                'filters.relations'               => 'json',
-//                'filters.relations'     => 'json|relations:compositeProducts,availabilities,categories',
-                'items_id'              => 'json',
-                'code'                  => 'string',
-                'category_id'           => 'string|nullable|exists:categories,id'
+                'store_id' => 'required|string',
+                'category_id' => 'string|nullable|exists:categories,id'
             ]);
 
             $this->setLocale();
 
-            $resultSet = Product::select('products.*');
-
-            $this->filter($resultSet, ['date', 'relations', 'itemsId', 'categoryId']);
+            if($request->get('category_id')){
+                $resultSet = Product::select('products.*')->where('store_id', $request->get('store_id'))->where('category_id', $request->get('category_id'));
+            } else {
+                $resultSet = Product::select('products.*')->where('store_id', $request->get('store_id'));
+            }
 
             $this->paginate($resultSet);
 
-            if (!empty($request->code))
-            {
-                $resultCode = PromotionalCode::where('code', $request->code)->first();
-
-                if (empty($resultCode))
-                {
-                    throw new Exception('The promo code doesn\'t exist', 404);
-                }
-                $products = $resultSet->get();
-
-                foreach ($products as $product){
-                    $product->code($resultCode->id)->getCurrentDiscountAttribute();
-                    $product->code($resultCode->id)->getCurrentPricingAttribute();
-                    $product->code($resultCode->id)->getDiscountAttribute();
-                }
-
-                return response()->json($products, 200,['pagination' => $this->pagination]);
-            }
-            else{
-                $products = $resultSet->get();
-                return response()->json($products, 200,['pagination' => $this->pagination]);
-            }
-        }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
-        catch(ValidationException $e) {
+            $products = $resultSet->get();
+            return response()->json($products, 200, ['pagination' => $this->pagination]);
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(ModelNotFoundException | Exception $e) {
+        } catch (ModelNotFoundException|Exception $e) {
             return response()->json($e->getMessage(), 409);
         }
     }
@@ -233,66 +169,66 @@ class ProductController extends Controller
     {
         try {
             $this->validate($request, [
-                'title'                         => 'string',
-                'locale'                        => 'in:'. env('LOCALES_ALLOWED'),
-                'text'                          => 'string|nullable',
+                'title' => 'string',
+                'locale' => 'in:' . env('LOCALES_ALLOWED'),
+                'text' => 'string|nullable',
 
-                'category_id'                   => 'string|nullable|exists:categories,id',
+                'category_id' => 'string|nullable|exists:categories,id',
 
-                'days'                          => 'json|nullable',
-                'hour_start'                    => 'date_format:H:i:s|nullable',
-                'hour_end'                      => 'date_format:H:i:s|nullable',
+                'days' => 'json|nullable',
+                'hour_start' => 'date_format:H:i:s|nullable',
+                'hour_end' => 'date_format:H:i:s|nullable',
 
-                'price_including_taxes'         => 'integer',
-                'price_excluding_taxes'         => 'integer',
-                'vat_value'                     => 'integer',
-                'vat_rate'                      => 'integer',
+                'price_including_taxes' => 'integer',
+                'price_excluding_taxes' => 'integer',
+                'vat_value' => 'integer',
+                'vat_rate' => 'integer',
             ]);
 
-            if(!empty($request->input('locale'))) {
+            if (!empty($request->input('locale'))) {
                 $this->setLocale();
             }
 
             DB::beginTransaction();
 
-            $request->product_translation_id = substr('prodtrad_' . md5(Str::uuid()),0 ,25);
+            $request->product_translation_id = substr('prodtrad_' . md5(Str::uuid()), 0, 25);
 
             $product = new Product;
             $id = $this->generateId('prod', $product);
             $product->id = $id;
 
-            if(!empty($request->input('locale'))) {
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->title   = $request->input('title');
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->text    = $request->input('text');
+            if (!empty($request->input('locale'))) {
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->title = $request->input('title');
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->text = $request->input('text');
             }
 
             $product->save();
 
             $availability = new ProductAvailability();
-            $availability->id           = $this->generateId('prodavail', $availability);
-            $availability->product_id   = $id;
-            $availability->days          = json_decode($request->days);
-            $availability->hour_start   = $request->hour_start;
-            $availability->hour_end     = $request->hour_end;
+            $availability->id = $this->generateId('prodavail', $availability);
+            $availability->product_id = $id;
+            $availability->days = json_decode($request->days);
+            $availability->hour_start = $request->hour_start;
+            $availability->hour_end = $request->hour_end;
             $availability->save();
             $product->availability = $availability;
 
             $price = new ProductPrice();
-            $price->id                      = $this->generateId('prodprice', $price);
-            $price->product_id              = $id;
-            $price->price_including_taxes   = $request->price_including_taxes;
-            $price->price_excluding_taxes   = $request->price_excluding_taxes;
-            $price->vat_value               = $request->vat_value;
-            $price->vat_rate                = $request->vat_rate;
+            $price->id = $this->generateId('prodprice', $price);
+            $price->product_id = $id;
+            $price->price_including_taxes = $request->price_including_taxes;
+            $price->price_excluding_taxes = $request->price_excluding_taxes;
+            $price->vat_value = $request->vat_value;
+            $price->vat_rate = $request->vat_rate;
             $price->save();
             $product->price = $price;
 
-            if ($request->category_id){
+            if ($request->category_id) {
 
                 $category = new ProductCategory();
-                $category->id               = $this->generateId('prodcat', $category);
-                $category->product_id       = $id;
-                $category->category_id      = $request->category_id;
+                $category->id = $this->generateId('prodcat', $category);
+                $category->product_id = $id;
+                $category->category_id = $request->category_id;
                 $category->save();
                 $product->category = $category;
             }
@@ -301,17 +237,13 @@ class ProductController extends Controller
             DB::commit();
 
             return response()->json($product);
-        }
-        catch(PDOException $e) {
+        } catch (PDOException $e) {
             throw new PgSqlException($e);
-        }
-        catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json($e->getMessage(), $e->getCode());
-        }
-        catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -331,14 +263,14 @@ class ProductController extends Controller
      *
      * @return JsonResponse
      */
-    public function delete(Request $request):JsonResponse
+    public function delete(Request $request): JsonResponse
     {
         try {
             DB::beginTransaction();
 
             $resultSet = Product::where('products.id', $request->product_id);
 
-            if($resultSet->get()->isEmpty()) {
+            if ($resultSet->get()->isEmpty()) {
                 throw new ModelNotFoundException('Product not found.', 404);
             }
 
@@ -349,17 +281,11 @@ class ProductController extends Controller
             DB::commit();
 
             return response()->json($product->fresh()->makeHidden(['current_pricing', 'current_discount', 'original_pricing', 'discount']));
-        }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
-        catch(ModelNotFoundException $e) {
+        }  catch (ModelNotFoundException $e) {
             return response()->json($e->getMessage(), $e->getCode());
-        }
-        catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -387,26 +313,26 @@ class ProductController extends Controller
     {
         try {
             $this->validate($request, [
-                'locale'            => 'required|string|in:'.env('LOCALES_ALLOWED'),
-                'title'             => 'required|string',
-                'text'              => 'nullable|string'
+                'locale' => 'required|string|in:' . env('LOCALES_ALLOWED'),
+                'title' => 'required|string',
+                'text' => 'nullable|string'
             ]);
 
             DB::beginTransaction();
 
             $resultSet = Product::where('products.id', $request->product_id);
 
-            if($resultSet->get()->isEmpty()) {
+            if ($resultSet->get()->isEmpty()) {
                 throw new ModelNotFoundException('Product not found.', 404);
             }
 
             $product = $resultSet->first();
 
-            if($product->hasTranslation($request->input('locale'))) {
+            if ($product->hasTranslation($request->input('locale'))) {
                 $product->deleteTranslations($request->input('locale'));
             }
 
-            $request->productTranslation_id = substr('prodtrad_' . md5(Str::uuid()),0 ,25);
+            $request->productTranslation_id = substr('prodtrad_' . md5(Str::uuid()), 0, 25);
 
             $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->title = $request->input('title');
             $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->text = $request->input('text');
@@ -416,17 +342,13 @@ class ProductController extends Controller
             DB::commit();
 
             return response()->json($product->translate($request->input('locale'))->fresh());
-        }
-        catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json($e->getMessage(), 404);
-        }
-        catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             return response()->json($e->getMessage(), 409);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -452,7 +374,7 @@ class ProductController extends Controller
     {
         try {
             $this->validate($request, [
-                'locale'         => 'required|string|in:'. env('LOCALES_ALLOWED')
+                'locale' => 'required|string|in:' . env('LOCALES_ALLOWED')
             ]);
 
             DB::beginTransaction();
@@ -460,18 +382,17 @@ class ProductController extends Controller
             $resultSet = Product::where('products.id', $request->product_id);
 
             $product = $resultSet->first();
-            if(empty($product)) {
+            if (empty($product)) {
                 throw new ModelNotFoundException('Product not found.', 404);
             }
 
-            if(strtolower($request->input('locale')) === strtolower(env('DEFAULT_LOCALE'))) {
+            if (strtolower($request->input('locale')) === strtolower(env('DEFAULT_LOCALE'))) {
                 throw new Exception('You cannot remove the default translation.');
             }
             $translationDeleted = $product->translate($request->input('locale'));
-            if($product->hasTranslation($request->input('locale'))) {
+            if ($product->hasTranslation($request->input('locale'))) {
                 $product->deleteTranslations($request->input('locale'));
-            }
-            else {
+            } else {
                 throw new ModelNotFoundException('Translation not found.', 404);
             }
 
@@ -480,17 +401,13 @@ class ProductController extends Controller
             DB::commit();
 
             return response()->json($translationDeleted->fresh());
-        }
-        catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json($e->getMessage(), 404);
-        }
-        catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             return response()->json($e->getMessage(), 409);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -520,17 +437,17 @@ class ProductController extends Controller
     {
         try {
             $this->validate($request, [
-                'price_including_taxes'         => 'integer',
-                'price_excluding_taxes'         => 'integer',
-                'vat_value'                     => 'integer',
-                'vat_rate'                      => 'integer',
+                'price_including_taxes' => 'integer',
+                'price_excluding_taxes' => 'integer',
+                'vat_value' => 'integer',
+                'vat_rate' => 'integer',
             ]);
 
             DB::beginTransaction();
 
             $product = Product::where('products.id', $request->product_id)->first();
 
-            if(empty($product)) {
+            if (empty($product)) {
                 throw new ModelNotFoundException('Product not found.', 404);
             }
 
@@ -538,7 +455,7 @@ class ProductController extends Controller
 
             $price = $resultSet->first();
 
-            if(empty($price)) {
+            if (empty($price)) {
                 throw new Exception('The product price doesn\'t exist.', 404);
             }
 
@@ -546,29 +463,23 @@ class ProductController extends Controller
 
 
             $newPrice = new ProductPrice();
-            $newPrice->id                           = $this->generateId('prodprice', $newPrice);
-            $newPrice->product_id                   = $request->product_id;
-            $newPrice->price_including_taxes        = $request->price_including_taxes;
-            $newPrice->price_excluding_taxes        = $request->price_excluding_taxes;
-            $newPrice->vat_value                    = $request->vat_value;
-            $newPrice->vat_rate                     = $request->vat_rate;
+            $newPrice->id = $this->generateId('prodprice', $newPrice);
+            $newPrice->product_id = $request->product_id;
+            $newPrice->price_including_taxes = $request->price_including_taxes;
+            $newPrice->price_excluding_taxes = $request->price_excluding_taxes;
+            $newPrice->vat_value = $request->vat_value;
+            $newPrice->vat_rate = $request->vat_rate;
 
             $newPrice->save();
 
             DB::commit();
 
             return response()->json($newPrice);
-        }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
-        catch(ModelNotFoundException $e) {
+        }  catch (ModelNotFoundException $e) {
             return response()->json($e->getMessage(), $e->getCode());
-        }
-        catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -594,14 +505,14 @@ class ProductController extends Controller
     {
         try {
             $this->validate($request, [
-                'category_id'                   => 'string|exists:categories,id',
+                'category_id' => 'string|exists:categories,id',
             ]);
 
             DB::beginTransaction();
 
             $product = Product::where('products.id', $request->product_id)->first();
 
-            if(empty($product)) {
+            if (empty($product)) {
                 throw new ModelNotFoundException('Product not found.', 404);
             }
 
@@ -609,21 +520,18 @@ class ProductController extends Controller
 
             $category = $resultSet->first();
 
-            $category->category_id  = $request->input('category_id', $category->getOriginal('category_id'));
+            $category->category_id = $request->input('category_id', $category->getOriginal('category_id'));
 
             $category->save();
 
             DB::commit();
 
             return response()->json($category);
-        }
-        catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json($e->getMessage(), $e->getCode());
-        }
-        catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json($e->response->original, 409);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }

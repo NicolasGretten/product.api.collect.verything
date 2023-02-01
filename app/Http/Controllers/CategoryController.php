@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-set_time_limit(0);
 
 use App\Category;
 use App\Traits\FiltersTrait;
@@ -47,17 +46,10 @@ class CategoryController extends Controller
     public function retrieve(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
-                'filters.relations'               => 'json',
-//                'filters.relations'        => 'json|relations:products,compositeProducts,discounts',
-            ]);
-
             $this->setLocale();
 
             $resultSet = Category::select('categories.*')
-                ->where('categories.id', $request->category_id);
-
-            $this->filter($resultSet, ['relations']);
+                ->where('categories.id', $request->id);
 
             $category = $resultSet->first();
 
@@ -114,19 +106,14 @@ class CategoryController extends Controller
     public function list(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
-                'limit'                 => 'int|required_with:page',
-                'page'                  => 'int|required_with:limit',
-                'filters.relations'               => 'json',
-//                'filters.relations'     => 'json|relations:products,compositeProducts,discounts',
-                'items_id'              => 'json'
+            $request->validate([
+                'store_id' => 'required|exists:categories,id',
             ]);
 
             $this->setLocale();
 
-            $resultSet = Category::select('categories.*');
+            $resultSet = Category::select('categories.*')->where('store_id', $request->input('store_id'));
 
-            $this->filter($resultSet, ['date', 'relations', 'itemsId']);
             $this->paginate($resultSet);
 
             $categories = $resultSet->get();
@@ -162,9 +149,10 @@ class CategoryController extends Controller
         try {
 
             $this->validate($request, [
-                'title'                         => 'string',
                 'locale'                        => 'in:'. env('LOCALES_ALLOWED'),
-                'text'                          => 'string'
+                'text'                          => 'string',
+                'default'                          => 'required|boolean',
+                'store_id'                          => 'required|string'
             ]);
 
             if(!empty($request->input('locale'))) {
@@ -173,13 +161,12 @@ class CategoryController extends Controller
 
             DB::beginTransaction();
 
-            $request->category_translation_id = substr('cattrad_' . md5(Str::uuid()),0 ,25);
+            $request->category_translation_id = substr('cattrad-' . md5(Str::uuid()),0 ,25);
 
             $category = new Category;
             $category->id = $this->generateId('cat', $category);
 
             if(!empty($request->input('locale'))) {
-                $category->translateOrNew($request->input('locale'))->fill(['id' => $request->category_translation_id])->title   = $request->input('title');
                 $category->translateOrNew($request->input('locale'))->fill(['id' => $request->category_translation_id])->text    = $request->input('text');
             }
 
@@ -220,7 +207,7 @@ class CategoryController extends Controller
         try {
             DB::beginTransaction();
 
-            $resultSet = Category::where('categories.id', $request->category_id);
+            $resultSet = Category::where('categories.id', $request->id);
 
             if($resultSet->get()->isEmpty()) {
                 throw new ModelNotFoundException('Category not found.', 404);
@@ -269,13 +256,12 @@ class CategoryController extends Controller
         try {
             $this->validate($request, [
                 'locale'            => 'required|string|in:'.env('LOCALES_ALLOWED'),
-                'title'             => 'required|string',
                 'text'              => 'required|string'
             ]);
 
             DB::beginTransaction();
 
-            $resultSet = Category::where('categories.id', $request->category_id);
+            $resultSet = Category::where('categories.id', $request->id);
 
             if($resultSet->get()->isEmpty()) {
                 throw new ModelNotFoundException('Category not found.', 404);
@@ -287,9 +273,8 @@ class CategoryController extends Controller
                 $category->deleteTranslations($request->input('locale'));
             }
 
-            $request->categoryTranslation_id = substr('cattrad_' . md5(Str::uuid()),0 ,25);
+            $request->categoryTranslation_id = substr('cattrad-' . md5(Str::uuid()),0 ,25);
 
-            $category->translateOrNew($request->input('locale'))->fill(['id' => $request->categoryTranslation_id])->title = $request->input('title');
             $category->translateOrNew($request->input('locale'))->fill(['id' => $request->categoryTranslation_id])->text = $request->input('text');
 
             $category->save();
@@ -338,7 +323,7 @@ class CategoryController extends Controller
 
             DB::beginTransaction();
 
-            $resultSet = Category::where('categories.id', $request->category_id);
+            $resultSet = Category::where('categories.id', $request->id);
 
             $category = $resultSet->first();
             if(empty($category)) {
