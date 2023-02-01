@@ -16,10 +16,10 @@ class CreateProductsPricesTable extends Migration
         Schema::create('products_prices', function (Blueprint $table) {
             $table->string('id')->primary();;
             $table->string('product_id');
-            $table->integer('price_including_taxes');
-            $table->integer('price_excluding_taxes');
-            $table->integer('vat_value');
-            $table->integer('vat_rate');
+            $table->integer('ttc');
+            $table->integer('ht');
+            $table->integer('tva_value');
+            $table->integer('tva_rate');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 

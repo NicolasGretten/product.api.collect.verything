@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\JsonEncodingException;
-use phpDocumentor\Reflection\DocBlock\Description;
 
 /**
  * Trait FiltersTrait
@@ -187,35 +186,8 @@ trait FiltersTrait
             if (json_last_error()) {
                 throw new JsonEncodingException();
             }
-            $builder->WhereIn($builder->getModel()->getTable() . '.id', $items)->get();
-        }
 
-        return $this;
-    }
-
-    /**
-    /**
-     * @param Builder $builder
-     *
-     * @return FiltersTrait
-     */
-    public function categoryId(Builder $builder)
-    {
-        if (!empty(request()->get('category_id'))) {
-            if (json_last_error()) {
-                throw new JsonEncodingException();
-            }
-            $builder
-                ->join('products_categories', 'products_categories.product_id', '=', 'products.id')
-                ->join('categories', 'products_categories.category_id', '=', 'categories.id')
-                ->where('categories.id', '=', request()->get('category_id'))
-                ->get();
-        }
-        elseif (!empty(request()->get('without_category'))){
-            $builder
-                ->leftJoin('products_categories', 'products_categories.product_id', '=', 'products.id')
-                ->where('products_categories.product_id', '=', null)
-                ->get();
+            $builder->WhereIn('id', $items)->get();
         }
 
         return $this;
@@ -227,22 +199,20 @@ trait FiltersTrait
         if ($requestedFilters === null) {
             return $this;
         }
-
-        // clone de la requête pour récupérer les methods
         $clonedBuilder = clone $builder;
-
         // récupération des méthodes suivant le model demandé
         $methodsName = get_class_methods($clonedBuilder->first());
 
         foreach ($requestedFilters as $filterName => $filterValue) {
             if ($filterName === 'relations') {
-                if (!empty($filterValue)) {
+                if(!empty($filterValue)){
                     foreach (json_decode($filterValue) as $relation) {
                         // si la relations n'est pas trouvée dans le modèle, on continue
+                        //Todo: à mettre dans template
                         if (empty($methodsName)){
                             continue;
                         }
-                        if (array_search($relation, $methodsName) === false) {
+                        if (array_search($relation,$methodsName) === false) {
                             continue;
                         }
                         $builder = $builder->with($relation);

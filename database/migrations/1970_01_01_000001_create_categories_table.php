@@ -14,7 +14,9 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->string('id')->primary();;
+            $table->string('id')->primary();
+            $table->string('store_id');
+            $table->boolean('default');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

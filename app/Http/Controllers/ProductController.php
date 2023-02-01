@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 set_time_limit(0);
 
 use App\Product;
-use App\Exceptions\PgSqlException;
-use App\ProductAvailability;
-use App\ProductCategory;
-use App\ProductMinimumBookingCapacity;
 use App\ProductPrice;
-use App\PromotionalCode;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
 use App\Traits\LocaleTrait;
@@ -24,7 +19,7 @@ use Illuminate\Http\Request;
 use InvalidArgumentException;
 use PDOException;
 
-class ProductController extends ControllerBase
+class ProductController extends Controller
 {
     use IdTrait, FiltersTrait, PaginationTrait, LocaleTrait;
 
@@ -579,70 +574,6 @@ class ProductController extends ControllerBase
     }
 
     /**
-     * Update a product availabilities
-     *
-     * You can update product availabilities data.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id          required        Id of the product to update     Example: prod_3a3d84897c39a40bc49e
-     *
-     * @queryParam  day                 required        day available                   Example: ["monday","tuesday","wednesday"]
-     * @queryParam  hour_start          required        Hour start                      Example: 08:00:00
-     * @queryParam  hour_end            required        Hour end                        Example: 10:00:00
-     *
-     * @responseFile /responses/products/updateAvailability.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function updateAvailability(Request $request): JsonResponse
-    {
-        try {
-            $this->validate($request, [
-                'days'                          => 'json',
-                'hour_start'                    => 'date_format:H:i:s',
-                'hour_end'                      => 'date_format:H:i:s',
-            ]);
-
-            DB::beginTransaction();
-
-            $product = Product::where('products.id', $request->product_id)->first();
-
-            if(empty($product)) {
-                throw new ModelNotFoundException('Product not found.', 404);
-            }
-
-            $resultSet = ProductAvailability::where('products_availabilities.product_id', $request->product_id);
-
-            $availability = $resultSet->first();
-
-            $availability->days             = json_encode($request->input('days', $availability->getOriginal('days')));
-            $availability->hour_start       = $request->input('hour_start', $availability->getOriginal('hour_start'));
-            $availability->hour_end         = $request->input('hour_end', $availability->getOriginal('hour_end'));
-
-            $availability->save();
-
-            DB::commit();
-
-            return response()->json($availability);
-        }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
-        catch(ModelNotFoundException $e) {
-            return response()->json($e->getMessage(), $e->getCode());
-        }
-        catch(ValidationException $e) {
-            return response()->json($e->response->original, 409);
-        }
-        catch(Exception $e) {
-            return response()->json($e->getMessage(), 500);
-        }
-    }
-
-    /**
      * Update a product category
      *
      * You can update product category data.
@@ -686,9 +617,6 @@ class ProductController extends ControllerBase
 
             return response()->json($category);
         }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
         catch(ModelNotFoundException $e) {
             return response()->json($e->getMessage(), $e->getCode());
         }
@@ -696,166 +624,6 @@ class ProductController extends ControllerBase
             return response()->json($e->response->original, 409);
         }
         catch(Exception $e) {
-            return response()->json($e->getMessage(), 500);
-        }
-    }
-
-    /**
-     * Add a minimum capacity to a product
-     *
-     * Add a minimum capacity to a product
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id  required        Product ID                                      Example: prod_3a3d84897c39a40bc49e
-     *
-     * @queryParam  minimum_capacity        required        Minimum capacity       Example: 4
-     *
-     * @responseFile /responses/products/addProductMinimumCapacity.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function addMinimumBookingCapacity(Request $request): JsonResponse
-    {
-        try {
-            $this->validate($request, [
-                'minimum_booking_capacity'             => 'required|integer',
-            ]);
-
-            DB::beginTransaction();
-
-            $resultSet = ProductMinimumBookingCapacity::where('products_minimum_booking_capacity.product_id', $request->product_id);
-
-            if(!empty($resultSet->first())) {
-                throw new ModelNotFoundException('Product has already a minimum booking capacity set.', 404);
-            }
-
-            $product = $resultSet->first();
-
-            $request->productMinimumCapacity = substr('prodminbookcapa_' . md5(Str::uuid()), 0, 25);
-
-            $minCapacity = new ProductMinimumBookingCapacity();
-            $minCapacity->id = $request->productMinimumCapacity;
-            $minCapacity->product_id = $request->product_id;
-            $minCapacity->minimum_booking_capacity = $request->minimum_booking_capacity;
-
-            $minCapacity->save();
-
-
-            DB::commit();
-
-            return response()->json($minCapacity);
-        }
-        catch(ModelNotFoundException $e) {
-            return response()->json($e->getMessage(), 404);
-        }
-        catch(ValidationException $e) {
-            return response()->json($e->response->original, 409);
-        }
-        catch(InvalidArgumentException $e) {
-            return response()->json($e->getMessage(), 409);
-        }
-        catch(Exception $e) {
-            return response()->json($e->getMessage(), 500);
-        }
-    }
-
-    /**
-     * Remove a product's minimum capacity
-     *
-     * Remove a product's minimum capacity.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id      required        Product ID      Example: prod_3a3d84897c39a40bc49e
-     * @urlParam  product_minimum_capacity_id          required        ID          Example: prodminbookcapa_4894984684684
-     *
-     * @responseFile /responses/products/removeProductMinimumCapacity.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function removeMinimumBookingCapacity(Request $request): JsonResponse
-    {
-        try {
-
-            $resultSet = ProductMinimumBookingCapacity::where('products_minimum_booking_capacity.id', $request->product_minimum_booking_capacity_id);
-
-            $minCapacity = $resultSet->first();
-
-            if (empty($minCapacity)) {
-                throw new ModelNotFoundException('Product minimum booking capacity not found.', 404);
-            }
-
-            DB::beginTransaction();
-
-            $minCapacity->delete();
-
-            DB::commit();
-
-            return response()->json($minCapacity);
-        } catch (ModelNotFoundException $e) {
-            return response()->json($e->getMessage(), 404);
-        } catch (ValidationException $e) {
-            return response()->json($e->response->original, 409);
-        } catch (InvalidArgumentException $e) {
-            return response()->json($e->getMessage(), 409);
-        } catch (Exception $e) {
-            return response()->json($e->getMessage(), 500);
-        }
-    }
-
-    /**
-     * Update a product's minimum booking capacity
-     *
-     * Update a product's minimum booking capacity.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id      required        Product ID      Example: prod_3a3d84897c39a40bc49e
-     * @urlParam  product_minimum_capacity_id          required        ID          Example: prodminbookcapa_4894984684684
-     *
-     * @responseFile /responses/products/updateProductMinimumCapacity.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function updateMinimumBookingCapacity(Request $request): JsonResponse
-    {
-        try {
-            $this->validate($request, [
-                'minimum_booking_capacity'             => 'required|integer',
-            ]);
-
-            $resultSet = ProductMinimumBookingCapacity::where('products_minimum_booking_capacity.id', $request->product_minimum_booking_capacity_id);
-
-            $minimumCapacity = $resultSet->first();
-
-            if (empty($minimumCapacity)) {
-                throw new ModelNotFoundException('Product Minimum booking Capacity not found.', 404);
-            }
-
-            DB::beginTransaction();
-
-
-            $minimumCapacity->minimum_booking_capacity  = $request->input('minimum_booking_capacity', $minimumCapacity->getOriginal('minimum_booking_capacity'));
-
-            $minimumCapacity->save();
-
-            DB::commit();
-
-            return response()->json($minimumCapacity);
-        } catch (ModelNotFoundException $e) {
-            return response()->json($e->getMessage(), 404);
-        } catch (ValidationException $e) {
-            return response()->json($e->response->original, 409);
-        } catch (InvalidArgumentException $e) {
-            return response()->json($e->getMessage(), 409);
-        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }

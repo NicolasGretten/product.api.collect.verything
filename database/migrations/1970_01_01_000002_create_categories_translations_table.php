@@ -17,7 +17,6 @@ class CreateCategoriesTranslationsTable extends Migration
             $table->string('id')->primary();;
             $table->string('category_id');
             $table->string('locale')->index();
-            $table->string('title');
             $table->text('text');
             $table->unique(['id','category_id','locale']);
             $table->timestamp('deleted_at')->nullable();

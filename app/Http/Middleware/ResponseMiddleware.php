@@ -6,8 +6,8 @@ use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
-use Laravel\Lumen\Http\ResponseFactory;
 
 class ResponseMiddleware
 {

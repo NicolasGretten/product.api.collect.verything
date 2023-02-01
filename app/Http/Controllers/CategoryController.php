@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 set_time_limit(0);
 
 use App\Category;
-use App\Exceptions\PgSqlException;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
 use App\Traits\LocaleTrait;
@@ -19,7 +18,7 @@ use Illuminate\Http\Request;
 use InvalidArgumentException;
 use PDOException;
 
-class CategoryController extends ControllerBase
+class CategoryController extends Controller
 {
     use IdTrait, FiltersTrait, PaginationTrait, LocaleTrait;
 
@@ -63,9 +62,6 @@ class CategoryController extends ControllerBase
             $category = $resultSet->first();
 
             return response()->json($category);
-        }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
         }
         catch(ValidationException $e) {
             return response()->json($e->response->original, 409);
@@ -137,9 +133,6 @@ class CategoryController extends ControllerBase
 
             return response()->json($categories, 200,['pagination' => $this->pagination]);
         }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
         catch(ValidationException $e) {
             return response()->json($e->response->original, 409);
         }
@@ -196,9 +189,6 @@ class CategoryController extends ControllerBase
 
             return response()->json($category);
         }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
-        }
         catch(ModelNotFoundException $e) {
             return response()->json($e->getMessage(), $e->getCode());
         }
@@ -243,9 +233,6 @@ class CategoryController extends ControllerBase
             DB::commit();
 
             return response()->json($category);
-        }
-        catch(PDOException $e) {
-            throw new PgSqlException($e);
         }
         catch(ModelNotFoundException $e) {
             return response()->json($e->getMessage(), $e->getCode());

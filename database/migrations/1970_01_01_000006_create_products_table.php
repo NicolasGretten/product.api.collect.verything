@@ -15,9 +15,15 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->string('id')->primary();
-//            $table->string('sku')->unique()->nullable();
+            $table->string('store_id');
+            $table->string('category_id');
+            $table->boolean('available')->default(1);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
         });
     }
 
