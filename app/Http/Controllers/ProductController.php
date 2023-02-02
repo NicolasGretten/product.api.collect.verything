@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductPrice;
 use App\Traits\FiltersTrait;
@@ -58,10 +59,7 @@ class ProductController extends Controller
                 $product = [];
             }
             return response()->json($product);
-        } catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
-        } catch (ModelNotFoundException $e) {
+        } catch (ValidationException|ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
@@ -110,7 +108,7 @@ class ProductController extends Controller
             return response()->json($products, 200, ['pagination' => $this->pagination]);
         } catch (ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         } catch (ModelNotFoundException|Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
@@ -153,6 +151,12 @@ class ProductController extends Controller
                 $this->setLocale();
             }
 
+            $category = Category::where('id', $request->input('category_id'))->first();
+
+            if ($category->store_id !== $request->input('store_id')) {
+                throw new ModelNotFoundException('Store Id is not the same.', 404);
+            }
+
             DB::beginTransaction();
 
             $request->product_translation_id = substr('prodtrad-' . md5(Str::uuid()), 0, 25);
@@ -161,6 +165,7 @@ class ProductController extends Controller
             $id = $this->generateId('prod', $product);
             $product->id = $id;
             $product->store_id = $request->store_id;
+            $product->category_id = $request->category_id;
             $product->available = $request->available;
 
             if (!empty($request->input('locale'))) {
@@ -190,7 +195,7 @@ class ProductController extends Controller
             return response()->json($e->getMessage(), $e->getCode());
         } catch (ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
@@ -300,7 +305,7 @@ class ProductController extends Controller
             return response()->json($e->getMessage(), $e->getCode());
         } catch (ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
@@ -358,7 +363,7 @@ class ProductController extends Controller
             return response()->json($e->getMessage(), 404);
         } catch (ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         } catch (InvalidArgumentException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
@@ -428,7 +433,7 @@ class ProductController extends Controller
             return response()->json($e->getMessage(), 404);
         } catch (ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         } catch (InvalidArgumentException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
@@ -502,7 +507,7 @@ class ProductController extends Controller
             return response()->json($e->getMessage(), $e->getCode());
         } catch (ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);

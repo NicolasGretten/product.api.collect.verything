@@ -25,7 +25,7 @@ class Category extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
-    public $translatedAttributes = ['title', 'text'];
+    public $translatedAttributes = ['text'];
 
     /**
      * The attributes that are mass assignable.
@@ -42,68 +42,22 @@ class Category extends Model
      */
     protected $hidden = ['pivot','translations'];
 
-    protected $appends = ['discount'];
-
-    public function getDiscountAttribute()
-    {
-        if ($this->discounts()->exists()) {
-            return $this->discounts()
-                ->where('start_at','<=', Carbon::now())
-                ->where('end_at','>', Carbon::now())
-                ->get();
-        }
-        return null;
-    }
+    protected $appends = [];
 
     public function translationsList(): HasMany
     {
-        return $this->hasMany('App\CategoryTranslation');
-    }
-
-    public function categoryDiscounts(): HasMany
-    {
-        return $this->hasMany('App\CategoryDiscount');
-    }
-
-    public function productCategory(): HasMany
-    {
-        return $this->hasMany('App\ProductCategory');
-    }
-
-    public function compositeProductCategory(): HasMany
-    {
-        return $this->hasMany('App\CompositeProductCategory');
-    }
-
-    public function ProductTemplate(): HasMany
-    {
-        return $this->hasMany('App\ProductTemplate');
+        return $this->hasMany('App\Models\CategoryTranslation');
     }
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany('App\Product', 'products_categories')->wherePivotNull('deleted_at');
+        return $this->belongsToMany('App\Models\Product', 'products_categories')->wherePivotNull('deleted_at');
     }
 
-    public function compositeProducts(): belongsToMany
-    {
-        return $this->belongsToMany('App\CompositeProduct', 'composite_products_categories')->wherePivotNull('deleted_at');
-
-    }
-
-    public function discounts(): belongsToMany
-    {
-        return $this->belongsToMany('App\Discount', 'categories_discounts')->wherePivotNull('deleted_at');
-
-    }
 
     public function delete(): ?bool
     {
         $this->translationsList()->delete();
-        $this->categoryDiscounts()->delete();
-        $this->productCategory()->delete();
-        $this->compositeProductCategory()->delete();
-        $this->ProductTemplate()->delete();
 
         return parent::delete();
     }

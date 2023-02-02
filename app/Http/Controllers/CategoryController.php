@@ -53,7 +53,7 @@ class CategoryController extends Controller
         }
         catch(ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         }
         catch(ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
@@ -101,7 +101,7 @@ class CategoryController extends Controller
         }
         catch(ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         }
         catch(ModelNotFoundException | Exception $e) {
             Bugsnag::notifyException($e);
@@ -130,10 +130,10 @@ class CategoryController extends Controller
         try {
 
             $this->validate($request, [
-                'locale'                        => 'in:'. env('LOCALES_ALLOWED'),
-                'text'                          => 'string',
-                'default'                          => 'required|boolean',
-                'store_id'                          => 'required|string'
+                'locale'         => 'in:'. env('LOCALES_ALLOWED'),
+                'text'           => 'string',
+                'default'        => 'required|boolean',
+                'store_id'       => 'required|string'
             ]);
 
             if(!empty($request->input('locale'))) {
@@ -165,7 +165,7 @@ class CategoryController extends Controller
         }
         catch(ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         }
         catch(Exception $e) {
             Bugsnag::notifyException($e);
@@ -219,7 +219,7 @@ class CategoryController extends Controller
         }
         catch(ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         }
         catch(Exception $e) {
             Bugsnag::notifyException($e);
@@ -280,7 +280,7 @@ class CategoryController extends Controller
         }
         catch(ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         }
         catch(InvalidArgumentException $e) {
             Bugsnag::notifyException($e);
@@ -355,7 +355,7 @@ class CategoryController extends Controller
         }
         catch(ValidationException $e) {
             Bugsnag::notifyException($e);
-            return response()->json($e->response->original, 409);
+            return response()->json($e->getMessage(), 409);
         }
         catch(InvalidArgumentException $e) {
             Bugsnag::notifyException($e);
