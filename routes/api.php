@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +25,12 @@ Route::controller(CategoryController::class)->group(function () {
 });
 
 Route::controller(ProductController::class)->group(function () {
-    Route::get('products/{id}', 'ProductController@retrieve');
-    Route::get('products/', 'ProductController@list');
-    Route::post('products/', 'ProductController@create');
-    Route::delete('products/{id}', 'ProductController@delete');
-    Route::post('products/{id}/translate', 'ProductController@addTranslation');
-    Route::delete('products/{id}/translate', 'ProductController@removeTranslation');
-    Route::patch('products/{id}/price/{product_price_id}', 'ProductController@updatePrice');
+    Route::get('products/{id}', 'retrieve');
+    Route::get('products/', 'list');
+    Route::post('products/', 'create');
+    Route::delete('products/{id}', 'delete');
+    Route::patch('products/{id}', 'patch');
+    Route::post('products/{id}/translate', 'addTranslation');
+    Route::delete('products/{id}/translate', 'removeTranslation');
+    Route::patch('products/{id}/price', 'updatePrice');
 });

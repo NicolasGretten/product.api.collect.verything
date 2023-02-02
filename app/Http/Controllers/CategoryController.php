@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Models\Category;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
 use App\Traits\LocaleTrait;
 use App\Traits\PaginationTrait;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
@@ -15,33 +16,28 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
+use OpenApi\Annotations as OA;
 use PDOException;
 
 class CategoryController extends Controller
 {
     use IdTrait, FiltersTrait, PaginationTrait, LocaleTrait;
 
-    public function __construct() {
-
-    }
-
     /**
-     * Retrieve a category
-     *
-     * Retrieve all category details.
-     *
-     * @group   Categories
-     *
-     * @urlParam    category_id          required        Category ID                        Example: cat_d10be1a57a0fddafc85b5
-     *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["products","compositeProducts","discounts"]
-     *
-     * @responseFile /responses/categories/retrieve.json
-     * @responseFile scenario="Relations filter" /responses/categories/relations-retrieve.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Get(
+     *      path="/api/categories/{id}",
+     *      operationId="retrieve",
+     *      tags={"Categories"},
+     *      summary="Get category information",
+     *      description="Returns category data",
+     *      @OA\Parameter(name="id",description="Category id", required=true, in="query"),
+     *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Category not found."),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
     public function retrieve(Request $request): JsonResponse
     {
@@ -56,58 +52,41 @@ class CategoryController extends Controller
             return response()->json($category);
         }
         catch(ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         }
         catch(ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
         catch(Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * List all categories
-     *
-     * List all the categories.
-     *
-     * @group   Categories
-     *
-     * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["cat_d10be1a57a0fddafc85b5","cattrad_d8c93817712865f96"]
-     * @queryParam  limit                                  Number of results per pagination page                        Example: 10
-     * @queryParam  page                                   Current page number for pagination                           Example: 1
-     *
-     * @bodyParam   filters[created][gt]                   Creation datetime is Greater Than this value.                Example: 1602688060
-     * @bodyParam   filters[created][gte]                  Creation datetime is Greater Than or Equal to this value     Example: 1602688060
-     * @bodyParam   filters[created][lt]                   Creation datetime is Less Than this value                    Example: 1602688060
-     * @bodyParam   filters[created][lte]                  Creation datetime is Less Than or Equal to this value        Example: 1602688060
-     * @bodyParam   filters[created][order]                Sort the results in the order given                          Example: ASC
-     *
-     * @bodyParam   filters[updated][gt]                   Update datetime is Greater Than this value.                  Example: 1602688060
-     * @bodyParam   filters[updated][gte]                  Update datetime is Greater Than or Equal to this value       Example: 1602688060
-     * @bodyParam   filters[updated][lt]                   Update datetime is Less Than this value                      Example: 1602688060
-     * @bodyParam   filters[updated][lte]                  Update datetime is Less Than or Equal to this value          Example: 1602688060
-     * @bodyParam   filters[updated][order]                Sort the results in the order given                          Example: ASC
-     *
-     * @bodyParam   filters[deleted][gt]                   Deletion datetime is Greater Than this value.                Example: 1602688060
-     * @bodyParam   filters[deleted][gte]                  Deletion datetime is Greater Than or Equal to this value     Example: 1602688060
-     * @bodyParam   filters[deleted][lt]                   Deletion datetime is Less Than this value                    Example: 1602688060
-     * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
-     * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
-     *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["products","compositeProducts","discounts"]
-     *
-     * @responseFile /responses/categories/list.json
-     * @responseFile scenario="Relations Filter" /responses/categories/relations-list.json
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @OA\Get(
+     *      path="/api/categories",
+     *      operationId="list",
+     *      tags={"Categories"},
+     *      summary="Get all categories information",
+     *      description="Returns category data",
+     *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Parameter(name="store_id",description="Store Id", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=403, description="Forbidden"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
     public function list(Request $request): JsonResponse
     {
         try {
             $request->validate([
-                'store_id' => 'required|exists:categories,id',
+                'store_id' => 'required',
             ]);
 
             $this->setLocale();
@@ -121,28 +100,30 @@ class CategoryController extends Controller
             return response()->json($categories, 200,['pagination' => $this->pagination]);
         }
         catch(ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         }
         catch(ModelNotFoundException | Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
     }
 
     /**
-     * Create a category
-     *
-     * Allows you to create a new category.
-     *
-     * @group   Categories
-     *
-     * @queryParam  title       required        Title of the description    Example: Traduction française
-     * @queryParam  locale      required        Locale                      Example: fr-FR
-     * @queryParam  text        required        Description                 Example: Soins
-     *
-     * @responseFile /responses/categories/create.json
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @OA\Post(
+     *      path="/api/categories",
+     *      operationId="create",
+     *      tags={"Categories"},
+     *      summary="Post a new category",
+     *      description="Create a category",
+     *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
+     *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
+     *      @OA\Parameter(name="store_id", description="Store Id", required=true, in="query"),
+     *      @OA\Parameter(name="default", description="Default", required=false, in="query"),
+     *      @OA\Response(response=201,description="Category created"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
      */
     public function create(Request $request): JsonResponse
     {
@@ -165,6 +146,8 @@ class CategoryController extends Controller
 
             $category = new Category;
             $category->id = $this->generateId('cat', $category);
+            $category->store_id =  $request->input('store_id');
+            $category->default = $request->input('default');
 
             if(!empty($request->input('locale'))) {
                 $category->translateOrNew($request->input('locale'))->fill(['id' => $request->category_translation_id])->text    = $request->input('text');
@@ -177,30 +160,39 @@ class CategoryController extends Controller
             return response()->json($category);
         }
         catch(ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         }
         catch(ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         }
         catch(Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * Delete a category
-     *
-     * Delete a category and anonymize the data.
-     *
-     * @group   Categories
-     *
-     * @urlParam    category_id     required        Category ID     Example: cat_d10be1a57a0fddafc85b5
-     *
-     * @responseFile /responses/categories/delete.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Delete  (
+     *      path="/api/categories/{id}",
+     *      operationId="delete",
+     *      tags={"Categories"},
+     *      summary="Delete a category",
+     *      description="Soft delete a category",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Category id",
+     *          required=true,
+     *          in="query",
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Category deleted"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function delete(Request $request):JsonResponse
     {
@@ -222,34 +214,33 @@ class CategoryController extends Controller
             return response()->json($category);
         }
         catch(ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         }
         catch(ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         }
         catch(Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * Translate a category's description
-     *
-     * Allow you to translate a category's description
-     *
-     * @group   Categories
-     *
-     * @urlParam    category_id     required        Category ID                                     Example: cat_d10be1a57a0fddafc85b5
-     *
-     * @queryParam  locale          required        Locale                                          Example: en-US
-     * @queryParam  title           required        The title of the translation                    Example: English translations
-     * @queryParam  text            required        The description of the category translated      Example: subscription
-     *
-     * @responseFile /responses/categories/addTranslation.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Post(
+     *      path="/api/categories/{id}/translations",
+     *      operationId="addTranslation",
+     *      tags={"Categories Translations"},
+     *      summary="Post a new category translation",
+     *      description="Create a new translation",
+     *      @OA\Parameter(name="id", description="Category id", required=true, in="query"),
+     *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
+     *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
+     *      @OA\Response(response=201,description="Translation created"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
      */
     public function addTranslation(Request $request): JsonResponse
     {
@@ -284,35 +275,46 @@ class CategoryController extends Controller
             return response()->json($category->translate($request->input('locale'))->fresh());
         }
         catch(ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 404);
         }
         catch(ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         }
         catch(InvalidArgumentException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
         catch(Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * Remove a category's description translation
-     *
-     * Allow you to remove a category's description translation.
-     *
-     * @group   Categories
-     *
-     * @urlParam    category_id     required        Category ID         Example: cat_d10be1a57a0fddafc85b5
-     *
-     * @queryParam  locale          required        Locale              Example: en-US
-     *
-     * @responseFile /responses/categories/removeTranslation.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Delete  (
+     *      path="/api/categories/{id}/translations",
+     *      operationId="removeTranslation",
+     *      tags={"Categories Translations"},
+     *      summary="Delete a category translation",
+     *      description="Soft delete a translation",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Category id",
+     *          required=true,
+     *          in="query",
+     *      ),
+     *     @OA\Parameter(
+     *          name="locale",
+     *          description="Locale",
+     *          required=true,
+     *          in="query",
+     *      ),
+     *      @OA\Response(response=200, description="Translation deleted"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function removeTranslation(Request $request): JsonResponse
     {
@@ -348,15 +350,19 @@ class CategoryController extends Controller
             return response()->json($translationDeleted->fresh());
         }
         catch(ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 404);
         }
         catch(ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         }
         catch(InvalidArgumentException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
         catch(Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }

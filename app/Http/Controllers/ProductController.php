@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-set_time_limit(0);
 
-use App\Product;
-use App\ProductPrice;
+use App\Models\Product;
+use App\Models\ProductPrice;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
 use App\Traits\LocaleTrait;
 use App\Traits\PaginationTrait;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Exception;
+use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -17,37 +18,31 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
+use OpenApi\Annotations as OA;
 use PDOException;
 
 class ProductController extends Controller
 {
+    /**
+     * @OA\Info(title="Products API Collect&Verything", version="0.1")
+     */
     use IdTrait, FiltersTrait, PaginationTrait, LocaleTrait;
 
-    public function __construct()
-    {
-
-    }
-
     /**
-     * Retrieve a product
-     *
-     * Retrieve all product details.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id          required        Product ID                          Example: prod_3a3d84897c39a40bc49e
-     *
-     * @queryParam  code                                Promotional code                    Example: PROMO10
-     *
-     * @bodyParam   filters[relations]                   Add a relation in the response     Example: ["compositeProducts","availabilities","categories"]
-     *
-     * @responseFile /responses/products/retrieve.json
-     * @responseFile scenario="Relations filter" /responses/products/relations-retrieve.json
-     * @responseFile scenario="Use code promo" /responses/products/promo-retrieve.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Get(
+     *      path="/api/products/{id}",
+     *      operationId="retrieve",
+     *      tags={"Products"},
+     *      summary="Get product information",
+     *      description="Returns product data",
+     *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
+     *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Product not found."),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
     public function retrieve(Request $request): JsonResponse
     {
@@ -64,55 +59,34 @@ class ProductController extends Controller
             }
             return response()->json($product);
         } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         } catch (ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * List all products
-     *
-     * List all the products.
-     *
-     * @group   Products
-     *
-     * @queryParam  items_id                               The items ID list to retrieve.                               Example: ["prod_3a3d84897c39a40bc49e","prod_c93e0a2194593f85a7a6"]
-     * @queryParam  limit                                  Number of results per pagination page                        Example: 10
-     * @queryParam  page                                   Current page number for pagination                           Example: 1
-     * @queryParam  code                                   Promotional code                                             Example: PROMO10
-     * @queryParam  category_id                             Category Id                                             Example: cat_8a61a9ed91efe584ca29z
-     * @queryParam  without_category                             Product without category only                                            Example: 1
-     *
-     * @bodyParam   filters[created][gt]                   Creation datetime is Greater Than this value.                Example: 1602688060
-     * @bodyParam   filters[created][gte]                  Creation datetime is Greater Than or Equal to this value     Example: 1602688060
-     * @bodyParam   filters[created][lt]                   Creation datetime is Less Than this value                    Example: 1602688060
-     * @bodyParam   filters[created][lte]                  Creation datetime is Less Than or Equal to this value        Example: 1602688060
-     * @bodyParam   filters[created][order]                Sort the results in the order given                          Example: ASC
-     *
-     * @bodyParam   filters[updated][gt]                   Update datetime is Greater Than this value.                  Example: 1602688060
-     * @bodyParam   filters[updated][gte]                  Update datetime is Greater Than or Equal to this value       Example: 1602688060
-     * @bodyParam   filters[updated][lt]                   Update datetime is Less Than this value                      Example: 1602688060
-     * @bodyParam   filters[updated][lte]                  Update datetime is Less Than or Equal to this value          Example: 1602688060
-     * @bodyParam   filters[updated][order]                Sort the results in the order given                          Example: ASC
-     *
-     * @bodyParam   filters[deleted][gt]                   Deletion datetime is Greater Than this value.                Example: 1602688060
-     * @bodyParam   filters[deleted][gte]                  Deletion datetime is Greater Than or Equal to this value     Example: 1602688060
-     * @bodyParam   filters[deleted][lt]                   Deletion datetime is Less Than this value                    Example: 1602688060
-     * @bodyParam   filters[deleted][lte]                  Deletion datetime is Less Than or Equal to this value        Example: 1602688060
-     * @bodyParam   filters[deleted][order]                Sort the results in the order given                          Example: ASC
-     *
-     * @bodyParam   filters[relations]                     Add a relation in the response                               Example: ["compositeProducts","availabilities","categories"]
-     *
-     * @responseFile /responses/products/list.json
-     * @responseFile scenario="Relations Filter" /responses/products/relations-list.json
-     * @responseFile scenario="Use code promo" /responses/products/promo-list.json
-     *
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @OA\Get(
+     *      path="/api/products",
+     *      operationId="list",
+     *      tags={"Products"},
+     *      summary="Get all products information",
+     *      description="Returns product data",
+     *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Parameter(name="product_id",description="Product Id", required=true, in="query"),
+     *      @OA\Parameter(name="category_id",description="Category Id", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=403, description="Forbidden"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
     public function list(Request $request): JsonResponse
     {
@@ -135,54 +109,44 @@ class ProductController extends Controller
             $products = $resultSet->get();
             return response()->json($products, 200, ['pagination' => $this->pagination]);
         } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         } catch (ModelNotFoundException|Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
     }
 
     /**
-     * Create a product
-     *
-     * Allows you to create a new product.
-     *
-     * @group   Products
-     *
-     * @queryParam  title                           required        Title of the description        Example: Traduction française
-     * @queryParam  locale                          required        Locale                          Example: fr-FR
-     * @queryParam  text                            required        Description                     Example: spa
-     * @queryParam  price_including_taxes           required        New price including taxes       Example: 120
-     * @queryParam  price_excluding_taxes           required        New price excluding taxes       Example: 100
-     * @queryParam  vat_value                       required        New vat value                   Example: 20
-     * @queryParam  vat_rate                        required        New vat rate                    Example: 20
-     * @queryParam  day                             required        day available                   Example: ["monday","tuesday","wednesday"]
-     * @queryParam  hour_start                      required        Hour start                      Example: 08:00:00
-     * @queryParam  hour_end                        required        Hour end                        Example: 10:00:00
-     * @queryParam  category_id                     required        Category ID                     Example: cat_d10be1a57a0fddafc85b5
-     *
-     * @responseFile /responses/products/create.json
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @OA\Post(
+     *      path="/api/products",
+     *      operationId="create",
+     *      tags={"Products"},
+     *      summary="Post a new product",
+     *      description="Create a product",
+     *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
+     *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
+     *      @OA\Parameter(name="category_id", description="Category Id", required=true, in="query"),
+     *      @OA\Parameter(name="store_id", description="Store Id", required=true, in="query"),
+     *      @OA\Parameter(name="available", description="Available", required=true, in="query"),
+     *      @OA\Parameter(name="ht", description="HT", required=true, in="query"),
+     *      @OA\Parameter(name="tva_rate", description="TVA rate", required=false, in="query"),
+     *      @OA\Response(response=201,description="Product created"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
      */
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
-                'title' => 'string',
                 'locale' => 'in:' . env('LOCALES_ALLOWED'),
                 'text' => 'string|nullable',
-
-                'category_id' => 'string|nullable|exists:categories,id',
-
-                'days' => 'json|nullable',
-                'hour_start' => 'date_format:H:i:s|nullable',
-                'hour_end' => 'date_format:H:i:s|nullable',
-
-                'price_including_taxes' => 'integer',
-                'price_excluding_taxes' => 'integer',
-                'vat_value' => 'integer',
-                'vat_rate' => 'integer',
+                'category_id' => 'string|required|exists:categories,id',
+                'store_id' => 'string|required',
+                'available' => 'boolean|required',
+                'ht' => 'required|integer',
+                'tva_rate' => 'required|integer',
             ]);
 
             if (!empty($request->input('locale'))) {
@@ -191,77 +155,127 @@ class ProductController extends Controller
 
             DB::beginTransaction();
 
-            $request->product_translation_id = substr('prodtrad_' . md5(Str::uuid()), 0, 25);
+            $request->product_translation_id = substr('prodtrad-' . md5(Str::uuid()), 0, 25);
 
             $product = new Product;
             $id = $this->generateId('prod', $product);
             $product->id = $id;
+            $product->store_id = $request->store_id;
+            $product->available = $request->available;
 
             if (!empty($request->input('locale'))) {
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->title = $request->input('title');
                 $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->text = $request->input('text');
             }
 
             $product->save();
 
-            $availability = new ProductAvailability();
-            $availability->id = $this->generateId('prodavail', $availability);
-            $availability->product_id = $id;
-            $availability->days = json_decode($request->days);
-            $availability->hour_start = $request->hour_start;
-            $availability->hour_end = $request->hour_end;
-            $availability->save();
-            $product->availability = $availability;
+            $ttc = $request->ht * $request->tva_rate;
+            $tva_value = $ttc - $request->ht;
 
             $price = new ProductPrice();
             $price->id = $this->generateId('prodprice', $price);
             $price->product_id = $id;
-            $price->price_including_taxes = $request->price_including_taxes;
-            $price->price_excluding_taxes = $request->price_excluding_taxes;
-            $price->vat_value = $request->vat_value;
-            $price->vat_rate = $request->vat_rate;
+            $price->ttc = $ttc;
+            $price->ht = $request->ht;
+            $price->tva_value = $tva_value;
+            $price->tva_rate = $request->tva_rate;
             $price->save();
             $product->price = $price;
-
-            if ($request->category_id) {
-
-                $category = new ProductCategory();
-                $category->id = $this->generateId('prodcat', $category);
-                $category->product_id = $id;
-                $category->category_id = $request->category_id;
-                $category->save();
-                $product->category = $category;
-            }
-
 
             DB::commit();
 
             return response()->json($product);
-        } catch (PDOException $e) {
-            throw new PgSqlException($e);
-        } catch (ModelNotFoundException $e) {
+        }  catch (ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * Delete a product
-     *
-     * Delete a product and anonymize the data.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id             required        Product ID            Example: prod_3a3d84897c39a40bc49e
-     *
-     * @responseFile /responses/products/delete.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Patch (
+     *      path="/api/products/{id}",
+     *      operationId="update",
+     *      tags={"Products"},
+     *      summary="Patch a product",
+     *      description="Update a product",
+     *      @OA\Parameter(name="available", description="available", required=false, in="query"),
+     *      @OA\Parameter(name="category_id", description="Category Id", required=false, in="query"),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Store updated"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function update(Request $request): JsonResponse
+    {
+        try {
+            $request->validate([
+                'available' => 'string',
+                'category_id' => 'string|exists:categories,id',
+            ]);
+
+            DB::beginTransaction();
+
+            $resultSet = Product::select('products.*')
+                ->where('products.id', $request->id);
+
+            $product = $resultSet->first();
+
+            if(empty($product)) {
+                throw new ModelNotFoundException('Product not found.', 404);
+            }
+
+            $product->available = $request->input('available', $product->getOriginal('available'));
+            $product->category_id = $request->input('category_id', $product->getOriginal('category_id'));
+
+            $product->save();
+
+            DB::commit();
+
+            return response()->json($product, 200);
+        }
+        catch(ModelNotFoundException | JsonEncodingException $e) {
+            Bugsnag::notifyException($e);
+            return response()->json($e->getMessage(), $e->getCode());
+        }
+        catch(ValidationException $e) {
+            Bugsnag::notifyException($e);
+            return response()->json($e->getMessage(), 409);
+        }
+        catch(Exception $e) {
+            Bugsnag::notifyException($e);
+            return response()->json($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @OA\Delete  (
+     *      path="/api/products/{id}",
+     *      operationId="delete",
+     *      tags={"Products"},
+     *      summary="Delete a product",
+     *      description="Soft delete a product",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Product id",
+     *          required=true,
+     *          in="query",
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Product deleted"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function delete(Request $request): JsonResponse
     {
@@ -280,41 +294,39 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return response()->json($product->fresh()->makeHidden(['current_pricing', 'current_discount', 'original_pricing', 'discount']));
+            return response()->json($product->fresh());
         }  catch (ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * Translate a product's description
-     *
-     * Allow you to translate a product's description
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id  required        Product ID                                      Example: prod_3a3d84897c39a40bc49e
-     *
-     * @queryParam  locale      required        Locale                                          Example: en-US
-     * @queryParam  title       required        The title of the translation                    Example: English translations
-     * @queryParam  text        required        The description of the product translated       Example: Spa
-     *
-     * @responseFile /responses/products/addTranslation.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Post(
+     *      path="/api/products/{id}/translations",
+     *      operationId="addTranslation",
+     *      tags={"Products Translations"},
+     *      summary="Post a new product translation",
+     *      description="Create a new translation",
+     *      @OA\Parameter(name="id", description="Product id", required=true, in="query"),
+     *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
+     *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
+     *      @OA\Response(response=201,description="Translation created"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
      */
     public function addTranslation(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
                 'locale' => 'required|string|in:' . env('LOCALES_ALLOWED'),
-                'title' => 'required|string',
                 'text' => 'nullable|string'
             ]);
 
@@ -332,9 +344,8 @@ class ProductController extends Controller
                 $product->deleteTranslations($request->input('locale'));
             }
 
-            $request->productTranslation_id = substr('prodtrad_' . md5(Str::uuid()), 0, 25);
+            $request->productTranslation_id = substr('prodtrad-' . md5(Str::uuid()), 0, 25);
 
-            $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->title = $request->input('title');
             $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->text = $request->input('text');
 
             $product->save();
@@ -343,32 +354,43 @@ class ProductController extends Controller
 
             return response()->json($product->translate($request->input('locale'))->fresh());
         } catch (ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 404);
         } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         } catch (InvalidArgumentException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * Remove a product's description translation
-     *
-     * Allow you to remove a product's description translation.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id      required        Product ID      Example: prod_3a3d84897c39a40bc49e
-     *
-     * @queryParam  locale          required        Locale          Example: en-US
-     *
-     * @responseFile /responses/products/removeTranslation.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Delete  (
+     *      path="/api/products/{id}/translations",
+     *      operationId="removeTranslation",
+     *      tags={"Products Translations"},
+     *      summary="Delete a product translation",
+     *      description="Soft delete a translation",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Product id",
+     *          required=true,
+     *          in="query",
+     *      ),
+     *     @OA\Parameter(
+     *          name="locale",
+     *          description="Locale",
+     *          required=true,
+     *          in="query",
+     *      ),
+     *      @OA\Response(response=200, description="Translation deleted"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function removeTranslation(Request $request): JsonResponse
     {
@@ -402,56 +424,54 @@ class ProductController extends Controller
 
             return response()->json($translationDeleted->fresh());
         } catch (ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 404);
         } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         } catch (InvalidArgumentException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
 
     /**
-     * Update a product price
-     *
-     * You can update product price data.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id              required    Id of the product to update         Example: prod_3a3d84897c39a40bc49e
-     * @urlParam    product_price_id        required    Id of the product price to update   Example: prodprice_4e9a60b280a60e5
-     *
-     * @queryParam  price_including_taxes   required    New price including taxes           Example: 120
-     * @queryParam  price_excluding_taxes   required    New price excluding taxes           Example: 100
-     * @queryParam  vat_value               required    New vat value                       Example: 20
-     * @queryParam  vat_rate                required    New vat rate                        Example: 20
-     *
-     * @responseFile /responses/products/updatePrice.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
+     * @OA\Patch (
+     *      path="/api/products/{id}/price",
+     *      operationId="updatePrice",
+     *      tags={"Products"},
+     *      summary="Patch a product price",
+     *      description="Update a product price",
+     *      @OA\Parameter(name="ht", description="HT", required=true, in="query"),
+     *      @OA\Parameter(name="tva_rate", description="TVA rate", required=true, in="query"),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Store updated"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function updatePrice(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
-                'price_including_taxes' => 'integer',
-                'price_excluding_taxes' => 'integer',
-                'vat_value' => 'integer',
-                'vat_rate' => 'integer',
+                'ht' => 'required|integer',
+                'tva_rate' => 'required|integer',
             ]);
 
             DB::beginTransaction();
 
-            $product = Product::where('products.id', $request->product_id)->first();
+            $product = Product::where('products.id', $request->id)->first();
 
             if (empty($product)) {
                 throw new ModelNotFoundException('Product not found.', 404);
             }
 
-            $resultSet = ProductPrice::where('products_prices.id', $request->product_price_id);
+            $resultSet = ProductPrice::where('products_prices.product_id', $request->id)->first();
 
             $price = $resultSet->first();
 
@@ -462,76 +482,29 @@ class ProductController extends Controller
             $price->delete();
 
 
-            $newPrice = new ProductPrice();
-            $newPrice->id = $this->generateId('prodprice', $newPrice);
-            $newPrice->product_id = $request->product_id;
-            $newPrice->price_including_taxes = $request->price_including_taxes;
-            $newPrice->price_excluding_taxes = $request->price_excluding_taxes;
-            $newPrice->vat_value = $request->vat_value;
-            $newPrice->vat_rate = $request->vat_rate;
+            $ttc = $request->ht * $request->tva_rate;
+            $tva_value = $ttc - $request->ht;
 
-            $newPrice->save();
+            $productPrice = new ProductPrice();
+            $productPrice->id = $this->generateId('prodprice', $price);
+            $productPrice->product_id = $request->id;
+            $productPrice->ttc = $ttc;
+            $productPrice->ht = $request->ht;
+            $productPrice->tva_value = $tva_value;
+            $productPrice->tva_rate = $request->tva_rate;
+            $productPrice->save();
 
             DB::commit();
 
-            return response()->json($newPrice);
+            return response()->json($productPrice);
         }  catch (ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->response->original, 409);
         } catch (Exception $e) {
-            return response()->json($e->getMessage(), 500);
-        }
-    }
-
-    /**
-     * Update a product category
-     *
-     * You can update product category data.
-     *
-     * @group   Products
-     *
-     * @urlParam    product_id      required        Id of the product to update     Example: prod_3a3d84897c39a40bc49e
-     *
-     * @queryParam  category_id     required        Category ID                     Example: cat_d10be1a57a0fddafc85b5
-     *
-     * @responseFile /responses/products/updateCategory.json
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function updateCategory(Request $request): JsonResponse
-    {
-        try {
-            $this->validate($request, [
-                'category_id' => 'string|exists:categories,id',
-            ]);
-
-            DB::beginTransaction();
-
-            $product = Product::where('products.id', $request->product_id)->first();
-
-            if (empty($product)) {
-                throw new ModelNotFoundException('Product not found.', 404);
-            }
-
-            $resultSet = ProductCategory::where('products_categories.product_id', $request->product_id);
-
-            $category = $resultSet->first();
-
-            $category->category_id = $request->input('category_id', $category->getOriginal('category_id'));
-
-            $category->save();
-
-            DB::commit();
-
-            return response()->json($category);
-        } catch (ModelNotFoundException $e) {
-            return response()->json($e->getMessage(), $e->getCode());
-        } catch (ValidationException $e) {
-            return response()->json($e->response->original, 409);
-        } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
     }
