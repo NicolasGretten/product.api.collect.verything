@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\AddToCartJob;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductPrice;
@@ -128,6 +129,7 @@ class ProductController extends Controller
      *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
      *      @OA\Parameter(name="category_id", description="Category Id", required=true, in="query"),
      *      @OA\Parameter(name="store_id", description="Store Id", required=true, in="query"),
+     *      @OA\Parameter(name="image_id", description="Image Id", required=true, in="query"),
      *      @OA\Parameter(name="available", description="Available", required=true, in="query"),
      *      @OA\Parameter(name="ht", description="HT", required=true, in="query"),
      *      @OA\Parameter(name="tva_rate", description="TVA rate", required=false, in="query"),
@@ -144,6 +146,7 @@ class ProductController extends Controller
                 'text' => 'string|nullable',
                 'category_id' => 'string|required|exists:categories,id',
                 'store_id' => 'string|required',
+                'image_id' => 'string',
                 'available' => 'boolean|required',
                 'ht' => 'required|integer',
                 'tva_rate' => 'required|integer',
@@ -167,6 +170,7 @@ class ProductController extends Controller
             $id = $this->generateId('prod', $product);
             $product->id = $id;
             $product->store_id = $request->store_id;
+            $product->image_id = $request->image_id;
             $product->category_id = $request->category_id;
             $product->available = $request->available;
 
@@ -214,6 +218,7 @@ class ProductController extends Controller
      *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="available", description="available", required=false, in="query"),
      *      @OA\Parameter(name="category_id", description="Category Id", required=false, in="query"),
+     *      @OA\Parameter(name="image_id", description="Image Id", required=false, in="query"),
      *      @OA\Response(
      *          response=200,
      *          description="Store updated"
@@ -228,6 +233,7 @@ class ProductController extends Controller
             $request->validate([
                 'available' => 'string',
                 'category_id' => 'string|exists:categories,id',
+                'image_id' => 'string',
             ]);
 
             DB::beginTransaction();
@@ -243,6 +249,7 @@ class ProductController extends Controller
 
             $product->available = $request->input('available', $product->getOriginal('available'));
             $product->category_id = $request->input('category_id', $product->getOriginal('category_id'));
+            $product->image_id = $request->input('image_id', $product->getOriginal('image_id'));
 
             $product->save();
 
@@ -501,6 +508,54 @@ class ProductController extends Controller
             DB::commit();
 
             return response()->json($productPrice);
+        }  catch (ModelNotFoundException $e) {
+            Bugsnag::notifyException($e);
+            return response()->json($e->getMessage(), $e->getCode());
+        } catch (ValidationException $e) {
+            Bugsnag::notifyException($e);
+            return response()->json($e->getMessage(), 409);
+        } catch (Exception $e) {
+            Bugsnag::notifyException($e);
+            return response()->json($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @OA\Post (
+     *      path="/api/products/{id}/cart",
+     *      operationId="addToCart",
+     *      tags={"Products"},
+     *      summary="Add a product to a shopping cart",
+     *      description="Send pub to cart API",
+     *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
+     *      @OA\Parameter(name="cart_id", description="Cart Id", required=true, in="query"),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Added to Cart updated"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function addToCart(Request $request): JsonResponse
+    {
+        try {
+            DB::beginTransaction();
+
+            $product = Product::where('products.id', $request->id)->first();
+
+            if (empty($product)) {
+                throw new ModelNotFoundException('Product not found.', 404);
+            }
+
+            AddToCartJob::dispatch([
+                'cart_id' => $request->cart_id,
+                'product' => $product,
+            ])->onQueue('add_to_cart');
+
+            DB::commit();
+
+            return response()->json($product);
         }  catch (ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
