@@ -30,8 +30,9 @@ class CategoryController extends Controller
      *      tags={"Categories"},
      *      summary="Get category information",
      *      description="Returns category data",
-     *      @OA\Parameter(name="id",description="Category id", required=true, in="query"),
      *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Parameter(name="id",description="Category id", required=true, in="query"),
+     *      @OA\Parameter(name="store_id",description="Store Id", required=true, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Category not found."),
@@ -42,24 +43,23 @@ class CategoryController extends Controller
     public function retrieve(Request $request): JsonResponse
     {
         try {
+            $request->validate([
+                'store_id' => 'required',
+            ]);
+
             $this->setLocale();
 
             $resultSet = Category::select('categories.*')
-                ->where('categories.id', $request->id);
+                ->where('categories.id', $request->id)->where('store_id', $request->input('store_id'));
 
             $category = $resultSet->first();
 
             return response()->json($category);
         }
-        catch(ValidationException $e) {
+        catch(ValidationException|ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
-        }
-        catch(ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch(Exception $e) {
+        } catch(Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
@@ -119,7 +119,7 @@ class CategoryController extends Controller
      *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
      *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
      *      @OA\Parameter(name="store_id", description="Store Id", required=true, in="query"),
-     *      @OA\Parameter(name="default", description="Default", required=false, in="query"),
+     *      @OA\Parameter(name="default", description="Default", required=true, in="query"),
      *      @OA\Response(response=201,description="Category created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -229,14 +229,14 @@ class CategoryController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/categories/{id}/translations",
+     *      path="/api/categories/{id}/translate",
      *      operationId="addTranslation",
      *      tags={"Categories Translations"},
      *      summary="Post a new category translation",
      *      description="Create a new translation",
-     *      @OA\Parameter(name="id", description="Category id", required=true, in="query"),
      *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
-     *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
+     *      @OA\Parameter(name="id", description="Category id", required=true, in="query"),
+     *      @OA\Parameter(name="text", description="Text", required=true, in="query"),
      *      @OA\Response(response=201,description="Translation created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -254,7 +254,7 @@ class CategoryController extends Controller
 
             $resultSet = Category::where('categories.id', $request->id);
 
-            if($resultSet->get()->isEmpty()) {
+            if(!$resultSet->first()) {
                 throw new ModelNotFoundException('Category not found.', 404);
             }
 
@@ -264,9 +264,9 @@ class CategoryController extends Controller
                 $category->deleteTranslations($request->input('locale'));
             }
 
-            $request->categoryTranslation_id = substr('cattrad-' . md5(Str::uuid()),0 ,25);
+            $request->category_translation_id = substr('cattrad-' . md5(Str::uuid()),0 ,25);
 
-            $category->translateOrNew($request->input('locale'))->fill(['id' => $request->categoryTranslation_id])->text = $request->input('text');
+            $category->translateOrNew($request->input('locale'))->fill(['id' => $request->category_translation_id])->text = $request->input('text');
 
             $category->save();
 
@@ -294,20 +294,20 @@ class CategoryController extends Controller
 
     /**
      * @OA\Delete  (
-     *      path="/api/categories/{id}/translations",
+     *      path="/api/categories/{id}/translate",
      *      operationId="removeTranslation",
      *      tags={"Categories Translations"},
      *      summary="Delete a category translation",
      *      description="Soft delete a translation",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Category id",
-     *          required=true,
-     *          in="query",
-     *      ),
      *     @OA\Parameter(
      *          name="locale",
      *          description="Locale",
+     *          required=true,
+     *          in="query",
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Category id",
      *          required=true,
      *          in="query",
      *      ),
@@ -353,15 +353,10 @@ class CategoryController extends Controller
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 404);
         }
-        catch(ValidationException $e) {
+        catch(ValidationException|InvalidArgumentException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
-        }
-        catch(InvalidArgumentException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch(Exception $e) {
+        } catch(Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }

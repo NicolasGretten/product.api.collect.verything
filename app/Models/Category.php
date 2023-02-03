@@ -42,7 +42,7 @@ class Category extends Model
      */
     protected $hidden = ['pivot','translations'];
 
-    protected $appends = [];
+    protected $appends = ['products'];
 
     public function translationsList(): HasMany
     {
@@ -52,6 +52,11 @@ class Category extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany('App\Models\Product', 'products_categories')->wherePivotNull('deleted_at');
+    }
+
+    public function getProductsAttribute(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->hasMany('App\Models\Product')->get();
     }
 
 

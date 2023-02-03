@@ -29,7 +29,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('products/', 'list');
     Route::post('products/', 'create');
     Route::delete('products/{id}', 'delete');
-    Route::patch('products/{id}', 'patch');
+    Route::patch('products/{id}', 'update');
     Route::post('products/{id}/translate', 'addTranslation');
     Route::delete('products/{id}/translate', 'removeTranslation');
     Route::patch('products/{id}/price', 'updatePrice');

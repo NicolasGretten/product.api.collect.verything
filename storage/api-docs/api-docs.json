@@ -15,16 +15,22 @@
                 "operationId": "retrieve",
                 "parameters": [
                     {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false
+                    },
+                    {
                         "name": "id",
                         "in": "query",
                         "description": "Category id",
                         "required": true
                     },
                     {
-                        "name": "locale",
+                        "name": "store_id",
                         "in": "query",
-                        "description": "Locale",
-                        "required": false
+                        "description": "Store Id",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -146,7 +152,7 @@
                         "name": "default",
                         "in": "query",
                         "description": "Default",
-                        "required": false
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -162,7 +168,7 @@
                 }
             }
         },
-        "/api/categories/{id}/translations": {
+        "/api/categories/{id}/translate": {
             "post": {
                 "tags": [
                     "Categories Translations"
@@ -172,21 +178,21 @@
                 "operationId": "addTranslation",
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "query",
-                        "description": "Category id",
-                        "required": true
-                    },
-                    {
                         "name": "locale",
                         "in": "query",
                         "description": "Locale",
                         "required": true
                     },
                     {
-                        "name": "description",
+                        "name": "id",
                         "in": "query",
-                        "description": "Description",
+                        "description": "Category id",
+                        "required": true
+                    },
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "Text",
                         "required": true
                     }
                 ],
@@ -211,15 +217,15 @@
                 "operationId": "removeTranslation",
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "query",
-                        "description": "Category id",
-                        "required": true
-                    },
-                    {
                         "name": "locale",
                         "in": "query",
                         "description": "Locale",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Category id",
                         "required": true
                     }
                 ],
@@ -246,16 +252,22 @@
                 "operationId": "retrieve",
                 "parameters": [
                     {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false
+                    },
+                    {
                         "name": "id",
                         "in": "query",
                         "description": "Product id",
                         "required": true
                     },
                     {
-                        "name": "locale",
+                        "name": "store_id",
                         "in": "query",
-                        "description": "Locale",
-                        "required": false
+                        "description": "Store Id",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -312,6 +324,12 @@
                 "operationId": "update",
                 "parameters": [
                     {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
                         "name": "available",
                         "in": "query",
                         "description": "available",
@@ -353,9 +371,9 @@
                         "required": false
                     },
                     {
-                        "name": "product_id",
+                        "name": "store_id",
                         "in": "query",
-                        "description": "Product Id",
+                        "description": "Store Id",
                         "required": true
                     },
                     {
@@ -450,7 +468,7 @@
                 }
             }
         },
-        "/api/products/{id}/translations": {
+        "/api/products/{id}/translate": {
             "post": {
                 "tags": [
                     "Products Translations"
@@ -533,6 +551,12 @@
                 "description": "Update a product price",
                 "operationId": "updatePrice",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
                     {
                         "name": "ht",
                         "in": "query",

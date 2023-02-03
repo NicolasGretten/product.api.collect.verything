@@ -36,8 +36,9 @@ class ProductController extends Controller
      *      tags={"Products"},
      *      summary="Get product information",
      *      description="Returns product data",
-     *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
+     *      @OA\Parameter(name="store_id",description="Store Id", required=true, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Product not found."),
@@ -49,10 +50,14 @@ class ProductController extends Controller
     {
         try {
 
+            $this->validate($request, [
+                'store_id' => 'required|string',
+            ]);
+
             $this->setLocale();
 
             $resultSet = Product::select('products.*')
-                ->where('products.id', $request->id);
+                ->where('products.id', $request->id)->where('store_id', $request->get('store_id'));
 
             $product = $resultSet->first();
             if ($product == null) {
@@ -76,7 +81,7 @@ class ProductController extends Controller
      *      summary="Get all products information",
      *      description="Returns product data",
      *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
-     *      @OA\Parameter(name="product_id",description="Product Id", required=true, in="query"),
+     *      @OA\Parameter(name="store_id",description="Store Id", required=true, in="query"),
      *      @OA\Parameter(name="category_id",description="Category Id", required=true, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
@@ -106,10 +111,7 @@ class ProductController extends Controller
 
             $products = $resultSet->get();
             return response()->json($products, 200, ['pagination' => $this->pagination]);
-        } catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        } catch (ModelNotFoundException|Exception $e) {
+        } catch (ValidationException|ModelNotFoundException|Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
@@ -174,16 +176,16 @@ class ProductController extends Controller
 
             $product->save();
 
-            $ttc = $request->ht * $request->tva_rate;
+            $ttc = $request->ht + ($request->ht * ($request->tva_rate / 100));
             $tva_value = $ttc - $request->ht;
 
             $price = new ProductPrice();
             $price->id = $this->generateId('prodprice', $price);
             $price->product_id = $id;
-            $price->ttc = $ttc;
-            $price->ht = $request->ht;
-            $price->tva_value = $tva_value;
-            $price->tva_rate = $request->tva_rate;
+            $price->ttc = (int)$ttc;
+            $price->ht = (int)$request->ht;
+            $price->tva_value = (int)$tva_value;
+            $price->tva_rate = (int)$request->tva_rate;
             $price->save();
             $product->price = $price;
 
@@ -209,6 +211,7 @@ class ProductController extends Controller
      *      tags={"Products"},
      *      summary="Patch a product",
      *      description="Update a product",
+     *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="available", description="available", required=false, in="query"),
      *      @OA\Parameter(name="category_id", description="Category Id", required=false, in="query"),
      *      @OA\Response(
@@ -314,14 +317,14 @@ class ProductController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/products/{id}/translations",
+     *      path="/api/products/{id}/translate",
      *      operationId="addTranslation",
      *      tags={"Products Translations"},
      *      summary="Post a new product translation",
      *      description="Create a new translation",
      *      @OA\Parameter(name="id", description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
-     *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
+     *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
      *      @OA\Response(response=201,description="Translation created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -332,7 +335,7 @@ class ProductController extends Controller
         try {
             $this->validate($request, [
                 'locale' => 'required|string|in:' . env('LOCALES_ALLOWED'),
-                'text' => 'nullable|string'
+                'text' => 'required|string'
             ]);
 
             DB::beginTransaction();
@@ -361,10 +364,7 @@ class ProductController extends Controller
         } catch (ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 404);
-        } catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        } catch (InvalidArgumentException $e) {
+        } catch (ValidationException|InvalidArgumentException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
@@ -375,7 +375,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Delete  (
-     *      path="/api/products/{id}/translations",
+     *      path="/api/products/{id}/translate",
      *      operationId="removeTranslation",
      *      tags={"Products Translations"},
      *      summary="Delete a product translation",
@@ -431,10 +431,7 @@ class ProductController extends Controller
         } catch (ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 404);
-        } catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        } catch (InvalidArgumentException $e) {
+        } catch (ValidationException|InvalidArgumentException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
@@ -450,6 +447,7 @@ class ProductController extends Controller
      *      tags={"Products"},
      *      summary="Patch a product price",
      *      description="Update a product price",
+     *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="ht", description="HT", required=true, in="query"),
      *      @OA\Parameter(name="tva_rate", description="TVA rate", required=true, in="query"),
      *      @OA\Response(
@@ -476,7 +474,8 @@ class ProductController extends Controller
                 throw new ModelNotFoundException('Product not found.', 404);
             }
 
-            $resultSet = ProductPrice::where('products_prices.product_id', $request->id)->first();
+            $resultSet = ProductPrice::where('products_prices.product_id', $request->id)->where('deleted_at', null);
+
 
             $price = $resultSet->first();
 
@@ -487,16 +486,16 @@ class ProductController extends Controller
             $price->delete();
 
 
-            $ttc = $request->ht * $request->tva_rate;
+            $ttc = $request->ht + ($request->ht * ($request->tva_rate / 100));
             $tva_value = $ttc - $request->ht;
 
             $productPrice = new ProductPrice();
             $productPrice->id = $this->generateId('prodprice', $price);
             $productPrice->product_id = $request->id;
-            $productPrice->ttc = $ttc;
-            $productPrice->ht = $request->ht;
-            $productPrice->tva_value = $tva_value;
-            $productPrice->tva_rate = $request->tva_rate;
+            $productPrice->ttc = (int)$ttc;
+            $productPrice->ht = (int)$request->ht;
+            $productPrice->tva_value = (int)$tva_value;
+            $productPrice->tva_rate = (int)$request->tva_rate;
             $productPrice->save();
 
             DB::commit();
