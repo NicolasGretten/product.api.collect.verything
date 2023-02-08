@@ -1,0 +1,67 @@
+stages:
+  - staging-build
+  - staging-deploy
+  - staging-clean
+  - prod-build
+  - prod-deploy
+  - prod-clean
+
+staging-build-job:
+  stage: staging-build
+  allow_failure: false
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging"
+  tags:
+    - staging
+  script:
+    - cd /home/admin/docker.collect.verything/product/ && sudo docker compose build --no-cache
+
+staging-deploy-job:
+  stage: staging-deploy
+  allow_failure: false
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging"
+  tags:
+    - staging
+  script:
+    - cd /home/admin/docker.collect.verything/product/ && sudo docker compose up -d
+
+staging-clean-job:
+  stage: staging-clean
+  allow_failure: false
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging"
+  tags:
+    - staging
+  script:
+    - sudo docker image prune --force
+
+prod-build-job:
+  stage: prod-build
+  allow_failure: false
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  tags:
+    - production
+  script:
+    - cd /home/admin/docker.collect.verything/product/ && sudo docker compose build --no-cache
+
+prod-deploy-job:
+  stage: prod-deploy
+  allow_failure: false
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  tags:
+    - production
+  script:
+    - cd /home/admin/docker.collect.verything/product/ && sudo docker compose up -d
+
+prod-clean-job:
+  stage: prod-clean
+  allow_failure: false
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  tags:
+    - production
+  script:
+    - sudo docker image prune --force

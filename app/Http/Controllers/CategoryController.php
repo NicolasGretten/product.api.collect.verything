@@ -129,7 +129,7 @@ class CategoryController extends Controller
     {
         try {
 
-            $this->validate($request, [
+            $request->validate([
                 'locale'         => 'in:'. env('LOCALES_ALLOWED'),
                 'text'           => 'string',
                 'default'        => 'required|boolean',
@@ -245,7 +245,7 @@ class CategoryController extends Controller
     public function addTranslation(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'locale'            => 'required|string|in:'.env('LOCALES_ALLOWED'),
                 'text'              => 'required|string'
             ]);
@@ -319,7 +319,7 @@ class CategoryController extends Controller
     public function removeTranslation(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'locale'         => 'required|string|in:'. env('LOCALES_ALLOWED')
             ]);
 
