@@ -143,7 +143,7 @@ class Controller extends BaseController
     public function index(Request $request): JsonResponse
     {
         try{
-            $this->validate($request, [
+            $request->validate([
                 'example' => 'string',
             ]);
 

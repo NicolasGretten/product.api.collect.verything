@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\AddToCartJob;
+use App\Jobs\ProductImageJob;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductPrice;
@@ -51,7 +52,7 @@ class ProductController extends Controller
     {
         try {
 
-            $this->validate($request, [
+            $request->validate([
                 'store_id' => 'required|string',
             ]);
 
@@ -83,7 +84,7 @@ class ProductController extends Controller
      *      description="Returns product data",
      *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
      *      @OA\Parameter(name="store_id",description="Store Id", required=true, in="query"),
-     *      @OA\Parameter(name="category_id",description="Category Id", required=true, in="query"),
+     *      @OA\Parameter(name="category_id",description="Category Id", required=false, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=403, description="Forbidden"),
@@ -95,9 +96,9 @@ class ProductController extends Controller
     public function list(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'store_id' => 'required|string',
-                'category_id' => 'string|nullable|exists:categories,id'
+                'category_id' => 'string|exists:categories,id'
             ]);
 
             $this->setLocale();
@@ -141,7 +142,7 @@ class ProductController extends Controller
     public function create(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'locale' => 'in:' . env('LOCALES_ALLOWED'),
                 'text' => 'string|nullable',
                 'category_id' => 'string|required|exists:categories,id',
@@ -180,8 +181,8 @@ class ProductController extends Controller
 
             $product->save();
 
-            $ttc = $request->ht + ($request->ht * ($request->tva_rate / 100));
-            $tva_value = $ttc - $request->ht;
+            $ttc = $request->ht + ($request->ht * ($request->tva_rate / 10000));
+            $tva_value = $request->ht * ($request->tva_rate / 10000);
 
             $price = new ProductPrice();
             $price->id = $this->generateId('prodprice', $price);
@@ -194,6 +195,10 @@ class ProductController extends Controller
             $product->price = $price;
 
             DB::commit();
+
+            if($product->image_id){
+                ProductImageJob::dispatch($product)->onQueue('product_image');
+            }
 
             return response()->json($product);
         }  catch (ModelNotFoundException $e) {
@@ -254,6 +259,10 @@ class ProductController extends Controller
             $product->save();
 
             DB::commit();
+
+            if($request->input('image_id')){
+                ProductImageJob::dispatch($product)->onQueue('product_image');
+            }
 
             return response()->json($product, 200);
         }
@@ -340,7 +349,7 @@ class ProductController extends Controller
     public function addTranslation(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'locale' => 'required|string|in:' . env('LOCALES_ALLOWED'),
                 'text' => 'required|string'
             ]);
@@ -407,7 +416,7 @@ class ProductController extends Controller
     public function removeTranslation(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'locale' => 'required|string|in:' . env('LOCALES_ALLOWED')
             ]);
 
@@ -468,7 +477,7 @@ class ProductController extends Controller
     public function updatePrice(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'ht' => 'required|integer',
                 'tva_rate' => 'required|integer',
             ]);
@@ -493,8 +502,8 @@ class ProductController extends Controller
             $price->delete();
 
 
-            $ttc = $request->ht + ($request->ht * ($request->tva_rate / 100));
-            $tva_value = $ttc - $request->ht;
+            $ttc = $request->ht + ($request->ht * ($request->tva_rate / 10000));
+            $tva_value = $request->ht * ($request->tva_rate / 10000);
 
             $productPrice = new ProductPrice();
             $productPrice->id = $this->generateId('prodprice', $price);
@@ -528,6 +537,7 @@ class ProductController extends Controller
      *      summary="Add a product to a shopping cart",
      *      description="Send pub to cart API",
      *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
+     *      @OA\Parameter(name="quantity",description="Quantity", required=true, in="query"),
      *      @OA\Parameter(name="cart_id", description="Cart Id", required=true, in="query"),
      *      @OA\Response(
      *          response=200,
@@ -550,7 +560,15 @@ class ProductController extends Controller
 
             AddToCartJob::dispatch([
                 'cart_id' => $request->cart_id,
-                'product' => $product,
+                'product_id' => $product->id,
+                'store_id' => $product->store_id,
+                'category_id' => $product->category_id,
+                'ttc' => $product->original_pricing->ttc,
+                'ht' => $product->original_pricing->ht,
+                'tva_rate' => $product->original_pricing->tva_rate,
+                'tva_value' => $product->original_pricing->tva_value,
+                'text' => $product->text,
+                'quantity' => $request->quantity,
             ])->onQueue('add_to_cart');
 
             DB::commit();
