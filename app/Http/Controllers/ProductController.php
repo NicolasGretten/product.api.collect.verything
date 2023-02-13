@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\AddToCartJob;
+use App\Jobs\ProductImageJob;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductPrice;
@@ -195,6 +196,10 @@ class ProductController extends Controller
 
             DB::commit();
 
+            if($product->image_id){
+                ProductImageJob::dispatch($product)->onQueue('product_image');
+            }
+
             return response()->json($product);
         }  catch (ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
@@ -254,6 +259,10 @@ class ProductController extends Controller
             $product->save();
 
             DB::commit();
+
+            if($request->input('image_id')){
+                ProductImageJob::dispatch($product)->onQueue('product_image');
+            }
 
             return response()->json($product, 200);
         }

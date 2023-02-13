@@ -36,6 +36,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        if(env('APP_ENV') == 'production' || env('APP_ENV') == 'staging'){
+            resolve(\Illuminate\Routing\UrlGenerator::class)->forceScheme('https');
+            parent::boot();
+        }
     }
 
     /**
