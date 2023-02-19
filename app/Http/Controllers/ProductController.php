@@ -367,7 +367,7 @@ class ProductController extends Controller
 
             DB::beginTransaction();
 
-            $resultSet = Product::where('products.id', $request->product_id);
+            $resultSet = Product::where('products.id', $request->id);
 
             if ($resultSet->get()->isEmpty()) {
                 throw new ModelNotFoundException('Product not found.', 404);
@@ -439,7 +439,7 @@ class ProductController extends Controller
 
             DB::beginTransaction();
 
-            $resultSet = Product::where('products.id', $request->product_id);
+            $resultSet = Product::where('products.id', $request->id);
 
             $product = $resultSet->first();
             if (empty($product)) {
