@@ -361,8 +361,8 @@ class ProductController extends Controller
         try {
             $request->validate([
                 'locale' => 'required|string|in:' . env('LOCALES_ALLOWED'),
-                'label' => 'string',
-                'description' => 'string'
+                'label' => 'string|nullable',
+                'description' => 'string|nullable'
             ]);
 
             DB::beginTransaction();
@@ -374,6 +374,8 @@ class ProductController extends Controller
             }
 
             $product = $resultSet->first();
+            $desc = $product->description;
+            $label = $product->label;
 
             if ($product->hasTranslation($request->input('locale'))) {
                 $product->deleteTranslations($request->input('locale'));
@@ -381,13 +383,8 @@ class ProductController extends Controller
 
             $request->productTranslation_id = substr('prodtrad-' . md5(Str::uuid()), 0, 25);
 
-            $request->input('label') !== null  ?
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->label = $request->input('label') :
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id, 'label' => $product->label]);
-            $request->input('description') !== null ?
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $request->input('description') :
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $product->description;
-
+            $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->label = $request->input('label', $label);
+            $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $request->input('description', $desc);
             $product->save();
 
             DB::commit();

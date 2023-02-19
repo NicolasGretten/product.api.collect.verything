@@ -9,7 +9,7 @@ services:
         restart: unless-stopped
         tty: true
         volumes:
-            - './conf/nginx/nginx.conf:/etc/nginx/nginx.conf'
+            - './docker/conf/nginx/nginx.conf:/etc/nginx/nginx.conf'
         networks:
             - collectandverything
     php-fpm:
