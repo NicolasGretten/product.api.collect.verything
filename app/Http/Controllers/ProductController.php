@@ -374,7 +374,6 @@ class ProductController extends Controller
             }
 
             $product = $resultSet->first();
-            $productSave = $product;
 
             if ($product->hasTranslation($request->input('locale'))) {
                 $product->deleteTranslations($request->input('locale'));
@@ -384,10 +383,10 @@ class ProductController extends Controller
 
             $request->input('label') !== null  ?
                 $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->label = $request->input('label') :
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id, 'label' => $productSave->label]);
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id, 'label' => $product->label]);
             $request->input('description') !== null ?
                 $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $request->input('description') :
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $productSave->description;
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $product->description;
 
             $product->save();
 
