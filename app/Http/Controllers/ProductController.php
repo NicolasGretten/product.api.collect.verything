@@ -203,7 +203,7 @@ class ProductController extends Controller
             DB::commit();
 
             if($product->image_id){
-                ProductImageJob::dispatch($product)->onQueue('product_image');
+                ProductImageJob::dispatch($product->toArray())->onQueue('product_image');
             }
 
             return response()->json($product);
@@ -270,7 +270,7 @@ class ProductController extends Controller
             DB::commit();
 
             if($request->input('image_id')){
-                ProductImageJob::dispatch($product)->onQueue('product_image');
+                ProductImageJob::dispatch($product->toArray())->onQueue('product_image');
             }
 
             return response()->json($product, 200);
