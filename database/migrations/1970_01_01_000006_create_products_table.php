@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('category_id');
             $table->string('image_id')->nullable();
             $table->string('image_url')->nullable();
+            $table->string('reference')->nullable();
             $table->boolean('available')->default(1);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

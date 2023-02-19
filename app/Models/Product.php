@@ -28,7 +28,7 @@ class Product extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
-    public $translatedAttributes = ['text'];
+    public $translatedAttributes = ['label','description'];
 
 
     /**

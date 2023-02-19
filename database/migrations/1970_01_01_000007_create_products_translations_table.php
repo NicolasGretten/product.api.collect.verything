@@ -17,7 +17,8 @@ class CreateProductsTranslationsTable extends Migration
             $table->string('id')->primary();;
             $table->string('product_id');
             $table->string('locale')->index();
-            $table->text('text');
+            $table->text('label');
+            $table->text('description');
             $table->unique(['id','product_id','locale']);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
