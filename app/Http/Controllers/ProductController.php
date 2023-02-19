@@ -382,10 +382,10 @@ class ProductController extends Controller
 
             $request->productTranslation_id = substr('prodtrad-' . md5(Str::uuid()), 0, 25);
 
-            $request->input('label') ?
+            $request->input('label') !== null  ?
                 $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->label = $request->input('label') :
                 $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->label = $productSave->label;
-            $request->input('description') ?
+            $request->input('description') !== null ?
                 $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $request->input('description') :
                 $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $productSave->description;
 
