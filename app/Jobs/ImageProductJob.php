@@ -39,6 +39,7 @@ class ImageProductJob implements ShouldQueue
             $product = Product::where('image_id', $data['id'])->first();
             if(!empty($product)){
                 $product->image_url = $data['file_name'];
+                $product->save();
             }
         }
         catch (\Exception $e){
