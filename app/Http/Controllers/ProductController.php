@@ -127,7 +127,9 @@ class ProductController extends Controller
      *      summary="Post a new product",
      *      description="Create a product",
      *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
-     *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
+     *      @OA\Parameter(name="label", description="Label", required=true, in="query"),
+     *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
+     *      @OA\Parameter(name="reference", description="Reference", required=false, in="query"),
      *      @OA\Parameter(name="category_id", description="Category Id", required=true, in="query"),
      *      @OA\Parameter(name="store_id", description="Store Id", required=true, in="query"),
      *      @OA\Parameter(name="image_id", description="Image Id", required=true, in="query"),
@@ -144,7 +146,9 @@ class ProductController extends Controller
         try {
             $request->validate([
                 'locale' => 'in:' . env('LOCALES_ALLOWED'),
-                'text' => 'string|nullable',
+                'label' => 'string|required',
+                'description' => 'string|required',
+                'reference' => 'string|nullable',
                 'category_id' => 'string|required|exists:categories,id',
                 'store_id' => 'string|required',
                 'image_id' => 'string',
@@ -174,9 +178,11 @@ class ProductController extends Controller
             $product->image_id = $request->image_id;
             $product->category_id = $request->category_id;
             $product->available = $request->available;
+            $product->reference = $request->reference;
 
             if (!empty($request->input('locale'))) {
-                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->text = $request->input('text');
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->label = $request->input('label');
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->product_translation_id])->description = $request->input('description');
             }
 
             $product->save();
@@ -239,6 +245,7 @@ class ProductController extends Controller
                 'available' => 'string',
                 'category_id' => 'string|exists:categories,id',
                 'image_id' => 'string',
+                'reference' => 'string',
             ]);
 
             DB::beginTransaction();
@@ -255,6 +262,7 @@ class ProductController extends Controller
             $product->available = $request->input('available', $product->getOriginal('available'));
             $product->category_id = $request->input('category_id', $product->getOriginal('category_id'));
             $product->image_id = $request->input('image_id', $product->getOriginal('image_id'));
+            $product->reference = $request->input('reference', $product->getOriginal('reference'));
 
             $product->save();
 
@@ -351,7 +359,8 @@ class ProductController extends Controller
         try {
             $request->validate([
                 'locale' => 'required|string|in:' . env('LOCALES_ALLOWED'),
-                'text' => 'required|string'
+                'label' => 'string',
+                'description' => 'string'
             ]);
 
             DB::beginTransaction();
@@ -363,6 +372,7 @@ class ProductController extends Controller
             }
 
             $product = $resultSet->first();
+            $productSave = $product;
 
             if ($product->hasTranslation($request->input('locale'))) {
                 $product->deleteTranslations($request->input('locale'));
@@ -370,7 +380,12 @@ class ProductController extends Controller
 
             $request->productTranslation_id = substr('prodtrad-' . md5(Str::uuid()), 0, 25);
 
-            $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->text = $request->input('text');
+            $request->input('label') ?
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->label = $request->input('label') :
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->label = $productSave->label;
+            $request->input('description') ?
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $request->input('description') :
+                $product->translateOrNew($request->input('locale'))->fill(['id' => $request->productTranslation_id])->description = $productSave->description;
 
             $product->save();
 
@@ -567,7 +582,9 @@ class ProductController extends Controller
                 'ht' => $product->original_pricing->ht,
                 'tva_rate' => $product->original_pricing->tva_rate,
                 'tva_value' => $product->original_pricing->tva_value,
-                'text' => $product->text,
+                'reference' => $product->reference,
+                'label' => $product->label,
+                'description' => $product->description,
                 'quantity' => $request->quantity,
             ])->onQueue('add_to_cart');
 
