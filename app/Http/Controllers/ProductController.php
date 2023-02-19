@@ -230,6 +230,7 @@ class ProductController extends Controller
      *      @OA\Parameter(name="available", description="available", required=false, in="query"),
      *      @OA\Parameter(name="category_id", description="Category Id", required=false, in="query"),
      *      @OA\Parameter(name="image_id", description="Image Id", required=false, in="query"),
+     *      @OA\Parameter(name="reference", description="Reference", required=false, in="query"),
      *      @OA\Response(
      *          response=200,
      *          description="Store updated"
@@ -348,7 +349,8 @@ class ProductController extends Controller
      *      description="Create a new translation",
      *      @OA\Parameter(name="id", description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
-     *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
+     *      @OA\Parameter(name="label", description="Label", required=false, in="query"),
+     *      @OA\Parameter(name="description", description="Description", required=false, in="query"),
      *      @OA\Response(response=201,description="Translation created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
