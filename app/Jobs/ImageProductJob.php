@@ -36,7 +36,7 @@ class ImageProductJob implements ShouldQueue
     {
         try{
             $data = json_decode(json_encode($this->data), true);
-            $product = Product::where('image_id', $data['image_id'])->first();
+            $product = Product::where('image_id', $data['id'])->first();
             if(!empty($product)){
                 $product->image_url = $data['file_name'];
             }
