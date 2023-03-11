@@ -120,6 +120,48 @@ class ProductController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *      path="/api/products/all",
+     *      operationId="listAll",
+     *      tags={"Products"},
+     *      summary="Get all products information ADMIN",
+     *      description="Returns product data",
+     *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Parameter(name="category_id",description="Category Id", required=false, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=403, description="Forbidden"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
+     */
+    public function listAll(Request $request): JsonResponse
+    {
+        try {
+            $request->validate([
+                'category_id' => 'string|exists:categories,id'
+            ]);
+
+            $this->setLocale();
+
+            if($request->get('category_id')){
+                $resultSet = Product::select('products.*')->where('category_id', $request->get('category_id'));
+            } else {
+                $resultSet = Product::select('products.*');
+            }
+
+            $this->paginate($resultSet);
+
+            $products = $resultSet->get();
+            return response()->json($products, 200, ['pagination' => $this->pagination]);
+        } catch (ValidationException|ModelNotFoundException|Exception $e) {
+            Bugsnag::notifyException($e);
+            return response()->json($e->getMessage(), 409);
+        }
+    }
+
+    /**
      * @OA\Post(
      *      path="/api/products",
      *      operationId="create",
