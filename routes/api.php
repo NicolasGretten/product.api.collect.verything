@@ -26,9 +26,9 @@ Route::controller(CategoryController::class)->group(function () {
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('products/{id}', 'retrieve');
+    Route::get('products/all', 'listAll');
     Route::get('products/', 'list');
     Route::post('products/', 'create');
-    Route::get('products/all', 'listAll');
     Route::delete('products/{id}', 'delete');
     Route::patch('products/{id}', 'update');
     Route::post('products/{id}/translate', 'addTranslation');
