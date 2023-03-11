@@ -26,7 +26,7 @@ Route::controller(CategoryController::class)->group(function () {
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('products/{id}', 'retrieve');
-    Route::get('products/all', 'listAll');
+    Route::get('admin/products/', 'listAll');
     Route::get('products/', 'list');
     Route::post('products/', 'create');
     Route::delete('products/{id}', 'delete');

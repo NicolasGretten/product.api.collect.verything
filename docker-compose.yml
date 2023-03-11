@@ -3,8 +3,8 @@ services:
     nginx:
         container_name: product-nginx
         build:
-            context: ./docker/
-            dockerfile: ./nginx/dockerfile
+            context: ./docker
+            dockerfile: /nginx/dockerfile
         image: 'collectandverything-nginx'
         restart: unless-stopped
         tty: true
@@ -15,8 +15,8 @@ services:
     php-fpm:
         container_name: product-php
         build:
-            context: ./docker/
-            dockerfile: ./php/dockerfile
+            context: ./docker
+            dockerfile: /php/dockerfile
         volumes:
             - './:/var/www'
         image: 'collectandverything-product:latest'
