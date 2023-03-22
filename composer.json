@@ -9,7 +9,6 @@
         "darkaonline/l5-swagger": "8.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "astrotomic/laravel-translatable": "^11.8",
         "bugsnag/bugsnag-laravel": "^2.0",
